@@ -3,7 +3,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import theme from './components/Theme';
 // import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Header from './components/Header';
-import Home from './pages/Home';
+import HomeScreen from './screens/HomeScreen';
 // import Newsletter from "./components/ui/Newsletter";
 // import Footer from "./components/ui/Footer";
 // import DevTag from "./components/ui/DevTag";
@@ -18,10 +18,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <Fragment>
         <Header openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
-        <Home />
+        <HomeScreen />
         {/* <Newsletter />
         <Footer />
-        <DevTag />
         {isMobile && (
           <Fragment>
             <BottomNavMargin />
