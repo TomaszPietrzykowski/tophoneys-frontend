@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import banner from '../assets/banner.png';
-import bannerMobile from '../assets/bannerMobile.svg';
+import banner from '../../assets/banner.png';
+import bannerMobile from '../../assets/bannerMobile.svg';
 
 const useStyles = makeStyles((theme) => ({
   container: {

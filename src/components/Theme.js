@@ -25,7 +25,13 @@ export default createMuiTheme({
     },
   },
   typography: {
-    tab: {
+    open: {
+      fontFamily: 'Open Sans, sans-serif',
+    },
+    bree: {
+      fontFamily: 'Poppins, sans',
+    },
+    poppins: {
       fontFamily: 'Poppins, sans',
       textTransform: 'none',
       fontWeight: '700',

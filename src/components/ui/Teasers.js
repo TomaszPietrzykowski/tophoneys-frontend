@@ -2,9 +2,9 @@ import React from 'react';
 // material-ui
 import { makeStyles } from '@material-ui/styles';
 // custom
-import teaser1 from '../assets/teaser01.svg';
-import teaser2 from '../assets/teaser02.svg';
-import teaser3 from '../assets/teaser03.svg';
+import teaser1 from '../../assets/teaser01.svg';
+import teaser2 from '../../assets/teaser02.svg';
+import teaser3 from '../../assets/teaser03.svg';
 
 const useStyles = makeStyles((theme) => ({
   container: {

@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './components/Theme';
 // import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Header from './components/Header';
+import Header from './components/ui/Header';
 import HomeScreen from './screens/HomeScreen';
 // import Newsletter from "./components/ui/Newsletter";
 // import Footer from "./components/ui/Footer";

@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import logo from '../assets/logotranspbg.png';
-import SearchIcon from '@material-ui/icons/Search';
+import logo from '../../assets/logotranspbg.png';
+import Search from './Search';
 import UserIcon from '@material-ui/icons/Person';
 import CartIcon from '@material-ui/icons/ShoppingCartOutlined';
 import ExpandIcon from '@material-ui/icons/ExpandMore';
@@ -11,84 +11,52 @@ import CloseIcon from '@material-ui/icons/Close';
 import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
+  // --------------------------------------------------- LAYOUT
   root: {
     backgroundColor: theme.palette.common.white,
     width: '100%',
-    fontFamily: 'Open Sans, sans-serif',
     position: 'fixed',
     top: 0,
     left: 0,
     zIndex: 1200,
   },
   container: {
-    maxWidth: 1300,
-    margin: 'auto',
+    border: '1px solid blue',
+    ...theme.utils.container,
     padding: '0px 50px',
     [theme.breakpoints.down('md')]: {
       padding: '0px 15px',
     },
   },
   navbar: {
-    display: 'flex',
-    flexDirection: 'column',
+    border: '1px solid magenta',
+    ...theme.flex.col,
+    alignItems: 'space-between',
   },
   topBar: {
+    border: '1px solid magenta',
     backgroundColor: theme.palette.common.white,
-    display: 'flex',
-    alignItems: 'center',
+    ...theme.flex.row,
     justifyContent: 'space-between',
-    padding: '15px 0px',
-  },
-  search: {
-    display: 'flex',
-    outline: 'none',
-    minHeight: 35,
-    width: '33%',
-    [theme.breakpoints.down('md')]: {
-      display: 'none',
-    },
-  },
-  input: {
-    minWidth: 200,
-    outline: 'none',
-    padding: '6px 10px',
-    borderRadius: 0,
-    fontSize: '15px',
-    fontFamily: 'inherit',
-    border: `1px solid ${theme.palette.primary.main}`,
-  },
-  searchBtn: {
-    width: '35px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 0,
-    border: 'none',
-    backgroundColor: theme.palette.primary.main,
-    outline: 'none',
-    cursor: 'pointer',
-  },
-  searchIcon: {
-    color: 'white',
-    height: '20px',
+    padding: '1.5rem 0',
   },
 
+  // ----------------------------------------------- MENU BTN
   menuBtnContainer: {
     display: 'none',
     outline: 'none',
     minHeight: 35,
-    width: '33%',
+    flex: 1,
     [theme.breakpoints.down('md')]: {
       display: 'flex',
       width: 'auto',
     },
   },
-  menuBtn: {
+  menuIcon: {
     color: theme.palette.primary.main,
     fontSize: '2rem',
   },
-
+  // ------------------------------------------- SIDE ICONS
   sideIconCart: {
     color: theme.palette.text.primary,
     height: '20px',
@@ -98,38 +66,12 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     height: '20px',
     marginLeft: '10px',
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
   },
-  currentCartValue: {
-    color: theme.palette.text.primary,
-    fontSize: '13px',
-    fontWeight: 700,
-    marginLeft: '10px',
-    [theme.breakpoints.down('md')]: {
-      display: 'none',
-    },
-  },
-  currentCartItems: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white,
-    fontSize: '12px',
-    fontWeight: 700,
-    marginLeft: '10px',
-    borderRadius: '50%',
-    width: 20,
-    height: 20,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
+  // ------------------------------------------- LOGO
   logoContainer: {
-    width: '33%',
     textAlign: 'center',
-    [theme.breakpoints.down('md')]: {
-      width: 'auto',
-    },
+    flex: 1,
   },
   logo: {
     height: '4rem',
@@ -144,13 +86,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   icons: {
+    border: '1px solid lime',
     display: 'flex',
-    width: '33%',
+    flex: 1,
     justifyContent: 'flex-end',
-    [theme.breakpoints.down('md')]: {
-      width: 'auto',
-    },
   },
+  // ------------------------------------------------ NAVIGATION
   menuBar: {
     display: 'flex',
     alignItems: 'center',
@@ -219,6 +160,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.85rem',
     margin: '3px 0px 0px 5px',
   },
+
+  // -------------------------------------------- DRAWER
   drawer: {
     position: 'fixed',
     top: 0,
@@ -265,7 +208,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <header className={classes.root}>
       <div className={classes.container}>
         <div className={classes.navbar}>
           <div className={classes.topBar}>
@@ -273,21 +216,15 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
               className={classes.menuBtnContainer}
               onClick={() => setOpenDrawer(!openDrawer)}
             >
-              <MenuIcon className={classes.menuBtn} />
+              <MenuIcon className={classes.menuIcon} />
             </div>
-            <form className={classes.search}>
-              <input
-                type='text'
-                className={classes.input}
-                placeholder='Szukaj...'
-              />
-              <button type='submit' className={classes.searchBtn}>
-                <SearchIcon className={classes.searchIcon} />
-              </button>
-            </form>
+
+            <Search />
+
             <div className={classes.logoContainer}>
               <img className={classes.logo} src={logo} alt='company logo' />
             </div>
+
             <div className={classes.icons}>
               <UserIcon className={classes.sideIconUser} />
               <div className={classes.currentCartValue}>0,00</div>
@@ -295,6 +232,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
               <div className={classes.currentCartItems}>2</div>
             </div>
           </div>
+
           {openDrawer && (
             <ul className={classes.drawer}>
               <li className={classes.drawerNav}>
@@ -383,7 +321,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
             </ul>
           )}
 
-          <div className={classes.menuBar}>
+          <nav className={classes.menuBar}>
             <ul className={classes.navigation}>
               <li className={classes.tab}>
                 <div>Nowości</div>
@@ -548,10 +486,10 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                 <ExpandIcon className={classes.expandIcon} />
               </li>
             </ul>
-          </div>
+          </nav>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
