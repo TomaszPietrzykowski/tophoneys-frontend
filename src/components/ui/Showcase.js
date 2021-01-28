@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import banner from '../../assets/banner.png';
-import bannerMobile from '../../assets/bannerMobile.svg';
+import banner from '../../assets/showcase.jpg';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '0px 15px',
     margin: '30px 0px',
     minHeight: 300,
-    backgroundImage: `url(${bannerMobile})`,
+    backgroundImage: `url(${banner})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     borderRadius: 7,

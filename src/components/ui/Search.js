@@ -12,8 +12,31 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  searchMobile: {
+    display: 'none',
+    outline: 'none',
+    width: '86%',
+    paddingTop: '1rem',
+    margin: 'auto',
+    [theme.breakpoints.down('md')]: {
+      display: 'flex',
+      justifyContent: 'center',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
+  },
   input: {
     minWidth: 200,
+    outline: 'none',
+    padding: '6px 10px',
+    borderRadius: 0,
+    fontSize: '15px',
+    fontFamily: 'inherit',
+    border: `1px solid ${theme.palette.primary.main}`,
+  },
+  inputMobile: {
+    width: 'calc(100% - 80px)',
     outline: 'none',
     padding: '6px 10px',
     borderRadius: 0,
@@ -33,19 +56,44 @@ const useStyles = makeStyles((theme) => ({
     outline: 'none',
     cursor: 'pointer',
   },
+  searchBtnMobile: {
+    ...theme.flex.col,
+    height: '45px',
+    width: '45px',
+    borderRadius: 0,
+    border: 'none',
+    backgroundColor: theme.palette.primary.main,
+    outline: 'none',
+    cursor: 'pointer',
+    [theme.breakpoints.down('sm')]: {
+      height: '35px',
+      width: '35px',
+    },
+  },
   searchIcon: {
+    color: 'white',
+    height: '20px',
+  },
+  searchIconMobile: {
     color: 'white',
     height: '20px',
   },
 }));
 
-const Search = () => {
+const Search = ({ isMobile }) => {
   const classes = useStyles();
 
   return (
-    <form className={classes.search}>
-      <input type='text' className={classes.input} placeholder='Szukaj...' />
-      <button type='submit' className={classes.searchBtn}>
+    <form className={isMobile ? classes.searchMobile : classes.search}>
+      <input
+        type='text'
+        className={isMobile ? classes.inputMobile : classes.input}
+        placeholder='Szukaj...'
+      />
+      <button
+        type='submit'
+        className={isMobile ? classes.searchBtnMobile : classes.searchBtn}
+      >
         <SearchIcon className={classes.searchIcon} />
       </button>
     </form>

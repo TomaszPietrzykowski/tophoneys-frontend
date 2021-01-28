@@ -1,35 +1,36 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const pink = 'rgba(235, 21, 96, 1)';
-const pinkShadow = 'rgba(235, 21, 96, .3)';
-const lightPink = 'rgba(251, 208, 222, 1)';
-const blue = 'rgba(107, 213, 255, 1)';
-const white = 'rgba(255, 255, 255, 1)';
 const violet = 'rgba(122, 65, 156, 1)';
 
 export default createMuiTheme({
   palette: {
     common: {
-      pink: `${pink}`,
-      pinkShadow: `${pinkShadow}`,
-      lightPink: `${lightPink}`,
-      blue: `${blue}`,
-      white: `${white}`,
-      violet: `${violet}`,
+      white: `rgba(255, 255, 255, 1)`,
+      orange1: 'rgb(253,155,2)',
+      orange2: 'rgb(255, 153, 0)',
+      orange3: 'rgb(222,114,0)',
+      brown1: 'rgb(179, 107, 0)',
+      brown2: 'rgb(77, 46, 0)',
     },
     primary: {
-      main: `${pink}`,
+      main: `rgb(179, 107, 0)`,
     },
     secondary: {
-      main: `${violet}`,
+      main: `rgb(253,153,0)`,
     },
   },
   typography: {
     open: {
       fontFamily: 'Open Sans, sans-serif',
     },
+    balsamiq: {
+      fontFamily: 'Balsamiq Sans, cursive',
+      fontSize: '1rem',
+      textTransform: 'uppercase',
+      letterSpacing: 0.5,
+    },
     bree: {
-      fontFamily: 'Poppins, sans',
+      fontFamily: 'Bree Serif, serif',
     },
     poppins: {
       fontFamily: 'Poppins, sans',

@@ -21,24 +21,24 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1200,
   },
   container: {
-    border: '1px solid blue',
+    // border: '1px solid blue',
     ...theme.utils.container,
-    padding: '0px 50px',
+    padding: '0 3rem',
     [theme.breakpoints.down('md')]: {
-      padding: '0px 15px',
+      padding: '0 .8rem',
     },
   },
   navbar: {
-    border: '1px solid magenta',
+    // border: '1px solid magenta',
     ...theme.flex.col,
     alignItems: 'space-between',
   },
   topBar: {
-    border: '1px solid magenta',
+    // border: '1px solid magenta',
     backgroundColor: theme.palette.common.white,
     ...theme.flex.row,
     justifyContent: 'space-between',
-    padding: '1.5rem 0',
+    padding: '1.75rem 0',
   },
 
   // ----------------------------------------------- MENU BTN
@@ -59,13 +59,13 @@ const useStyles = makeStyles((theme) => ({
   // ------------------------------------------- SIDE ICONS
   sideIconCart: {
     color: theme.palette.text.primary,
-    height: '20px',
-    marginLeft: '10px',
+    height: '2rem',
+    marginLeft: '1rem',
   },
   sideIconUser: {
     color: theme.palette.text.primary,
-    height: '20px',
-    marginLeft: '10px',
+    height: '2rem',
+    marginLeft: '1rem',
   },
 
   // ------------------------------------------- LOGO
@@ -82,11 +82,11 @@ const useStyles = makeStyles((theme) => ({
       height: '3rem',
     },
     [theme.breakpoints.down('xs')]: {
-      height: '2.4rem',
+      height: '2.8rem',
     },
   },
   icons: {
-    border: '1px solid lime',
+    // border: '1px solid lime',
     display: 'flex',
     flex: 1,
     justifyContent: 'flex-end',
@@ -104,11 +104,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     listStyle: 'none',
-    fontFamily: 'Bree Serif',
-    fontSize: '18px',
     margin: 0,
   },
   tab: {
+    ...theme.typography.balsamiq,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -144,13 +143,6 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       color: theme.palette.primary.dark,
     },
-  },
-  submenuItemHead: {
-    display: 'block',
-    fontFamily: 'Bree Serif',
-    fontSize: '1rem',
-    padding: '.6rem',
-    marginTop: '.5rem',
   },
   submenuFlex: {
     display: 'flex',
@@ -226,10 +218,10 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
             </div>
 
             <div className={classes.icons}>
+              <div></div>
+              <div></div>
               <UserIcon className={classes.sideIconUser} />
-              <div className={classes.currentCartValue}>0,00</div>
               <CartIcon className={classes.sideIconCart} />
-              <div className={classes.currentCartItems}>2</div>
             </div>
           </div>
 
@@ -324,165 +316,56 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
           <nav className={classes.menuBar}>
             <ul className={classes.navigation}>
               <li className={classes.tab}>
-                <div>Nowości</div>
+                <div>New</div>
                 <ExpandIcon className={classes.expandIcon} />
               </li>
               <li className={classes.tab}>
-                <div>Promocje</div>
+                <div>Honeys</div>
                 <ExpandIcon className={classes.expandIcon} />
                 <div className={classes.dropdown}>
                   <ul className={classes.submenu}>
-                    <li className={classes.submenuItem}>Promocje</li>
-                    <li className={classes.submenuItem}>Wyprzedaże</li>
+                    <li className={classes.submenuItem}>All honeys</li>
+                    <li className={classes.submenuItem}>Creamed honeys</li>
+                    <li className={classes.submenuItem}>
+                      Honeys with additives
+                    </li>
+                    <li className={classes.submenuItem}>Accessories</li>
                   </ul>
                 </div>
               </li>
 
               <li className={classes.tab}>
-                <div>Makijaż</div>
-                <ExpandIcon className={classes.expandIcon} />
-                <div className={classes.dropdown}>
-                  <div className={classes.submenuFlex}>
-                    <ul className={classes.submenu}>
-                      <li className={classes.submenuItemHead}>Twarz</li>
-                      <li className={classes.submenuItem}>
-                        Pudry,&nbsp;róże,&nbsp;bronzery
-                      </li>
-                      <li className={classes.submenuItem}>Korektory</li>
-                      <li className={classes.submenuItem}>Podkłady</li>
-                      <li className={classes.submenuItem}>Glitters</li>
-                      <li className={classes.submenuItem}>Rozświetlacze</li>
-                      <li className={classes.submenuItem}>
-                        Bazy&nbsp;pod&nbsp;makijaż&nbsp;i&nbsp;primer
-                      </li>
-                      <li className={classes.submenuItem}>Kremy BB i CC</li>
-                    </ul>
-
-                    <ul className={classes.submenu}>
-                      <li className={classes.submenuItemHead}>Usta</li>
-                      <li className={classes.submenuItem}>
-                        Kredki&nbsp;do&nbsp;malowania
-                      </li>
-                      <li className={classes.submenuItem}>Błyszczyki</li>
-                      <li className={classes.submenuItem}>Szminki</li>
-                      <li className={classes.submenuItem}>Konturówki</li>
-                      <li className={classes.submenuItem}>
-                        Balsamy&nbsp;do&nbsp;ust
-                      </li>
-                    </ul>
-
-                    <ul className={classes.submenu}>
-                      <li className={classes.submenuItemHead}>Oczy</li>
-                      <li className={classes.submenuItem}>
-                        Bazy&nbsp;pod&nbsp;cienie
-                      </li>
-                      <li className={classes.submenuItem}>
-                        Cienie&nbsp;do&nbsp;powiek
-                      </li>
-                      <li className={classes.submenuItem}>
-                        Tusze&nbsp;do&nbsp;rzęs
-                      </li>
-                      <li className={classes.submenuItem}>Eyeliner</li>
-                      <li className={classes.submenuItem}>
-                        Kredki&nbsp;i&nbsp;cienie&nbsp;do&nbsp;brwi
-                      </li>
-                      <li className={classes.submenuItem}>
-                        Kredki&nbsp;do&nbsp;oczu
-                      </li>
-                      <li className={classes.submenuItem}>
-                        Paletki&nbsp;cieni
-                      </li>
-                      <li className={classes.submenuItem}>Henna</li>
-                      <li className={classes.submenuItem}>
-                        Sztuczne&nbsp;rzęsy
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-
-              <li className={classes.tab}>
-                <div>Włosy</div>
+                <div>Bees products</div>
                 <ExpandIcon className={classes.expandIcon} />
                 <div className={classes.dropdown}>
                   <ul className={classes.submenu}>
-                    <li className={classes.submenuItem}>Szampony</li>
-                    <li className={classes.submenuItem}>Odżywki</li>
-                    <li className={classes.submenuItem}>Maski</li>
-                    <li className={classes.submenuItem}>
-                      Olejki&nbsp;i&nbsp;serum
-                    </li>
+                    <li className={classes.submenuItem}>Bee feathers</li>
+                    <li className={classes.submenuItem}>Propolis</li>
+                    <li className={classes.submenuItem}>Bee pollen</li>
+                    <li className={classes.submenuItem}>Bee milk</li>
+                    <li className={classes.submenuItem}>Beewax candles</li>
                   </ul>
                 </div>
               </li>
 
               <li className={classes.tab}>
-                <div>Paznokcie</div>
+                <div>Oils</div>
                 <ExpandIcon className={classes.expandIcon} />
-                <div className={classes.dropdown}>
-                  <ul className={classes.submenu}>
-                    <li className={classes.submenuItem}>Lakiery</li>
-                    <li className={classes.submenuItem}>
-                      Odżywki&nbsp;i&nbsp;utwardzacze
-                    </li>
-                    <li className={classes.submenuItem}>Stylizacja</li>
-                  </ul>
-                </div>
               </li>
-
               <li className={classes.tab}>
-                <div>Skóra</div>
+                <div>Gift sets</div>
                 <ExpandIcon className={classes.expandIcon} />
-                <div className={classes.dropdown}>
-                  <ul className={classes.submenu}>
-                    <li className={classes.submenuItem}>
-                      Kremy&nbsp;do&nbsp;twarzy
-                    </li>
-                    <li className={classes.submenuItem}>
-                      Produkty&nbsp;do&nbsp;mycia&nbsp;twarzy
-                    </li>
-                    <li className={classes.submenuItem}>
-                      Balsamy&nbsp;i&nbsp;olejki&nbsp;do&nbsp;ciała
-                    </li>
-                    <li className={classes.submenuItem}>
-                      Toniki&nbsp;i&nbsp;mgielki&nbsp;do&nbsp;ciała
-                    </li>
-                    <li className={classes.submenuItem}>
-                      Pielęgnacja&nbsp;dłoni
-                    </li>
-                    <li className={classes.submenuItem}>
-                      Pielęgnacja&nbsp;stóp
-                    </li>
-                  </ul>
-                </div>
               </li>
-
               <li className={classes.tab}>
-                <div>Akcesoria</div>
+                <div>Special offer</div>
                 <ExpandIcon className={classes.expandIcon} />
-                <div className={classes.dropdown}>
-                  <ul className={classes.submenu}>
-                    <li className={classes.submenuItem}>
-                      Pędzle&nbsp;do&nbsp;makijażu
-                    </li>
-                    <li className={classes.submenuItem}>
-                      Pędzle&nbsp;do&nbsp;malowania&nbsp;ust
-                    </li>
-                    <li className={classes.submenuItem}>
-                      Eyeliner&nbsp;pędzle
-                    </li>
-                    <li className={classes.submenuItem}>
-                      Pędzle&nbsp;-&nbsp;zestawy
-                    </li>
-                    <li className={classes.submenuItem}>Pincety</li>
-                    <li className={classes.submenuItem}>Strugaczki</li>
-                    <li className={classes.submenuItem}>Lusterka</li>
-                  </ul>
-                </div>
               </li>
-
               <li className={classes.tab}>
-                <div>Marki</div>
+                <div>Beauty and Care</div>
+                <ExpandIcon className={classes.expandIcon} />
+              </li>
+              <li className={classes.tab}>
+                <div>Sale</div>
                 <ExpandIcon className={classes.expandIcon} />
               </li>
             </ul>
