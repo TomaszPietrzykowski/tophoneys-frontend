@@ -4,6 +4,7 @@ import logo from '../../assets/logotranspbg.png';
 import Search from './Search';
 import UserIcon from '@material-ui/icons/Person';
 import CartIcon from '@material-ui/icons/ShoppingCartOutlined';
+import SettingsIcon from '@material-ui/icons/Settings';
 import ExpandIcon from '@material-ui/icons/ExpandMore';
 import RightArrowIcon from '@material-ui/icons/ArrowForwardIos';
 import MenuIcon from '@material-ui/icons/MenuRounded';
@@ -71,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flex: 1,
     justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
   iconButton: {
     '&:hover': {
@@ -78,7 +80,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   username: {
+    ...theme.typography.mont,
     fontSize: '.9rem',
+    fontWeight: 500,
+    marginRight: '.5rem',
   },
   sideIconCart: {
     color: theme.palette.text.primary,
@@ -87,6 +92,11 @@ const useStyles = makeStyles((theme) => ({
   sideIconUser: {
     color: theme.palette.text.primary,
     height: '2rem',
+  },
+  dropdownItemIcons: {
+    ...theme.typography.mont,
+    fontSize: '.8rem',
+    fontWeight: 500,
   },
 
   // ------------------------------------------- LOGO
@@ -125,46 +135,22 @@ const useStyles = makeStyles((theme) => ({
     ...theme.flex.row,
     ...theme.typography.mont,
     textTransform: 'uppercase',
-    letterSpacing: 1,
-    fontWeight: 500,
+    fontWeight: 600,
     padding: '15px 20px',
     cursor: 'pointer',
-    position: 'relative',
-    '&:hover': {
-      opacity: 0.7,
-    },
-    '&:hover $dropdown': {
-      display: 'block',
-    },
   },
   dropdown: {
-    position: 'absolute',
-    display: 'none',
-    // border: "1px solid blue",
     backgroundColor: theme.palette.common.white,
-    top: '100%',
-    left: 0,
     boxShadow: theme.palette.shadows.primary,
   },
   submenu: {
-    listStyle: 'none',
-    padding: '1rem',
-    display: 'flex',
-    flexDirection: 'column',
-    marginRight: '2rem',
+    ...theme.typography.mont,
+    fontSize: '.9rem',
+    fontWeight: 500,
+    padding: '.6rem 3rem .6rem 1.5rem',
+    textTransform: 'uppercase',
   },
-  submenuItem: {
-    display: 'block',
-    fontFamily: 'Open Sans',
-    fontSize: '.85rem',
-    padding: '.6rem',
-    '&:hover': {
-      color: theme.palette.primary.dark,
-    },
-  },
-  submenuFlex: {
-    display: 'flex',
-  },
+
   expandIcon: {
     color: theme.palette.text.secondary,
     fontSize: '0.85rem',
@@ -217,29 +203,67 @@ const useStyles = makeStyles((theme) => ({
 const Header = ({ openDrawer, setOpenDrawer }) => {
   const classes = useStyles();
 
-  const userLogin = true;
+  const userLogin = false;
 
   // dropdown states:
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [openUser, setOpenUser] = useState(false);
+  const [anchorElAdmin, setAnchorElAdmin] = useState(null);
+  const [openAdmin, setOpenAdmin] = useState(false);
+  const [anchorElHoneys, setAnchorElHoneys] = useState(null);
+  const [openHoneys, setOpenHoneys] = useState(false);
+  const [anchorElBees, setAnchorElBees] = useState(null);
+  const [openBees, setOpenBees] = useState(false);
+  const [anchorElTea, setAnchorElTea] = useState(null);
+  const [openTea, setOpenTea] = useState(false);
 
   //dropdown handlers
   const handleClickUser = (e) => {
     setAnchorElUser(e.currentTarget);
     setOpenUser(true);
   };
-
   const handleCloseUser = (e) => {
     setAnchorElUser(null);
     setOpenUser(false);
   };
-
-  function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
-      event.preventDefault();
+  const handleClickAdmin = (e) => {
+    setAnchorElAdmin(e.currentTarget);
+    setOpenAdmin(true);
+  };
+  const handleCloseAdmin = (e) => {
+    setAnchorElAdmin(null);
+    setOpenAdmin(false);
+  };
+  const handleClickHoneys = (e) => {
+    setAnchorElHoneys(e.currentTarget);
+    setOpenHoneys(true);
+  };
+  const handleCloseHoneys = (e) => {
+    setAnchorElHoneys(null);
+    setOpenHoneys(false);
+  };
+  const handleClickBees = (e) => {
+    setAnchorElBees(e.currentTarget);
+    setOpenBees(true);
+  };
+  const handleCloseBees = (e) => {
+    setAnchorElBees(null);
+    setOpenBees(false);
+  };
+  const handleClickTea = (e) => {
+    setAnchorElTea(e.currentTarget);
+    setOpenTea(true);
+  };
+  const handleCloseTea = (e) => {
+    setAnchorElTea(null);
+    setOpenTea(false);
+  };
+  const handleListKeyDown = (e) => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
       setOpenUser(false);
     }
-  }
+  };
 
   return (
     <header className={classes.root}>
@@ -267,16 +291,28 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                 onMouseOver={(e) => handleClickUser(e)}
                 onMouseLeave={handleCloseUser}
               >
-                <div className={classes.username}>{userLogin && 'user'}</div>
+                <div className={classes.username}>{userLogin && 'User'}</div>
                 <UserIcon className={classes.sideIconUser} />
               </IconButton>
 
               <IconButton className={classes.iconButton}>
                 <CartIcon className={classes.sideIconCart} />
               </IconButton>
+
+              <IconButton
+                className={classes.iconButton}
+                aria-owns={anchorElAdmin ? 'dropdown-admin' : undefined}
+                aria-haspopup={anchorElAdmin ? true : undefined}
+                onMouseOver={(e) => handleClickAdmin(e)}
+                onMouseLeave={handleCloseAdmin}
+              >
+                <SettingsIcon className={classes.sideIconUser} />
+              </IconButton>
             </div>
           </div>
+
           {/* Dropdown user */}
+
           <Popper
             open={openUser}
             anchorEl={anchorElUser}
@@ -292,64 +328,130 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                   transformOrigin: 'top left',
                 }}
               >
-                <Paper className={classes.dropdownLang} elevation={0}>
+                <Paper className={classes.dropdown} elevation={0}>
                   <ClickAwayListener onClickAway={handleCloseUser}>
                     <MenuList
                       autoFocusItem={false}
                       id='dropdown-user'
                       onKeyDown={handleListKeyDown}
-                      disableAutoFocusItem
+                      // disableAutoFocusItem
                       onMouseLeave={handleCloseUser}
                       onMouseOver={() => setOpenUser(true)}
                       disablePadding
                     >
-                      {userLogin ? (
-                        <>
-                          <MenuItem
-                            classes={{ root: classes.dropdownItemLang }}
-                            value='en'
-                            onClick={(e) => {
-                              handleCloseUser(e);
-                              // setLang('en');
-                            }}
-                          >
-                            Profile
-                          </MenuItem>
-                          <MenuItem
-                            classes={{ root: classes.dropdownItemLang }}
-                            value='nl'
-                            onClick={(e) => {
-                              handleCloseUser(e);
-                              // setLang('nl');
-                            }}
-                          >
-                            Sign Out
-                          </MenuItem>
-                        </>
-                      ) : (
-                        <>
-                          <MenuItem
-                            classes={{ root: classes.dropdownItemLang }}
-                            value='nl'
-                            onClick={(e) => {
-                              handleCloseUser(e);
-                              // setLang('nl');
-                            }}
-                          >
-                            Login
-                          </MenuItem>
-                          <MenuItem
-                            classes={{ root: classes.dropdownItemLang }}
-                            value='nl'
-                            onClick={(e) => {
-                              handleCloseUser(e);
-                              // setLang('nl');
-                            }}
-                          >
-                            Sign Up
-                          </MenuItem>
-                        </>
+                      {userLogin && (
+                        <MenuItem
+                          classes={{ root: classes.dropdownItemIcons }}
+                          value='en'
+                          onClick={(e) => {
+                            handleCloseUser(e);
+                            // setIcons('en');
+                          }}
+                        >
+                          Profile
+                        </MenuItem>
                       )}
+                      {userLogin && (
+                        <MenuItem
+                          classes={{ root: classes.dropdownItemIcons }}
+                          value='nl'
+                          onClick={(e) => {
+                            handleCloseUser(e);
+                            // setIcons('nl');
+                          }}
+                        >
+                          Log out
+                        </MenuItem>
+                      )}
+                      {!userLogin && (
+                        <MenuItem
+                          classes={{ root: classes.dropdownItemIcons }}
+                          value='nl'
+                          onClick={(e) => {
+                            handleCloseUser(e);
+                            // setIcons('nl');
+                          }}
+                        >
+                          Log in
+                        </MenuItem>
+                      )}
+                      {!userLogin && (
+                        <MenuItem
+                          classes={{ root: classes.dropdownItemIcons }}
+                          value='nl'
+                          onClick={(e) => {
+                            handleCloseUser(e);
+                            // setIcons('nl');
+                          }}
+                        >
+                          Sign up
+                        </MenuItem>
+                      )}
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
+
+          {/* Dropdown admin */}
+
+          <Popper
+            open={openAdmin}
+            anchorEl={anchorElAdmin}
+            role={undefined}
+            transition
+            disablePortal
+            placement='bottom-start'
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin: 'top left',
+                }}
+              >
+                <Paper className={classes.dropdown} elevation={0}>
+                  <ClickAwayListener onClickAway={handleCloseAdmin}>
+                    <MenuList
+                      autoFocusItem={false}
+                      id='dropdown-admin'
+                      onKeyDown={handleListKeyDown}
+                      // disableAutoFocusItem
+                      onMouseLeave={handleCloseAdmin}
+                      onMouseOver={() => setOpenAdmin(true)}
+                      disablePadding
+                    >
+                      <MenuItem
+                        classes={{ root: classes.dropdownItemIcons }}
+                        value='en'
+                        onClick={(e) => {
+                          handleCloseAdmin(e);
+                          // setIcons('en');
+                        }}
+                      >
+                        Products
+                      </MenuItem>
+                      <MenuItem
+                        classes={{ root: classes.dropdownItemIcons }}
+                        value='nl'
+                        onClick={(e) => {
+                          handleCloseUser(e);
+                          // setIcons('nl');
+                        }}
+                      >
+                        Orders
+                      </MenuItem>
+                      <MenuItem
+                        classes={{ root: classes.dropdownItemIcons }}
+                        value='nl'
+                        onClick={(e) => {
+                          handleCloseUser(e);
+                          // setLang('nl');
+                        }}
+                      >
+                        Users
+                      </MenuItem>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>
@@ -365,63 +467,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                   onClick={() => setOpenDrawer(false)}
                 >
                   <CloseIcon className={classes.closeIcon} />
-                </div>
-              </li>
-              <Divider />
-              <li
-                className={classes.drawerItem}
-                onClick={() => setOpenDrawer(false)}
-              >
-                <div className={classes.drawerText}>Nowości</div>
-              </li>
-              <Divider />
-              <li
-                className={classes.drawerItem}
-                onClick={() => setOpenDrawer(false)}
-              >
-                <div className={classes.drawerText}>Promocje</div>
-                <div className={classes.drawerIconContainer}>
-                  <RightArrowIcon className={classes.drawerIcon} />
-                </div>
-              </li>
-              <Divider />
-              <li
-                className={classes.drawerItem}
-                onClick={() => setOpenDrawer(false)}
-              >
-                <div className={classes.drawerText}>Makijaż</div>
-                <div className={classes.drawerIconContainer}>
-                  <RightArrowIcon className={classes.drawerIcon} />
-                </div>
-              </li>
-              <Divider />
-              <li
-                className={classes.drawerItem}
-                onClick={() => setOpenDrawer(false)}
-              >
-                <div className={classes.drawerText}>Włosy</div>
-                <div className={classes.drawerIconContainer}>
-                  <RightArrowIcon className={classes.drawerIcon} />
-                </div>
-              </li>
-              <Divider />
-              <li
-                className={classes.drawerItem}
-                onClick={() => setOpenDrawer(false)}
-              >
-                <div className={classes.drawerText}>Paznokcie</div>
-                <div className={classes.drawerIconContainer}>
-                  <RightArrowIcon className={classes.drawerIcon} />
-                </div>
-              </li>
-              <Divider />
-              <li
-                className={classes.drawerItem}
-                onClick={() => setOpenDrawer(false)}
-              >
-                <div className={classes.drawerText}>Skóra</div>
-                <div className={classes.drawerIconContainer}>
-                  <RightArrowIcon className={classes.drawerIcon} />
                 </div>
               </li>
               <Divider />
@@ -450,45 +495,268 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
               <li className={classes.tab}>
                 <div>New</div>
               </li>
-              <li className={classes.tab}>
-                <div>Honeys</div>
-                <ExpandIcon className={classes.expandIcon} />
-                <div className={classes.dropdown}>
-                  <ul className={classes.submenu}>
-                    <li className={classes.submenuItem}>All honeys</li>
-                    <li className={classes.submenuItem}>Creamed honeys</li>
-                    <li className={classes.submenuItem}>
-                      Honeys with additives
-                    </li>
-                    <li className={classes.submenuItem}>Accessories</li>
-                  </ul>
-                </div>
-              </li>
+              <div
+                aria-owns={anchorElHoneys ? 'dropdown-honeys' : undefined}
+                aria-haspopup={anchorElHoneys ? true : undefined}
+                onMouseOver={(e) => handleClickHoneys(e)}
+                onMouseLeave={handleCloseHoneys}
+              >
+                <li className={classes.tab}>
+                  <div>Honeys</div>
+                  <ExpandIcon className={classes.expandIcon} />
+                </li>
+              </div>
 
-              <li className={classes.tab}>
-                <div>Bees products</div>
-                <ExpandIcon className={classes.expandIcon} />
-                <div className={classes.dropdown}>
-                  <ul className={classes.submenu}>
-                    <li className={classes.submenuItem}>Bee feathers</li>
-                    <li className={classes.submenuItem}>Propolis</li>
-                    <li className={classes.submenuItem}>Bee pollen</li>
-                    <li className={classes.submenuItem}>Bee milk</li>
-                    <li className={classes.submenuItem}>Beewax candles</li>
-                  </ul>
-                </div>
-              </li>
-              <li className={classes.tab}>
-                <div>Teas</div>
-                <ExpandIcon className={classes.expandIcon} />
-                <div className={classes.dropdown}>
-                  <ul className={classes.submenu}>
-                    <li className={classes.submenuItem}>Black tea</li>
-                    <li className={classes.submenuItem}>Green tea</li>
-                    <li className={classes.submenuItem}>Fruit tea</li>
-                  </ul>
-                </div>
-              </li>
+              <Popper
+                open={openHoneys}
+                anchorEl={anchorElHoneys}
+                role={undefined}
+                transition
+                disablePortal
+                placement='bottom-start'
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin: 'top left',
+                    }}
+                  >
+                    <Paper className={classes.dropdown} elevation={0}>
+                      <ClickAwayListener onClickAway={handleCloseHoneys}>
+                        <MenuList
+                          autoFocusItem={false}
+                          id='dropdown-honeys'
+                          onKeyDown={handleListKeyDown}
+                          // disableAutoFocusItem
+                          onMouseLeave={handleCloseHoneys}
+                          onMouseOver={() => setOpenHoneys(true)}
+                          disablePadding
+                        >
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='en'
+                            onClick={(e) => {
+                              handleCloseHoneys(e);
+                              // setLang('en');
+                            }}
+                          >
+                            All honeys
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='nl'
+                            onClick={(e) => {
+                              handleCloseUser(e);
+                              // setLang('nl');
+                            }}
+                          >
+                            Creamed honeys
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='nl'
+                            onClick={(e) => {
+                              handleCloseUser(e);
+                              // setLang('nl');
+                            }}
+                          >
+                            Honeys with additives
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='nl'
+                            onClick={(e) => {
+                              handleCloseUser(e);
+                              // setLang('nl');
+                            }}
+                          >
+                            Accessories
+                          </MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+              <div
+                aria-owns={anchorElBees ? 'dropdown-bees' : undefined}
+                aria-haspopup={anchorElBees ? true : undefined}
+                onMouseOver={(e) => handleClickBees(e)}
+                onMouseLeave={handleCloseBees}
+              >
+                <li className={classes.tab}>
+                  <div>Bees products</div>
+                  <ExpandIcon className={classes.expandIcon} />
+                </li>
+              </div>
+
+              <Popper
+                open={openBees}
+                anchorEl={anchorElBees}
+                role={undefined}
+                transition
+                disablePortal
+                placement='bottom-start'
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin: 'top left',
+                    }}
+                  >
+                    <Paper className={classes.dropdown} elevation={0}>
+                      <ClickAwayListener onClickAway={handleCloseBees}>
+                        <MenuList
+                          autoFocusItem={false}
+                          id='dropdown-bees'
+                          onKeyDown={handleListKeyDown}
+                          // disableAutoFocusItem
+                          onMouseLeave={handleCloseBees}
+                          onMouseOver={() => setOpenBees(true)}
+                          disablePadding
+                        >
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='en'
+                            onClick={(e) => {
+                              handleCloseBees(e);
+                              // setLang('en');
+                            }}
+                          >
+                            Bee feathers
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='nl'
+                            onClick={(e) => {
+                              handleCloseUser(e);
+                              // setLang('nl');
+                            }}
+                          >
+                            Propolis
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='nl'
+                            onClick={(e) => {
+                              handleCloseUser(e);
+                              // setLang('nl');
+                            }}
+                          >
+                            Bee pollen
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='nl'
+                            onClick={(e) => {
+                              handleCloseUser(e);
+                              // setLang('nl');
+                            }}
+                          >
+                            Bee milk
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='nl'
+                            onClick={(e) => {
+                              handleCloseUser(e);
+                              // setLang('nl');
+                            }}
+                          >
+                            Beewax candles
+                          </MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+              <div
+                aria-owns={anchorElBees ? 'dropdown-tea' : undefined}
+                aria-haspopup={anchorElTea ? true : undefined}
+                onMouseOver={(e) => handleClickTea(e)}
+                onMouseLeave={handleCloseTea}
+              >
+                <li className={classes.tab}>
+                  <div>Teas</div>
+                  <ExpandIcon className={classes.expandIcon} />
+                </li>
+              </div>
+
+              <Popper
+                open={openTea}
+                anchorEl={anchorElTea}
+                role={undefined}
+                transition
+                disablePortal
+                placement='bottom-start'
+              >
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin: 'top left',
+                    }}
+                  >
+                    <Paper className={classes.dropdown} elevation={0}>
+                      <ClickAwayListener onClickAway={handleCloseTea}>
+                        <MenuList
+                          autoFocusItem={false}
+                          id='dropdown-tea'
+                          onKeyDown={handleListKeyDown}
+                          // disableAutoFocusItem
+                          onMouseLeave={handleCloseTea}
+                          onMouseOver={() => setOpenTea(true)}
+                          disablePadding
+                        >
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='en'
+                            onClick={(e) => {
+                              handleCloseTea(e);
+                              // setLang('en');
+                            }}
+                          >
+                            All teas
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='en'
+                            onClick={(e) => {
+                              handleCloseTea(e);
+                              // setLang('en');
+                            }}
+                          >
+                            Black tea
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='en'
+                            onClick={(e) => {
+                              handleCloseTea(e);
+                              // setLang('en');
+                            }}
+                          >
+                            Fruit tea
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.submenu }}
+                            value='en'
+                            onClick={(e) => {
+                              handleCloseTea(e);
+                              // setLang('en');
+                            }}
+                          >
+                            Green tea
+                          </MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
               <li className={classes.tab}>
                 <div>Gift sets</div>
               </li>

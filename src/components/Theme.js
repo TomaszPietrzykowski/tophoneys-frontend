@@ -17,7 +17,7 @@ export default createMuiTheme({
       main: `rgb(253,153,0)`,
     },
     shadows: {
-      primary: '1px 1px 1px rgba(0,0,0,1)',
+      primary: '1px 1px 1px rgba(0,0,0,.3)',
     },
   },
   typography: {
@@ -72,7 +72,7 @@ export default createMuiTheme({
       xs: 360,
       sm: 400,
       md: 600,
-      lg: 990,
+      lg: 1050,
       xl: 1200,
     },
   },
