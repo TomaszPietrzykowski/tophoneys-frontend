@@ -1,7 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const violet = 'rgba(122, 65, 156, 1)';
-
 export default createMuiTheme({
   palette: {
     common: {
@@ -18,10 +16,24 @@ export default createMuiTheme({
     secondary: {
       main: `rgb(253,153,0)`,
     },
+    shadows: {
+      primary: '1px 1px 1px rgba(0,0,0,1)',
+    },
   },
   typography: {
     open: {
       fontFamily: 'Open Sans, sans-serif',
+    },
+    mont: {
+      fontFamily: 'Montserrat, sans-serif',
+    },
+    noto: {
+      fontFamily: 'Noto Sans, sans-serif',
+      textTransform: 'uppercase',
+      letterSpacing: 1,
+    },
+    notojp: {
+      fontFamily: 'Noto Sans JP, sans-serif',
     },
     balsamiq: {
       fontFamily: 'Balsamiq Sans, cursive',
@@ -31,13 +43,6 @@ export default createMuiTheme({
     },
     bree: {
       fontFamily: 'Bree Serif, serif',
-    },
-    poppins: {
-      fontFamily: 'Poppins, sans',
-      textTransform: 'none',
-      fontWeight: '700',
-      fontSize: '1rem',
-      marginLeft: '25px',
     },
   },
   flex: {

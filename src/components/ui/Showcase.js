@@ -6,7 +6,7 @@ import banner from '../../assets/showcase.jpg';
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: '0px 15px',
-    margin: '40px 50px',
+    margin: '40px 48px',
     minHeight: 420,
     backgroundImage: `url(${banner})`,
     backgroundPosition: 'center',

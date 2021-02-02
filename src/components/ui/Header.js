@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import logo from '../../assets/logotranspbg.png';
 import Search from './Search';
@@ -9,6 +9,15 @@ import RightArrowIcon from '@material-ui/icons/ArrowForwardIos';
 import MenuIcon from '@material-ui/icons/MenuRounded';
 import CloseIcon from '@material-ui/icons/Close';
 import Divider from '@material-ui/core/Divider';
+import {
+  ClickAwayListener,
+  Grow,
+  MenuList,
+  Paper,
+  Popper,
+  IconButton,
+  MenuItem,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   // --------------------------------------------------- LAYOUT
@@ -57,15 +66,27 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '2rem',
   },
   // ------------------------------------------- SIDE ICONS
+  icons: {
+    // border: '1px solid lime',
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  iconButton: {
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
+  username: {
+    fontSize: '.9rem',
+  },
   sideIconCart: {
     color: theme.palette.text.primary,
     height: '2rem',
-    marginLeft: '1rem',
   },
   sideIconUser: {
     color: theme.palette.text.primary,
     height: '2rem',
-    marginLeft: '1rem',
   },
 
   // ------------------------------------------- LOGO
@@ -85,12 +106,6 @@ const useStyles = makeStyles((theme) => ({
       height: '2.8rem',
     },
   },
-  icons: {
-    // border: '1px solid lime',
-    display: 'flex',
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
   // ------------------------------------------------ NAVIGATION
   menuBar: {
     display: 'flex',
@@ -107,14 +122,17 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
   },
   tab: {
-    ...theme.typography.balsamiq,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    ...theme.flex.row,
+    ...theme.typography.mont,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
+    fontWeight: 500,
     padding: '15px 20px',
     cursor: 'pointer',
-    // border: "1px solid red",
     position: 'relative',
+    '&:hover': {
+      opacity: 0.7,
+    },
     '&:hover $dropdown': {
       display: 'block',
     },
@@ -126,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.white,
     top: '100%',
     left: 0,
-    boxShadow: `0px 2px 3px ${theme.palette.common.pinkShadow}`,
+    boxShadow: theme.palette.shadows.primary,
   },
   submenu: {
     listStyle: 'none',
@@ -199,6 +217,30 @@ const useStyles = makeStyles((theme) => ({
 const Header = ({ openDrawer, setOpenDrawer }) => {
   const classes = useStyles();
 
+  const userLogin = true;
+
+  // dropdown states:
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [openUser, setOpenUser] = useState(false);
+
+  //dropdown handlers
+  const handleClickUser = (e) => {
+    setAnchorElUser(e.currentTarget);
+    setOpenUser(true);
+  };
+
+  const handleCloseUser = (e) => {
+    setAnchorElUser(null);
+    setOpenUser(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpenUser(false);
+    }
+  }
+
   return (
     <header className={classes.root}>
       <div className={classes.container}>
@@ -218,12 +260,102 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
             </div>
 
             <div className={classes.icons}>
-              <div></div>
-              <div></div>
-              <UserIcon className={classes.sideIconUser} />
-              <CartIcon className={classes.sideIconCart} />
+              <IconButton
+                className={classes.iconButton}
+                aria-owns={anchorElUser ? 'dropdown-user' : undefined}
+                aria-haspopup={anchorElUser ? true : undefined}
+                onMouseOver={(e) => handleClickUser(e)}
+                onMouseLeave={handleCloseUser}
+              >
+                <div className={classes.username}>{userLogin && 'user'}</div>
+                <UserIcon className={classes.sideIconUser} />
+              </IconButton>
+
+              <IconButton className={classes.iconButton}>
+                <CartIcon className={classes.sideIconCart} />
+              </IconButton>
             </div>
           </div>
+          {/* Dropdown user */}
+          <Popper
+            open={openUser}
+            anchorEl={anchorElUser}
+            role={undefined}
+            transition
+            disablePortal
+            placement='bottom-start'
+          >
+            {({ TransitionProps, placement }) => (
+              <Grow
+                {...TransitionProps}
+                style={{
+                  transformOrigin: 'top left',
+                }}
+              >
+                <Paper className={classes.dropdownLang} elevation={0}>
+                  <ClickAwayListener onClickAway={handleCloseUser}>
+                    <MenuList
+                      autoFocusItem={false}
+                      id='dropdown-user'
+                      onKeyDown={handleListKeyDown}
+                      disableAutoFocusItem
+                      onMouseLeave={handleCloseUser}
+                      onMouseOver={() => setOpenUser(true)}
+                      disablePadding
+                    >
+                      {userLogin ? (
+                        <>
+                          <MenuItem
+                            classes={{ root: classes.dropdownItemLang }}
+                            value='en'
+                            onClick={(e) => {
+                              handleCloseUser(e);
+                              // setLang('en');
+                            }}
+                          >
+                            Profile
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.dropdownItemLang }}
+                            value='nl'
+                            onClick={(e) => {
+                              handleCloseUser(e);
+                              // setLang('nl');
+                            }}
+                          >
+                            Sign Out
+                          </MenuItem>
+                        </>
+                      ) : (
+                        <>
+                          <MenuItem
+                            classes={{ root: classes.dropdownItemLang }}
+                            value='nl'
+                            onClick={(e) => {
+                              handleCloseUser(e);
+                              // setLang('nl');
+                            }}
+                          >
+                            Login
+                          </MenuItem>
+                          <MenuItem
+                            classes={{ root: classes.dropdownItemLang }}
+                            value='nl'
+                            onClick={(e) => {
+                              handleCloseUser(e);
+                              // setLang('nl');
+                            }}
+                          >
+                            Sign Up
+                          </MenuItem>
+                        </>
+                      )}
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Grow>
+            )}
+          </Popper>
 
           {openDrawer && (
             <ul className={classes.drawer}>
@@ -317,7 +449,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
             <ul className={classes.navigation}>
               <li className={classes.tab}>
                 <div>New</div>
-                <ExpandIcon className={classes.expandIcon} />
               </li>
               <li className={classes.tab}>
                 <div>Honeys</div>
@@ -347,26 +478,25 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                   </ul>
                 </div>
               </li>
-
               <li className={classes.tab}>
-                <div>Oils</div>
+                <div>Teas</div>
                 <ExpandIcon className={classes.expandIcon} />
+                <div className={classes.dropdown}>
+                  <ul className={classes.submenu}>
+                    <li className={classes.submenuItem}>Black tea</li>
+                    <li className={classes.submenuItem}>Green tea</li>
+                    <li className={classes.submenuItem}>Fruit tea</li>
+                  </ul>
+                </div>
               </li>
               <li className={classes.tab}>
                 <div>Gift sets</div>
-                <ExpandIcon className={classes.expandIcon} />
               </li>
               <li className={classes.tab}>
                 <div>Special offer</div>
-                <ExpandIcon className={classes.expandIcon} />
-              </li>
-              <li className={classes.tab}>
-                <div>Beauty and Care</div>
-                <ExpandIcon className={classes.expandIcon} />
               </li>
               <li className={classes.tab}>
                 <div>Sale</div>
-                <ExpandIcon className={classes.expandIcon} />
               </li>
             </ul>
           </nav>

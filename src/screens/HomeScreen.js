@@ -11,10 +11,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 150,
     padding: '15px',
     [theme.breakpoints.down('md')]: {
-      marginTop: 100,
+      marginTop: 130,
     },
     [theme.breakpoints.down('sm')]: {
-      marginTop: 70,
+      marginTop: 90,
     },
   },
 }));
