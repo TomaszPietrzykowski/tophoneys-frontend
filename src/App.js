@@ -1,9 +1,12 @@
 import React, { Fragment, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/styles';
 import theme from './components/Theme';
 // import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Header from './components/ui/Header';
 import HomeScreen from './screens/HomeScreen';
+import CategoryScreen from './screens/CategoryScreen';
+import ProductScreen from './screens/ProductScreen';
 // import Newsletter from "./components/ui/Newsletter";
 // import Footer from "./components/ui/Footer";
 // import DevTag from "./components/ui/DevTag";
@@ -16,10 +19,15 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Fragment>
-        <Header openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
-        <HomeScreen />
-        {/* <Newsletter />
+      <Router>
+        <Fragment>
+          <Header openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
+          <Switch>
+            <Route path='/' component={HomeScreen} exact />
+            <Route path='/category' component={CategoryScreen} exact />
+            <Route path='/category/:id' component={CategoryScreen} exact />
+            <Route path='/product/:id' component={ProductScreen} exact />
+            {/* <Newsletter />
         <Footer />
         {isMobile && (
           <Fragment>
@@ -27,7 +35,9 @@ function App() {
             <BottomNav openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
           </Fragment>
         )} */}
-      </Fragment>
+          </Switch>
+        </Fragment>
+      </Router>
     </ThemeProvider>
   );
 }

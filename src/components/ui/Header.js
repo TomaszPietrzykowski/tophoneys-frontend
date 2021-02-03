@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import logo from '../../assets/logotranspbg.png';
 import Search from './Search';
@@ -278,10 +279,11 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
             </div>
 
             <Search />
-
-            <div className={classes.logoContainer}>
-              <img className={classes.logo} src={logo} alt='company logo' />
-            </div>
+            <Link to='/'>
+              <div className={classes.logoContainer}>
+                <img className={classes.logo} src={logo} alt='company logo' />
+              </div>
+            </Link>
 
             <div className={classes.icons}>
               <IconButton
