@@ -140,6 +140,10 @@ const useStyles = makeStyles((theme) => ({
     padding: '15px 20px',
     cursor: 'pointer',
   },
+  navLink: {
+    color: theme.palette.text.primary,
+    textDecoration: 'none',
+  },
   dropdown: {
     backgroundColor: theme.palette.common.white,
     boxShadow: theme.palette.shadows.primary,
@@ -336,7 +340,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       autoFocusItem={false}
                       id='dropdown-user'
                       onKeyDown={handleListKeyDown}
-                      // disableAutoFocusItem
                       onMouseLeave={handleCloseUser}
                       onMouseOver={() => setOpenUser(true)}
                       disablePadding
@@ -347,7 +350,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           value='en'
                           onClick={(e) => {
                             handleCloseUser(e);
-                            // setIcons('en');
                           }}
                         >
                           Profile
@@ -359,7 +361,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           value='nl'
                           onClick={(e) => {
                             handleCloseUser(e);
-                            // setIcons('nl');
                           }}
                         >
                           Log out
@@ -371,7 +372,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           value='nl'
                           onClick={(e) => {
                             handleCloseUser(e);
-                            // setIcons('nl');
                           }}
                         >
                           Log in
@@ -383,7 +383,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           value='nl'
                           onClick={(e) => {
                             handleCloseUser(e);
-                            // setIcons('nl');
                           }}
                         >
                           Sign up
@@ -419,7 +418,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       autoFocusItem={false}
                       id='dropdown-admin'
                       onKeyDown={handleListKeyDown}
-                      // disableAutoFocusItem
                       onMouseLeave={handleCloseAdmin}
                       onMouseOver={() => setOpenAdmin(true)}
                       disablePadding
@@ -429,7 +427,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         value='en'
                         onClick={(e) => {
                           handleCloseAdmin(e);
-                          // setIcons('en');
                         }}
                       >
                         Products
@@ -439,7 +436,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         value='nl'
                         onClick={(e) => {
                           handleCloseUser(e);
-                          // setIcons('nl');
                         }}
                       >
                         Orders
@@ -449,7 +445,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         value='nl'
                         onClick={(e) => {
                           handleCloseUser(e);
-                          // setLang('nl');
                         }}
                       >
                         Users
@@ -495,7 +490,9 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
           <nav className={classes.menuBar}>
             <ul className={classes.navigation}>
               <li className={classes.tab}>
-                <div>New</div>
+                <Link to='/category/new' className={classes.navLink}>
+                  <div>New</div>
+                </Link>
               </li>
               <div
                 aria-owns={anchorElHoneys ? 'dropdown-honeys' : undefined}
@@ -503,10 +500,12 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                 onMouseOver={(e) => handleClickHoneys(e)}
                 onMouseLeave={handleCloseHoneys}
               >
-                <li className={classes.tab}>
-                  <div>Honeys</div>
-                  <ExpandIcon className={classes.expandIcon} />
-                </li>
+                <Link to='/category/honeys' className={classes.navLink}>
+                  <li className={classes.tab}>
+                    <div>Honeys</div>
+                    <ExpandIcon className={classes.expandIcon} />
+                  </li>
+                </Link>
               </div>
 
               <Popper
@@ -530,47 +529,50 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           autoFocusItem={false}
                           id='dropdown-honeys'
                           onKeyDown={handleListKeyDown}
-                          // disableAutoFocusItem
                           onMouseLeave={handleCloseHoneys}
                           onMouseOver={() => setOpenHoneys(true)}
                           disablePadding
                         >
                           <MenuItem
+                            component={Link}
+                            to='/category/honeys'
                             classes={{ root: classes.submenu }}
-                            value='en'
+                            value='honeys'
                             onClick={(e) => {
                               handleCloseHoneys(e);
-                              // setLang('en');
                             }}
                           >
                             All honeys
                           </MenuItem>
                           <MenuItem
+                            component={Link}
+                            to='/category/creamed'
                             classes={{ root: classes.submenu }}
                             value='nl'
                             onClick={(e) => {
-                              handleCloseUser(e);
-                              // setLang('nl');
+                              handleCloseHoneys(e);
                             }}
                           >
                             Creamed honeys
                           </MenuItem>
                           <MenuItem
+                            component={Link}
+                            to='/category/additives'
                             classes={{ root: classes.submenu }}
                             value='nl'
                             onClick={(e) => {
-                              handleCloseUser(e);
-                              // setLang('nl');
+                              handleCloseHoneys(e);
                             }}
                           >
                             Honeys with additives
                           </MenuItem>
                           <MenuItem
+                            component={Link}
+                            to='/category/accessories'
                             classes={{ root: classes.submenu }}
                             value='nl'
                             onClick={(e) => {
-                              handleCloseUser(e);
-                              // setLang('nl');
+                              handleCloseHoneys(e);
                             }}
                           >
                             Accessories
@@ -587,10 +589,12 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                 onMouseOver={(e) => handleClickBees(e)}
                 onMouseLeave={handleCloseBees}
               >
-                <li className={classes.tab}>
-                  <div>Bees products</div>
-                  <ExpandIcon className={classes.expandIcon} />
-                </li>
+                <Link to='/category/beeproducts' className={classes.navLink}>
+                  <li className={classes.tab}>
+                    <div>Bees products</div>
+                    <ExpandIcon className={classes.expandIcon} />
+                  </li>
+                </Link>
               </div>
 
               <Popper
@@ -614,57 +618,56 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           autoFocusItem={false}
                           id='dropdown-bees'
                           onKeyDown={handleListKeyDown}
-                          // disableAutoFocusItem
                           onMouseLeave={handleCloseBees}
                           onMouseOver={() => setOpenBees(true)}
                           disablePadding
                         >
                           <MenuItem
+                            component={Link}
+                            to='/category/beefeathers'
                             classes={{ root: classes.submenu }}
-                            value='en'
                             onClick={(e) => {
                               handleCloseBees(e);
-                              // setLang('en');
                             }}
                           >
                             Bee feathers
                           </MenuItem>
                           <MenuItem
+                            component={Link}
+                            to='/category/propolis'
                             classes={{ root: classes.submenu }}
-                            value='nl'
                             onClick={(e) => {
-                              handleCloseUser(e);
-                              // setLang('nl');
+                              handleCloseBees(e);
                             }}
                           >
                             Propolis
                           </MenuItem>
                           <MenuItem
+                            component={Link}
+                            to='/category/pollen'
                             classes={{ root: classes.submenu }}
-                            value='nl'
                             onClick={(e) => {
-                              handleCloseUser(e);
-                              // setLang('nl');
+                              handleCloseBees(e);
                             }}
                           >
                             Bee pollen
                           </MenuItem>
                           <MenuItem
+                            component={Link}
+                            to='/category/beemilk'
                             classes={{ root: classes.submenu }}
-                            value='nl'
                             onClick={(e) => {
-                              handleCloseUser(e);
-                              // setLang('nl');
+                              handleCloseBees(e);
                             }}
                           >
                             Bee milk
                           </MenuItem>
                           <MenuItem
+                            component={Link}
+                            to='/category/beewaxcandles'
                             classes={{ root: classes.submenu }}
-                            value='nl'
                             onClick={(e) => {
-                              handleCloseUser(e);
-                              // setLang('nl');
+                              handleCloseBees(e);
                             }}
                           >
                             Beewax candles
@@ -681,10 +684,12 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                 onMouseOver={(e) => handleClickTea(e)}
                 onMouseLeave={handleCloseTea}
               >
-                <li className={classes.tab}>
-                  <div>Teas</div>
-                  <ExpandIcon className={classes.expandIcon} />
-                </li>
+                <Link to='/category/tea' className={classes.navLink}>
+                  <li className={classes.tab}>
+                    <div>Teas</div>
+                    <ExpandIcon className={classes.expandIcon} />
+                  </li>
+                </Link>
               </div>
 
               <Popper
@@ -708,50 +713,49 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           autoFocusItem={false}
                           id='dropdown-tea'
                           onKeyDown={handleListKeyDown}
-                          // disableAutoFocusItem
                           onMouseLeave={handleCloseTea}
                           onMouseOver={() => setOpenTea(true)}
                           disablePadding
                         >
                           <MenuItem
-                            classes={{ root: classes.submenu }}
-                            value='en'
+                            component={Link}
+                            to='/category/tea'
+                            className={classes.submenu}
                             onClick={(e) => {
                               handleCloseTea(e);
-                              // setLang('en');
                             }}
                           >
                             All teas
                           </MenuItem>
                           <MenuItem
-                            classes={{ root: classes.submenu }}
-                            value='en'
+                            component={Link}
+                            to='/category/blacktea'
+                            className={classes.submenu}
                             onClick={(e) => {
                               handleCloseTea(e);
-                              // setLang('en');
                             }}
                           >
                             Black tea
                           </MenuItem>
                           <MenuItem
-                            classes={{ root: classes.submenu }}
-                            value='en'
+                            component={Link}
+                            to='/category/greentea'
+                            className={classes.submenu}
                             onClick={(e) => {
                               handleCloseTea(e);
-                              // setLang('en');
-                            }}
-                          >
-                            Fruit tea
-                          </MenuItem>
-                          <MenuItem
-                            classes={{ root: classes.submenu }}
-                            value='en'
-                            onClick={(e) => {
-                              handleCloseTea(e);
-                              // setLang('en');
                             }}
                           >
                             Green tea
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to='/category/fruittea'
+                            className={classes.submenu}
+                            onClick={(e) => {
+                              handleCloseTea(e);
+                            }}
+                          >
+                            Fruit tea
                           </MenuItem>
                         </MenuList>
                       </ClickAwayListener>
@@ -759,15 +763,21 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                   </Grow>
                 )}
               </Popper>
-              <li className={classes.tab}>
-                <div>Gift sets</div>
-              </li>
-              <li className={classes.tab}>
-                <div>Special offer</div>
-              </li>
-              <li className={classes.tab}>
-                <div>Sale</div>
-              </li>
+              <Link to='/category/giftsets' className={classes.navLink}>
+                <li className={classes.tab}>
+                  <div>Gift sets</div>
+                </li>
+              </Link>
+              <Link to='/category/specialoffer' className={classes.navLink}>
+                <li className={classes.tab}>
+                  <div>Special offer</div>
+                </li>
+              </Link>
+              <Link to='/category/sale' className={classes.navLink}>
+                <li className={classes.tab}>
+                  <div>Sale</div>
+                </li>
+              </Link>
             </ul>
           </nav>
         </div>
