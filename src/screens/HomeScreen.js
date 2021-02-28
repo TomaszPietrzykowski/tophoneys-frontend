@@ -1,19 +1,19 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
-import Search from '../components/ui/Search';
-import Showcase from '../components/ui/Showcase';
-import Teasers from '../components/ui/Teasers';
+import Search from "../components/ui/Search";
+import Showcase from "../components/ui/Showcase";
+import Teasers from "../components/ui/Teasers";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
     marginTop: 150,
-    padding: '15px',
-    [theme.breakpoints.down('md')]: {
+    padding: "15px",
+    [theme.breakpoints.down("md")]: {
       marginTop: 130,
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down("sm")]: {
       marginTop: 90,
     },
   },
