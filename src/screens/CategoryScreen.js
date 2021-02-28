@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
-// import axios from "axios";
 import { getProductsByCategory } from "../actions/productActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -36,18 +35,12 @@ const CategoryScreen = ({ match }) => {
 
   return (
     <main className={classes.container}>
+      {message && <Message message={message} onClose={() => setMessage("")} />}
       Category screen:{" "}
-      {message && (
-        <Message
-          // variant="error"
-          message={message}
-          onClose={() => setMessage("")}
-        />
-      )}
       {loading ? (
         <Loader />
       ) : error ? (
-        <h3>{error}</h3>
+        <Message variant="error" message={error} />
       ) : (
         <div>
           {products.map((product) => {
