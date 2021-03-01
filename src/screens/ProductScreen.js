@@ -14,16 +14,18 @@ const useStyles = makeStyles((theme) => ({
     ...theme.utils.container,
   },
   backBtn: {
-    padding: ".3rem 2rem",
-    color: "black",
-    border: "1px solid black",
+    ...theme.typography.prosto,
+    textTransform: "uppercase",
+    padding: ".6rem 2rem .6rem 1.5rem",
+    color: theme.palette.text.secondary,
+    border: "1px solid rgba(0,0,0,.2)",
     background: "white",
     borderRadius: 4,
-    marginBottom: "2rem",
+    margin: "2rem",
+    cursor: "pointer",
   },
   card: {
     padding: "2rem",
-    // border: "1px solid blue",
   },
   filler: {
     width: "100%",
@@ -90,11 +92,11 @@ const ProductScreen = ({ match }) => {
         ) : (
           <>
             <Link to="/">
-              <button className={classes.backBtn}>Go Back</button>
+              <button className={classes.backBtn}> &larr; Go Back</button>
             </Link>
             {product && (
               <Grid container>
-                <Grid item xs={12} md={6} lg={4} className={classes.card}>
+                <Grid item xs={12} md={6} lg={5} className={classes.card}>
                   <div className={classes.filler}>
                     <img
                       src={product.image}
@@ -103,7 +105,7 @@ const ProductScreen = ({ match }) => {
                     />
                   </div>
                 </Grid>
-                <Grid item xs={12} md={6} lg={5} className={classes.card}>
+                <Grid item xs={12} md={6} lg={4} className={classes.card}>
                   <div className={classes.filler}>
                     <h3 className={classes.name}>{product.name}</h3>
                     <p className={classes.listItem}>{product.description}</p>
