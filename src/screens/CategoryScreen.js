@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 import { getProductsByCategory } from "../actions/productActions";
@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 
 const CategoryScreen = ({ match }) => {
   const classes = useStyles();
-  const [message, setMessage] = useState("testowa wiadomosc");
   const { loading, error, products } = useSelector(
     (state) => state.productCategory
   );
@@ -35,7 +34,6 @@ const CategoryScreen = ({ match }) => {
 
   return (
     <main className={classes.container}>
-      {message && <Message message={message} onClose={() => setMessage("")} />}
       Category screen:{" "}
       {loading ? (
         <Loader />
