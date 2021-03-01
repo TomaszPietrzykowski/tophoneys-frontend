@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Search from "../components/ui/Search";
 import Showcase from "../components/ui/Showcase";
 import Teasers from "../components/ui/Teasers";
+import Featured from "../components/Featured";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,6 +26,7 @@ const Home = () => {
     <main className={classes.container}>
       <Search isMobile={true} />
       <Showcase />
+      <Featured />
       <Teasers />
     </main>
   );

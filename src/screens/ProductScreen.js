@@ -1,31 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/styles';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { listProductDetails } from "../actions/productActions";
+import { Link } from "react-router-dom";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const useStyles = makeStyles((theme) => ({
-  test: {
-    color: 'green',
-    marginTop: '20rem',
+  container: {
+    marginTop: "20rem",
+    ...theme.utils.container,
+  },
+  backBtn: {
+    padding: ".3rem 2rem",
+    color: "black",
+    border: "1px solid black",
+    background: "white",
+    borderRadius: 4,
   },
 }));
 
 const ProductScreen = ({ match }) => {
   const classes = useStyles();
-  const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
+
+  const { loading, error, product } = useSelector(
+    (state) => state.productDetails
+  );
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get(`/api/products/${match.params.id}`);
-
-      setProduct(data);
-    };
-    fetchProduct();
-  }, [match.params.id]);
+    dispatch(listProductDetails(match.params.id));
+  }, [match, dispatch]);
 
   return (
-    <div className={classes.test}>
-      {product && `product fetched: ${product.name}`}
-    </div>
+    <>
+      <div className={classes.container}>
+        <Link to="/">
+          <button className={classes.backBtn}>Go Back</button>
+        </Link>
+        <p>{product && `product fetched: ${product.name}`}</p>
+      </div>
+    </>
   );
 };
 

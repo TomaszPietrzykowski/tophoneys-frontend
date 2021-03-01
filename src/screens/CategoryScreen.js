@@ -1,14 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
-// import axios from "axios";
 import { getProductsByCategory } from "../actions/productActions";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const useStyles = makeStyles((theme) => ({
-  test: {
+  container: {
+    ...theme.utils.container,
     ...theme.flex.col,
-    color: "green",
     marginTop: "20rem",
+    padding: "1rem",
+    [theme.breakpoints.down("md")]: {
+      marginTop: 130,
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 90,
+    },
   },
 }));
 
@@ -25,12 +33,12 @@ const CategoryScreen = ({ match }) => {
   }, [id, dispatch]);
 
   return (
-    <div className={classes.test}>
+    <main className={classes.container}>
       Category screen:{" "}
       {loading ? (
-        <h2>Loading...</h2>
+        <Loader />
       ) : error ? (
-        <h3>{error}</h3>
+        <Message variant="error" message={error} />
       ) : (
         <div>
           {products.map((product) => {
@@ -38,7 +46,7 @@ const CategoryScreen = ({ match }) => {
           })}
         </div>
       )}
-    </div>
+    </main>
   );
 };
 
