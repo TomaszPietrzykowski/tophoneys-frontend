@@ -54,8 +54,8 @@ const Featured = ({ match }) => {
             .filter((p, i) => i < 4)
             .map((product) => {
               return (
-                <Link to={`/product/${product._id}`} className={classes.link}>
-                  <div className={classes.productTab} key={product._id}>
+                <div className={classes.productTab} key={product._id}>
+                  <Link to={`/product/${product._id}`} className={classes.link}>
                     <img
                       src={`${product.image}`}
                       alt={product.name}
@@ -64,8 +64,8 @@ const Featured = ({ match }) => {
                     <h3 style={{ margin: 10 }}>{product.name}</h3>
                     <p style={{ margin: 10 }}>&euro; {product.price}</p>
                     <p style={{ margin: 10 }}>{product.image}</p>
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               );
             })}
         </div>
