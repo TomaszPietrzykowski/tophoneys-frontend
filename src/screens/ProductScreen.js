@@ -56,30 +56,39 @@ const ProductScreen = ({ match }) => {
   return (
     <>
       <div className={classes.container}>
-        <Link to="/">
-          <button className={classes.backBtn}>Go Back</button>
-        </Link>
-        <Grid container>
-          <Grid item xs={12} md={6} lg={4} className={classes.box1}>
-            <div className={classes.filler}>
-              <img
-                src={product.image}
-                className={classes.image}
-                alt={product.name}
-              />
-            </div>
-          </Grid>
-          <Grid item xs={12} md={6} lg={5} className={classes.box2}>
-            <div className={classes.filler}>
-              <h3>{product.name}</h3>
-              <p>{product.description}</p>
-            </div>
-          </Grid>
-          <Grid item xs={12} md={12} lg={3} className={classes.box3}>
-            <div className={classes.filler}>c</div>
-          </Grid>
-        </Grid>
-        <p>{product && `product fetched: ${product.name}`}</p>
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant="error" message={error} />
+        ) : (
+          <>
+            <Link to="/">
+              <button className={classes.backBtn}>Go Back</button>
+            </Link>
+            {product && (
+              <Grid container>
+                <Grid item xs={12} md={6} lg={4} className={classes.box1}>
+                  <div className={classes.filler}>
+                    <img
+                      src={product.image}
+                      className={classes.image}
+                      alt={product.name}
+                    />
+                  </div>
+                </Grid>
+                <Grid item xs={12} md={6} lg={5} className={classes.box2}>
+                  <div className={classes.filler}>
+                    <h3>{product.name}</h3>
+                    <p>{product.description}</p>
+                  </div>
+                </Grid>
+                <Grid item xs={12} md={12} lg={3} className={classes.box3}>
+                  <div className={classes.filler}>c</div>
+                </Grid>
+              </Grid>
+            )}
+          </>
+        )}
       </div>
     </>
   );
