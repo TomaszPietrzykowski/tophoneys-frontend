@@ -32,24 +32,23 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1200,
   },
   container: {
-    // border: '1px solid blue',
+    // border: "1px solid blue",
     ...theme.utils.container,
-    padding: "0 3rem",
+    ...theme.flex.row,
+    justifyContent: "space-between",
+    padding: "1.75rem 3rem",
     [theme.breakpoints.down("md")]: {
-      padding: "0 .8rem",
+      padding: ".8rem",
     },
   },
   navbar: {
-    // border: '1px solid magenta',
+    // border: "1px solid magenta",
     ...theme.flex.col,
     alignItems: "space-between",
   },
   topBar: {
-    // border: '1px solid magenta',
+    // border: "1px solid green",
     backgroundColor: theme.palette.common.white,
-    ...theme.flex.row,
-    justifyContent: "space-between",
-    padding: "1.75rem 0",
   },
 
   // ----------------------------------------------- MENU BTN
@@ -119,6 +118,7 @@ const useStyles = makeStyles((theme) => ({
   },
   // ------------------------------------------------ NAVIGATION
   menuBar: {
+    background: "rgba(0,0,0,.04)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -271,9 +271,9 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
 
   return (
     <header className={classes.root}>
-      <div className={classes.container}>
-        <div className={classes.navbar}>
-          <div className={classes.topBar}>
+      <div className={classes.navbar}>
+        <div className={classes.topBar}>
+          <div className={classes.container}>
             <div
               className={classes.menuBtnContainer}
               onClick={() => setOpenDrawer(!openDrawer)}
@@ -315,121 +315,47 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
               </IconButton>
             </div>
           </div>
+        </div>
 
-          {/* Dropdown user */}
+        {/* Dropdown user */}
 
-          <Popper
-            open={openUser}
-            anchorEl={anchorElUser}
-            role={undefined}
-            transition
-            disablePortal
-            placement="bottom-start"
-          >
-            {({ TransitionProps, placement }) => (
-              <Grow
-                {...TransitionProps}
-                style={{
-                  transformOrigin: "top left",
-                }}
-              >
-                <Paper className={classes.dropdown} elevation={0}>
-                  <ClickAwayListener onClickAway={handleCloseUser}>
-                    <MenuList
-                      autoFocusItem={false}
-                      id="dropdown-user"
-                      onKeyDown={handleListKeyDown}
-                      onMouseLeave={handleCloseUser}
-                      onMouseOver={() => setOpenUser(true)}
-                      disablePadding
-                    >
-                      {userLogin && (
-                        <MenuItem
-                          classes={{ root: classes.dropdownItemIcons }}
-                          value="en"
-                          onClick={(e) => {
-                            handleCloseUser(e);
-                          }}
-                        >
-                          Profile
-                        </MenuItem>
-                      )}
-                      {userLogin && (
-                        <MenuItem
-                          classes={{ root: classes.dropdownItemIcons }}
-                          value="nl"
-                          onClick={(e) => {
-                            handleCloseUser(e);
-                          }}
-                        >
-                          Log out
-                        </MenuItem>
-                      )}
-                      {!userLogin && (
-                        <MenuItem
-                          classes={{ root: classes.dropdownItemIcons }}
-                          value="nl"
-                          onClick={(e) => {
-                            handleCloseUser(e);
-                          }}
-                        >
-                          Log in
-                        </MenuItem>
-                      )}
-                      {!userLogin && (
-                        <MenuItem
-                          classes={{ root: classes.dropdownItemIcons }}
-                          value="nl"
-                          onClick={(e) => {
-                            handleCloseUser(e);
-                          }}
-                        >
-                          Sign up
-                        </MenuItem>
-                      )}
-                    </MenuList>
-                  </ClickAwayListener>
-                </Paper>
-              </Grow>
-            )}
-          </Popper>
-
-          {/* Dropdown admin */}
-
-          <Popper
-            open={openAdmin}
-            anchorEl={anchorElAdmin}
-            role={undefined}
-            transition
-            disablePortal
-            placement="bottom-start"
-          >
-            {({ TransitionProps, placement }) => (
-              <Grow
-                {...TransitionProps}
-                style={{
-                  transformOrigin: "top left",
-                }}
-              >
-                <Paper className={classes.dropdown} elevation={0}>
-                  <ClickAwayListener onClickAway={handleCloseAdmin}>
-                    <MenuList
-                      autoFocusItem={false}
-                      id="dropdown-admin"
-                      onKeyDown={handleListKeyDown}
-                      onMouseLeave={handleCloseAdmin}
-                      onMouseOver={() => setOpenAdmin(true)}
-                      disablePadding
-                    >
+        <Popper
+          open={openUser}
+          anchorEl={anchorElUser}
+          role={undefined}
+          transition
+          disablePortal
+          placement="bottom-start"
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin: "top left",
+              }}
+            >
+              <Paper className={classes.dropdown} elevation={0}>
+                <ClickAwayListener onClickAway={handleCloseUser}>
+                  <MenuList
+                    autoFocusItem={false}
+                    id="dropdown-user"
+                    onKeyDown={handleListKeyDown}
+                    onMouseLeave={handleCloseUser}
+                    onMouseOver={() => setOpenUser(true)}
+                    disablePadding
+                  >
+                    {userLogin && (
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
                         value="en"
                         onClick={(e) => {
-                          handleCloseAdmin(e);
+                          handleCloseUser(e);
                         }}
                       >
-                        Products
+                        Profile
                       </MenuItem>
+                    )}
+                    {userLogin && (
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
                         value="nl"
@@ -437,8 +363,10 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           handleCloseUser(e);
                         }}
                       >
-                        Orders
+                        Log out
                       </MenuItem>
+                    )}
+                    {!userLogin && (
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
                         value="nl"
@@ -446,341 +374,414 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           handleCloseUser(e);
                         }}
                       >
-                        Users
+                        Log in
                       </MenuItem>
-                    </MenuList>
-                  </ClickAwayListener>
-                </Paper>
-              </Grow>
-            )}
-          </Popper>
-
-          {openDrawer && (
-            <ul className={classes.drawer}>
-              <li className={classes.drawerNav}>
-                <div
-                  className={classes.closeIconContainer}
-                  onClick={() => setOpenDrawer(false)}
-                >
-                  <CloseIcon className={classes.closeIcon} />
-                </div>
-              </li>
-              <Divider />
-              <li
-                className={classes.drawerItem}
-                onClick={() => setOpenDrawer(false)}
-              >
-                <div className={classes.drawerText}>Akcesoria</div>
-                <div className={classes.drawerIconContainer}>
-                  <RightArrowIcon className={classes.drawerIcon} />
-                </div>
-              </li>
-              <Divider />
-              <li
-                className={classes.drawerItem}
-                onClick={() => setOpenDrawer(false)}
-              >
-                <div className={classes.drawerText}>Marki</div>
-              </li>
-              <Divider />
-            </ul>
+                    )}
+                    {!userLogin && (
+                      <MenuItem
+                        classes={{ root: classes.dropdownItemIcons }}
+                        value="nl"
+                        onClick={(e) => {
+                          handleCloseUser(e);
+                        }}
+                      >
+                        Sign up
+                      </MenuItem>
+                    )}
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
           )}
+        </Popper>
 
-          <nav className={classes.menuBar}>
-            <ul className={classes.navigation}>
+        {/* Dropdown admin */}
+
+        <Popper
+          open={openAdmin}
+          anchorEl={anchorElAdmin}
+          role={undefined}
+          transition
+          disablePortal
+          placement="bottom-start"
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin: "top left",
+              }}
+            >
+              <Paper className={classes.dropdown} elevation={0}>
+                <ClickAwayListener onClickAway={handleCloseAdmin}>
+                  <MenuList
+                    autoFocusItem={false}
+                    id="dropdown-admin"
+                    onKeyDown={handleListKeyDown}
+                    onMouseLeave={handleCloseAdmin}
+                    onMouseOver={() => setOpenAdmin(true)}
+                    disablePadding
+                  >
+                    <MenuItem
+                      classes={{ root: classes.dropdownItemIcons }}
+                      value="en"
+                      onClick={(e) => {
+                        handleCloseAdmin(e);
+                      }}
+                    >
+                      Products
+                    </MenuItem>
+                    <MenuItem
+                      classes={{ root: classes.dropdownItemIcons }}
+                      value="nl"
+                      onClick={(e) => {
+                        handleCloseUser(e);
+                      }}
+                    >
+                      Orders
+                    </MenuItem>
+                    <MenuItem
+                      classes={{ root: classes.dropdownItemIcons }}
+                      value="nl"
+                      onClick={(e) => {
+                        handleCloseUser(e);
+                      }}
+                    >
+                      Users
+                    </MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+
+        {openDrawer && (
+          <ul className={classes.drawer}>
+            <li className={classes.drawerNav}>
+              <div
+                className={classes.closeIconContainer}
+                onClick={() => setOpenDrawer(false)}
+              >
+                <CloseIcon className={classes.closeIcon} />
+              </div>
+            </li>
+            <Divider />
+            <li
+              className={classes.drawerItem}
+              onClick={() => setOpenDrawer(false)}
+            >
+              <div className={classes.drawerText}>Akcesoria</div>
+              <div className={classes.drawerIconContainer}>
+                <RightArrowIcon className={classes.drawerIcon} />
+              </div>
+            </li>
+            <Divider />
+            <li
+              className={classes.drawerItem}
+              onClick={() => setOpenDrawer(false)}
+            >
+              <div className={classes.drawerText}>Marki</div>
+            </li>
+            <Divider />
+          </ul>
+        )}
+        {/* <div className={classes.container}> */}
+        <nav className={classes.menuBar}>
+          <ul className={classes.navigation}>
+            <li className={classes.tab}>
+              <Link to="/category/new" className={classes.navLink}>
+                <div>New</div>
+              </Link>
+            </li>
+            <div
+              aria-owns={anchorElHoneys ? "dropdown-honeys" : undefined}
+              aria-haspopup={anchorElHoneys ? true : undefined}
+              onMouseOver={(e) => handleClickHoneys(e)}
+              onMouseLeave={handleCloseHoneys}
+            >
+              <Link to="/category/honeys" className={classes.navLink}>
+                <li className={classes.tab}>
+                  <div>Honeys</div>
+                  <ExpandIcon className={classes.expandIcon} />
+                </li>
+              </Link>
+            </div>
+
+            <Popper
+              open={openHoneys}
+              anchorEl={anchorElHoneys}
+              role={undefined}
+              transition
+              disablePortal
+              placement="bottom-start"
+            >
+              {({ TransitionProps, placement }) => (
+                <Grow
+                  {...TransitionProps}
+                  style={{
+                    transformOrigin: "top left",
+                  }}
+                >
+                  <Paper className={classes.dropdown} elevation={0}>
+                    <ClickAwayListener onClickAway={handleCloseHoneys}>
+                      <MenuList
+                        autoFocusItem={false}
+                        id="dropdown-honeys"
+                        onKeyDown={handleListKeyDown}
+                        onMouseLeave={handleCloseHoneys}
+                        onMouseOver={() => setOpenHoneys(true)}
+                        disablePadding
+                      >
+                        <MenuItem
+                          component={Link}
+                          to="/category/honeys"
+                          classes={{ root: classes.submenu }}
+                          value="honeys"
+                          onClick={(e) => {
+                            handleCloseHoneys(e);
+                          }}
+                        >
+                          All honeys
+                        </MenuItem>
+                        <MenuItem
+                          component={Link}
+                          to="/category/creamed"
+                          classes={{ root: classes.submenu }}
+                          value="nl"
+                          onClick={(e) => {
+                            handleCloseHoneys(e);
+                          }}
+                        >
+                          Creamed honeys
+                        </MenuItem>
+                        <MenuItem
+                          component={Link}
+                          to="/category/additives"
+                          classes={{ root: classes.submenu }}
+                          value="nl"
+                          onClick={(e) => {
+                            handleCloseHoneys(e);
+                          }}
+                        >
+                          Honeys with additives
+                        </MenuItem>
+                        <MenuItem
+                          component={Link}
+                          to="/category/accessories"
+                          classes={{ root: classes.submenu }}
+                          value="nl"
+                          onClick={(e) => {
+                            handleCloseHoneys(e);
+                          }}
+                        >
+                          Accessories
+                        </MenuItem>
+                      </MenuList>
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
+              )}
+            </Popper>
+            <div
+              aria-owns={anchorElBees ? "dropdown-bees" : undefined}
+              aria-haspopup={anchorElBees ? true : undefined}
+              onMouseOver={(e) => handleClickBees(e)}
+              onMouseLeave={handleCloseBees}
+            >
+              <Link to="/category/beeproducts" className={classes.navLink}>
+                <li className={classes.tab}>
+                  <div>Bees products</div>
+                  <ExpandIcon className={classes.expandIcon} />
+                </li>
+              </Link>
+            </div>
+
+            <Popper
+              open={openBees}
+              anchorEl={anchorElBees}
+              role={undefined}
+              transition
+              disablePortal
+              placement="bottom-start"
+            >
+              {({ TransitionProps, placement }) => (
+                <Grow
+                  {...TransitionProps}
+                  style={{
+                    transformOrigin: "top left",
+                  }}
+                >
+                  <Paper className={classes.dropdown} elevation={0}>
+                    <ClickAwayListener onClickAway={handleCloseBees}>
+                      <MenuList
+                        autoFocusItem={false}
+                        id="dropdown-bees"
+                        onKeyDown={handleListKeyDown}
+                        onMouseLeave={handleCloseBees}
+                        onMouseOver={() => setOpenBees(true)}
+                        disablePadding
+                      >
+                        <MenuItem
+                          component={Link}
+                          to="/category/beefeathers"
+                          classes={{ root: classes.submenu }}
+                          onClick={(e) => {
+                            handleCloseBees(e);
+                          }}
+                        >
+                          Bee feathers
+                        </MenuItem>
+                        <MenuItem
+                          component={Link}
+                          to="/category/propolis"
+                          classes={{ root: classes.submenu }}
+                          onClick={(e) => {
+                            handleCloseBees(e);
+                          }}
+                        >
+                          Propolis
+                        </MenuItem>
+                        <MenuItem
+                          component={Link}
+                          to="/category/pollen"
+                          classes={{ root: classes.submenu }}
+                          onClick={(e) => {
+                            handleCloseBees(e);
+                          }}
+                        >
+                          Bee pollen
+                        </MenuItem>
+                        <MenuItem
+                          component={Link}
+                          to="/category/beemilk"
+                          classes={{ root: classes.submenu }}
+                          onClick={(e) => {
+                            handleCloseBees(e);
+                          }}
+                        >
+                          Bee milk
+                        </MenuItem>
+                        <MenuItem
+                          component={Link}
+                          to="/category/beewaxcandles"
+                          classes={{ root: classes.submenu }}
+                          onClick={(e) => {
+                            handleCloseBees(e);
+                          }}
+                        >
+                          Beewax candles
+                        </MenuItem>
+                      </MenuList>
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
+              )}
+            </Popper>
+            <div
+              aria-owns={anchorElBees ? "dropdown-tea" : undefined}
+              aria-haspopup={anchorElTea ? true : undefined}
+              onMouseOver={(e) => handleClickTea(e)}
+              onMouseLeave={handleCloseTea}
+            >
+              <Link to="/category/tea" className={classes.navLink}>
+                <li className={classes.tab}>
+                  <div>Teas</div>
+                  <ExpandIcon className={classes.expandIcon} />
+                </li>
+              </Link>
+            </div>
+
+            <Popper
+              open={openTea}
+              anchorEl={anchorElTea}
+              role={undefined}
+              transition
+              disablePortal
+              placement="bottom-start"
+            >
+              {({ TransitionProps, placement }) => (
+                <Grow
+                  {...TransitionProps}
+                  style={{
+                    transformOrigin: "top left",
+                  }}
+                >
+                  <Paper className={classes.dropdown} elevation={0}>
+                    <ClickAwayListener onClickAway={handleCloseTea}>
+                      <MenuList
+                        autoFocusItem={false}
+                        id="dropdown-tea"
+                        onKeyDown={handleListKeyDown}
+                        onMouseLeave={handleCloseTea}
+                        onMouseOver={() => setOpenTea(true)}
+                        disablePadding
+                      >
+                        <MenuItem
+                          component={Link}
+                          to="/category/tea"
+                          className={classes.submenu}
+                          onClick={(e) => {
+                            handleCloseTea(e);
+                          }}
+                        >
+                          All teas
+                        </MenuItem>
+                        <MenuItem
+                          component={Link}
+                          to="/category/blacktea"
+                          className={classes.submenu}
+                          onClick={(e) => {
+                            handleCloseTea(e);
+                          }}
+                        >
+                          Black tea
+                        </MenuItem>
+                        <MenuItem
+                          component={Link}
+                          to="/category/greentea"
+                          className={classes.submenu}
+                          onClick={(e) => {
+                            handleCloseTea(e);
+                          }}
+                        >
+                          Green tea
+                        </MenuItem>
+                        <MenuItem
+                          component={Link}
+                          to="/category/fruittea"
+                          className={classes.submenu}
+                          onClick={(e) => {
+                            handleCloseTea(e);
+                          }}
+                        >
+                          Fruit tea
+                        </MenuItem>
+                      </MenuList>
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
+              )}
+            </Popper>
+            <Link to="/category/giftsets" className={classes.navLink}>
               <li className={classes.tab}>
-                <Link to="/category/new" className={classes.navLink}>
-                  <div>New</div>
-                </Link>
+                <div>Gift sets</div>
               </li>
-              <div
-                aria-owns={anchorElHoneys ? "dropdown-honeys" : undefined}
-                aria-haspopup={anchorElHoneys ? true : undefined}
-                onMouseOver={(e) => handleClickHoneys(e)}
-                onMouseLeave={handleCloseHoneys}
-              >
-                <Link to="/category/honeys" className={classes.navLink}>
-                  <li className={classes.tab}>
-                    <div>Honeys</div>
-                    <ExpandIcon className={classes.expandIcon} />
-                  </li>
-                </Link>
-              </div>
-
-              <Popper
-                open={openHoneys}
-                anchorEl={anchorElHoneys}
-                role={undefined}
-                transition
-                disablePortal
-                placement="bottom-start"
-              >
-                {({ TransitionProps, placement }) => (
-                  <Grow
-                    {...TransitionProps}
-                    style={{
-                      transformOrigin: "top left",
-                    }}
-                  >
-                    <Paper className={classes.dropdown} elevation={0}>
-                      <ClickAwayListener onClickAway={handleCloseHoneys}>
-                        <MenuList
-                          autoFocusItem={false}
-                          id="dropdown-honeys"
-                          onKeyDown={handleListKeyDown}
-                          onMouseLeave={handleCloseHoneys}
-                          onMouseOver={() => setOpenHoneys(true)}
-                          disablePadding
-                        >
-                          <MenuItem
-                            component={Link}
-                            to="/category/honeys"
-                            classes={{ root: classes.submenu }}
-                            value="honeys"
-                            onClick={(e) => {
-                              handleCloseHoneys(e);
-                            }}
-                          >
-                            All honeys
-                          </MenuItem>
-                          <MenuItem
-                            component={Link}
-                            to="/category/creamed"
-                            classes={{ root: classes.submenu }}
-                            value="nl"
-                            onClick={(e) => {
-                              handleCloseHoneys(e);
-                            }}
-                          >
-                            Creamed honeys
-                          </MenuItem>
-                          <MenuItem
-                            component={Link}
-                            to="/category/additives"
-                            classes={{ root: classes.submenu }}
-                            value="nl"
-                            onClick={(e) => {
-                              handleCloseHoneys(e);
-                            }}
-                          >
-                            Honeys with additives
-                          </MenuItem>
-                          <MenuItem
-                            component={Link}
-                            to="/category/accessories"
-                            classes={{ root: classes.submenu }}
-                            value="nl"
-                            onClick={(e) => {
-                              handleCloseHoneys(e);
-                            }}
-                          >
-                            Accessories
-                          </MenuItem>
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
-              <div
-                aria-owns={anchorElBees ? "dropdown-bees" : undefined}
-                aria-haspopup={anchorElBees ? true : undefined}
-                onMouseOver={(e) => handleClickBees(e)}
-                onMouseLeave={handleCloseBees}
-              >
-                <Link to="/category/beeproducts" className={classes.navLink}>
-                  <li className={classes.tab}>
-                    <div>Bees products</div>
-                    <ExpandIcon className={classes.expandIcon} />
-                  </li>
-                </Link>
-              </div>
-
-              <Popper
-                open={openBees}
-                anchorEl={anchorElBees}
-                role={undefined}
-                transition
-                disablePortal
-                placement="bottom-start"
-              >
-                {({ TransitionProps, placement }) => (
-                  <Grow
-                    {...TransitionProps}
-                    style={{
-                      transformOrigin: "top left",
-                    }}
-                  >
-                    <Paper className={classes.dropdown} elevation={0}>
-                      <ClickAwayListener onClickAway={handleCloseBees}>
-                        <MenuList
-                          autoFocusItem={false}
-                          id="dropdown-bees"
-                          onKeyDown={handleListKeyDown}
-                          onMouseLeave={handleCloseBees}
-                          onMouseOver={() => setOpenBees(true)}
-                          disablePadding
-                        >
-                          <MenuItem
-                            component={Link}
-                            to="/category/beefeathers"
-                            classes={{ root: classes.submenu }}
-                            onClick={(e) => {
-                              handleCloseBees(e);
-                            }}
-                          >
-                            Bee feathers
-                          </MenuItem>
-                          <MenuItem
-                            component={Link}
-                            to="/category/propolis"
-                            classes={{ root: classes.submenu }}
-                            onClick={(e) => {
-                              handleCloseBees(e);
-                            }}
-                          >
-                            Propolis
-                          </MenuItem>
-                          <MenuItem
-                            component={Link}
-                            to="/category/pollen"
-                            classes={{ root: classes.submenu }}
-                            onClick={(e) => {
-                              handleCloseBees(e);
-                            }}
-                          >
-                            Bee pollen
-                          </MenuItem>
-                          <MenuItem
-                            component={Link}
-                            to="/category/beemilk"
-                            classes={{ root: classes.submenu }}
-                            onClick={(e) => {
-                              handleCloseBees(e);
-                            }}
-                          >
-                            Bee milk
-                          </MenuItem>
-                          <MenuItem
-                            component={Link}
-                            to="/category/beewaxcandles"
-                            classes={{ root: classes.submenu }}
-                            onClick={(e) => {
-                              handleCloseBees(e);
-                            }}
-                          >
-                            Beewax candles
-                          </MenuItem>
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
-              <div
-                aria-owns={anchorElBees ? "dropdown-tea" : undefined}
-                aria-haspopup={anchorElTea ? true : undefined}
-                onMouseOver={(e) => handleClickTea(e)}
-                onMouseLeave={handleCloseTea}
-              >
-                <Link to="/category/tea" className={classes.navLink}>
-                  <li className={classes.tab}>
-                    <div>Teas</div>
-                    <ExpandIcon className={classes.expandIcon} />
-                  </li>
-                </Link>
-              </div>
-
-              <Popper
-                open={openTea}
-                anchorEl={anchorElTea}
-                role={undefined}
-                transition
-                disablePortal
-                placement="bottom-start"
-              >
-                {({ TransitionProps, placement }) => (
-                  <Grow
-                    {...TransitionProps}
-                    style={{
-                      transformOrigin: "top left",
-                    }}
-                  >
-                    <Paper className={classes.dropdown} elevation={0}>
-                      <ClickAwayListener onClickAway={handleCloseTea}>
-                        <MenuList
-                          autoFocusItem={false}
-                          id="dropdown-tea"
-                          onKeyDown={handleListKeyDown}
-                          onMouseLeave={handleCloseTea}
-                          onMouseOver={() => setOpenTea(true)}
-                          disablePadding
-                        >
-                          <MenuItem
-                            component={Link}
-                            to="/category/tea"
-                            className={classes.submenu}
-                            onClick={(e) => {
-                              handleCloseTea(e);
-                            }}
-                          >
-                            All teas
-                          </MenuItem>
-                          <MenuItem
-                            component={Link}
-                            to="/category/blacktea"
-                            className={classes.submenu}
-                            onClick={(e) => {
-                              handleCloseTea(e);
-                            }}
-                          >
-                            Black tea
-                          </MenuItem>
-                          <MenuItem
-                            component={Link}
-                            to="/category/greentea"
-                            className={classes.submenu}
-                            onClick={(e) => {
-                              handleCloseTea(e);
-                            }}
-                          >
-                            Green tea
-                          </MenuItem>
-                          <MenuItem
-                            component={Link}
-                            to="/category/fruittea"
-                            className={classes.submenu}
-                            onClick={(e) => {
-                              handleCloseTea(e);
-                            }}
-                          >
-                            Fruit tea
-                          </MenuItem>
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
-              <Link to="/category/giftsets" className={classes.navLink}>
-                <li className={classes.tab}>
-                  <div>Gift sets</div>
-                </li>
-              </Link>
-              <Link to="/category/specialoffer" className={classes.navLink}>
-                <li className={classes.tab}>
-                  <div>Special offer</div>
-                </li>
-              </Link>
-              <Link to="/category/sale" className={classes.navLink}>
-                <li className={classes.tab}>
-                  <div>Sale</div>
-                </li>
-              </Link>
-            </ul>
-          </nav>
-        </div>
+            </Link>
+            <Link to="/category/specialoffer" className={classes.navLink}>
+              <li className={classes.tab}>
+                <div>Special offer</div>
+              </li>
+            </Link>
+            <Link to="/category/sale" className={classes.navLink}>
+              <li className={classes.tab}>
+                <div>Sale</div>
+              </li>
+            </Link>
+          </ul>
+        </nav>
       </div>
+      {/* </div> */}
     </header>
   );
 };

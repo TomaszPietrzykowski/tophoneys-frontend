@@ -11,7 +11,8 @@ export default createMuiTheme({
       brown2: "rgb(77, 46, 0)",
     },
     primary: {
-      main: `rgb(179, 107, 0)`,
+      main: `rgba(215, 170, 14, 1)`,
+      // main: `rgb(179, 107, 0)`,
     },
     secondary: {
       main: `rgb(253,153,0)`,
