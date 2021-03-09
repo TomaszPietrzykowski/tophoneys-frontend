@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ match, history }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [qty, setQty] = useState(1);
@@ -81,6 +81,10 @@ const ProductScreen = ({ match }) => {
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
   }, [match, dispatch]);
+
+  const addToCartHandler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
 
   return (
     <>
@@ -126,18 +130,24 @@ const ProductScreen = ({ match }) => {
                       Availability:{" "}
                       {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
                     </p>
-                    <p className={classes.listItem}>
-                      Quantity:{" "}
-                      <input
-                        className={classes.input}
-                        type="number"
-                        value={qty}
-                        min={1}
-                        max={product.countInStock}
-                        onChange={(e) => setQty(e.target.value)}
-                      />
-                    </p>
-                    <button className={classes.addToCartButton}>
+                    {product.countInStock > 0 && (
+                      <p className={classes.listItem}>
+                        Quantity:{" "}
+                        <input
+                          className={classes.input}
+                          type="number"
+                          value={qty}
+                          min={1}
+                          max={product.countInStock}
+                          onChange={(e) => setQty(e.target.value)}
+                        />
+                      </p>
+                    )}
+                    <button
+                      className={classes.addToCartButton}
+                      disabled={product.countInStock === 0}
+                      onClick={addToCartHandler}
+                    >
                       Add to cart
                     </button>
                   </div>

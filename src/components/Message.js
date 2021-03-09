@@ -2,6 +2,10 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Alert from "@material-ui/lab/Alert";
 
+// Alert component API:
+// variant: success - green, warning - yellow, error - red, info - blue
+// onClose - callback (passing onClose argument causes component render close btn)
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
