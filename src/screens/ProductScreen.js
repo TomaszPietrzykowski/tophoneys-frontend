@@ -139,7 +139,7 @@ const ProductScreen = ({ match, history }) => {
                           value={qty}
                           min={1}
                           max={product.countInStock}
-                          onChange={(e) => setQty(e.target.value)}
+                          onChange={(e) => setQty(Number(e.target.value))}
                         />
                       </p>
                     )}

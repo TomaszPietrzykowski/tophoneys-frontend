@@ -15,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Message = ({ variant = "success", message, onClose }) => {
+const Message = ({ variant = "success", message, onClose, action }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Alert severity={variant} onClose={onClose}>
+      <Alert severity={variant} onClose={onClose} action={action}>
         {message}
       </Alert>
     </div>
