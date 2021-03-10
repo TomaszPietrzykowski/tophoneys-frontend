@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Message from "../components/Message";
-import { addToCart } from "../actions/cartActions";
+import { addToCart, removeFromCart } from "../actions/cartActions";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { IconButton } from "@material-ui/core";
@@ -27,7 +27,7 @@ const CartScreen = ({ match, location, history }) => {
   }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    console.log(`item ${id} deleted`);
+    dispatch(removeFromCart(id));
   };
 
   const checkoutHandler = () => {

@@ -204,7 +204,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ openDrawer, setOpenDrawer }) => {
+const Header = ({ openDrawer, setOpenDrawer, history }) => {
   const classes = useStyles();
 
   const userLogin = false;
@@ -299,11 +299,11 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                 <div className={classes.username}>{userLogin && "User"}</div>
                 <UserIcon className={classes.sideIconUser} />
               </IconButton>
-
-              <IconButton className={classes.iconButton}>
-                <CartIcon className={classes.sideIconCart} />
-              </IconButton>
-
+              <Link to="/cart">
+                <IconButton className={classes.iconButton}>
+                  <CartIcon className={classes.sideIconCart} />
+                </IconButton>
+              </Link>
               <IconButton
                 className={classes.iconButton}
                 aria-owns={anchorElAdmin ? "dropdown-admin" : undefined}
