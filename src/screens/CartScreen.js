@@ -8,8 +8,74 @@ import Button from "@material-ui/core/Button";
 import { IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Tooltip from "@material-ui/core/Tooltip";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    ...theme.utils.container,
+    marginTop: "15rem",
+  },
+  title: {
+    ...theme.typography.prosto,
+    fontSize: "1.5rem",
+    padding: "1rem",
+    marginBottom: "2rem",
+  },
+  tableHeader: {
+    "& > *": {
+      ...theme.typography.open,
+      ...theme.flex.col,
+      padding: ".5rem",
+    },
+  },
+  table: {
+    "& > *": {
+      ...theme.flex.col,
+    },
+  },
+  image: {
+    width: "100%",
+    objectFit: "contain",
+    padding: ".5rem",
+  },
+  qtyInput: {
+    padding: ".2rem",
+  },
+  deleteIcon: {
+    color: "rgb(150,0,0)",
+    fontSize: "1.2rem",
+  },
+  summary: {
+    "& > *": {
+      ...theme.flex.col,
+      ...theme.typography.prosto,
+    },
+    [theme.breakpoints.down("md")]: {
+      // border: "1px solid green",
+      marginLeft: "50%",
+    },
+  },
+  subtotal: {
+    fontSize: "1.2rem",
+    marginBottom: "2rem",
+  },
+  price: {
+    fontSize: "2rem",
+  },
+  btnContainer: {
+    padding: "3rem",
+  },
+  checkoutBtn: {
+    backgroundColor: theme.palette.primary.main,
+    width: "100%",
+    "&:hover": {
+      backgroundColor: theme.palette.primary.dark,
+    },
+  },
+}));
 
 const CartScreen = ({ match, location, history }) => {
+  const classes = useStyles();
   // get product id from url
   const productId = match.params.id;
   // get quantity from url query string
@@ -35,10 +101,10 @@ const CartScreen = ({ match, location, history }) => {
   };
 
   return (
-    <div style={{ marginTop: "15rem" }}>
+    <div className={classes.container}>
+      <h1 className={classes.title}>Shopping cart</h1>
       <Grid container>
-        <Grid item md={9}>
-          <h1>Shopping cart</h1>
+        <Grid item md={12} lg={9}>
           {cartItems.length === 0 ? (
             <Message
               variant="info"
@@ -55,18 +121,33 @@ const CartScreen = ({ match, location, history }) => {
             />
           ) : (
             <div>
+              <Grid container className={classes.tableHeader}>
+                <Grid item md={2}>
+                  Preview
+                </Grid>
+                <Grid item md={4}>
+                  Name
+                </Grid>
+                <Grid item md={2}>
+                  Price
+                </Grid>
+                <Grid item md={2}>
+                  Quantity
+                </Grid>
+                <Grid item md={2}>
+                  Actions
+                </Grid>
+              </Grid>
               {cartItems.map((item) => (
-                <Grid container key={item.product}>
+                <Grid container key={item.product} className={classes.table}>
                   <Grid item md={2}>
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      style={{
-                        width: "100%",
-                        objectFit: "contain",
-                        padding: ".5rem",
-                      }}
-                    />
+                    <Link to={`/product/${item.product}`}>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className={classes.image}
+                      />
+                    </Link>
                   </Grid>
                   <Grid item md={4}>
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
@@ -76,7 +157,7 @@ const CartScreen = ({ match, location, history }) => {
                   </Grid>
                   <Grid item md={2}>
                     <input
-                      // className={classes.input}
+                      className={classes.qtyInput}
                       type="number"
                       value={item.qty}
                       min={1}
@@ -93,9 +174,7 @@ const CartScreen = ({ match, location, history }) => {
                       <IconButton
                         onClick={() => removeFromCartHandler(item.product)}
                       >
-                        <DeleteIcon
-                          style={{ color: "rgb(150,0,0)", fontSize: "1.2rem" }}
-                        />
+                        <DeleteIcon className={classes.deleteIcon} />
                       </IconButton>
                     </Tooltip>
                   </Grid>
@@ -104,22 +183,33 @@ const CartScreen = ({ match, location, history }) => {
             </div>
           )}
         </Grid>
-        <Grid item md={3}>
-          <h2>
-            Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}{" "}
-            items):
-          </h2>
-          <div style={{ fontSize: "2rem" }}>
-            &euro;{" "}
-            {cartItems
-              .reduce((acc, item) => acc + item.qty * item.price, 0)
-              .toFixed(2)}
-          </div>
-          <div>
-            <Button disabled={cartItems.length === 0} onClick={checkoutHandler}>
-              checkout
-            </Button>
-          </div>
+        <Grid item md={6} lg={3} className={classes.summary}>
+          {cartItems.length > 0 && (
+            <>
+              <h2 className={classes.subtotal}>
+                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}{" "}
+                {cartItems.reduce((acc, item) => acc + item.qty, 0) > 1
+                  ? "items"
+                  : "item"}
+                ):
+              </h2>
+              <div className={classes.price}>
+                &euro;{" "}
+                {cartItems
+                  .reduce((acc, item) => acc + item.qty * item.price, 0)
+                  .toFixed(2)}
+              </div>
+              <div className={classes.btnContainer}>
+                <Button
+                  className={classes.checkoutBtn}
+                  disabled={cartItems.length === 0}
+                  onClick={checkoutHandler}
+                >
+                  checkout
+                </Button>
+              </div>
+            </>
+          )}
         </Grid>
       </Grid>
     </div>
