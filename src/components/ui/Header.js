@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1200,
   },
   container: {
-    // border: "1px solid blue",
     ...theme.utils.container,
     ...theme.flex.row,
     justifyContent: "space-between",
@@ -44,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   navbar: {
-    // border: "1px solid magenta",
     ...theme.flex.col,
     alignItems: "space-between",
   },
@@ -352,15 +350,17 @@ const Header = ({ openDrawer, setOpenDrawer, history }) => {
                     disablePadding
                   >
                     {userInfo && (
-                      <MenuItem
-                        classes={{ root: classes.dropdownItemIcons }}
-                        value="en"
-                        onClick={(e) => {
-                          handleCloseUser(e);
-                        }}
-                      >
-                        Profile
-                      </MenuItem>
+                      <Link to="/profile">
+                        <MenuItem
+                          classes={{ root: classes.dropdownItemIcons }}
+                          value="en"
+                          onClick={(e) => {
+                            handleCloseUser(e);
+                          }}
+                        >
+                          Profile
+                        </MenuItem>
+                      </Link>
                     )}
                     {userInfo && (
                       <MenuItem
