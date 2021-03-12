@@ -5,7 +5,7 @@ import { Grid, Button, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getUserDetails } from "../actions/userActions";
+import { getUserDetails, updateUserProfile } from "../actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -49,6 +49,7 @@ const ProfileScreen = ({ location, history }) => {
 
   const { loading, error, user } = useSelector((state) => state.userDetails);
   const { userInfo } = useSelector((state) => state.userLogin);
+  const { success } = useSelector((state) => state.userUpdateProfile);
 
   useEffect(() => {
     if (!userInfo) {
@@ -68,7 +69,7 @@ const ProfileScreen = ({ location, history }) => {
     if (password !== passwordConfirm) {
       setMessage("Passwords do not match");
     } else {
-      // dispatch update profile
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
   };
 
@@ -79,6 +80,7 @@ const ProfileScreen = ({ location, history }) => {
         <form onSubmit={(e) => submitHandler(e)} className={classes.form}>
           {loading && <Loader />}
           {message && <Message variant="error" message={message} />}
+          {success && <Message variant="success" message="Profile updated" />}
           {error && <Message variant="error" message={error} />}
           <TextField
             id="name"
