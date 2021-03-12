@@ -8,6 +8,7 @@ import HomeScreen from "./screens/HomeScreen";
 import CategoryScreen from "./screens/CategoryScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
+import LoginScreen from "./screens/LoginScreen";
 // import Newsletter from "./components/ui/Newsletter";
 // import Footer from "./components/ui/Footer";
 // import DevTag from "./components/ui/DevTag";
@@ -24,11 +25,12 @@ function App() {
         <Fragment>
           <Header openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
           <Switch>
-            <Route path="/" component={HomeScreen} exact />
             <Route path="/category" component={CategoryScreen} exact />
             <Route path="/category/:id" component={CategoryScreen} exact />
             <Route path="/product/:id" component={ProductScreen} exact />
             <Route path="/cart/:id?" component={CartScreen} />
+            <Route path="/login" component={LoginScreen} exact />
+            <Route path="/" component={HomeScreen} exact />
             {/* <Newsletter />
         <Footer />
         {isMobile && (

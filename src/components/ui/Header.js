@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 import logo from "../../assets/logotranspbg.png";
 import Search from "./Search";
@@ -207,7 +208,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = ({ openDrawer, setOpenDrawer, history }) => {
   const classes = useStyles();
 
-  const userLogin = false;
+  const { userInfo } = useSelector((state) => state.userLogin);
 
   // dropdown states:
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -268,6 +269,10 @@ const Header = ({ openDrawer, setOpenDrawer, history }) => {
       setOpenUser(false);
     }
   };
+  const handleLogout = () => {
+    console.log("user logged out");
+    // dispatch(logoutUser())
+  };
 
   return (
     <header className={classes.root}>
@@ -296,7 +301,9 @@ const Header = ({ openDrawer, setOpenDrawer, history }) => {
                 onMouseOver={(e) => handleClickUser(e)}
                 onMouseLeave={handleCloseUser}
               >
-                <div className={classes.username}>{userLogin && "User"}</div>
+                <div className={classes.username}>
+                  {userInfo && userInfo.name}
+                </div>
                 <UserIcon className={classes.sideIconUser} />
               </IconButton>
               <Link to="/cart">
@@ -344,7 +351,7 @@ const Header = ({ openDrawer, setOpenDrawer, history }) => {
                     onMouseOver={() => setOpenUser(true)}
                     disablePadding
                   >
-                    {userLogin && (
+                    {userInfo && (
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
                         value="en"
@@ -355,38 +362,43 @@ const Header = ({ openDrawer, setOpenDrawer, history }) => {
                         Profile
                       </MenuItem>
                     )}
-                    {userLogin && (
+                    {userInfo && (
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
                         value="nl"
                         onClick={(e) => {
                           handleCloseUser(e);
+                          handleLogout();
                         }}
                       >
                         Log out
                       </MenuItem>
                     )}
-                    {!userLogin && (
-                      <MenuItem
-                        classes={{ root: classes.dropdownItemIcons }}
-                        value="nl"
-                        onClick={(e) => {
-                          handleCloseUser(e);
-                        }}
-                      >
-                        Log in
-                      </MenuItem>
+                    {!userInfo && (
+                      <Link to="/login">
+                        <MenuItem
+                          classes={{ root: classes.dropdownItemIcons }}
+                          value="nl"
+                          onClick={(e) => {
+                            handleCloseUser(e);
+                          }}
+                        >
+                          Log in
+                        </MenuItem>
+                      </Link>
                     )}
-                    {!userLogin && (
-                      <MenuItem
-                        classes={{ root: classes.dropdownItemIcons }}
-                        value="nl"
-                        onClick={(e) => {
-                          handleCloseUser(e);
-                        }}
-                      >
-                        Sign up
-                      </MenuItem>
+                    {!userInfo && (
+                      <Link to="/register">
+                        <MenuItem
+                          classes={{ root: classes.dropdownItemIcons }}
+                          value="nl"
+                          onClick={(e) => {
+                            handleCloseUser(e);
+                          }}
+                        >
+                          Sign up
+                        </MenuItem>
+                      </Link>
                     )}
                   </MenuList>
                 </ClickAwayListener>
