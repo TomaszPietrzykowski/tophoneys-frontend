@@ -5,7 +5,7 @@ import { Button, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { login } from "../actions/userActions";
+import { register } from "../actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -35,16 +35,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginScreen = ({ location, history }) => {
+const RegisterScreen = ({ location, history }) => {
   const classes = useStyles();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [message, setMessage] = useState(null);
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   const dispatch = useDispatch();
 
-  const { loading, error, userInfo } = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = useSelector(
+    (state) => state.userRegister
+  );
 
   useEffect(() => {
     if (userInfo) {
@@ -54,15 +59,27 @@ const LoginScreen = ({ location, history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+    if (password !== passwordConfirm) {
+      setMessage("Passwords do not match");
+    } else {
+      dispatch(register(name, email, password));
+    }
   };
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.title}>Sign In</h1>
+      <h1 className={classes.title}>Sign Up</h1>
       <form onSubmit={(e) => submitHandler(e)} className={classes.form}>
         {loading && <Loader />}
+        {message && <Message variant="error" message={message} />}
         {error && <Message variant="error" message={error} />}
+        <TextField
+          id="name"
+          label="Name"
+          variant="outlined"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <TextField
           id="email"
           label="Email"
@@ -78,18 +95,26 @@ const LoginScreen = ({ location, history }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <TextField
+          id="confirmPassword"
+          type="password"
+          label="Confirm password"
+          variant="outlined"
+          value={passwordConfirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+        />
         <Button type="submit" className={classes.submitBtn}>
           Submit
         </Button>
       </form>
       <div className={classes.links}>
-        New customer?{" "}
-        <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
-          Register
+        Already a customer?{" "}
+        <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+          Log in
         </Link>
       </div>
     </div>
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;

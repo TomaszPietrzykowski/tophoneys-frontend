@@ -7,13 +7,14 @@ import {
   productDetailsReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
-import { userLoginReducer } from "./reducers/userReducers";
+import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
 
 const reducer = combineReducers({
   productList: productListReducer,
   productCategory: productCategoryReducer,
   productDetails: productDetailsReducer,
   userLogin: userLoginReducer,
+  userRegister: userRegisterReducer,
   cart: cartReducer,
 });
 
