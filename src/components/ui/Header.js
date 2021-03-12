@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 import logo from "../../assets/logotranspbg.png";
 import Search from "./Search";
@@ -21,6 +21,7 @@ import {
   IconButton,
   MenuItem,
 } from "@material-ui/core";
+import { logout } from "../../actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   // --------------------------------------------------- LAYOUT
@@ -207,7 +208,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = ({ openDrawer, setOpenDrawer, history }) => {
   const classes = useStyles();
-
+  const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userLogin);
 
   // dropdown states:
@@ -270,8 +271,7 @@ const Header = ({ openDrawer, setOpenDrawer, history }) => {
     }
   };
   const handleLogout = () => {
-    console.log("user logged out");
-    // dispatch(logoutUser())
+    dispatch(logout());
   };
 
   return (
