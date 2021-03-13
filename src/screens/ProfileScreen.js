@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/styles";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
+import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -55,14 +56,15 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!user || !user.name) {
+      if (!user || !user.name || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
       } else {
         setName(user.name);
         setEmail(user.email);
       }
     }
-  }, [userInfo, user, history, dispatch]);
+  }, [userInfo, user, history, dispatch, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
