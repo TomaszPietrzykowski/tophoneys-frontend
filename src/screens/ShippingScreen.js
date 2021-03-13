@@ -48,12 +48,12 @@ const ShippingScreen = ({ history }) => {
     e.preventDefault();
 
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
-    history.push("/payment");
+    history.push("/paymentmethod");
   };
 
   return (
     <div className={classes.container}>
-      <CheckoutSteps step1 step2 />
+      <CheckoutSteps step1 />
       <h1>Shipping</h1>
       <form onSubmit={submitHandler} className={classes.form}>
         <TextField

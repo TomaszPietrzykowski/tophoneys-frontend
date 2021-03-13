@@ -29,10 +29,13 @@ export default createMuiTheme({
     },
     prosto: {
       fontFamily: "Prosto One, cursive",
-      letterSpacing: 2,
+      letterSpacing: 1,
     },
     mont: {
       fontFamily: "Montserrat, sans-serif",
+    },
+    source: {
+      fontFamily: "Source Sans Pro, sans-serif",
     },
     noto: {
       fontFamily: "Noto Sans, sans-serif",

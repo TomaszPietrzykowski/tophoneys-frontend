@@ -44,7 +44,7 @@ const ProfileScreen = ({ location, history }) => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [message, setMessage] = useState(null);
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  // const redirect = location.search ? location.search.split("=")[1] : "/";
 
   const dispatch = useDispatch();
 

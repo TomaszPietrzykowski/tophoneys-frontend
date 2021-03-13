@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "3rem",
   },
   checkoutBtn: {
+    ...theme.typography.prosto,
     backgroundColor: theme.palette.primary.main,
     width: "100%",
     "&:hover": {

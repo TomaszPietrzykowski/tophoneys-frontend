@@ -204,7 +204,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Header = ({ openDrawer, setOpenDrawer, history }) => {
+const Header = ({ openDrawer, setOpenDrawer }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userLogin);
@@ -363,16 +363,18 @@ const Header = ({ openDrawer, setOpenDrawer, history }) => {
                       </Link>
                     )}
                     {userInfo && (
-                      <MenuItem
-                        classes={{ root: classes.dropdownItemIcons }}
-                        value="nl"
-                        onClick={(e) => {
-                          handleCloseUser(e);
-                          handleLogout();
-                        }}
-                      >
-                        Log out
-                      </MenuItem>
+                      <Link to="/">
+                        <MenuItem
+                          classes={{ root: classes.dropdownItemIcons }}
+                          value="nl"
+                          onClick={(e) => {
+                            handleCloseUser(e);
+                            handleLogout();
+                          }}
+                        >
+                          Log out
+                        </MenuItem>
+                      </Link>
                     )}
                     {!userInfo && (
                       <Link to="/login">

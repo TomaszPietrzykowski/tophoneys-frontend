@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
+    ...theme.typography.prosto,
   },
   nav: {
     ...theme.flex.row,

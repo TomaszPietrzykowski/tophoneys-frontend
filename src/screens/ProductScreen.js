@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid rgba(0,0,0,.2)",
     background: "white",
     borderRadius: 4,
-    margin: "2rem",
+    margin: "1rem 2rem",
     cursor: "pointer",
   },
   card: {
@@ -29,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
   },
   filler: {
     width: "100%",
-    ...theme.typography.open,
+    ...theme.typography.source,
+    fontSize: "1.2rem",
   },
   image: {
     width: "100%",
@@ -44,7 +45,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "3rem",
   },
   description: {
-    ...theme.typography.open,
     color: theme.palette.text.secondary,
     marginBottom: "3rem",
   },

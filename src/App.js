@@ -12,6 +12,8 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ShippingScreen from "./screens/ShippingScreen";
+import PaymentScreen from "./screens/PaymentScreen";
+import OrderScreen from "./screens/OrderScreen";
 // import Newsletter from "./components/ui/Newsletter";
 // import Footer from "./components/ui/Footer";
 // import DevTag from "./components/ui/DevTag";
@@ -36,6 +38,8 @@ function App() {
             <Route path="/register" component={RegisterScreen} exact />
             <Route path="/profile" component={ProfileScreen} exact />
             <Route path="/shipping" component={ShippingScreen} exact />
+            <Route path="/paymentmethod" component={PaymentScreen} exact />
+            <Route path="/placeorder" component={OrderScreen} exact />
             <Route path="/" component={HomeScreen} exact />
             {/* <Newsletter />
         <Footer />

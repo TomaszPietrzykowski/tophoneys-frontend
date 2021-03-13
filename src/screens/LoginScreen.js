@@ -40,7 +40,7 @@ const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  const redirect = location.search ? location.search.split("=")[1] : null;
 
   const dispatch = useDispatch();
 
@@ -48,7 +48,11 @@ const LoginScreen = ({ location, history }) => {
 
   useEffect(() => {
     if (userInfo) {
-      history.push(redirect);
+      if (redirect) {
+        history.push(redirect);
+      } else {
+        history.goBack();
+      }
     }
   }, [userInfo, redirect, history]);
 
