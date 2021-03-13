@@ -69,7 +69,7 @@ const RegisterScreen = ({ location, history }) => {
   return (
     <div className={classes.container}>
       <h1 className={classes.title}>Sign Up</h1>
-      <form onSubmit={(e) => submitHandler(e)} className={classes.form}>
+      <form onSubmit={submitHandler} className={classes.form}>
         {loading && <Loader />}
         {message && <Message variant="error" message={message} />}
         {error && <Message variant="error" message={error} />}
