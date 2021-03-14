@@ -91,6 +91,11 @@ const LoginScreen = ({ location, history }) => {
         <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
           Register
         </Link>
+        {history.location.state && history.location.state.from === "checkout" && (
+          <Link to={`/anonymous`}>
+            <Button>Guest shopping</Button>
+          </Link>
+        )}
       </div>
     </div>
   );

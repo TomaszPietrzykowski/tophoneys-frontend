@@ -38,13 +38,12 @@ const useStyles = makeStyles((theme) => ({
 
 const ProfileScreen = ({ location, history }) => {
   const classes = useStyles();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [message, setMessage] = useState(null);
-
-  // const redirect = location.search ? location.search.split("=")[1] : "/";
 
   const dispatch = useDispatch();
 
