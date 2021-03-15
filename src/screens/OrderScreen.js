@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import { Button, Grid } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,13 +17,17 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "contain",
     padding: ".5rem",
   },
+  link: {
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
 }));
 
 const OrderScreen = ({ history }) => {
   const classes = useStyles();
-  const { cartItems, shippingAddress, paymentMethod } = useSelector(
-    (state) => state.cart
-  );
+  const cart = useSelector((state) => state.cart);
+  const { cartItems, shippingAddress, paymentMethod } = cart;
   const userInfo = useSelector((state) => state.userLogin.userInfo);
 
   if (
@@ -32,9 +37,23 @@ const OrderScreen = ({ history }) => {
     history.push("/shipping");
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log(history.location.state.from);
+  const addDecimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
+  };
+
+  cart.itemsPrice = addDecimals(
+    cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+  );
+  cart.shippingPrice = cart.itemsPrice > 20 ? 0 : 10;
+  // cart.taxPrice = addDecimals(Number((0.1 * cart.itemsPrice).toFixed(2)));
+  cart.taxPrice = 0;
+  cart.totalPrice = (
+    Number(cart.itemsPrice) +
+    Number(cart.shippingPrice) +
+    Number(cart.taxPrice)
+  ).toFixed(2);
+  const placeOrderHandler = () => {
+    console.log("Place order button hit");
   };
 
   return (
@@ -52,7 +71,7 @@ const OrderScreen = ({ history }) => {
           <p>{shippingAddress.country}</p>
           <h3>Cart Items:</h3>
           {cartItems.map((item) => (
-            <Grid container key={item._id}>
+            <Grid container key={item.product}>
               <Grid item md={2}>
                 <img
                   src={item.image}
@@ -61,7 +80,9 @@ const OrderScreen = ({ history }) => {
                 />
               </Grid>
               <Grid item md={6}>
-                {item.name}
+                <Link to={`/product/${item.product}`} className={classes.link}>
+                  {item.name}
+                </Link>
               </Grid>
               <Grid item md={4}>
                 {item.qty} x {item.price} = {item.qty * item.price}
@@ -70,12 +91,44 @@ const OrderScreen = ({ history }) => {
           ))}
         </Grid>
         <Grid item md={4}>
-          Buttons
+          <h3>Order summary</h3>
+          <Grid container>
+            <Grid item md={6}>
+              Items:
+            </Grid>
+            <Grid item md={6}>
+              &euro; {cart.itemsPrice}
+            </Grid>
+          </Grid>
+          {/* <Grid container>
+            <Grid item md={6}>
+              Tax:
+            </Grid>
+            <Grid item md={6}>
+              &euro; {cart.taxPrice}
+            </Grid>
+          </Grid> */}
+          <Grid container>
+            <Grid item md={6}>
+              Shipping:
+            </Grid>
+            <Grid item md={6}>
+              &euro; {cart.shippingPrice}
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item md={6}>
+              Total:
+            </Grid>
+            <Grid item md={6}>
+              &euro; {cart.totalPrice}
+            </Grid>
+          </Grid>
+          <Button disabled={cartItems.length === 0} onClick={placeOrderHandler}>
+            Place order
+          </Button>
         </Grid>
       </Grid>
-      <form onSubmit={handleSubmit}>
-        <Button type="submit">Submit</Button>
-      </form>
     </div>
   );
 };

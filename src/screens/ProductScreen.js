@@ -95,9 +95,12 @@ const ProductScreen = ({ match, history }) => {
           <Message variant="error" message={error} />
         ) : (
           <>
-            <Link to="/">
-              <button className={classes.backBtn}> &larr; Go Back</button>
-            </Link>
+            <button
+              className={classes.backBtn}
+              onClick={() => history.goBack()}
+            >
+              &larr; Back
+            </button>
             {product && (
               <Grid container>
                 <Grid item xs={12} md={6} lg={5} className={classes.card}>
