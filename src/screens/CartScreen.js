@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
+    ...theme.typography.source,
     marginTop: "15rem",
   },
   title: {
@@ -71,6 +72,11 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     "&:hover": {
       backgroundColor: theme.palette.primary.dark,
+    },
+  },
+  link: {
+    "&:hover": {
+      textDecoration: "underline",
     },
   },
 }));
@@ -151,7 +157,12 @@ const CartScreen = ({ match, location, history }) => {
                     </Link>
                   </Grid>
                   <Grid item md={4}>
-                    <Link to={`/product/${item.product}`}>{item.name}</Link>
+                    <Link
+                      to={`/product/${item.product}`}
+                      className={classes.link}
+                    >
+                      {item.name}
+                    </Link>
                   </Grid>
                   <Grid item md={2}>
                     &euro; {item.price}

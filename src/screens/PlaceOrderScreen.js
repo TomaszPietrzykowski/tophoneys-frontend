@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import { Button, Grid } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import CheckoutSteps from "../components/CheckoutSteps";
+import { createOrder } from "../actions/orderActions";
+import Message from "../components/Message";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -17,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "contain",
     padding: ".5rem",
   },
+  center: {
+    ...theme.flex.row,
+  },
   link: {
     "&:hover": {
       textDecoration: "underline",
@@ -24,8 +30,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OrderScreen = ({ history }) => {
+const PlaceOrderScreen = ({ history }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems, shippingAddress, paymentMethod } = cart;
   const userInfo = useSelector((state) => state.userLogin.userInfo);
@@ -52,8 +59,29 @@ const OrderScreen = ({ history }) => {
     Number(cart.shippingPrice) +
     Number(cart.taxPrice)
   ).toFixed(2);
+
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreate;
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`);
+      dispatch({ type: ORDER_CREATE_RESET });
+    }
+  }, [dispatch, success]);
+
   const placeOrderHandler = () => {
-    console.log("Place order button hit");
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: "PayPal",
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
   };
 
   return (
@@ -79,12 +107,12 @@ const OrderScreen = ({ history }) => {
                   className={classes.image}
                 />
               </Grid>
-              <Grid item md={6}>
+              <Grid item md={6} className={classes.center}>
                 <Link to={`/product/${item.product}`} className={classes.link}>
                   {item.name}
                 </Link>
               </Grid>
-              <Grid item md={4}>
+              <Grid item md={4} className={classes.center}>
                 {item.qty} x {item.price} = {item.qty * item.price}
               </Grid>
             </Grid>
@@ -124,6 +152,7 @@ const OrderScreen = ({ history }) => {
               &euro; {cart.totalPrice}
             </Grid>
           </Grid>
+          {error && <Message variant="error" message={error} />}
           <Button disabled={cartItems.length === 0} onClick={placeOrderHandler}>
             Place order
           </Button>
@@ -133,4 +162,4 @@ const OrderScreen = ({ history }) => {
   );
 };
 
-export default OrderScreen;
+export default PlaceOrderScreen;
