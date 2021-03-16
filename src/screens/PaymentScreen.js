@@ -28,7 +28,7 @@ const PaymentScreen = ({ history }) => {
     // e.preventDefault()
     // to be enchanced with other payments
     setPaymentMethod(paymentMethod);
-    dispatch(savePaymentMethod(paymentMethod));
+    dispatch(savePaymentMethod("PayPal"));
     history.push("/placeorder");
   };
 

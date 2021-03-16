@@ -35,7 +35,7 @@ const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
-  const { cartItems, shippingAddress, paymentMethod } = cart;
+  const { cartItems, shippingAddress } = cart;
 
   const userInfo = useSelector((state) => state.userLogin.userInfo);
 
@@ -78,7 +78,7 @@ const PlaceOrderScreen = ({ history }) => {
       createOrder({
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
-        paymentMethod,
+        paymentMethod: cart.paymentMethod || "PayPal",
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,

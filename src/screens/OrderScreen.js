@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { PayPalButton } from "react-paypal-button-v2";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import { Grid } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../components/Loader";
-import { getOrderDetails } from "../actions/orderActions";
+import { getOrderDetails, payOrder } from "../actions/orderActions";
+import { ORDER_PAY_RESET } from "../constants/orderConstants";
 import Message from "../components/Message";
 
 const useStyles = makeStyles((theme) => ({
@@ -35,8 +38,13 @@ const OrderScreen = ({ match }) => {
 
   const orderId = match.params.id;
 
+  const [sdkReady, setSdkReady] = useState(false);
+
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
+  const orderPay = useSelector((state) => state.orderPay);
+  const { loading: loadingPay, success: successPay } = orderPay;
 
   //   const userInfo = useSelector((state) => state.userLogin.userInfo);
 
@@ -50,10 +58,37 @@ const OrderScreen = ({ match }) => {
   }
 
   useEffect(() => {
-    if (!order || order._id !== orderId) {
+    const addPayPalScript = async () => {
+      const { data: clientId } = await axios.get("/api/config/paypal");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    };
+
+    if (!order || successPay || order._id !== orderId) {
+      dispatch({ type: ORDER_PAY_RESET });
+      // dispatch({ type: ORDER_DELIVER_RESET })
       dispatch(getOrderDetails(orderId));
+    } else if (!order.isPaid) {
+      if (!window.paypal) {
+        addPayPalScript();
+      } else {
+        setSdkReady(true);
+      }
     }
-  }, [dispatch, order, orderId]);
+  }, [dispatch, order, orderId, successPay]);
+
+  // --------------------------------------------------------- HANDLERS
+
+  const successPaymentHandler = (paymentResult) => {
+    console.log(paymentResult);
+    dispatch(payOrder(orderId, paymentResult));
+  };
 
   return (
     <div className={classes.container}>
@@ -80,7 +115,7 @@ const OrderScreen = ({ match }) => {
               <p>{order.shippingAddress.postalCode}</p>
               <p>{order.shippingAddress.city}</p>
               <p>{order.shippingAddress.country}</p>
-              <p>
+              <div>
                 {order.isDelivered ? (
                   <Message
                     variant="success"
@@ -89,9 +124,9 @@ const OrderScreen = ({ match }) => {
                 ) : (
                   <Message variant="error" message="Not sent" />
                 )}
-              </p>
+              </div>
               <h3>Payment:</h3>
-              <p>
+              <div>
                 {order.isPaid ? (
                   <Message
                     variant="success"
@@ -100,7 +135,7 @@ const OrderScreen = ({ match }) => {
                 ) : (
                   <Message variant="error" message="Not paid" />
                 )}
-              </p>
+              </div>
               <h3>Order Items:</h3>
               {order.orderItems.length === 0 ? (
                 <Message variant="info" message="Order is empty" />
@@ -163,6 +198,19 @@ const OrderScreen = ({ match }) => {
                   &euro; {order.totalPrice}
                 </Grid>
               </Grid>
+              {!order.isPaid && (
+                <div>
+                  {loadingPay && <Loader />}
+                  {!sdkReady ? (
+                    <Loader />
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    />
+                  )}
+                </div>
+              )}
             </Grid>
           </Grid>
         </>
