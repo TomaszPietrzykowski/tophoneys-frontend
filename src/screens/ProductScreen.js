@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../actions/productActions";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Loader from "../components/Loader";
 import Message from "../components/Message";

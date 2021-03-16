@@ -33,8 +33,10 @@ const useStyles = makeStyles((theme) => ({
 const PlaceOrderScreen = ({ history }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+
   const cart = useSelector((state) => state.cart);
   const { cartItems, shippingAddress, paymentMethod } = cart;
+
   const userInfo = useSelector((state) => state.userLogin.userInfo);
 
   if (
@@ -68,14 +70,15 @@ const PlaceOrderScreen = ({ history }) => {
       history.push(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
-  }, [dispatch, success]);
+    // eslint-disable-next-line
+  }, [dispatch, success, history]);
 
   const placeOrderHandler = () => {
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
-        paymentMethod: "PayPal",
+        paymentMethod,
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
@@ -98,25 +101,32 @@ const PlaceOrderScreen = ({ history }) => {
           <p>{shippingAddress.city}</p>
           <p>{shippingAddress.country}</p>
           <h3>Cart Items:</h3>
-          {cartItems.map((item) => (
-            <Grid container key={item.product}>
-              <Grid item md={2}>
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className={classes.image}
-                />
+          {cartItems.length === 0 ? (
+            <Message variant="info" message="Your cart is empty" />
+          ) : (
+            cartItems.map((item) => (
+              <Grid container key={item.product}>
+                <Grid item md={2}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className={classes.image}
+                  />
+                </Grid>
+                <Grid item md={6} className={classes.center}>
+                  <Link
+                    to={`/product/${item.product}`}
+                    className={classes.link}
+                  >
+                    {item.name}
+                  </Link>
+                </Grid>
+                <Grid item md={4} className={classes.center}>
+                  {item.qty} x {item.price} = {item.qty * item.price}
+                </Grid>
               </Grid>
-              <Grid item md={6} className={classes.center}>
-                <Link to={`/product/${item.product}`} className={classes.link}>
-                  {item.name}
-                </Link>
-              </Grid>
-              <Grid item md={4} className={classes.center}>
-                {item.qty} x {item.price} = {item.qty * item.price}
-              </Grid>
-            </Grid>
-          ))}
+            ))
+          )}
         </Grid>
         <Grid item md={4}>
           <h3>Order summary</h3>
