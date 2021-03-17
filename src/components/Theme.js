@@ -20,6 +20,10 @@ export default createMuiTheme({
     shadows: {
       primary: "1px 1px 1px rgba(0,0,0,.3)",
     },
+    text: {
+      primary: "rgb(26, 26, 26)",
+      secondary: "rgb(85, 89, 92)",
+    },
   },
   typography: {
     open: {

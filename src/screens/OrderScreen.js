@@ -13,22 +13,61 @@ import Message from "../components/Message";
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    ...theme.flex.col,
     ...theme.typography.source,
     marginTop: "15rem",
+    maxWidth: 1140,
+    color: theme.palette.text.secondary,
+  },
+  h1: {
+    ...theme.typography.prosto,
+    color: theme.palette.text.primary,
+    fontSize: "1.7rem",
+    padding: "1rem",
+    wordWrap: "break-word",
+    fontWeight: 500,
+  },
+  h2: {
+    ...theme.typography.prosto,
+    fontSize: "1.4rem",
+    padding: ".5rem 0",
+    marginBottom: ".5rem",
+    fontWeight: 400,
   },
   image: {
     width: "100%",
     objectFit: "contain",
-    padding: ".5rem",
+    padding: "1rem",
+  },
+  productListItem: {
+    borderBottom: "1px solid rgba(0,0,0,.125)",
   },
   center: {
     ...theme.flex.row,
+    justifyContent: "flex-start",
+    paddingLeft: "1rem",
   },
   link: {
     "&:hover": {
       textDecoration: "underline",
     },
+  },
+  column: {
+    padding: "1rem",
+    "& > *": {
+      marginBottom: "1rem",
+    },
+  },
+  card: {
+    border: "1px solid rgba(0,0,0,.125)",
+    borderRadius: 4,
+    "& > *": {
+      padding: ".75rem 1.25rem",
+      borderBottom: "1px solid rgba(0,0,0,.125)",
+    },
+  },
+  mr: {
+    paddingRight: "1rem",
+    width: "50%",
   },
 }));
 
@@ -86,7 +125,7 @@ const OrderScreen = ({ match }) => {
   // --------------------------------------------------------- HANDLERS
 
   const successPaymentHandler = (paymentResult) => {
-    console.log(paymentResult);
+    // console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
   };
 
@@ -98,50 +137,53 @@ const OrderScreen = ({ match }) => {
         <Message variant="error" message={error} />
       ) : (
         <>
-          <h1>Order {orderId}</h1>
+          <h1 className={classes.h1}>Order {orderId}</h1>
           <Grid container>
-            <Grid item md={8}>
-              <h3>Customer:</h3>
+            <Grid item md={8} className={classes.column}>
+              <h2 className={classes.h2}>Shipping:</h2>
+              <p>Name: {order.user.name}</p>
               <p>
-                <strong>Name: </strong>
-                {order.user.name}
-              </p>
-              <p>
-                <strong>Email: </strong>
+                Email:{" "}
                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
               </p>
-              <h3>Shipping address:</h3>
-              <p>{order.shippingAddress.address}</p>
-              <p>{order.shippingAddress.postalCode}</p>
-              <p>{order.shippingAddress.city}</p>
-              <p>{order.shippingAddress.country}</p>
-              <div>
-                {order.isDelivered ? (
-                  <Message
-                    variant="success"
-                    message={`Sent on ${order.deliveredAt}`}
-                  />
-                ) : (
-                  <Message variant="error" message="Not sent" />
-                )}
-              </div>
-              <h3>Payment:</h3>
+              <p>
+                Address: {order.shippingAddress.address},{" "}
+                {order.shippingAddress.postalCode} {order.shippingAddress.city},{" "}
+                {order.shippingAddress.country}
+              </p>
+              {order.isDelivered ? (
+                <Message
+                  variant="success"
+                  message={`Sent on ${order.deliveredAt
+                    .substring(0, 16)
+                    .replace("T", " at ")}`}
+                />
+              ) : (
+                <Message variant="error" message="Status: not sent" />
+              )}
+              <h2 className={classes.h2}>Payment:</h2>
               <div>
                 {order.isPaid ? (
                   <Message
                     variant="success"
-                    message={`Paid on ${order.paidAt}`}
+                    message={`Paid on ${order.paidAt
+                      .substring(0, 16)
+                      .replace("T", " at ")}`}
                   />
                 ) : (
                   <Message variant="error" message="Not paid" />
                 )}
               </div>
-              <h3>Order Items:</h3>
+              <h2 className={classes.h2}>Order Items:</h2>
               {order.orderItems.length === 0 ? (
                 <Message variant="info" message="Order is empty" />
               ) : (
                 order.orderItems.map((item) => (
-                  <Grid container key={item.product}>
+                  <Grid
+                    container
+                    key={item.product}
+                    className={classes.productListItem}
+                  >
                     <Grid item md={2}>
                       <img
                         src={item.image}
@@ -158,23 +200,25 @@ const OrderScreen = ({ match }) => {
                       </Link>
                     </Grid>
                     <Grid item md={4} className={classes.center}>
-                      {item.qty} x {item.price} = {item.qty * item.price}
+                      {item.qty} x &euro;{item.price} = &euro;
+                      {item.qty * item.price}
                     </Grid>
                   </Grid>
                 ))
               )}
             </Grid>
             <Grid item md={4}>
-              <h3>Order summary</h3>
-              <Grid container>
-                <Grid item md={6}>
-                  Items:
+              <div className={classes.card}>
+                <h2 className={classes.h2}>Order summary:</h2>
+                <Grid container>
+                  <Grid item md={6} className={classes.mr}>
+                    Products:
+                  </Grid>
+                  <Grid item md={6}>
+                    &euro; {order.itemsPrice}
+                  </Grid>
                 </Grid>
-                <Grid item md={6}>
-                  &euro; {order.itemsPrice}
-                </Grid>
-              </Grid>
-              {/* <Grid container>
+                {/* <Grid container>
             <Grid item md={6}>
               Tax:
             </Grid>
@@ -182,37 +226,39 @@ const OrderScreen = ({ match }) => {
               &euro; {cart.taxPrice}
             </Grid>
           </Grid> */}
-              <Grid container>
-                <Grid item md={6}>
-                  Shipping:
+                <Grid container>
+                  <Grid item md={6} className={classes.mr}>
+                    Shipping:
+                  </Grid>
+                  <Grid item md={6}>
+                    &euro; {order.shippingPrice}
+                  </Grid>
                 </Grid>
-                <Grid item md={6}>
-                  &euro; {order.shippingPrice}
+                <Grid container>
+                  <Grid item md={6} className={classes.mr}>
+                    Total:
+                  </Grid>
+                  <Grid item md={6}>
+                    &euro; {order.totalPrice}
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item md={6}>
-                  Total:
-                </Grid>
-                <Grid item md={6}>
-                  &euro; {order.totalPrice}
-                </Grid>
-              </Grid>
-              {!order.isPaid && (
-                <div>
-                  {loadingPay && <Loader />}
-                  {!sdkReady ? (
-                    <Loader />
-                  ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      currency="EUR"
-                      shippingPreference="NO_SHIPPING"
-                      onSuccess={successPaymentHandler}
-                    />
-                  )}
-                </div>
-              )}
+                {!order.isPaid && (
+                  <>
+                    {loadingPay ? (
+                      <Loader />
+                    ) : !sdkReady ? (
+                      <Loader />
+                    ) : (
+                      <PayPalButton
+                        amount={order.totalPrice}
+                        currency="EUR"
+                        shippingPreference="NO_SHIPPING"
+                        onSuccess={successPaymentHandler}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
             </Grid>
           </Grid>
         </>
