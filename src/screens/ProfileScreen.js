@@ -1,16 +1,53 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, Button, TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/styles";
+import { withStyles, makeStyles } from "@material-ui/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import CancelIcon from "@material-ui/icons/Cancel";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
+import { listMyOrders } from "../actions/orderActions";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
+
+const StyledTableCell = withStyles((theme) => ({
+  root: {
+    ...theme.typography.source,
+  },
+}))(TableCell);
+
+const CssTextField = withStyles((theme) => ({
+  root: {
+    "& label.Mui-focused": {
+      color: theme.palette.primary.main,
+    },
+    "& .MuiOutlinedInput-root": {
+      ...theme.typography.source,
+      color: theme.palette.text.secondary,
+      "& fieldset": {
+        borderColor: theme.palette.text.secondary,
+      },
+      "&:hover fieldset": {
+        borderColor: theme.palette.primary.light,
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: theme.palette.primary.main,
+      },
+    },
+  },
+}))(TextField);
 
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
+    ...theme.typography.source,
     marginTop: "15rem",
   },
   title: {
@@ -34,6 +71,18 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.dark,
     },
   },
+  table: {
+    minWidth: 500,
+  },
+  tableContainer: {
+    maxWidth: "90vw",
+    overflow: "scroll",
+  },
+  cell: {
+    root: {
+      ...theme.typography.source,
+    },
+  },
 }));
 
 const ProfileScreen = ({ location, history }) => {
@@ -46,8 +95,11 @@ const ProfileScreen = ({ location, history }) => {
   const [message, setMessage] = useState(null);
 
   const dispatch = useDispatch();
-
+  // STATE
   const { loading, error, user } = useSelector((state) => state.userDetails);
+  const { loading: loadingOrders, error: errorOrders, orders } = useSelector(
+    (state) => state.orderMyList
+  );
   const { userInfo } = useSelector((state) => state.userLogin);
   const { success } = useSelector((state) => state.userUpdateProfile);
 
@@ -58,6 +110,7 @@ const ProfileScreen = ({ location, history }) => {
       if (!user || !user.name || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
+        dispatch(listMyOrders());
       } else {
         setName(user.name);
         setEmail(user.email);
@@ -83,21 +136,21 @@ const ProfileScreen = ({ location, history }) => {
           {message && <Message variant="error" message={message} />}
           {success && <Message variant="success" message="Profile updated" />}
           {error && <Message variant="error" message={error} />}
-          <TextField
+          <CssTextField
             id="name"
             label="Name"
             variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <TextField
+          <CssTextField
             id="email"
             label="Email"
             variant="outlined"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <TextField
+          <CssTextField
             id="password"
             type="password"
             label="Password"
@@ -105,7 +158,7 @@ const ProfileScreen = ({ location, history }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <TextField
+          <CssTextField
             id="confirmPassword"
             type="password"
             label="Confirm password"
@@ -120,6 +173,64 @@ const ProfileScreen = ({ location, history }) => {
       </Grid>
       <Grid item md={9}>
         <h2 className={classes.title}>My orders</h2>
+        {loadingOrders ? (
+          <Loader />
+        ) : errorOrders ? (
+          <Message variant="error" message={error} />
+        ) : (
+          <div className={classes.tableContainer}>
+            <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell className={classes.cell}>
+                      ID
+                    </StyledTableCell>
+                    <StyledTableCell>DATE</StyledTableCell>
+                    <StyledTableCell>TOTAL</StyledTableCell>
+                    <StyledTableCell>PAID</StyledTableCell>
+                    <StyledTableCell>SENT</StyledTableCell>
+                    <StyledTableCell></StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {orders.map((order) => (
+                    <TableRow key={order._id}>
+                      <StyledTableCell component="th" scope="row">
+                        {order._id}
+                      </StyledTableCell>
+                      <StyledTableCell component="th" scope="row">
+                        {order.createdAt.substring(0, 10)}
+                      </StyledTableCell>
+                      <StyledTableCell component="th" scope="row">
+                        {order.totalPrice}
+                      </StyledTableCell>
+                      <StyledTableCell component="th" scope="row">
+                        {order.isPaid ? (
+                          order.paidAt.substring(0, 10)
+                        ) : (
+                          <CancelIcon />
+                        )}
+                      </StyledTableCell>
+                      <StyledTableCell component="th" scope="row">
+                        {order.isDelivered ? (
+                          order.deliveredAt.substring(0, 10)
+                        ) : (
+                          <CancelIcon />
+                        )}
+                      </StyledTableCell>
+                      <StyledTableCell component="th" scope="row">
+                        <Link to={`/order/${order._id}`}>
+                          <button>details</button>
+                        </Link>
+                      </StyledTableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        )}
       </Grid>
     </Grid>
   );
