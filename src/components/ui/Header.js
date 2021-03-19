@@ -355,7 +355,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       <Link to="/profile">
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
-                          value="en"
                           onClick={(e) => {
                             handleCloseUser(e);
                           }}
@@ -368,7 +367,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       <Link to="/">
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
-                          value="nl"
                           onClick={(e) => {
                             handleCloseUser(e);
                             handleLogout();
@@ -382,7 +380,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       <Link to="/login">
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
-                          value="nl"
                           onClick={(e) => {
                             handleCloseUser(e);
                           }}
@@ -395,7 +392,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       <Link to="/register">
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
-                          value="nl"
                           onClick={(e) => {
                             handleCloseUser(e);
                           }}
@@ -438,18 +434,18 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                     onMouseOver={() => setOpenAdmin(true)}
                     disablePadding
                   >
+                    <Link to="/admin/productlist">
+                      <MenuItem
+                        classes={{ root: classes.dropdownItemIcons }}
+                        onClick={(e) => {
+                          handleCloseAdmin(e);
+                        }}
+                      >
+                        Products
+                      </MenuItem>
+                    </Link>
                     <MenuItem
                       classes={{ root: classes.dropdownItemIcons }}
-                      value="en"
-                      onClick={(e) => {
-                        handleCloseAdmin(e);
-                      }}
-                    >
-                      Products
-                    </MenuItem>
-                    <MenuItem
-                      classes={{ root: classes.dropdownItemIcons }}
-                      value="nl"
                       onClick={(e) => {
                         handleCloseUser(e);
                       }}
@@ -459,7 +455,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                     <Link to="/admin/userlist">
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
-                        value="nl"
                         onClick={(e) => {
                           handleCloseUser(e);
                         }}
