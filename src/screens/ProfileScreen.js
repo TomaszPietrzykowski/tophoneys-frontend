@@ -40,6 +40,9 @@ const CssTextField = withStyles((theme) => ({
       "&.Mui-focused fieldset": {
         borderColor: theme.palette.primary.main,
       },
+      // "& .MuiOutlinedInput-input": {
+      //   padding: "1rem .8rem",
+      // },
     },
   },
 }))(TextField);
@@ -75,13 +78,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 500,
   },
   tableContainer: {
-    maxWidth: "90vw",
-    overflow: "scroll",
-  },
-  cell: {
-    root: {
-      ...theme.typography.source,
-    },
+    overflowX: "scroll",
   },
 }));
 

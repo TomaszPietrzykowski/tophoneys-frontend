@@ -309,15 +309,17 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                   <CartIcon className={classes.sideIconCart} />
                 </IconButton>
               </Link>
-              <IconButton
-                className={classes.iconButton}
-                aria-owns={anchorElAdmin ? "dropdown-admin" : undefined}
-                aria-haspopup={anchorElAdmin ? true : undefined}
-                onMouseOver={(e) => handleClickAdmin(e)}
-                onMouseLeave={handleCloseAdmin}
-              >
-                <SettingsIcon className={classes.sideIconUser} />
-              </IconButton>
+              {userInfo && userInfo.isAdmin && (
+                <IconButton
+                  className={classes.iconButton}
+                  aria-owns={anchorElAdmin ? "dropdown-admin" : undefined}
+                  aria-haspopup={anchorElAdmin ? true : undefined}
+                  onMouseOver={(e) => handleClickAdmin(e)}
+                  onMouseLeave={handleCloseAdmin}
+                >
+                  <SettingsIcon className={classes.sideIconUser} />
+                </IconButton>
+              )}
             </div>
           </div>
         </div>
@@ -454,15 +456,17 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                     >
                       Orders
                     </MenuItem>
-                    <MenuItem
-                      classes={{ root: classes.dropdownItemIcons }}
-                      value="nl"
-                      onClick={(e) => {
-                        handleCloseUser(e);
-                      }}
-                    >
-                      Users
-                    </MenuItem>
+                    <Link to="/admin/userlist">
+                      <MenuItem
+                        classes={{ root: classes.dropdownItemIcons }}
+                        value="nl"
+                        onClick={(e) => {
+                          handleCloseUser(e);
+                        }}
+                      >
+                        Users
+                      </MenuItem>
+                    </Link>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
