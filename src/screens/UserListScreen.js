@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, Button, IconButton, Tooltip } from "@material-ui/core";
+import { IconButton, Tooltip } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -16,7 +16,7 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import CheckIcon from "@material-ui/icons/CheckCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import { listUsers } from "../actions/userActions";
+import { listUsers, deleteUser } from "../actions/userActions";
 
 const StyledTableCell = withStyles((theme) => ({
   root: {
@@ -57,10 +57,14 @@ const UserListScreen = ({ history }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  // STATE
+  const userInfo = useSelector((state) => state.userLogin.userInfo);
+
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
-  const userInfo = useSelector((state) => state.userLogin.userInfo);
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -68,10 +72,12 @@ const UserListScreen = ({ history }) => {
     } else {
       history.push("/login");
     }
-  }, [dispatch, history]);
+  }, [dispatch, history, userInfo, successDelete]);
 
   const deleteHandler = (id) => {
-    console.log(`deldete ${id}`);
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      dispatch(deleteUser(id));
+    }
   };
 
   return (
@@ -115,7 +121,7 @@ const UserListScreen = ({ history }) => {
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
                       <Tooltip title="Edit" placement="top-start">
-                        <Link to={`/user/${user._id}/edit`}>
+                        <Link to={`/admin/user/${user._id}/edit`}>
                           <IconButton>
                             <EditIcon className={classes.editIcon} />
                           </IconButton>
