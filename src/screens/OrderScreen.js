@@ -201,7 +201,7 @@ const OrderScreen = ({ match }) => {
                     </Grid>
                     <Grid item md={4} className={classes.center}>
                       {item.qty} x &euro;{item.price} = &euro;
-                      {item.qty * item.price}
+                      {(item.qty * item.price).toFixed(2)}
                     </Grid>
                   </Grid>
                 ))

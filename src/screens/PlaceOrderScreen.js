@@ -7,6 +7,7 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import { createOrder } from "../actions/orderActions";
 import Message from "../components/Message";
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
+import { CART_EMPTY_ITEMS } from "../constants/cartConstants";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -69,6 +70,8 @@ const PlaceOrderScreen = ({ history }) => {
     if (success) {
       history.push(`/order/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
+      dispatch({ type: CART_EMPTY_ITEMS });
+      localStorage.removeItem("cartItems");
     }
     // eslint-disable-next-line
   }, [dispatch, success, history]);
@@ -122,7 +125,8 @@ const PlaceOrderScreen = ({ history }) => {
                   </Link>
                 </Grid>
                 <Grid item md={4} className={classes.center}>
-                  {item.qty} x {item.price} = {item.qty * item.price}
+                  {item.qty} x {item.price} ={" "}
+                  {(item.qty * item.price).toFixed(2)}
                 </Grid>
               </Grid>
             ))

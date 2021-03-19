@@ -107,10 +107,11 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push("/login");
     } else {
+      dispatch(listMyOrders());
       if (!user || !user.name || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
-        dispatch(listMyOrders());
+        // dispatch(listMyOrders());
       } else {
         setName(user.name);
         setEmail(user.email);

@@ -79,6 +79,9 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline",
     },
   },
+  messageContainer: {
+    maxWidth: 600,
+  },
 }));
 
 const CartScreen = ({ match, location, history }) => {
@@ -113,19 +116,21 @@ const CartScreen = ({ match, location, history }) => {
       <Grid container>
         <Grid item md={12} lg={9}>
           {cartItems.length === 0 ? (
-            <Message
-              variant="info"
-              message="Your cart is empty"
-              action={
-                <Button
-                  color="inherit"
-                  size="small"
-                  onClick={() => history.push("/")}
-                >
-                  Back
-                </Button>
-              }
-            />
+            <div className={classes.messageContainer}>
+              <Message
+                variant="info"
+                message="Your cart is empty. Manage your orders in your profile"
+                action={
+                  <Button
+                    color="inherit"
+                    size="small"
+                    onClick={() => history.push("/profile")}
+                  >
+                    Profile
+                  </Button>
+                }
+              />
+            </div>
           ) : (
             <div>
               <Grid container className={classes.tableHeader}>

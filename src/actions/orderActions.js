@@ -13,6 +13,7 @@ import {
   ORDER_MY_LIST_SUCCESS,
   ORDER_MY_LIST_FAIL,
 } from "../constants/orderConstants";
+import { CART_EMPTY_ITEMS } from "../constants/cartConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
@@ -36,6 +37,9 @@ export const createOrder = (order) => async (dispatch, getState) => {
     dispatch({
       type: ORDER_CREATE_SUCCESS,
       payload: data,
+    });
+    dispatch({
+      type: CART_EMPTY_ITEMS,
     });
   } catch (error) {
     dispatch({
