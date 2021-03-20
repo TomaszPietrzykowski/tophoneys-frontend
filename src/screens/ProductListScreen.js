@@ -14,7 +14,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import { listProducts } from "../actions/productActions";
+import { deleteProduct, listProducts } from "../actions/productActions";
 
 const StyledTableCell = withStyles((theme) => ({
   root: {
@@ -61,17 +61,24 @@ const ProductListScreen = ({ history, match }) => {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete;
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listProducts());
     } else {
       history.push("/login");
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, successDelete]);
 
   const deleteHandler = (id) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      // delete products dispatch
+    if (window.confirm("Are you sure you want to delete this product?")) {
+      dispatch(deleteProduct(id));
     }
   };
 
@@ -89,10 +96,12 @@ const ProductListScreen = ({ history, match }) => {
           <Button onClick={createProductHandler}>Create product</Button>
         </Grid>
       </Grid>
-      {loading ? (
+      {loading || loadingDelete ? (
         <Loader />
       ) : error ? (
         <Message variant="error" message={error} />
+      ) : errorDelete ? (
+        <Message variant="error" message={errorDelete} />
       ) : (
         <div className={classes.tableContainer}>
           <TableContainer component={Paper}>
