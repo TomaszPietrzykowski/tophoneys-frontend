@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, TextField } from "@material-ui/core";
+import {
+  Button,
+  TextField,
+  Grid,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  IconButton,
+} from "@material-ui/core";
+import Chip from "@material-ui/core/Chip";
 import { withStyles, makeStyles } from "@material-ui/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { createProduct } from "../actions/productActions";
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const CustomCheckbox = withStyles((theme) => ({
   root: {
@@ -22,7 +33,7 @@ const CustomCheckbox = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    ...theme.flex.col,
+    // ...theme.flex.col,
     ...theme.typography.source,
     marginTop: "15rem",
     color: theme.palette.text.primary,
@@ -31,11 +42,15 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.prosto,
     marginBottom: "2rem",
   },
-  form: {
+  formControl: {
+    minWidth: 220,
+  },
+  col: {
     ...theme.flex.col,
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
     "& > *": {
       marginBottom: "2rem",
-      width: "auto",
     },
   },
   checkboxContainer: {
@@ -45,6 +60,17 @@ const useStyles = makeStyles((theme) => ({
   },
   checkboxLabel: {
     fontSize: "1.2rem",
+  },
+  chipContainer: {
+    ...theme.flex.row,
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+    "& > *": {
+      margin: theme.spacing(0.5),
+    },
+  },
+  priceInput: {
+    minWidth: 200,
   },
   submitBtn: {
     backgroundColor: theme.palette.primary.main,
@@ -95,9 +121,6 @@ const ProductCreateScreen = ({ history }) => {
     }
   }, [dispatch, history, userInfo, success]);
 
-  let categoryArray = [];
-  let capacityDropdownArray = [];
-
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
@@ -108,7 +131,7 @@ const ProductCreateScreen = ({ history }) => {
         category,
         capacity,
         capacityDropdown,
-        price,
+        price: (price / 100).toFixed(2),
         countInStock,
         countryOfOrigin,
         brand,
@@ -120,8 +143,11 @@ const ProductCreateScreen = ({ history }) => {
 
   const categories = [
     ["All honeys", "honeys"],
-    ["All teas", "teas"],
     ["Creamed honeys", "creamedhoneys"],
+    ["All teas", "teas"],
+    ["Black teas", "blackteas"],
+    ["Green teas", "greenteas"],
+    ["Fruit teas", "fruitteas"],
   ];
 
   const categoryHandler = (e) => {
@@ -130,9 +156,15 @@ const ProductCreateScreen = ({ history }) => {
 
   const addDropdownHandler = (e) => {
     e.preventDefault();
-    setCapacityDropdown([...capacityDropdown, { label, productId }]);
-    setLabel("");
-    setProductId("");
+    if (!label || !productId) {
+      window.alert("Enter label and product ID");
+    } else if (productId.length !== 24) {
+      window.alert("Incorrect product ID");
+    } else {
+      setCapacityDropdown([...capacityDropdown, { label, productId }]);
+      setLabel("");
+      setProductId("");
+    }
   };
 
   const clearDropdown = () => {
@@ -147,104 +179,140 @@ const ProductCreateScreen = ({ history }) => {
       <Link to="/admin/productlist">
         <Button className={classes.backBtn}>&larr; All products</Button>
       </Link>
+      <h1 className={classes.title}>Create product</h1>
       <form onSubmit={submitHandler} className={classes.form}>
-        <h1 className={classes.title}>Create product</h1>
-        {loading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant="error" message={error} />
-        ) : (
-          <>
-            <TextField
-              id="name"
-              label="Name"
-              variant="outlined"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <TextField
-              id="image"
-              label="image"
-              variant="outlined"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            />
-            <TextField
-              id="description"
-              label="Description"
-              variant="outlined"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <TextField
-              id="capacity"
-              label="Capacity"
-              variant="outlined"
-              value={capacity}
-              onChange={(e) => setCapacity(e.target.value)}
-            />
-            <TextField
-              id="countryOfOrigin"
-              label="Country of origin"
-              variant="outlined"
-              value={countryOfOrigin}
-              onChange={(e) => setCountryOfOrigin(e.target.value)}
-            />
-            <TextField
-              id="brand"
-              label="Brand"
-              variant="outlined"
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
-            />
-            <h4>Categories</h4>
-            <select onChange={categoryHandler}>
-              <option value="add" selected disabled>
-                Add categories
-              </option>
-              {categories.map((cat, i) => (
-                <option key={i} value={cat[1]}>
-                  {cat[0]}
-                </option>
-              ))}
-            </select>
-            <div>
-              {category.length > 0 &&
-                category.map((cat, i) => <div key={i}>{cat}</div>)}
-            </div>
+        <Grid container>
+          {loading ? (
+            <Loader />
+          ) : error ? (
+            <Message variant="error" message={error} />
+          ) : (
+            <>
+              <Grid item md={4} className={classes.col}>
+                <TextField
+                  required
+                  id="name"
+                  label="Name"
+                  variant="outlined"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
 
-            <h4>Price</h4>
-            <input
-              type="number"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-            <h4>Count in stock</h4>
-            <input
-              type="number"
-              value={countInStock}
-              onChange={(e) => setCountInStock(e.target.value)}
-            />
+                <TextField
+                  required
+                  id="description"
+                  label="Description"
+                  variant="outlined"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+                <TextField
+                  id="image"
+                  label="image"
+                  variant="outlined"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                />
+              </Grid>
+              <Grid item md={4} className={classes.col}>
+                <TextField
+                  required
+                  id="capacity"
+                  label="Capacity"
+                  variant="outlined"
+                  value={capacity}
+                  onChange={(e) => setCapacity(e.target.value)}
+                />
+                <TextField
+                  id="countryOfOrigin"
+                  label="Country of origin"
+                  variant="outlined"
+                  value={countryOfOrigin}
+                  onChange={(e) => setCountryOfOrigin(e.target.value)}
+                />
+                <TextField
+                  id="brand"
+                  label="Brand"
+                  variant="outlined"
+                  value={brand}
+                  onChange={(e) => setBrand(e.target.value)}
+                />
+              </Grid>
+              <Grid item md={4} className={classes.col}>
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel id="category-label">Add category</InputLabel>
+                  <Select
+                    labelId="category-label"
+                    id="demo-simple-select-outlined"
+                    value={""}
+                    onChange={categoryHandler}
+                    label="Add category"
+                  >
+                    {categories.map((cat, i) => (
+                      <MenuItem key={i} value={cat[1]}>
+                        {cat[0]}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <div className={classes.chipContainer}>
+                  {category.length > 0 &&
+                    category.map((cat, i) => (
+                      <Chip key={i} label={cat} color="primary" />
+                    ))}
+                  {category.length > 0 && (
+                    <IconButton onClick={() => setCategory([])}>
+                      <DeleteIcon style={{ color: "red" }} />
+                    </IconButton>
+                  )}
+                </div>
 
-            <div className={classes.checkboxContainer}>
-              <CustomCheckbox
-                checked={isPromo}
-                onChange={(e) => setIsPromo(e.target.checked)}
-              />
-              <span className={classes.checkboxLabel}>Sale</span>
-            </div>
-            <div className={classes.checkboxContainer}>
-              <CustomCheckbox
-                checked={isPublished}
-                onChange={(e) => setIsPublished(e.target.checked)}
-              />
-              <span className={classes.checkboxLabel}>Publish in shop</span>
-            </div>
-            <Button type="submit" className={classes.submitBtn}>
-              Create
-            </Button>
-          </>
-        )}
+                <TextField
+                  required
+                  className={classes.priceInput}
+                  id="standard-number"
+                  label="Price (cents)"
+                  type="number"
+                  variant="outlined"
+                  helperText="Price x 100 e.g: 1999 for &euro;19,99"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  InputProps={{ inputProps: { min: 0 } }}
+                />
+
+                <TextField
+                  required
+                  className={classes.priceInput}
+                  id="standard-number"
+                  label="Count in stock"
+                  type="number"
+                  variant="outlined"
+                  value={countInStock}
+                  onChange={(e) => setCountInStock(e.target.value)}
+                  InputProps={{ inputProps: { min: 0 } }}
+                />
+
+                <div className={classes.checkboxContainer}>
+                  <CustomCheckbox
+                    checked={isPromo}
+                    onChange={(e) => setIsPromo(e.target.checked)}
+                  />
+                  <span className={classes.checkboxLabel}>Sale</span>
+                </div>
+                <div className={classes.checkboxContainer}>
+                  <CustomCheckbox
+                    checked={isPublished}
+                    onChange={(e) => setIsPublished(e.target.checked)}
+                  />
+                  <span className={classes.checkboxLabel}>Publish in shop</span>
+                </div>
+                <Button type="submit" className={classes.submitBtn}>
+                  Create
+                </Button>
+              </Grid>
+            </>
+          )}
+        </Grid>
       </form>
       {capacityDropdown.map((el, i) => (
         <div>

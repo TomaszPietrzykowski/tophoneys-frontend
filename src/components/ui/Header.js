@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     ...theme.utils.container,
+    minHeight: 0,
     ...theme.flex.row,
     justifyContent: "space-between",
     padding: "1.75rem 3rem",

@@ -66,6 +66,12 @@ export default createMuiTheme({
       alignItems: "center",
       justifyContent: "center",
     },
+    colStart: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      justifyContent: "flex-start",
+    },
     row: {
       display: "flex",
       flexDirection: "row",
@@ -77,6 +83,7 @@ export default createMuiTheme({
     container: {
       maxWidth: 1400,
       margin: "auto",
+      minHeight: "80vh",
     },
   },
   breakpoints: {
