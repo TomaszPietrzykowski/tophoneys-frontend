@@ -82,10 +82,6 @@ const ProductListScreen = ({ history, match }) => {
     }
   };
 
-  const createProductHandler = () => {
-    console.log("create product called");
-  };
-
   return (
     <div className={classes.container}>
       <Grid container>
@@ -93,7 +89,9 @@ const ProductListScreen = ({ history, match }) => {
           <h1>Products</h1>
         </Grid>
         <Grid item>
-          <Button onClick={createProductHandler}>Create product</Button>
+          <Link to="/admin/createproduct">
+            <Button>Create product</Button>
+          </Link>
         </Grid>
       </Grid>
       {loading || loadingDelete ? (
