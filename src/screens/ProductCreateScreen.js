@@ -77,6 +77,9 @@ const useStyles = makeStyles((theme) => ({
   priceInput: {
     minWidth: 200,
   },
+  text: {
+    minWidth: 250,
+  },
   submitBtn: {
     backgroundColor: theme.palette.primary.main,
     width: "100%",
@@ -96,7 +99,6 @@ const ProductCreateScreen = ({ history }) => {
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   const [capacity, setCapacity] = useState("");
-  const [capacityDropdown, setCapacityDropdown] = useState([]);
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState([]);
   const [countInStock, setCountInStock] = useState(0);
@@ -104,9 +106,6 @@ const ProductCreateScreen = ({ history }) => {
   const [brand, setBrand] = useState("");
   const [isPromo, setIsPromo] = useState(false);
   const [isPublished, setIsPublished] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [label, setLabel] = useState("");
-  const [productId, setProductId] = useState("");
   const [uploading, setUploading] = useState(false);
 
   const { userInfo } = useSelector((state) => state.userLogin);
@@ -136,7 +135,6 @@ const ProductCreateScreen = ({ history }) => {
         description,
         category,
         capacity,
-        capacityDropdown,
         price: (price / 100).toFixed(2),
         countInStock,
         countryOfOrigin,
@@ -182,26 +180,6 @@ const ProductCreateScreen = ({ history }) => {
     setCategory([...category, e.target.value]);
   };
 
-  const addDropdownHandler = (e) => {
-    e.preventDefault();
-    if (!label || !productId) {
-      window.alert("Enter label and product ID");
-    } else if (productId.length !== 24) {
-      window.alert("Incorrect product ID");
-    } else {
-      setCapacityDropdown([...capacityDropdown, { label, productId }]);
-      setLabel("");
-      setProductId("");
-    }
-  };
-
-  const clearDropdown = () => {
-    setCapacityDropdown([]);
-    setDropdownOpen(false);
-    setLabel("");
-    setProductId("");
-  };
-
   return (
     <div className={classes.container}>
       <Link to="/admin/productlist">
@@ -218,6 +196,7 @@ const ProductCreateScreen = ({ history }) => {
             <>
               <Grid item md={4} className={classes.col}>
                 <TextField
+                  className={classes.text}
                   required
                   id="name"
                   label="Name"
@@ -227,10 +206,13 @@ const ProductCreateScreen = ({ history }) => {
                 />
 
                 <TextField
+                  className={classes.text}
                   required
                   id="description"
                   label="Description"
                   variant="outlined"
+                  multiline
+                  rows="12"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
@@ -356,37 +338,6 @@ const ProductCreateScreen = ({ history }) => {
           )}
         </Grid>
       </form>
-      {capacityDropdown.map((el, i) => (
-        <div>
-          {el.label} : {el.productId}
-        </div>
-      ))}
-      {dropdownOpen && (
-        <form onSubmit={addDropdownHandler}>
-          <TextField
-            id="label"
-            label="Label"
-            variant="outlined"
-            value={label}
-            onChange={(e) => setLabel(e.target.value)}
-          />
-          <TextField
-            id="productId"
-            label="Product ID"
-            variant="outlined"
-            value={productId}
-            onChange={(e) => setProductId(e.target.value)}
-          />
-          <Button type="submit">Add</Button>
-        </form>
-      )}
-      {dropdownOpen ? (
-        <Button onClick={clearDropdown}>Clear dropdown</Button>
-      ) : (
-        <Button onClick={() => setDropdownOpen(true)}>
-          Add capacity dropdown
-        </Button>
-      )}
     </div>
   );
 };

@@ -62,7 +62,9 @@ const Featured = ({ match }) => {
                       style={{ width: 230, height: 230, margin: 10 }}
                     />
                     <h3 style={{ margin: 10 }}>{product.name}</h3>
-                    <p style={{ margin: 10 }}>&euro; {product.price}</p>
+                    <p style={{ margin: 10 }}>
+                      &euro; {product.price.toFixed(2)}
+                    </p>
                     <p style={{ margin: 10 }}>{product.image}</p>
                   </Link>
                 </div>

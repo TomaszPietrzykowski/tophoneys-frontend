@@ -123,7 +123,7 @@ const ProductListScreen = ({ history, match }) => {
                       {product._id}
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
-                      {product.name}
+                      <Link to={`/product/${product._id}`}>{product.name}</Link>
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
                       &euro; {product.price.toFixed(2)}

@@ -76,6 +76,9 @@ const useStyles = makeStyles((theme) => ({
   priceInput: {
     minWidth: 200,
   },
+  text: {
+    minWidth: 250,
+  },
   submitBtn: {
     backgroundColor: theme.palette.primary.main,
     width: "100%",
@@ -182,7 +185,6 @@ const ProductEditScreen = ({ history, match }) => {
   ];
 
   const uploadFileHandler = async (e) => {
-    console.log("uploadHandler called");
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
@@ -245,6 +247,7 @@ const ProductEditScreen = ({ history, match }) => {
             <>
               <Grid item md={4} className={classes.col}>
                 <TextField
+                  className={classes.text}
                   required
                   id="name"
                   label="Name"
@@ -254,10 +257,13 @@ const ProductEditScreen = ({ history, match }) => {
                 />
 
                 <TextField
+                  className={classes.text}
                   required
                   id="description"
                   label="Description"
                   variant="outlined"
+                  multiline
+                  rows="12"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
@@ -383,36 +389,42 @@ const ProductEditScreen = ({ history, match }) => {
           )}
         </Grid>
       </form>
-      {capacityDropdown.map((el, i) => (
-        <div>
-          {el.label} : {el.productId}
-        </div>
-      ))}
-      {dropdownOpen && (
-        <form onSubmit={addDropdownHandler}>
-          <TextField
-            id="label"
-            label="Label"
-            variant="outlined"
-            value={label}
-            onChange={(e) => setLabel(e.target.value)}
-          />
-          <TextField
-            id="productId"
-            label="Product ID"
-            variant="outlined"
-            value={productId}
-            onChange={(e) => setProductId(e.target.value)}
-          />
-          <Button type="submit">Add</Button>
-        </form>
-      )}
-      {dropdownOpen ? (
-        <Button onClick={clearDropdown}>Clear dropdown</Button>
+      {loading || loadingUpdate ? (
+        <Loader />
       ) : (
-        <Button onClick={() => setDropdownOpen(true)}>
-          Add capacity dropdown
-        </Button>
+        <>
+          {capacityDropdown.map((el, i) => (
+            <div>
+              {el.label} : {el.productId}
+            </div>
+          ))}
+          {dropdownOpen && (
+            <form onSubmit={addDropdownHandler}>
+              <TextField
+                id="label"
+                label="Label"
+                variant="outlined"
+                value={label}
+                onChange={(e) => setLabel(e.target.value)}
+              />
+              <TextField
+                id="productId"
+                label="Product ID"
+                variant="outlined"
+                value={productId}
+                onChange={(e) => setProductId(e.target.value)}
+              />
+              <Button type="submit">Add</Button>
+            </form>
+          )}
+          {dropdownOpen ? (
+            <Button onClick={clearDropdown}>Clear dropdown</Button>
+          ) : (
+            <Button onClick={() => setDropdownOpen(true)}>
+              Add capacity dropdown
+            </Button>
+          )}
+        </>
       )}
     </div>
   );
