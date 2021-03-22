@@ -13,6 +13,8 @@ import Paper from "@material-ui/core/Paper";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import DeleteIcon from "@material-ui/icons/Delete";
+import CancelIcon from "@material-ui/icons/Cancel";
+import CheckIcon from "@material-ui/icons/CheckCircle";
 import EditIcon from "@material-ui/icons/Edit";
 import { deleteProduct, listProducts } from "../actions/productActions";
 
@@ -109,6 +111,8 @@ const ProductListScreen = ({ history, match }) => {
                   <StyledTableCell>ID</StyledTableCell>
                   <StyledTableCell>NAME</StyledTableCell>
                   <StyledTableCell>PRICE</StyledTableCell>
+                  <StyledTableCell>SALE</StyledTableCell>
+                  <StyledTableCell>PUBLISHED</StyledTableCell>
                   <StyledTableCell></StyledTableCell>
                 </TableRow>
               </TableHead>
@@ -122,7 +126,21 @@ const ProductListScreen = ({ history, match }) => {
                       {product.name}
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
-                      &euro; {product.price}
+                      &euro; {product.price.toFixed(2)}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {product.isSale ? (
+                        <CheckIcon className={classes.checkIcon} />
+                      ) : (
+                        <CancelIcon className={classes.cancelIcon} />
+                      )}
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {product.isPublished ? (
+                        <CheckIcon className={classes.checkIcon} />
+                      ) : (
+                        <CancelIcon className={classes.cancelIcon} />
+                      )}
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
                       <Tooltip title="Edit" placement="top-start">

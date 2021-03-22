@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -52,6 +53,10 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: "2rem",
     },
   },
+  imagePreview: {
+    width: 200,
+    height: 200,
+  },
   checkboxContainer: {
     ...theme.flex.row,
     justifyContent: "flex-start",
@@ -103,6 +108,7 @@ const ProductEditScreen = ({ history, match }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [label, setLabel] = useState("");
   const [productId, setProductId] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const { userInfo } = useSelector((state) => state.userLogin);
 
@@ -175,6 +181,28 @@ const ProductEditScreen = ({ history, match }) => {
     ["Fruit teas", "fruitteas"],
   ];
 
+  const uploadFileHandler = async (e) => {
+    console.log("uploadHandler called");
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+    setUploading(true);
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const { data } = await axios.post("/api/uploads", formData, config);
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
+  };
+
   const categoryHandler = (e) => {
     setCategory([...category, e.target.value]);
   };
@@ -233,13 +261,6 @@ const ProductEditScreen = ({ history, match }) => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
-                <TextField
-                  id="image"
-                  label="image"
-                  variant="outlined"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                />
               </Grid>
               <Grid item md={4} className={classes.col}>
                 <TextField
@@ -264,6 +285,27 @@ const ProductEditScreen = ({ history, match }) => {
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
                 />
+                <input
+                  accept="image/*"
+                  id="contained-button-file"
+                  type="file"
+                  hidden
+                  onChange={uploadFileHandler}
+                />
+                <label htmlFor="contained-button-file">
+                  <Button variant="contained" component="span">
+                    Upload image
+                  </Button>
+                </label>
+                {uploading ? (
+                  <Loader />
+                ) : (
+                  <img
+                    src={image}
+                    alt={name}
+                    className={classes.imagePreview}
+                  />
+                )}
               </Grid>
               <Grid item md={4} className={classes.col}>
                 <FormControl variant="outlined" className={classes.formControl}>
