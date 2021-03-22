@@ -16,8 +16,8 @@ import { withStyles, makeStyles } from "@material-ui/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { listProductDetails } from "../actions/productActions";
-import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import { listProductDetails, updateProduct } from "../actions/productActions";
+import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const CustomCheckbox = withStyles((theme) => ({
@@ -110,60 +110,60 @@ const ProductEditScreen = ({ history, match }) => {
     (state) => state.productDetails
   );
 
-  //   const {
-  //     loading: loadingEdit,
-  //     error: errorEdit,
-  //     success: successEdit,
-  //   } = useSelector((state) => state.productEdit);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = useSelector((state) => state.productUpdate);
 
   useEffect(() => {
-    if (!product.name || product._id !== editedProductId) {
-      dispatch(listProductDetails(editedProductId));
+    if (successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
+      history.push("/admin/productlist");
     } else {
-      setName(product.name);
-      setImage(product.image);
-      setDescription(product.description);
-      setCapacity(product.capacity);
-      setCapacityDropdown(product.capacityDropdown);
-      setPrice(product.price * 100);
-      setCategory(product.category);
-      setCountInStock(product.countInStock);
-      setCountryOfOrigin(product.countryOfOrigin);
-      setBrand(product.brand);
-      setIsPromo(product.isPromo);
-      setIsPublished(product.isPublished);
+      if (!product.name || product._id !== editedProductId) {
+        dispatch(listProductDetails(editedProductId));
+      } else {
+        setName(product.name);
+        setImage(product.image);
+        setDescription(product.description);
+        setCapacity(product.capacity);
+        setCapacityDropdown(product.capacityDropdown);
+        setPrice(Math.ceil(product.price * 100));
+        setCategory(product.category);
+        setCountInStock(product.countInStock);
+        setCountryOfOrigin(product.countryOfOrigin);
+        setBrand(product.brand);
+        setIsPromo(product.isPromo);
+        setIsPublished(product.isPublished);
+      }
     }
-
-    // dispatch({ type: PRODUCT_CREATE_RESET });
     if (!userInfo) {
       history.push("/login");
     } else if (!userInfo.isAdmin) {
       history.push("/");
     }
-
-    // if (successEdit) {
-    //   history.push("/admin/productlist");
-    // }
-  }, [dispatch, history, product, editedProductId]);
+  }, [dispatch, history, product, editedProductId, successUpdate, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(
-    //   createProduct({
-    //     name,
-    //     image,
-    //     description,
-    //     category,
-    //     capacity,
-    //     capacityDropdown,
-    //     price: (price / 100).toFixed(2),
-    //     countInStock,
-    //     countryOfOrigin,
-    //     brand,
-    //     isPromo,
-    //     isPublished,
-    //   })
-    // );
+    dispatch(
+      updateProduct({
+        _id: editedProductId,
+        name,
+        image,
+        description,
+        category,
+        capacity,
+        capacityDropdown,
+        price: (price / 100).toFixed(2),
+        countInStock,
+        countryOfOrigin,
+        brand,
+        isPromo,
+        isPublished,
+      })
+    );
   };
 
   const categories = [
@@ -207,10 +207,12 @@ const ProductEditScreen = ({ history, match }) => {
       <h1 className={classes.title}>Edit product</h1>
       <form onSubmit={submitHandler} className={classes.form}>
         <Grid container>
-          {loading ? (
+          {loading || loadingUpdate ? (
             <Loader />
           ) : error ? (
             <Message variant="error" message={error} />
+          ) : errorUpdate ? (
+            <Message variant="error" message={errorUpdate} />
           ) : (
             <>
               <Grid item md={4} className={classes.col}>
@@ -332,7 +334,7 @@ const ProductEditScreen = ({ history, match }) => {
                   <span className={classes.checkboxLabel}>Publish in shop</span>
                 </div>
                 <Button type="submit" className={classes.submitBtn}>
-                  Create
+                  Update
                 </Button>
               </Grid>
             </>
