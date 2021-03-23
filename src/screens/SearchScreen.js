@@ -39,8 +39,14 @@ const SearchScreen = ({ match }) => {
         <Loader />
       ) : error ? (
         <Message variant="error" message={error} />
+      ) : products.length === 0 ? (
+        <Message
+          variant="info"
+          message={"No products matching search query..."}
+        />
       ) : (
         <div>
+          <p>Search results for fraze: "{keyword}"</p>
           {products.map((product) => {
             return <h3 key={product._id}>{product.name}</h3>;
           })}

@@ -9,14 +9,13 @@ const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
     ...theme.flex.col,
-    marginTop: "20rem",
-    padding: "1rem",
-    [theme.breakpoints.down("md")]: {
-      marginTop: 130,
-    },
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 90,
-    },
+    padding: "3rem",
+    // [theme.breakpoints.down("md")]: {
+    //   marginTop: 130,
+    // },
+    // [theme.breakpoints.down("sm")]: {
+    //   marginTop: 90,
+    // },
   },
 }));
 
@@ -39,6 +38,8 @@ const CategoryScreen = ({ match }) => {
         <Loader />
       ) : error ? (
         <Message variant="error" message={error} />
+      ) : products.length === 0 ? (
+        <Message variant="info" message={"No products in this category"} />
       ) : (
         <div>
           {products.map((product) => {
