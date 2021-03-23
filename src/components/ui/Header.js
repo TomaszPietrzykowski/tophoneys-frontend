@@ -445,14 +445,16 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         Products
                       </MenuItem>
                     </Link>
-                    <MenuItem
-                      classes={{ root: classes.dropdownItemIcons }}
-                      onClick={(e) => {
-                        handleCloseUser(e);
-                      }}
-                    >
-                      Orders
-                    </MenuItem>
+                    <Link to="/admin/orderlist">
+                      <MenuItem
+                        classes={{ root: classes.dropdownItemIcons }}
+                        onClick={(e) => {
+                          handleCloseUser(e);
+                        }}
+                      >
+                        Orders
+                      </MenuItem>
+                    </Link>
                     <Link to="/admin/userlist">
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
