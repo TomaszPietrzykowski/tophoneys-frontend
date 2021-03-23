@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -82,13 +83,32 @@ const useStyles = makeStyles((theme) => ({
 
 const Search = ({ isMobile }) => {
   const classes = useStyles();
+  const history = useHistory();
+  const [keyword, setKeyword] = useState("");
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    if (keyword.trim()) {
+      history.push(`/search/${keyword.trim()}`);
+    } else {
+      history.push("/");
+    }
+
+    setKeyword("");
+  };
 
   return (
-    <form className={isMobile ? classes.searchMobile : classes.search}>
+    <form
+      className={isMobile ? classes.searchMobile : classes.search}
+      onSubmit={submitHandler}
+    >
       <input
         type="text"
         className={isMobile ? classes.inputMobile : classes.input}
         placeholder="Szukaj..."
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
       />
       <button
         type="submit"

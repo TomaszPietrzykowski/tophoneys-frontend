@@ -21,6 +21,7 @@ import ProductListScreen from "./screens/ProductListScreen";
 import ProductCreateScreen from "./screens/ProductCreateScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
+import SearchScreen from "./screens/SearchScreen";
 // import Newsletter from "./components/ui/Newsletter";
 // import Footer from "./components/ui/Footer";
 // import DevTag from "./components/ui/DevTag";
@@ -48,6 +49,7 @@ function App() {
             <Route path="/paymentmethod" component={PaymentScreen} exact />
             <Route path="/placeorder" component={PlaceOrderScreen} exact />
             <Route path="/order/:id" component={OrderScreen} exact />
+            <Route path="/search/:keyword" component={SearchScreen} exact />
             <Route path="/admin/userlist" component={UserListScreen} exact />
             <Route path="/admin/orderlist" component={OrderListScreen} exact />
             <Route

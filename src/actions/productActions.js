@@ -18,6 +18,9 @@ import {
   PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_FAIL,
+  PRODUCT_SEARCH_REQUEST,
+  PRODUCT_SEARCH_SUCCESS,
+  PRODUCT_SEARCH_FAIL,
 } from "../constants/productConstants";
 
 export const listProducts = () => async (dispatch) => {
@@ -45,6 +48,24 @@ export const getProductsByCategory = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_CATEGORY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getProductsByKeyword = (keyword) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_SEARCH_REQUEST });
+
+    const { data } = await axios.get(`/api/products/search/${keyword}`);
+
+    dispatch({ type: PRODUCT_SEARCH_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_SEARCH_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
