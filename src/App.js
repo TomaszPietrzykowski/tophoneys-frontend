@@ -83,6 +83,11 @@ function App() {
               exact
             />
             <Route
+              path="/admin/productlist/page/:pageNumber"
+              component={ProductListScreen}
+              exact
+            />
+            <Route
               path="/admin/user/:id/edit"
               component={UserEditScreen}
               exact
