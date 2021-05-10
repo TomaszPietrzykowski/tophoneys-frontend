@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/styles";
-import { getProductsByCategory } from "../actions/productActions";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { makeStyles } from "@material-ui/styles"
+import { getProductsByCategory } from "../actions/productActions"
+import Loader from "../components/Loader"
+import Message from "../components/Message"
+import Paginate from "../components/Paginate"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -17,19 +18,19 @@ const useStyles = makeStyles((theme) => ({
     //   marginTop: 90,
     // },
   },
-}));
+}))
 
 const CategoryScreen = ({ match }) => {
-  const classes = useStyles();
-  const { loading, error, products } = useSelector(
+  const classes = useStyles()
+  const { loading, error, products, page, pages } = useSelector(
     (state) => state.productCategory
-  );
-  const dispatch = useDispatch();
-  const id = match.params.id;
-
+  )
+  const dispatch = useDispatch()
+  const id = match.params.id
+  const pageNumber = match.params.pageNumber || 1
   useEffect(() => {
-    dispatch(getProductsByCategory(id));
-  }, [id, dispatch]);
+    dispatch(getProductsByCategory(id, pageNumber))
+  }, [id, pageNumber, dispatch])
 
   return (
     <main className={classes.container}>
@@ -41,14 +42,17 @@ const CategoryScreen = ({ match }) => {
       ) : products.length === 0 ? (
         <Message variant="info" message={"No products in this category"} />
       ) : (
-        <div>
-          {products.map((product) => {
-            return <h3 key={product._id}>{product.name}</h3>;
-          })}
-        </div>
+        <>
+          <div>
+            {products.map((product) => {
+              return <h3 key={product._id}>{product.name}</h3>
+            })}
+          </div>
+          <Paginate id={id} page={page} pages={pages} url="category" />
+        </>
       )}
     </main>
-  );
-};
+  )
+}
 
-export default CategoryScreen;
+export default CategoryScreen

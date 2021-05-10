@@ -1,27 +1,27 @@
-import React, { Fragment, useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ThemeProvider } from "@material-ui/styles";
-import theme from "./components/Theme";
+import React, { Fragment, useState } from "react"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { ThemeProvider } from "@material-ui/styles"
+import theme from "./components/Theme"
 // import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Header from "./components/ui/Header";
-import HomeScreen from "./screens/HomeScreen";
-import CategoryScreen from "./screens/CategoryScreen";
-import ProductScreen from "./screens/ProductScreen";
-import CartScreen from "./screens/CartScreen";
-import LoginScreen from "./screens/LoginScreen";
-import RegisterScreen from "./screens/RegisterScreen";
-import ProfileScreen from "./screens/ProfileScreen";
-import ShippingScreen from "./screens/ShippingScreen";
-import PaymentScreen from "./screens/PaymentScreen";
-import PlaceOrderScreen from "./screens/PlaceOrderScreen";
-import OrderScreen from "./screens/OrderScreen";
-import UserListScreen from "./screens/UserListScreen";
-import UserEditScreen from "./screens/UserEditScreen";
-import ProductListScreen from "./screens/ProductListScreen";
-import ProductCreateScreen from "./screens/ProductCreateScreen";
-import ProductEditScreen from "./screens/ProductEditScreen";
-import OrderListScreen from "./screens/OrderListScreen";
-import SearchScreen from "./screens/SearchScreen";
+import Header from "./components/ui/Header"
+import HomeScreen from "./screens/HomeScreen"
+import CategoryScreen from "./screens/CategoryScreen"
+import ProductScreen from "./screens/ProductScreen"
+import CartScreen from "./screens/CartScreen"
+import LoginScreen from "./screens/LoginScreen"
+import RegisterScreen from "./screens/RegisterScreen"
+import ProfileScreen from "./screens/ProfileScreen"
+import ShippingScreen from "./screens/ShippingScreen"
+import PaymentScreen from "./screens/PaymentScreen"
+import PlaceOrderScreen from "./screens/PlaceOrderScreen"
+import OrderScreen from "./screens/OrderScreen"
+import UserListScreen from "./screens/UserListScreen"
+import UserEditScreen from "./screens/UserEditScreen"
+import ProductListScreen from "./screens/ProductListScreen"
+import ProductCreateScreen from "./screens/ProductCreateScreen"
+import ProductEditScreen from "./screens/ProductEditScreen"
+import OrderListScreen from "./screens/OrderListScreen"
+import SearchScreen from "./screens/SearchScreen"
 // import Newsletter from "./components/ui/Newsletter";
 // import Footer from "./components/ui/Footer";
 // import DevTag from "./components/ui/DevTag";
@@ -30,7 +30,7 @@ import SearchScreen from "./screens/SearchScreen";
 
 function App() {
   // const isMobile = useMediaQuery("(max-width:600px)");
-  const [openDrawer, setOpenDrawer] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false)
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,8 +38,18 @@ function App() {
         <Fragment>
           <Header openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
           <Switch>
-            <Route path="/category" component={CategoryScreen} exact />
+            {/* <Route path="/category" component={CategoryScreen} exact />
+            <Route
+              path="/category/page/:pageNumber"
+              component={CategoryScreen}
+              exact
+            /> */}
             <Route path="/category/:id" component={CategoryScreen} exact />
+            <Route
+              path="/category/:id/page/:pageNumber"
+              component={CategoryScreen}
+              exact
+            />
             <Route path="/product/:id" component={ProductScreen} exact />
             <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/login" component={LoginScreen} exact />
@@ -50,6 +60,11 @@ function App() {
             <Route path="/placeorder" component={PlaceOrderScreen} exact />
             <Route path="/order/:id" component={OrderScreen} exact />
             <Route path="/search/:keyword" component={SearchScreen} exact />
+            <Route
+              path="/search/:keyword/page/:pageNumber"
+              component={SearchScreen}
+              exact
+            />
             <Route path="/admin/userlist" component={UserListScreen} exact />
             <Route path="/admin/orderlist" component={OrderListScreen} exact />
             <Route
@@ -85,7 +100,7 @@ function App() {
         </Fragment>
       </Router>
     </ThemeProvider>
-  );
+  )
 }
 
-export default App;
+export default App
