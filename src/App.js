@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { ThemeProvider } from "@material-ui/styles"
 import theme from "./components/Theme"
-// import useMediaQuery from "@material-ui/core/useMediaQuery";
+import useMediaQuery from "@material-ui/core/useMediaQuery"
 import Header from "./components/ui/Header"
 import HomeScreen from "./screens/HomeScreen"
 import CategoryScreen from "./screens/CategoryScreen"
@@ -22,14 +22,12 @@ import ProductCreateScreen from "./screens/ProductCreateScreen"
 import ProductEditScreen from "./screens/ProductEditScreen"
 import OrderListScreen from "./screens/OrderListScreen"
 import SearchScreen from "./screens/SearchScreen"
-// import Newsletter from "./components/ui/Newsletter";
-// import Footer from "./components/ui/Footer";
-// import DevTag from "./components/ui/DevTag";
-// import BottomNav from "./components/ui/BottomNav";
-// import BottomNavMargin from "./components/ui/BottomNavMargin";
+import Footer from "./components/ui/Footer"
+import BottomNav from "./components/ui/BottomNav"
+import BottomNavMargin from "./components/ui/BottomNavMargin"
 
 function App() {
-  // const isMobile = useMediaQuery("(max-width:600px)");
+  const isMobile = useMediaQuery("(max-width:600px)")
   const [openDrawer, setOpenDrawer] = useState(false)
 
   return (
@@ -102,6 +100,16 @@ function App() {
           </Fragment>
         )} */}
           </Switch>
+          <Footer />
+          {isMobile && (
+            <Fragment>
+              <BottomNavMargin />
+              <BottomNav
+                openDrawer={openDrawer}
+                setOpenDrawer={setOpenDrawer}
+              />
+            </Fragment>
+          )}
         </Fragment>
       </Router>
     </ThemeProvider>
