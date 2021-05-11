@@ -81,25 +81,25 @@ const PromoLinks = () => {
               <div className={classes.mobileTab}>
                 <TimerIcon className={classes.desktopIcon} />
                 <div className={classes.desktopText}>
-                  Dostawa w ciągu 2 dni roboczych
+                  Fast delivery 2 - 4 days
                 </div>
               </div>
               <div className={classes.mobileTab}>
                 <TruckIcon className={classes.desktopIcon} />
                 <div className={classes.desktopText}>
-                  Darmowa przesyłka od 129pln
+                  Free delivery from 39 &euro;
                 </div>
               </div>
               <div className={classes.mobileTab}>
                 <GiftIcon className={classes.desktopIcon} />
                 <div className={classes.desktopText}>
-                  Upominek powyżej 99pln
+                  Extra gift from 60 &euro;
                 </div>
               </div>
               <div className={classes.mobileTab}>
                 <SecurityIcon className={classes.desktopIcon} />
                 <div className={classes.desktopText}>
-                  Bezpieczne zakupy przez SSL
+                  Secure shopping via SSL
                 </div>
               </div>
             </Slider>
@@ -112,13 +112,13 @@ const PromoLinks = () => {
                 <div className={classes.mobileTab}>
                   <TimerIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Dostawa w ciągu 2 dni roboczych
+                    Fast delivery 2 - 4 days
                   </div>
                 </div>
                 <div className={classes.mobileTab}>
                   <TruckIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Darmowa przesyłka od 129pln
+                    Free delivery from 39 &euro;
                   </div>
                 </div>
               </div>
@@ -126,13 +126,13 @@ const PromoLinks = () => {
                 <div className={classes.mobileTab}>
                   <GiftIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Upominek powyżej 99pln
+                    Extra gift from 60 &euro;
                   </div>
                 </div>
                 <div className={classes.mobileTab}>
                   <SecurityIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Bezpieczne zakupy przez SSL
+                    Secure shopping via SSL
                   </div>
                 </div>
               </div>
@@ -140,13 +140,13 @@ const PromoLinks = () => {
                 <div className={classes.mobileTab}>
                   <TimerIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Dostawa w ciągu 2 dni roboczych
+                    Fast delivery 2 - 4 days
                   </div>
                 </div>
                 <div className={classes.mobileTab}>
                   <TruckIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Darmowa przesyłka od 100pln
+                    Free delivery from 39 &euro;
                   </div>
                 </div>
               </div>
@@ -154,13 +154,13 @@ const PromoLinks = () => {
                 <div className={classes.mobileTab}>
                   <GiftIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Upominek powyżej 99pln
+                    Extra gift from 60 &euro;
                   </div>
                 </div>
                 <div className={classes.mobileTab}>
                   <SecurityIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Bezpieczne zakupy przez SSL
+                    Secure shopping via SSL
                   </div>
                 </div>
               </div>
@@ -172,25 +172,21 @@ const PromoLinks = () => {
         <div className={classes.desktopLinks}>
           <div className={classes.desktopTab}>
             <TimerIcon className={classes.desktopIcon} />
-            <div className={classes.desktopText}>
-              Dostawa w ciągu 2 dni roboczych
-            </div>
+            <div className={classes.desktopText}>Fast delivery 2 - 4 days</div>
           </div>
           <div className={classes.desktopTab}>
             <TruckIcon className={classes.desktopIcon} />
             <div className={classes.desktopText}>
-              Darmowa przesyłka od 129pln
+              Free delivery from 39 &euro;
             </div>
           </div>
           <div className={classes.desktopTab}>
             <GiftIcon className={classes.desktopIcon} />
-            <div className={classes.desktopText}>Upominek powyżej 99pln</div>
+            <div className={classes.desktopText}>Extra gift from 60 &euro;</div>
           </div>
           <div className={classes.desktopTab}>
             <SecurityIcon className={classes.desktopIcon} />
-            <div className={classes.desktopText}>
-              Bezpieczne zakupy przez SSL
-            </div>
+            <div className={classes.desktopText}>Secure shopping via SSL</div>
           </div>
         </div>
       )}

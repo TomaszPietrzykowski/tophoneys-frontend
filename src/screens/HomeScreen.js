@@ -7,6 +7,7 @@ import Teasers from "../components/ui/Teasers"
 import Featured from "../components/Featured"
 import ProductsSlider from "../components/ProductsSlider"
 import PromoLinks from "../components/PromoLinks"
+import SecondaryBanner from "../components/SecondaryBanner"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -31,8 +32,9 @@ const Home = () => {
       <Showcase />
       <Featured />
       <Teasers />
-      <ProductsSlider title="Nowa dostawa" endpoint={"new"} timeout={10000} />
-      <ProductsSlider title="Promocje" endpoint={"promo"} timeout={8000} />
+      <ProductsSlider title="New delivery" endpoint={"new"} timeout={10000} />
+      <SecondaryBanner />
+      <ProductsSlider title="Sale" endpoint={"promo"} timeout={8000} />
     </main>
   )
 }
