@@ -31,8 +31,8 @@ const Home = () => {
       <Showcase />
       <Featured />
       <Teasers />
-      <ProductsSlider title="Nowa dostawa" endpoint={"new"} />
-      <ProductsSlider title="Promocje" endpoint={"promo"} />
+      <ProductsSlider title="Nowa dostawa" endpoint={"new"} timeout={10000} />
+      <ProductsSlider title="Promocje" endpoint={"promo"} timeout={8000} />
     </main>
   )
 }

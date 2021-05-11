@@ -58,23 +58,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ProductsSlider = ({ title, endpoint }) => {
+const ProductsSlider = ({ title, endpoint, timeout }) => {
   const classes = useStyles()
   const isTablet = useMediaQuery("(max-width: 990px)")
   const isMobile = useMediaQuery("(max-width: 600px)")
   const slides = isMobile ? 2 : isTablet ? 3 : 5
   const products = endpoint === "new" ? products1 : products2
+  const to = timeout
   return (
     <div className={classes.container}>
       <div className={classes.sliderHeader}>
         <div className={classes.headerText}>{title}</div>
       </div>
       <div className={classes.productsSlider}>
-        <CustomSlider
-          timeout={6500}
-          slidesAtOnce={slides}
-          products={products}
-        />
+        <CustomSlider timeout={to} slidesAtOnce={slides} products={products} />
       </div>
     </div>
   )

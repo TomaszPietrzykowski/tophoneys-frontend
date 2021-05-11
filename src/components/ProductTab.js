@@ -132,7 +132,7 @@ const ProductTab = ({
       style={{
         minWidth: `${slideWidth}%`,
         transform: `translate3d(-${activeIndex * 100}%, 0, 0)`,
-        transition: "transform .5s",
+        transition: "transform .8s ease-in-out",
       }}
     >
       <div className={classes.imageContainer}>
