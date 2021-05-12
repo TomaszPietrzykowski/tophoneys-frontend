@@ -10,9 +10,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 420,
     width: "100%",
     height: "auto",
-    // backgroundImage: `url(${banner})`,
-    // backgroundPosition: "center",
-    // backgroundSize: "cover",
     borderRadius: 7,
   },
   containerMobile: {
@@ -21,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 300,
     width: "100%",
     height: "auto",
-    // backgroundImage: `url(${banner})`,
-    // backgroundPosition: "center",
-    // backgroundSize: "cover",
     borderRadius: 7,
     marginBottom: "80vh",
     [theme.breakpoints.down("md")]: {
@@ -43,7 +37,7 @@ const Showcase = () => {
 
   return (
     <div className={isMobile ? classes.containerMobile : classes.container}>
-      <img src={banner} className={classes.banner} />
+      <img src={banner} alt="I love TOP HONEYS" className={classes.banner} />
     </div>
   )
 }

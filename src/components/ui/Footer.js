@@ -94,25 +94,22 @@ const Footer = () => {
       <div className={classes.container}>
         <div className={classes.gridContainer}>
           <div className={classes.column}>
-            <div className={classes.columnHeader}>Moje konto</div>
-            <div className={classes.link}>Utworz konto</div>
-            <div className={classes.link}>Koszyk</div>
-            <div className={classes.link}>Moje transakcje</div>
-            <div className={classes.link}>Modyfikuj subskrypcje</div>
+            <div className={classes.columnHeader}>My account</div>
+            <div className={classes.link}>Create account</div>
+            <div className={classes.link}>Cart</div>
+            <div className={classes.link}>My orders</div>
+            <div className={classes.link}>My profile</div>
           </div>
           <div className={classes.column}>
-            <div className={classes.columnHeader}>Fjufjushop</div>
-            <div className={classes.link}>Kontakt</div>
-            <div className={classes.link}>Informacje</div>
-            <div className={classes.link}>Mozliwosci wspolpracy</div>
-            <div className={classes.link}>Pomoc</div>
+            <div className={classes.columnHeader}>Top Honeys</div>
+            <div className={classes.link}>About honey</div>
+            <div className={classes.link}>About us</div>
+            <div className={classes.link}>Contact</div>
           </div>
           <div className={classes.column}>
-            <div className={classes.columnHeader}>Regulaminy</div>
-            <div className={classes.link}>Warunki ogolne</div>
-            <div className={classes.link}>Dostawa</div>
-            <div className={classes.link}>Reklamacje i zwroty</div>
-            <div className={classes.link}>Promocje</div>
+            <div className={classes.columnHeader}>House rules</div>
+            <div className={classes.link}>General conditions</div>
+            <div className={classes.link}>Payment and shipping</div>
           </div>
         </div>
 

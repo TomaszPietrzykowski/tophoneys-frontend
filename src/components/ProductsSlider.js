@@ -23,8 +23,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1rem",
   },
   headerText: {
+    ...theme.typography.merienda,
     padding: "15px",
-    fontFamily: "Bree Serif",
+    // fontFamily: "Bree Serif",
     fontSize: "1.5rem",
     textAlign: "center",
     position: "relative",

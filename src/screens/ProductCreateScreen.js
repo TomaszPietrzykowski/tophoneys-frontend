@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
 import {
   Button,
   TextField,
@@ -11,15 +11,15 @@ import {
   InputLabel,
   FormControl,
   IconButton,
-} from "@material-ui/core";
-import Chip from "@material-ui/core/Chip";
-import { withStyles, makeStyles } from "@material-ui/styles";
-import Checkbox from "@material-ui/core/Checkbox";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import { createProduct } from "../actions/productActions";
-import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
-import DeleteIcon from "@material-ui/icons/Delete";
+} from "@material-ui/core"
+import Chip from "@material-ui/core/Chip"
+import { withStyles, makeStyles } from "@material-ui/styles"
+import Checkbox from "@material-ui/core/Checkbox"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import { createProduct } from "../actions/productActions"
+import { PRODUCT_CREATE_RESET } from "../constants/productConstants"
+import DeleteIcon from "@material-ui/icons/Delete"
 
 const CustomCheckbox = withStyles((theme) => ({
   root: {
@@ -29,7 +29,7 @@ const CustomCheckbox = withStyles((theme) => ({
     },
   },
   checked: {},
-}))(Checkbox);
+}))(Checkbox)
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -89,45 +89,45 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.dark,
     },
   },
-}));
+}))
 
 const ProductCreateScreen = ({ history }) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
+  const classes = useStyles()
+  const dispatch = useDispatch()
 
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [description, setDescription] = useState("");
-  const [capacity, setCapacity] = useState("");
-  const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState([]);
-  const [countInStock, setCountInStock] = useState(0);
-  const [countryOfOrigin, setCountryOfOrigin] = useState("");
-  const [brand, setBrand] = useState("");
-  const [isPromo, setIsPromo] = useState(false);
-  const [isPublished, setIsPublished] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [name, setName] = useState("")
+  const [image, setImage] = useState("")
+  const [description, setDescription] = useState("")
+  const [capacity, setCapacity] = useState("")
+  const [price, setPrice] = useState(0)
+  const [category, setCategory] = useState([])
+  const [countInStock, setCountInStock] = useState(0)
+  const [countryOfOrigin, setCountryOfOrigin] = useState("")
+  const [brand, setBrand] = useState("")
+  const [isPromo, setIsPromo] = useState(false)
+  const [isPublished, setIsPublished] = useState(false)
+  const [uploading, setUploading] = useState(false)
 
-  const { userInfo } = useSelector((state) => state.userLogin);
+  const { userInfo } = useSelector((state) => state.userLogin)
 
   const { loading, error, success } = useSelector(
     (state) => state.productCreate
-  );
+  )
 
   useEffect(() => {
-    dispatch({ type: PRODUCT_CREATE_RESET });
+    dispatch({ type: PRODUCT_CREATE_RESET })
     if (!userInfo) {
-      history.push("/login");
+      history.push("/login")
     } else if (!userInfo.isAdmin) {
-      history.push("/");
+      history.push("/")
     }
     if (success) {
-      history.push("/admin/productlist");
+      history.push("/admin/productlist")
     }
-  }, [dispatch, history, userInfo, success]);
+  }, [dispatch, history, userInfo, success])
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     dispatch(
       createProduct({
         name,
@@ -142,8 +142,8 @@ const ProductCreateScreen = ({ history }) => {
         isPromo,
         isPublished,
       })
-    );
-  };
+    )
+  }
 
   const categories = [
     ["All honeys", "honeys"],
@@ -152,33 +152,35 @@ const ProductCreateScreen = ({ history }) => {
     ["Black teas", "blackteas"],
     ["Green teas", "greenteas"],
     ["Fruit teas", "fruitteas"],
-  ];
+  ]
 
   const uploadFileHandler = async (e) => {
-    console.log("uploadHandler called");
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
-    setUploading(true);
+    console.log("uploadHandler called")
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append("image", file)
+    setUploading(true)
     try {
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      };
+      }
 
-      const { data } = await axios.post("/api/uploads", formData, config);
-      setImage(data);
-      setUploading(false);
+      const { data } = await axios.post("/api/uploads", formData, config)
+      const iMac = data.replaceAll(`\\`, "/")
+      console.log(iMac)
+      setImage(data)
+      setUploading(false)
     } catch (error) {
-      console.error(error);
-      setUploading(false);
+      console.error(error)
+      setUploading(false)
     }
-  };
+  }
 
   const categoryHandler = (e) => {
-    setCategory([...category, e.target.value]);
-  };
+    setCategory([...category, e.target.value])
+  }
 
   return (
     <div className={classes.container}>
@@ -339,7 +341,7 @@ const ProductCreateScreen = ({ history }) => {
         </Grid>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ProductCreateScreen;
+export default ProductCreateScreen

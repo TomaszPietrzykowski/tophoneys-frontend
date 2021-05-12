@@ -21,7 +21,7 @@ const SecondaryBanner = () => {
   const classes = useStyles()
   return (
     <div className={classes.container}>
-      <img src={image} className={classes.banner} />
+      <img src={image} alt="Great idea for a gift" className={classes.banner} />
     </div>
   )
 }

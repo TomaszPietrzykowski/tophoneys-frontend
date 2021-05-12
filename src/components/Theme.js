@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles"
 
 export default createMuiTheme({
   palette: {
@@ -40,6 +40,9 @@ export default createMuiTheme({
     },
     source: {
       fontFamily: "Source Sans Pro, sans-serif",
+    },
+    merienda: {
+      fontFamily: "Merienda One, cursive",
     },
     noto: {
       fontFamily: "Noto Sans, sans-serif",
@@ -97,4 +100,4 @@ export default createMuiTheme({
       xl: 1200,
     },
   },
-});
+})
