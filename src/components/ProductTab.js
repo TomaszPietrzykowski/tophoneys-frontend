@@ -1,89 +1,87 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
+import { Link } from "react-router-dom"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
-import HeartIcon from "@material-ui/icons/FavoriteBorder"
+// import HeartIcon from "@material-ui/icons/FavoriteBorder"
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    boxSizing: "border-box",
     ...theme.typography.mont,
-    display: "inline-flex",
-    flexDirection: "column",
-    justifyContent: "space-around",
+  },
+  card: {
+    height: "100%",
+    margin: "0 .9rem",
+    display: "flex",
     alignItems: "left",
     cursor: "pointer",
-    // border: "1px solid green",
-    "&:hover $buttonsContainer": {
-      backgroundColor: theme.palette.secondary.main,
-      color: theme.palette.common.white,
-      // transform: "scale(1,1)",
-    },
+    borderLeftWidth: "1px",
+    borderLeftStyle: "solid",
+    borderImage: `linear-gradient(transparent, 30%, ${theme.palette.secondary.main}, 55%, transparent) 1 100%`,
+    flexDirection: "column",
+    justifyContent: "center",
   },
   imageContainer: {
+    display: "block",
     height: "50%",
-    // border: "1px solid red",
   },
   img: {
-    maxHeight: "100%",
-    maxWidth: "100%",
-    // padding: ".5rem",
+    display: "block",
+    width: "100%",
+    height: "100%",
     objectFit: "contain",
-    // border: "1px solid red",
     [theme.breakpoints.down("md")]: {
       maxWidth: "100%",
     },
   },
+  content: {
+    // display: "block",
+    height: "50%",
+    // border: "1px solid blue",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  },
   title: {
     fontSize: "1rem",
-    // fontWeight: "bold",
-    padding: ".5rem",
-    color: theme.palette.text.primary,
-    // border: "1px solid red",
-  },
-  // description: {
-  //   ...theme.typography.mont,
-  //   fontSize: ".9rem",
-  //   padding: ".5rem",
-  //   textAlign: "center",
-  //   color: theme.palette.text.secondary,
-  //   // border: "1px solid red",
-  // },
-  price: {
-    padding: "1rem 0",
-    fontSize: "1.6rem",
+    padding: "1.4rem 1.4rem 0 1.4rem",
     color: theme.palette.text.secondary,
-    // fontWeight: "bold",
-    // border: "1px solid red",
+  },
+  capacity: {
+    fontSize: ".8rem",
+    padding: ".5rem 1.4rem",
+    color: theme.palette.text.disabled,
+  },
+  price: {
+    padding: "1.4rem",
+    fontSize: "1.6rem",
+    color: theme.palette.text.disabled,
+    letterSpacing: 2.5,
   },
   buttonsContainer: {
+    marginLeft: "1.4rem",
     display: "flex",
-    width: "80%",
-    margin: "1rem auto 0 0",
+    margin: "0auto 0 0",
     cursor: "pointer",
     color: theme.palette.common.white,
-    borderRadius: 4,
-    transition: "all 0.4s ease-in-out",
-    // transform: "scale(0,0)",
-    // border: "1px solid red",
     [theme.breakpoints.down("md")]: {
-      // transform: "scale(1,1)",
       backgroundColor: theme.palette.secondary.main,
     },
   },
   cartBtn: {
-    flex: 4,
-    padding: ".6rem",
+    padding: ".55rem 1.4rem",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     ...theme.typography.mont,
     textTransform: "uppercase",
     letterSpacing: 1,
-    fontSize: ".85rem",
+    fontSize: ".8rem",
     fontWeight: 400,
     borderRadius: 4,
+    backgroundColor: theme.palette.secondary.light,
     "&:hover": {
-      backgroundColor: theme.palette.secondary.dark,
-      color: "white",
+      backgroundColor: theme.palette.secondary.main,
     },
     [theme.breakpoints.down("md")]: {
       fontSize: ".85rem",
@@ -92,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   cartIcon: {
-    fontSize: "1.4rem",
+    fontSize: "1.2rem",
     marginRight: ".5rem",
     [theme.breakpoints.down("md")]: {
       fontSize: "1.2rem",
@@ -100,19 +98,19 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  wishlistBtn: {
-    flex: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    "&:hover": {
-      backgroundColor: theme.palette.secondary.dark,
-    },
-    [theme.breakpoints.down("md")]: {
-      fontSize: "1.2rem",
-      margin: 0,
-    },
-  },
+  // wishlistBtn: {
+  //   flex: 1,
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   "&:hover": {
+  //     backgroundColor: theme.palette.secondary.dark,
+  //   },
+  //   [theme.breakpoints.down("md")]: {
+  //     fontSize: "1.2rem",
+  //     margin: 0,
+  //   },
+  // },
   hide: {
     [theme.breakpoints.down("md")]: {
       display: "none",
@@ -123,7 +121,8 @@ const useStyles = makeStyles((theme) => ({
 const ProductTab = ({
   title,
   img,
-  description,
+  capacity,
+  id,
   price,
   slidesAtOnce,
   activeIndex,
@@ -141,19 +140,25 @@ const ProductTab = ({
         transition: "transform .8s ease-in-out",
       }}
     >
-      <div className={classes.imageContainer}>
-        <img src={img} alt="product" className={classes.img} />
-      </div>
-      <div className={classes.title}>{title}</div>
-      {/* <div className={classes.description}>{description}</div> */}
-      <div className={classes.price}>&euro;{price}</div>
-      <div className={classes.buttonsContainer}>
-        <div className={classes.cartBtn}>
-          <CartIcon className={classes.cartIcon} />
-          <div>
-            <span className={classes.hide}>Add to cart</span>
+      <div className={classes.card}>
+        <Link to={`/product/${id}`}>
+          <div className={classes.imageContainer}>
+            <img src={img} alt="product" className={classes.img} />
           </div>
-        </div>
+          <div className={classes.content}>
+            <div className={classes.title}>{title}</div>
+            <div className={classes.capacity}>{capacity}</div>
+            <div className={classes.price}>&euro;{price}</div>
+            <div className={classes.buttonsContainer}>
+              <div className={classes.cartBtn}>
+                <CartIcon className={classes.cartIcon} />
+                <div>
+                  <span className={classes.hide}>Add to cart</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   )

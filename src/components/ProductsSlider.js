@@ -1,17 +1,15 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { makeStyles } from "@material-ui/styles"
-// import Slider from "@farbenmeer/react-spring-slider";
 import { useMediaQuery } from "@material-ui/core"
-import products1 from "../db/productsDB"
-import products2 from "../db/productsDB2"
+import Loader from "../components/Loader"
 import CustomSlider from "./CustomSlider"
+import axios from "axios"
 
 const useStyles = makeStyles((theme) => ({
   container: {
     maxWidth: 1300,
-    margin: "auto",
+    margin: "12rem auto",
     padding: "0px 15px",
-    marginTop: "4rem",
     [theme.breakpoints.down("md")]: {
       padding: "0px",
     },
@@ -20,12 +18,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "1rem",
+    marginBottom: "3rem",
   },
   headerText: {
     ...theme.typography.merienda,
     padding: "15px",
-    // fontFamily: "Bree Serif",
     fontSize: "1.5rem",
     textAlign: "center",
     position: "relative",
@@ -63,17 +60,47 @@ const ProductsSlider = ({ title, endpoint, timeout }) => {
   const classes = useStyles()
   const isTablet = useMediaQuery("(max-width: 990px)")
   const isMobile = useMediaQuery("(max-width: 600px)")
+  const [loading, setLoading] = useState(false)
+  const [products, setProducts] = useState([])
+
+  const getProducts = async () => {
+    try {
+      setLoading(true)
+      const { data } = await axios.get(
+        `/api/products/category/${endpoint}?pageNumber=1`
+      )
+      setProducts(data.products)
+      setLoading(false)
+    } catch (err) {
+      setLoading(false)
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    getProducts()
+  }, [])
+
   const slides = isMobile ? 2 : isTablet ? 3 : 5
-  const products = endpoint === "new" ? products1 : products2
   const to = timeout
   return (
     <div className={classes.container}>
-      <div className={classes.sliderHeader}>
-        <div className={classes.headerText}>{title}</div>
-      </div>
-      <div className={classes.productsSlider}>
-        <CustomSlider timeout={to} slidesAtOnce={slides} products={products} />
-      </div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className={classes.sliderHeader}>
+            <div className={classes.headerText}>{title}</div>
+          </div>
+          <div className={classes.productsSlider}>
+            <CustomSlider
+              timeout={to}
+              slidesAtOnce={slides}
+              products={products}
+            />
+          </div>
+        </>
+      )}
     </div>
   )
 }

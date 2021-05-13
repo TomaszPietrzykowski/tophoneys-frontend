@@ -31,12 +31,13 @@ const CustomSlider = ({ timeout, slidesAtOnce, products }) => {
       {products.map((product, i) => (
         <ProductTab
           key={i}
+          id={product._id}
           activeIndex={index}
           slidesAtOnce={slidesAtOnce}
-          img={product.img}
+          img={product.image}
           title={product.name}
-          description={product.shortDescription}
-          price={product.price}
+          capacity={product.capacity}
+          price={product.price.toFixed(2)}
         />
       ))}
     </div>

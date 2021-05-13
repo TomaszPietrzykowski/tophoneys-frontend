@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/styles";
-import { getProductsByCategory } from "../actions/productActions";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
+import React, { useEffect } from "react"
+import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { makeStyles } from "@material-ui/styles"
+import { getProductsByCategory } from "../actions/productActions"
+import Loader from "../components/Loader"
+import Message from "../components/Message"
 
 const useStyles = makeStyles((theme) => ({
   flex: {
@@ -28,19 +28,19 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "inherit",
   },
-}));
+}))
 
 const Featured = ({ match }) => {
-  const classes = useStyles();
+  const classes = useStyles()
   const { loading, error, products } = useSelector(
     (state) => state.productCategory
-  );
-  const dispatch = useDispatch();
-  const id = "honeys";
+  )
+  const dispatch = useDispatch()
+  const id = "honeys"
 
   useEffect(() => {
-    dispatch(getProductsByCategory(id));
-  }, [id, dispatch]);
+    dispatch(getProductsByCategory(id))
+  }, [id, dispatch])
 
   return (
     <>
@@ -68,12 +68,12 @@ const Featured = ({ match }) => {
                     <p style={{ margin: 10 }}>{product.image}</p>
                   </Link>
                 </div>
-              );
+              )
             })}
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Featured;
+export default Featured
