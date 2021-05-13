@@ -1,12 +1,13 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
+import { Link } from "react-router-dom"
 import FacebookIcon from "@material-ui/icons/Facebook"
 import InstagramIcon from "@material-ui/icons/Instagram"
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    backgroundColor: theme.palette.primary.main,
+    background: `linear-gradient(110deg,${theme.palette.primary.main}, ${theme.palette.secondary.dark})`,
     color: "white",
   },
   container: {
@@ -34,17 +35,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   columnHeader: {
-    fontFamily: "Bree Serif",
+    ...theme.typography.prosto,
     fontSize: "1.2rem",
     padding: ".8rem .3rem",
   },
   link: {
-    fontFamily: "Open Sans",
+    ...theme.typography.mont,
     fontSize: ".9rem",
     padding: ".3rem",
     cursor: "pointer",
     "&:hover": {
-      color: theme.palette.common.blue,
+      color: theme.palette.common.brown2,
     },
     [theme.breakpoints.down("md")]: {
       fontSize: ".8rem",
@@ -79,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "1rem",
     cursor: "pointer",
     "&:hover": {
-      color: theme.palette.common.blue,
+      color: theme.palette.common.brown2,
     },
   },
   anchor: {
@@ -95,21 +96,36 @@ const Footer = () => {
         <div className={classes.gridContainer}>
           <div className={classes.column}>
             <div className={classes.columnHeader}>My account</div>
-            <div className={classes.link}>Create account</div>
-            <div className={classes.link}>Cart</div>
-            <div className={classes.link}>My orders</div>
-            <div className={classes.link}>My profile</div>
+            <Link to="/register">
+              <div className={classes.link}>Create account</div>
+            </Link>
+            <Link to="/cart">
+              <div className={classes.link}>Cart</div>
+            </Link>
+            <Link to="/profile">
+              <div className={classes.link}>My orders and profile</div>
+            </Link>
           </div>
           <div className={classes.column}>
             <div className={classes.columnHeader}>Top Honeys</div>
-            <div className={classes.link}>About honey</div>
-            <div className={classes.link}>About us</div>
-            <div className={classes.link}>Contact</div>
+            <Link to="/abouthoney">
+              <div className={classes.link}>About honey</div>
+            </Link>
+            <Link to="/aboutus">
+              <div className={classes.link}>About us</div>
+            </Link>
+            <Link to="/contact">
+              <div className={classes.link}>Contact</div>
+            </Link>
           </div>
           <div className={classes.column}>
-            <div className={classes.columnHeader}>House rules</div>
-            <div className={classes.link}>General conditions</div>
-            <div className={classes.link}>Payment and shipping</div>
+            <div className={classes.columnHeader}>Terms</div>
+            <Link to="/conditions">
+              <div className={classes.link}>General conditions</div>
+            </Link>
+            <Link to="/info">
+              <div className={classes.link}>Payment and shipping</div>
+            </Link>
           </div>
         </div>
 

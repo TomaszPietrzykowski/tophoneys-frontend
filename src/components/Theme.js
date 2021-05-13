@@ -9,6 +9,7 @@ export default createMuiTheme({
       orange3: "rgb(222,114,0)",
       brown1: "rgb(179, 107, 0)",
       brown2: "rgb(77, 46, 0)",
+      lightYellow: "rgb(77, 46, 0)",
     },
     primary: {
       main: `rgba(215, 170, 14, 1)`,

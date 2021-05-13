@@ -1,8 +1,16 @@
 import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: "15rem",
+  },
+}))
 
 const InfoPaymentScreen = () => {
+  const classes = useStyles()
   return (
-    <div>
+    <div className={classes.container}>
       <h1>Payment and shipping</h1>
       <h2>Payment options</h2>
       <p>

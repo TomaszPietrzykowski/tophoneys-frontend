@@ -1,8 +1,16 @@
 import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: "15rem",
+  },
+}))
 
 const AboutUsScreen = () => {
+  const classes = useStyles()
   return (
-    <div>
+    <div className={classes.container}>
       <h1>About us</h1>
       <p>
         It is a real challenge to eat healthy and free from harmful substances.

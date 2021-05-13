@@ -1,8 +1,16 @@
 import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: "15rem",
+  },
+}))
 
 const GenralConditionsScreen = () => {
+  const classes = useStyles()
   return (
-    <div>
+    <div className={classes.container}>
       <h1>General conditions</h1>
       <p>
         Organic food has become extremely fashionable for a reason in the

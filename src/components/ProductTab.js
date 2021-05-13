@@ -5,67 +5,68 @@ import HeartIcon from "@material-ui/icons/FavoriteBorder"
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    ...theme.typography.mont,
     display: "inline-flex",
     flexDirection: "column",
     justifyContent: "space-around",
-    alignItems: "center",
+    alignItems: "left",
     cursor: "pointer",
     // border: "1px solid green",
     "&:hover $buttonsContainer": {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.secondary.main,
       color: theme.palette.common.white,
-      transform: "scale(1,1)",
+      // transform: "scale(1,1)",
     },
   },
   imageContainer: {
-    height: "40%",
+    height: "50%",
     // border: "1px solid red",
   },
   img: {
     maxHeight: "100%",
     maxWidth: "100%",
     // padding: ".5rem",
-    objectFit: "scale-down",
+    objectFit: "contain",
     // border: "1px solid red",
     [theme.breakpoints.down("md")]: {
       maxWidth: "100%",
     },
   },
   title: {
-    fontFamily: "Open Sans",
     fontSize: "1rem",
-    fontWeight: "bold",
+    // fontWeight: "bold",
     padding: ".5rem",
     color: theme.palette.text.primary,
     // border: "1px solid red",
   },
-  description: {
-    fontFamily: "Bree Serif",
-    fontSize: ".9rem",
-    padding: ".5rem",
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-    // border: "1px solid red",
-  },
+  // description: {
+  //   ...theme.typography.mont,
+  //   fontSize: ".9rem",
+  //   padding: ".5rem",
+  //   textAlign: "center",
+  //   color: theme.palette.text.secondary,
+  //   // border: "1px solid red",
+  // },
   price: {
     padding: "1rem 0",
-    fontFamily: "Open Sans",
-    fontSize: "1rem",
-    fontWeight: "bold",
+    fontSize: "1.6rem",
+    color: theme.palette.text.secondary,
+    // fontWeight: "bold",
     // border: "1px solid red",
   },
   buttonsContainer: {
     display: "flex",
-    width: "90%",
-    margin: "1rem auto",
+    width: "80%",
+    margin: "1rem auto 0 0",
     cursor: "pointer",
     color: theme.palette.common.white,
-    transition: "all .15s",
-    transform: "scale(0,0)",
+    borderRadius: 4,
+    transition: "all 0.4s ease-in-out",
+    // transform: "scale(0,0)",
     // border: "1px solid red",
     [theme.breakpoints.down("md")]: {
-      transform: "scale(1,1)",
-      backgroundColor: theme.palette.primary.main,
+      // transform: "scale(1,1)",
+      backgroundColor: theme.palette.secondary.main,
     },
   },
   cartBtn: {
@@ -74,10 +75,15 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    fontSize: "1rem",
-    fontFamily: "Bree Serif",
+    ...theme.typography.mont,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    fontSize: ".85rem",
+    fontWeight: 400,
+    borderRadius: 4,
     "&:hover": {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: theme.palette.secondary.dark,
+      color: "white",
     },
     [theme.breakpoints.down("md")]: {
       fontSize: ".85rem",
@@ -86,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   cartIcon: {
-    fontSize: "1.6rem",
+    fontSize: "1.4rem",
     marginRight: ".5rem",
     [theme.breakpoints.down("md")]: {
       fontSize: "1.2rem",
@@ -100,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     "&:hover": {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: theme.palette.secondary.dark,
     },
     [theme.breakpoints.down("md")]: {
       fontSize: "1.2rem",
@@ -139,17 +145,14 @@ const ProductTab = ({
         <img src={img} alt="product" className={classes.img} />
       </div>
       <div className={classes.title}>{title}</div>
-      <div className={classes.description}>{description}</div>
-      <div className={classes.price}>{price}</div>
+      {/* <div className={classes.description}>{description}</div> */}
+      <div className={classes.price}>&euro;{price}</div>
       <div className={classes.buttonsContainer}>
         <div className={classes.cartBtn}>
           <CartIcon className={classes.cartIcon} />
           <div>
-            <span className={classes.hide}>Do koszyka</span>
+            <span className={classes.hide}>Add to cart</span>
           </div>
-        </div>
-        <div className={classes.wishlistBtn}>
-          <HeartIcon className={classes.cartIcon} />
         </div>
       </div>
     </div>

@@ -1,8 +1,17 @@
 import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: "15rem",
+  },
+}))
 
 const AboutHoneyScreen = () => {
+  const classes = useStyles()
+
   return (
-    <div>
+    <div className={classes.container}>
       <h1>About honey</h1>
       <p>
         Honey is one of nature's most valuable nutrients and medicinal

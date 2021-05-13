@@ -20,8 +20,13 @@ import UserEditScreen from "./screens/UserEditScreen"
 import ProductListScreen from "./screens/ProductListScreen"
 import ProductCreateScreen from "./screens/ProductCreateScreen"
 import ProductEditScreen from "./screens/ProductEditScreen"
+import ContactScreen from "./screens/ContactScreen"
+import AboutHoneyScreen from "./screens/AboutHoneyScreen"
+import AboutUsScreen from "./screens/AboutUsScreen"
+import GeneralConditionsScreen from "./screens/GeneralConditionsScreen"
 import OrderListScreen from "./screens/OrderListScreen"
 import SearchScreen from "./screens/SearchScreen"
+import InfoPaymentScreen from "./screens/InfoPaymentScreen"
 import Footer from "./components/ui/Footer"
 import BottomNav from "./components/ui/BottomNav"
 import BottomNavMargin from "./components/ui/BottomNavMargin"
@@ -36,12 +41,6 @@ function App() {
         <Fragment>
           <Header openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
           <Switch>
-            {/* <Route path="/category" component={CategoryScreen} exact />
-            <Route
-              path="/category/page/:pageNumber"
-              component={CategoryScreen}
-              exact
-            /> */}
             <Route path="/category/:id" component={CategoryScreen} exact />
             <Route
               path="/category/:id/page/:pageNumber"
@@ -50,6 +49,15 @@ function App() {
             />
             <Route path="/product/:id" component={ProductScreen} exact />
             <Route path="/cart/:id?" component={CartScreen} />
+            <Route path="/contact" component={ContactScreen} exact />
+            <Route path="/abouthoney" component={AboutHoneyScreen} exact />
+            <Route path="/aboutus" component={AboutUsScreen} exact />
+            <Route
+              path="/conditions"
+              component={GeneralConditionsScreen}
+              exact
+            />
+            <Route path="/info" component={InfoPaymentScreen} exact />
             <Route path="/login" component={LoginScreen} exact />
             <Route path="/register" component={RegisterScreen} exact />
             <Route path="/profile" component={ProfileScreen} exact />
