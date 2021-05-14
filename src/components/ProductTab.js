@@ -6,12 +6,17 @@ import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    boxSizing: "border-box",
     ...theme.typography.mont,
+    display: "flex",
+    // border: "2px solid pink",
   },
   card: {
-    height: "100%",
-    margin: "0 .9rem",
+    flexBasis: 1,
+    flexGrow: 1,
+    flexShrink: 0,
+    // border: "2px solid green",
+    minHeight: "100%",
+    margin: "0 1rem",
     display: "flex",
     alignItems: "left",
     cursor: "pointer",
@@ -22,21 +27,26 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   imageContainer: {
-    display: "block",
-    height: "50%",
+    flexBasis: 1,
+    flexGrow: 1,
+    flexShrink: 1,
+    // border: "1px solid orange",
   },
   img: {
     display: "block",
-    width: "100%",
-    height: "100%",
+    maxWidth: "100%",
+    height: "auto",
     objectFit: "contain",
+    flex: 1,
     [theme.breakpoints.down("md")]: {
       maxWidth: "100%",
     },
   },
   content: {
-    // display: "block",
-    height: "50%",
+    // flex: 1,
+    flexBasis: 1,
+    flexGrow: 1,
+    flexShrink: 1,
     // border: "1px solid blue",
     display: "flex",
     flexDirection: "column",
@@ -126,6 +136,7 @@ const ProductTab = ({
   price,
   slidesAtOnce,
   activeIndex,
+  isFeatured,
 }) => {
   const classes = useStyles()
 
@@ -134,14 +145,21 @@ const ProductTab = ({
   return (
     <div
       className={classes.root}
-      style={{
-        minWidth: `${slideWidth}%`,
-        transform: `translate3d(-${activeIndex * 100}%, 0, 0)`,
-        transition: "transform .8s ease-in-out",
-      }}
+      style={
+        isFeatured
+          ? {
+              width: `${slideWidth}%`,
+              minWidth: `${slideWidth}%`,
+            }
+          : {
+              minWidth: `${slideWidth}%`,
+              transform: `translate3d(-${activeIndex * 100}%, 0, 0)`,
+              transition: "transform .8s ease-in-out",
+            }
+      }
     >
-      <div className={classes.card}>
-        <Link to={`/product/${id}`}>
+      <Link to={`/product/${id}`}>
+        <div className={classes.card}>
           <div className={classes.imageContainer}>
             <img src={img} alt="product" className={classes.img} />
           </div>
@@ -158,8 +176,8 @@ const ProductTab = ({
               </div>
             </div>
           </div>
-        </Link>
-      </div>
+        </div>
+      </Link>
     </div>
   )
 }

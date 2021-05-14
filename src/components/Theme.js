@@ -4,16 +4,15 @@ export default createMuiTheme({
   palette: {
     common: {
       white: `rgba(255, 255, 255, 1)`,
-      orange1: "rgb(253,155,2)",
-      orange2: "rgb(255, 153, 0)",
-      orange3: "rgb(222,114,0)",
-      brown1: "rgb(179, 107, 0)",
+      // orange1: "rgb(253,155,2)",
+      // orange2: "rgb(255, 153, 0)",
+      // orange3: "rgb(222,114,0)",
+      // brown1: "rgb(179, 107, 0)",
       brown2: "rgb(77, 46, 0)",
       lightYellow: "rgb(77, 46, 0)",
     },
     primary: {
       main: `rgba(215, 170, 14, 1)`,
-      // main: `rgb(179, 107, 0)`,
     },
     secondary: {
       main: `rgb(253,153,0)`,
@@ -27,11 +26,6 @@ export default createMuiTheme({
     },
   },
   typography: {
-    open: {
-      fontFamily: "Open Sans, sans-serif",
-      letterSpacing: 1.2,
-      lineHeight: 1.5,
-    },
     prosto: {
       fontFamily: "Prosto One, cursive",
       letterSpacing: 1,
@@ -39,28 +33,8 @@ export default createMuiTheme({
     mont: {
       fontFamily: "Montserrat, sans-serif",
     },
-    source: {
-      fontFamily: "Source Sans Pro, sans-serif",
-    },
     merienda: {
       fontFamily: "Merienda One, cursive",
-    },
-    noto: {
-      fontFamily: "Noto Sans, sans-serif",
-      textTransform: "uppercase",
-      letterSpacing: 1,
-    },
-    notojp: {
-      fontFamily: "Noto Sans JP, sans-serif",
-    },
-    balsamiq: {
-      fontFamily: "Balsamiq Sans, cursive",
-      fontSize: "1rem",
-      textTransform: "uppercase",
-      letterSpacing: 0.5,
-    },
-    bree: {
-      fontFamily: "Bree Serif, serif",
     },
   },
   flex: {
@@ -70,12 +44,12 @@ export default createMuiTheme({
       alignItems: "center",
       justifyContent: "center",
     },
-    colStart: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
-      justifyContent: "flex-start",
-    },
+    // colStart: {
+    //   display: "flex",
+    //   flexDirection: "column",
+    //   alignItems: "flex-start",
+    //   justifyContent: "flex-start",
+    // },
     row: {
       display: "flex",
       flexDirection: "row",

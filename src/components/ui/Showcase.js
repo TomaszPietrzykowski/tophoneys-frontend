@@ -15,11 +15,9 @@ const useStyles = makeStyles((theme) => ({
   containerMobile: {
     padding: "0px 15px",
     margin: "30px 0px",
-    minHeight: 300,
     width: "100%",
     height: "auto",
     borderRadius: 7,
-    marginBottom: "80vh",
     [theme.breakpoints.down("md")]: {
       margin: "30px 0px 20px 0px",
     },

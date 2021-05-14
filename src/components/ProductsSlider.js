@@ -79,6 +79,7 @@ const ProductsSlider = ({ title, endpoint, timeout }) => {
 
   useEffect(() => {
     getProducts()
+    // eslint-disable-next-line
   }, [])
 
   const slides = isMobile ? 2 : isTablet ? 3 : 5

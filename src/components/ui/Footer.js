@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     background: `linear-gradient(110deg,${theme.palette.primary.main}, ${theme.palette.secondary.dark})`,
     color: "white",
+    marginTop: "auto",
   },
   container: {
     maxWidth: 1300,
