@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { makeStyles } from "@material-ui/styles";
-import SearchIcon from "@material-ui/icons/Search";
+import React, { useState } from "react"
+import { useHistory } from "react-router-dom"
+import { makeStyles } from "@material-ui/styles"
+import SearchIcon from "@material-ui/icons/Search"
 
 const useStyles = makeStyles((theme) => ({
   search: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
     outline: "none",
     width: "86%",
-    paddingTop: "1rem",
+    padding: "1rem 0",
     margin: "auto",
     [theme.breakpoints.down("md")]: {
       display: "flex",
@@ -79,24 +79,24 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     height: "20px",
   },
-}));
+}))
 
 const Search = ({ isMobile }) => {
-  const classes = useStyles();
-  const history = useHistory();
-  const [keyword, setKeyword] = useState("");
+  const classes = useStyles()
+  const history = useHistory()
+  const [keyword, setKeyword] = useState("")
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (keyword.trim()) {
-      history.push(`/search/${keyword.trim()}`);
+      history.push(`/search/${keyword.trim()}`)
     } else {
-      history.push("/");
+      history.push("/")
     }
 
-    setKeyword("");
-  };
+    setKeyword("")
+  }
 
   return (
     <form
@@ -117,7 +117,7 @@ const Search = ({ isMobile }) => {
         <SearchIcon className={classes.searchIcon} />
       </button>
     </form>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

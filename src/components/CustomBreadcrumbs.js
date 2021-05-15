@@ -7,16 +7,13 @@ import getCategoryLabel from "./GetCategoryLabel"
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    maxWidth: 1400,
-    margin: "auto",
-    padding: "1rem 3rem",
   },
   link: {
     fontSize: ".8rem",
     textTransform: "uppercase",
-    opacity: 0.8,
+    color: theme.palette.text.disabled,
     "&:hover": {
-      opacity: 1,
+      color: theme.palette.primary.main,
     },
   },
 }))
@@ -26,11 +23,13 @@ const CustomBreadcrumbs = ({ category }) => {
   return (
     <div className={classes.root}>
       <Breadcrumbs aria-label="breadcrumb">
-        {category.map((cat) => (
-          <Link className={classes.link} to={`/category/${cat}`} key={cat}>
-            {getCategoryLabel(cat)}
-          </Link>
-        ))}
+        {category &&
+          category.length > 0 &&
+          category.map((cat) => (
+            <Link className={classes.link} to={`/category/${cat}`} key={cat}>
+              {getCategoryLabel(cat)}
+            </Link>
+          ))}
       </Breadcrumbs>
     </div>
   )

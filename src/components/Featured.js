@@ -10,7 +10,7 @@ import ProductTab from "./ProductTab"
 const useStyles = makeStyles((theme) => ({
   flex: {
     // border: "1px solid magenta",
-    margin: "10rem 0",
+    margin: "7rem 0",
     ...theme.flex.row,
     justifyContent: "space-around",
     alignItems: "stretch",

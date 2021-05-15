@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
     marginTop: 165,
-    [theme.breakpoints.down("md")]: {
-      marginTop: 130,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 165,
     },
     [theme.breakpoints.down("sm")]: {
       marginTop: 90,

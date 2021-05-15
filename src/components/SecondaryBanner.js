@@ -5,7 +5,7 @@ import image from "../assets/Frame 63.jpeg"
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    padding: "6rem",
+    padding: "4rem 10rem",
     minHeight: 0,
   },
   banner: {

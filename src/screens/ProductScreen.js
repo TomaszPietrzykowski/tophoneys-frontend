@@ -7,15 +7,16 @@ import Grid from "@material-ui/core/Grid"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
 import Breadcrumbs from "../components/CustomBreadcrumbs"
+import Counter from "../components/Counter"
 
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: "3rem",
     marginTop: "10rem",
     ...theme.utils.container,
+    ...theme.typography.mont,
   },
   backBtn: {
-    ...theme.typography.prosto,
     textTransform: "uppercase",
     padding: ".6rem 2rem .6rem 1.5rem",
     color: theme.palette.text.secondary,
@@ -28,30 +29,73 @@ const useStyles = makeStyles((theme) => ({
   card: {
     padding: "2rem",
   },
-  filler: {
+  filler1: {
     width: "100%",
-    ...theme.typography.source,
     fontSize: "1.2rem",
+  },
+  filler2: {
+    width: "100%",
+    fontSize: "1.2rem",
+    padding: "1rem 3rem",
+    position: "relative",
+    "&::before": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      height: "100%",
+      width: 1,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent )`,
+      opacity: 0.7,
+    },
   },
   image: {
     width: "100%",
     objectFit: "contain",
   },
   name: {
-    ...theme.typography.prosto,
-    marginBottom: "3rem",
+    margin: "1.6rem 0",
+    fontWeight: 400,
+    fontSize: "1.8rem",
+    color: theme.palette.text.primary,
   },
   price: {
-    ...theme.typography.prosto,
-    marginBottom: "3rem",
+    margin: "1.6rem 0",
+    fontWeight: 300,
+    fontSize: "2.4rem",
+    color: theme.palette.text.secondary,
   },
   description: {
     color: theme.palette.text.secondary,
-    marginBottom: "3rem",
   },
   listItem: {
-    paddingBottom: "1rem",
+    padding: "0 3rem",
     color: theme.palette.text.secondary,
+  },
+  detail: {
+    color: theme.palette.text.secondary,
+    fontSize: "1rem",
+    margin: ".8rem 0",
+  },
+  descriptionContainer: {
+    marginTop: "6rem",
+    padding: "1.8rem",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: 2,
+      background: `linear-gradient(90deg, transparent, ${theme.palette.secondary.main}, transparent )`,
+      opacity: 0.7,
+    },
+  },
+  descriptionHeader: {
+    color: theme.palette.primary.main,
+    textAlign: "right",
+    textTransform: "uppercase",
   },
   input: {
     padding: ".3rem",
@@ -96,7 +140,6 @@ const ProductScreen = ({ match, history }) => {
           <Message variant="error" message={error} />
         ) : (
           <>
-            {product && <Breadcrumbs category={product.category} />}
             <button
               className={classes.backBtn}
               onClick={() => history.goBack()}
@@ -104,60 +147,105 @@ const ProductScreen = ({ match, history }) => {
               &larr; Back
             </button>
             {product && (
-              <Grid container>
-                <Grid item xs={12} md={6} lg={5} className={classes.card}>
-                  <div className={classes.filler}>
-                    <img
-                      src={product.image}
-                      className={classes.image}
-                      alt={product.name}
-                    />
-                  </div>
-                </Grid>
-                <Grid item xs={12} md={6} lg={4} className={classes.card}>
-                  <div className={classes.filler}>
-                    <h3 className={classes.name}>{product.name}</h3>
-                    <p className={classes.listItem}>{product.description}</p>
-                    <p className={classes.listItem}>
-                      Country: {product.countryOfOrigin}
-                    </p>
-                    <p className={classes.listItem}>
-                      Capacity: {product.capacity}
-                    </p>
-                  </div>
-                </Grid>
-                <Grid item xs={12} md={12} lg={3} className={classes.card}>
-                  <div className={classes.filler}>
-                    <h3 className={classes.price}>
-                      Price: &euro; {product.price}
-                    </h3>
-                    <p className={classes.listItem}>
-                      Availability:{" "}
-                      {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
-                    </p>
-                    {product.countInStock > 0 && (
-                      <p className={classes.listItem}>
-                        Quantity:{" "}
-                        <input
-                          className={classes.input}
-                          type="number"
-                          value={qty}
-                          min={1}
-                          max={product.countInStock}
-                          onChange={(e) => setQty(Number(e.target.value))}
-                        />
+              <>
+                <Grid container>
+                  <Grid
+                    item
+                    xs={12}
+                    mmd={12}
+                    md={6}
+                    lg={6}
+                    className={classes.card}
+                  >
+                    <div className={classes.filler1}>
+                      <img
+                        src={product.image}
+                        className={classes.image}
+                        alt={product.name}
+                      />
+                    </div>
+                  </Grid>
+
+                  <Grid
+                    item
+                    xs={12}
+                    s={12}
+                    md={6}
+                    lg={6}
+                    className={classes.card}
+                  >
+                    <div className={classes.filler2}>
+                      {product && <Breadcrumbs category={product.category} />}
+                      <h1 className={classes.name}>{product.name}</h1>
+                      <h2 className={classes.price}>
+                        &euro; {Number(product.price).toFixed(2)}
+                      </h2>
+                      {product.countryOfOrigin && (
+                        <p className={classes.detail}>
+                          Country: {product.countryOfOrigin}
+                        </p>
+                      )}
+                      <p className={classes.detail}>
+                        Status:{" "}
+                        {product.countInStock > 0 ? (
+                          <span style={{ color: "green" }}>{"In Stock"}</span>
+                        ) : (
+                          <span style={{ color: "red" }}>{"Out of Stock"}</span>
+                        )}
                       </p>
-                    )}
-                    <button
-                      className={classes.addToCartButton}
-                      disabled={product.countInStock === 0}
-                      onClick={addToCartHandler}
-                    >
-                      Add to cart
-                    </button>
-                  </div>
+
+                      {/* {product.brand && (
+                        <p className={classes.inStock}>
+                          Brand: {product.brand}
+                        </p>
+                      )} */}
+                      {product.countInStock > 0 && (
+                        <>
+                          <p className={classes.detail}>Quantity: </p>
+                          <p className={classes.detail}>
+                            <Counter
+                              count={qty}
+                              max={product.countInStock}
+                              setCount={setQty}
+                            />
+                            {/* <input
+                              className={classes.input}
+                              type="number"
+                              value={qty}
+                              min={1}
+                              max={product.countInStock}
+                              onChange={(e) => setQty(Number(e.target.value))}
+                            /> */}
+                          </p>
+                        </>
+                      )}
+                      <button
+                        className={classes.addToCartButton}
+                        disabled={product.countInStock === 0}
+                        onClick={addToCartHandler}
+                      >
+                        Add to cart
+                      </button>
+                    </div>
+                  </Grid>
                 </Grid>
-              </Grid>
+                <Grid container className={classes.descriptionContainer}>
+                  <Grid item xs={12} md={4} lg={4} className={classes.card}>
+                    <div className={classes.filler}>
+                      <p className={classes.descriptionHeader}>
+                        {product.name}
+                      </p>
+                    </div>
+                  </Grid>
+                  <Grid item xs={12} md={8} lg={8} className={classes.card}>
+                    <div className={classes.filler}>
+                      <p className={classes.description}>
+                        {product.description}
+                      </p>
+                    </div>
+                  </Grid>
+                </Grid>
+              </>
             )}
           </>
         )}

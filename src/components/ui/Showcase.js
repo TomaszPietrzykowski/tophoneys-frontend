@@ -13,13 +13,10 @@ const useStyles = makeStyles((theme) => ({
   },
   containerMobile: {
     padding: "0px 15px",
-    margin: "30px 0px",
+    // margin: "30px 0px",
     width: "100%",
     height: "auto",
     borderRadius: 7,
-    [theme.breakpoints.down("md")]: {
-      margin: "30px 0px 20px 0px",
-    },
   },
   banner: {
     width: "100%",
@@ -29,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Showcase = () => {
-  const isMobile = useMediaQuery("(max-width:600px)")
+  const isMobile = useMediaQuery("(max-width:860px)")
   const classes = useStyles()
 
   return (
