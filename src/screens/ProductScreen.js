@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/styles";
-import { useDispatch, useSelector } from "react-redux";
-import { listProductDetails } from "../actions/productActions";
+import React, { useState, useEffect } from "react"
+import { makeStyles } from "@material-ui/styles"
+import { useDispatch, useSelector } from "react-redux"
+import { listProductDetails } from "../actions/productActions"
 // import { Link } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
+import Grid from "@material-ui/core/Grid"
+import Loader from "../components/Loader"
+import Message from "../components/Message"
+import Breadcrumbs from "../components/CustomBreadcrumbs"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -67,24 +68,24 @@ const useStyles = makeStyles((theme) => ({
     margin: "2rem 0",
     cursor: "pointer",
   },
-}));
+}))
 
 const ProductScreen = ({ match, history }) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const [qty, setQty] = useState(1);
+  const classes = useStyles()
+  const dispatch = useDispatch()
+  const [qty, setQty] = useState(1)
 
   const { loading, error, product } = useSelector(
     (state) => state.productDetails
-  );
+  )
 
   useEffect(() => {
-    dispatch(listProductDetails(match.params.id));
-  }, [match, dispatch]);
+    dispatch(listProductDetails(match.params.id))
+  }, [match, dispatch])
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
-  };
+    history.push(`/cart/${match.params.id}?qty=${qty}`)
+  }
 
   return (
     <>
@@ -95,6 +96,7 @@ const ProductScreen = ({ match, history }) => {
           <Message variant="error" message={error} />
         ) : (
           <>
+            {product && <Breadcrumbs category={product.category} />}
             <button
               className={classes.backBtn}
               onClick={() => history.goBack()}
@@ -161,7 +163,7 @@ const ProductScreen = ({ match, history }) => {
         )}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ProductScreen;
+export default ProductScreen
