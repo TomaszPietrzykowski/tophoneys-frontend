@@ -12,8 +12,7 @@ import SecondaryBanner from "../components/SecondaryBanner"
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    marginTop: 150,
-    padding: "15px",
+    marginTop: 165,
     [theme.breakpoints.down("md")]: {
       marginTop: 130,
     },

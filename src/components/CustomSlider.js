@@ -37,6 +37,7 @@ const CustomSlider = ({ timeout, slidesAtOnce, products }) => {
           img={product.image}
           title={product.name}
           capacity={product.capacity}
+          category={product.category}
           price={product.price.toFixed(2)}
         />
       ))}

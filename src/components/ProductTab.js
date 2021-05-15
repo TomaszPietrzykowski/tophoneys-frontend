@@ -2,6 +2,7 @@ import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
+import getCategoryLabel from "./GetCategoryLabel"
 // import HeartIcon from "@material-ui/icons/FavoriteBorder"
 
 const useStyles = makeStyles((theme) => ({
@@ -51,25 +52,34 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    padding: "1.4rem",
+  },
+  category: {
+    fontSize: ".8rem",
+    color: theme.palette.text.disabled,
+    marginBottom: ".4rem",
+    textTransform: "uppercase",
+    fontWeight: 500,
+    letterSpacing: 0.5,
+    // border: "1px solid blue",
   },
   title: {
     fontSize: "1rem",
-    padding: "1.4rem 1.4rem 0 1.4rem",
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
   },
   capacity: {
     fontSize: ".8rem",
-    padding: ".5rem 1.4rem",
+    margin: ".5rem 0",
     color: theme.palette.text.disabled,
   },
   price: {
-    padding: "1.4rem",
-    fontSize: "1.6rem",
-    color: theme.palette.text.disabled,
+    marginTop: "auto",
+    marginBottom: ".8rem",
+    fontSize: "1.8rem",
+    color: theme.palette.text.secondary,
     letterSpacing: 2.5,
   },
   buttonsContainer: {
-    marginLeft: "1.4rem",
     display: "flex",
     margin: "0auto 0 0",
     cursor: "pointer",
@@ -107,20 +117,6 @@ const useStyles = makeStyles((theme) => ({
       margin: 0,
     },
   },
-
-  // wishlistBtn: {
-  //   flex: 1,
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   "&:hover": {
-  //     backgroundColor: theme.palette.secondary.dark,
-  //   },
-  //   [theme.breakpoints.down("md")]: {
-  //     fontSize: "1.2rem",
-  //     margin: 0,
-  //   },
-  // },
   hide: {
     [theme.breakpoints.down("md")]: {
       display: "none",
@@ -132,6 +128,7 @@ const ProductTab = ({
   title,
   img,
   capacity,
+  category,
   id,
   price,
   slidesAtOnce,
@@ -164,9 +161,18 @@ const ProductTab = ({
             <img src={img} alt="product" className={classes.img} />
           </div>
           <div className={classes.content}>
+            {category && (
+              <div className={classes.category}>
+                {getCategoryLabel(category[0])}
+              </div>
+            )}
+
             <div className={classes.title}>{title}</div>
             <div className={classes.capacity}>{capacity}</div>
-            <div className={classes.price}>&euro;{price}</div>
+            <div className={classes.price}>
+              <span style={{ opacity: 0.45 }}>&euro; </span>
+              {Number(price).toFixed(2)}
+            </div>
             <div className={classes.buttonsContainer}>
               <div className={classes.cartBtn}>
                 <CartIcon className={classes.cartIcon} />

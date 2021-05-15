@@ -8,7 +8,7 @@ import axios from "axios"
 const useStyles = makeStyles((theme) => ({
   container: {
     maxWidth: 1300,
-    margin: "12rem auto",
+    margin: "5rem auto",
     padding: "0px 15px",
     [theme.breakpoints.down("md")]: {
       padding: "0px",

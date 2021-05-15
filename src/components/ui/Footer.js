@@ -7,9 +7,10 @@ import InstagramIcon from "@material-ui/icons/Instagram"
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    background: `linear-gradient(110deg,${theme.palette.primary.main}, ${theme.palette.secondary.dark})`,
+    // background: `linear-gradient(110deg,${theme.palette.primary.main}, ${theme.palette.secondary.dark})`,
+    backgroundColor: theme.palette.primary.main,
     color: "white",
-    marginTop: "auto",
+    marginTop: "12rem",
   },
   container: {
     maxWidth: 1300,
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: ".9rem",
     padding: ".3rem",
     cursor: "pointer",
+    transition: "all .3s ease",
     "&:hover": {
       color: theme.palette.common.brown2,
     },
@@ -80,6 +82,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "3rem",
     margin: "1rem",
     cursor: "pointer",
+    transition: "all .3s ease",
     "&:hover": {
       color: theme.palette.common.brown2,
     },

@@ -5,8 +5,7 @@ import banner from "../../assets/iPhone8-119.jpeg"
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: "0px 15px",
-    margin: "40px 0",
+    padding: "0 3rem 3rem",
     minHeight: 420,
     width: "100%",
     height: "auto",

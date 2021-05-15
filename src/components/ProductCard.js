@@ -2,7 +2,7 @@ import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
-// import HeartIcon from "@material-ui/icons/FavoriteBorder"
+import getCategoryLabel from "./GetCategoryLabel"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,27 +43,36 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     display: "flex",
-    minHeight: 200,
+    minHeight: 220,
     // border: "1px solid blue",
     flexDirection: "column",
     justifyContent: "space-between",
     padding: "1rem",
   },
+  category: {
+    fontSize: ".85rem",
+    color: theme.palette.text.disabled,
+    marginBottom: ".5rem",
+    textTransform: "uppercase",
+    fontWeight: 500,
+    letterSpacing: 0.5,
+    // border: "1px solid blue",
+  },
   title: {
     fontSize: "1rem",
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     // border: "1px solid blue",
   },
   capacity: {
     fontSize: ".8rem",
-    marginTop: ".5rem",
+    margin: ".5rem 0",
     color: theme.palette.text.disabled,
     // border: "1px solid blue",
   },
   price: {
     margin: "auto 0 0.8rem 0",
     fontSize: "1.8rem",
-    color: theme.palette.text.disabled,
+    color: theme.palette.text.secondary,
     // border: "1px solid blue",
     letterSpacing: 2.5,
   },
@@ -126,6 +135,9 @@ const ProductCard = ({ product }) => {
             <img src={product.image} alt="product" className={classes.img} />
           </div>
           <div className={classes.content}>
+            <div className={classes.category}>
+              {getCategoryLabel(product.category[0])}
+            </div>
             <div className={classes.title}>{product.name}</div>
             <div className={classes.capacity}>{product.capacity}</div>
             <div className={classes.price}>

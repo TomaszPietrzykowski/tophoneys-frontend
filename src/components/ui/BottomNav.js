@@ -2,7 +2,7 @@ import React from "react"
 import { makeStyles } from "@material-ui/styles"
 import MenuIcon from "@material-ui/icons/MenuRounded"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
-import HeartIcon from "@material-ui/icons/FavoriteBorder"
+import HeartIcon from "@material-ui/icons/Loyalty"
 import EcoIcon from "@material-ui/icons/EcoRounded"
 import UserIcon from "@material-ui/icons/PersonOutlineRounded"
 
@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     position: "fixed",
     bottom: 0,
+    zIndex: 1300,
   },
   container: {
     maxWidth: 1300,
@@ -49,20 +50,20 @@ const BottomNav = ({ openDrawer, setOpenDrawer }) => {
           <div className={classes.label}>Menu</div>
         </div>
         <div className={classes.tab}>
-          <CartIcon className={classes.icon} />
-          <div className={classes.label}>Koszyk</div>
+          <EcoIcon className={classes.icon} />
+          <div className={classes.label}>New</div>
         </div>
         <div className={classes.tab}>
           <HeartIcon className={classes.icon} />
-          <div className={classes.label}>Ulubione</div>
+          <div className={classes.label}>Sale</div>
         </div>
         <div className={classes.tab}>
-          <EcoIcon className={classes.icon} />
-          <div className={classes.label}>Nowosci</div>
+          <CartIcon className={classes.icon} />
+          <div className={classes.label}>Cart</div>
         </div>
         <div className={classes.tab}>
           <UserIcon className={classes.icon} />
-          <div className={classes.label}>Zaloguj</div>
+          <div className={classes.label}>Profile</div>
         </div>
       </div>
     </div>

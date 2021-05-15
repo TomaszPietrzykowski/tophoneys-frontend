@@ -4,15 +4,13 @@ import image from "../assets/Frame 63.jpeg"
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: "100%",
-    maxWidth: 1400,
-    margin: "auto",
-    marginTop: "05rem",
-    marginBottom: "3rem",
+    ...theme.utils.container,
+    padding: "6rem",
+    minHeight: 0,
   },
   banner: {
     width: "100%",
-    height: "auto",
+    // height: "auto",
     objectFit: "contain",
   },
 }))

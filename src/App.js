@@ -30,6 +30,7 @@ import InfoPaymentScreen from "./screens/InfoPaymentScreen"
 import Footer from "./components/ui/Footer"
 import BottomNav from "./components/ui/BottomNav"
 import BottomNavMargin from "./components/ui/BottomNavMargin"
+import ScrollToTop from "./components/ui/ScrollToTop"
 
 function App() {
   const isMobile = useMediaQuery("(max-width:600px)")
@@ -38,68 +39,73 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Fragment>
-          <Header openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
-          <Switch>
-            <Route path="/category/:id" component={CategoryScreen} exact />
-            <Route
-              path="/category/:id/page/:pageNumber"
-              component={CategoryScreen}
-              exact
-            />
-            <Route path="/product/:id" component={ProductScreen} exact />
-            <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/contact" component={ContactScreen} exact />
-            <Route path="/abouthoney" component={AboutHoneyScreen} exact />
-            <Route path="/aboutus" component={AboutUsScreen} exact />
-            <Route
-              path="/conditions"
-              component={GeneralConditionsScreen}
-              exact
-            />
-            <Route path="/info" component={InfoPaymentScreen} exact />
-            <Route path="/login" component={LoginScreen} exact />
-            <Route path="/register" component={RegisterScreen} exact />
-            <Route path="/profile" component={ProfileScreen} exact />
-            <Route path="/shipping" component={ShippingScreen} exact />
-            <Route path="/paymentmethod" component={PaymentScreen} exact />
-            <Route path="/placeorder" component={PlaceOrderScreen} exact />
-            <Route path="/order/:id" component={OrderScreen} exact />
-            <Route path="/search/:keyword" component={SearchScreen} exact />
-            <Route
-              path="/search/:keyword/page/:pageNumber"
-              component={SearchScreen}
-              exact
-            />
-            <Route path="/admin/userlist" component={UserListScreen} exact />
-            <Route path="/admin/orderlist" component={OrderListScreen} exact />
-            <Route
-              path="/admin/product/:id/edit"
-              component={ProductEditScreen}
-              exact
-            />
-            <Route
-              path="/admin/createproduct"
-              component={ProductCreateScreen}
-              exact
-            />
-            <Route
-              path="/admin/productlist"
-              component={ProductListScreen}
-              exact
-            />
-            <Route
-              path="/admin/productlist/page/:pageNumber"
-              component={ProductListScreen}
-              exact
-            />
-            <Route
-              path="/admin/user/:id/edit"
-              component={UserEditScreen}
-              exact
-            />
-            <Route path="/" component={HomeScreen} exact />
-            {/* <Newsletter />
+        <ScrollToTop>
+          <Fragment>
+            <Header openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
+            <Switch>
+              <Route path="/category/:id" component={CategoryScreen} exact />
+              <Route
+                path="/category/:id/page/:pageNumber"
+                component={CategoryScreen}
+                exact
+              />
+              <Route path="/product/:id" component={ProductScreen} exact />
+              <Route path="/cart/:id?" component={CartScreen} />
+              <Route path="/contact" component={ContactScreen} exact />
+              <Route path="/abouthoney" component={AboutHoneyScreen} exact />
+              <Route path="/aboutus" component={AboutUsScreen} exact />
+              <Route
+                path="/conditions"
+                component={GeneralConditionsScreen}
+                exact
+              />
+              <Route path="/info" component={InfoPaymentScreen} exact />
+              <Route path="/login" component={LoginScreen} exact />
+              <Route path="/register" component={RegisterScreen} exact />
+              <Route path="/profile" component={ProfileScreen} exact />
+              <Route path="/shipping" component={ShippingScreen} exact />
+              <Route path="/paymentmethod" component={PaymentScreen} exact />
+              <Route path="/placeorder" component={PlaceOrderScreen} exact />
+              <Route path="/order/:id" component={OrderScreen} exact />
+              <Route path="/search/:keyword" component={SearchScreen} exact />
+              <Route
+                path="/search/:keyword/page/:pageNumber"
+                component={SearchScreen}
+                exact
+              />
+              <Route path="/admin/userlist" component={UserListScreen} exact />
+              <Route
+                path="/admin/orderlist"
+                component={OrderListScreen}
+                exact
+              />
+              <Route
+                path="/admin/product/:id/edit"
+                component={ProductEditScreen}
+                exact
+              />
+              <Route
+                path="/admin/createproduct"
+                component={ProductCreateScreen}
+                exact
+              />
+              <Route
+                path="/admin/productlist"
+                component={ProductListScreen}
+                exact
+              />
+              <Route
+                path="/admin/productlist/page/:pageNumber"
+                component={ProductListScreen}
+                exact
+              />
+              <Route
+                path="/admin/user/:id/edit"
+                component={UserEditScreen}
+                exact
+              />
+              <Route path="/" component={HomeScreen} exact />
+              {/* <Newsletter />
         <Footer />
         {isMobile && (
           <Fragment>
@@ -107,18 +113,19 @@ function App() {
             <BottomNav openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
           </Fragment>
         )} */}
-          </Switch>
-          <Footer />
-          {isMobile && (
-            <Fragment>
-              <BottomNavMargin />
-              <BottomNav
-                openDrawer={openDrawer}
-                setOpenDrawer={setOpenDrawer}
-              />
-            </Fragment>
-          )}
-        </Fragment>
+            </Switch>
+            <Footer />
+            {isMobile && (
+              <Fragment>
+                <BottomNavMargin />
+                <BottomNav
+                  openDrawer={openDrawer}
+                  setOpenDrawer={setOpenDrawer}
+                />
+              </Fragment>
+            )}
+          </Fragment>
+        </ScrollToTop>
       </Router>
     </ThemeProvider>
   )
