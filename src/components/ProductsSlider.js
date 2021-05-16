@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ProductsSlider = ({ title, endpoint, timeout }) => {
+const ProductsSlider = ({ title, endpoint, timeout, hideHeader = false }) => {
   const classes = useStyles()
   const isTablet = useMediaQuery("(max-width: 990px)")
   const isMobile = useMediaQuery("(max-width: 600px)")
@@ -90,9 +90,11 @@ const ProductsSlider = ({ title, endpoint, timeout }) => {
         <Loader />
       ) : (
         <>
-          <div className={classes.sliderHeader}>
-            <div className={classes.headerText}>{title}</div>
-          </div>
+          {!hideHeader && (
+            <div className={classes.sliderHeader}>
+              <div className={classes.headerText}>{title}</div>
+            </div>
+          )}
           <div className={classes.productsSlider}>
             <CustomSlider
               timeout={to}

@@ -71,10 +71,11 @@ const useStyles = makeStyles((theme) => ({
   },
   price: {
     margin: "auto 0 0.8rem 0",
-    fontSize: "1.8rem",
+    fontSize: "1.9rem",
     color: theme.palette.text.secondary,
     // border: "1px solid blue",
-    letterSpacing: 2.5,
+    letterSpacing: 1,
+    fontWeight: 300,
   },
   buttonsContainer: {
     // border: "1px solid blue",
@@ -98,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     borderRadius: 4,
     backgroundColor: theme.palette.secondary.light,
+    transition: "all .3s ease",
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },

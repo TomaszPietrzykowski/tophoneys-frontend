@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1300,
     margin: "auto",
     padding: "15px",
+    ...theme.typography.prosto,
+    // color: theme.palette.text.secondary,
+    color: "rgba(0,0,0,.6)",
   },
   desktopLinks: {
     display: "flex",
@@ -31,12 +34,11 @@ const useStyles = makeStyles((theme) => ({
     width: "25%",
     mihHeight: "2rem",
     textAlign: "center",
-    fontFamily: "Open Sans",
     fontSize: 13,
   },
   desktopIcon: {
     color: theme.palette.primary.main,
-    fontSize: 13,
+    fontSize: 16,
     marginRight: "0.4rem",
   },
   mobileLinks: {
@@ -56,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    fontFamily: "Open Sans",
     fontSize: 13,
     width: "auto",
   },

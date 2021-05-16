@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { makeStyles } from "@material-ui/styles"
-// import { useMediaQuery } from "@material-ui/core"
+import Button from "@material-ui/core/Button"
 import { getProductsByCategory } from "../actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.utils.container,
     ...theme.flex.col,
     justifyContent: "flex-start",
-    padding: "6rem 3rem 12rem",
+    padding: "2rem 3rem 0",
     // padding querry to do
     // [theme.breakpoints.down("md")]: {
     //   padding: ?,
@@ -24,14 +24,16 @@ const useStyles = makeStyles((theme) => ({
     // },
   },
   flex: {
+    paddingTop: "2rem",
     ...theme.flex.row,
     alignItems: "stretch",
+    justifyContent: "flex-start",
     flexWrap: "wrap",
     overflow: "wrap",
   },
 }))
 
-const CategoryScreen = ({ match }) => {
+const CategoryScreen = ({ match, history }) => {
   const classes = useStyles()
   // const isTablet = useMediaQuery("(max-width: 990px)")
   // const isMobile = useMediaQuery("(max-width: 600px)")
@@ -58,6 +60,15 @@ const CategoryScreen = ({ match }) => {
           <Message
             variant="info"
             message={"There are currently no products in this category"}
+            action={
+              <Button
+                color="inherit"
+                size="small"
+                onClick={() => history.goBack()}
+              >
+                Back
+              </Button>
+            }
           />
         ) : (
           <>

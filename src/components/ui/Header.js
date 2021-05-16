@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/styles";
-import logo from "../../assets/logotranspbg.png";
-import Search from "./Search";
-import UserIcon from "@material-ui/icons/Person";
-import CartIcon from "@material-ui/icons/ShoppingCartOutlined";
-import SettingsIcon from "@material-ui/icons/Settings";
-import ExpandIcon from "@material-ui/icons/ExpandMore";
-import RightArrowIcon from "@material-ui/icons/ArrowForwardIos";
-import MenuIcon from "@material-ui/icons/MenuRounded";
-import CloseIcon from "@material-ui/icons/Close";
-import Divider from "@material-ui/core/Divider";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { makeStyles } from "@material-ui/styles"
+import logo from "../../assets/logotranspbg.png"
+import Search from "./Search"
+import UserIcon from "@material-ui/icons/Person"
+import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
+import SettingsIcon from "@material-ui/icons/Settings"
+import ExpandIcon from "@material-ui/icons/ExpandMore"
+import RightArrowIcon from "@material-ui/icons/ArrowForwardIos"
+import MenuIcon from "@material-ui/icons/MenuRounded"
+import CloseIcon from "@material-ui/icons/Close"
+import Divider from "@material-ui/core/Divider"
 import {
   ClickAwayListener,
   Grow,
@@ -20,8 +20,8 @@ import {
   Popper,
   IconButton,
   MenuItem,
-} from "@material-ui/core";
-import { logout } from "../../actions/userActions";
+} from "@material-ui/core"
+import { logout } from "../../actions/userActions"
 
 const useStyles = makeStyles((theme) => ({
   // --------------------------------------------------- LAYOUT
@@ -203,75 +203,75 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.4rem",
     color: theme.palette.primary.main,
   },
-}));
+}))
 
 const Header = ({ openDrawer, setOpenDrawer }) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.userLogin);
+  const classes = useStyles()
+  const dispatch = useDispatch()
+  const { userInfo } = useSelector((state) => state.userLogin)
 
   // dropdown states:
-  const [anchorElUser, setAnchorElUser] = useState(null);
-  const [openUser, setOpenUser] = useState(false);
-  const [anchorElAdmin, setAnchorElAdmin] = useState(null);
-  const [openAdmin, setOpenAdmin] = useState(false);
-  const [anchorElHoneys, setAnchorElHoneys] = useState(null);
-  const [openHoneys, setOpenHoneys] = useState(false);
-  const [anchorElBees, setAnchorElBees] = useState(null);
-  const [openBees, setOpenBees] = useState(false);
-  const [anchorElTea, setAnchorElTea] = useState(null);
-  const [openTea, setOpenTea] = useState(false);
+  const [anchorElUser, setAnchorElUser] = useState(null)
+  const [openUser, setOpenUser] = useState(false)
+  const [anchorElAdmin, setAnchorElAdmin] = useState(null)
+  const [openAdmin, setOpenAdmin] = useState(false)
+  const [anchorElHoneys, setAnchorElHoneys] = useState(null)
+  const [openHoneys, setOpenHoneys] = useState(false)
+  const [anchorElBees, setAnchorElBees] = useState(null)
+  const [openBees, setOpenBees] = useState(false)
+  const [anchorElTea, setAnchorElTea] = useState(null)
+  const [openTea, setOpenTea] = useState(false)
 
   //dropdown handlers
   const handleClickUser = (e) => {
-    setAnchorElUser(e.currentTarget);
-    setOpenUser(true);
-  };
+    setAnchorElUser(e.currentTarget)
+    setOpenUser(true)
+  }
   const handleCloseUser = (e) => {
-    setAnchorElUser(null);
-    setOpenUser(false);
-  };
+    setAnchorElUser(null)
+    setOpenUser(false)
+  }
   const handleClickAdmin = (e) => {
-    setAnchorElAdmin(e.currentTarget);
-    setOpenAdmin(true);
-  };
+    setAnchorElAdmin(e.currentTarget)
+    setOpenAdmin(true)
+  }
   const handleCloseAdmin = (e) => {
-    setAnchorElAdmin(null);
-    setOpenAdmin(false);
-  };
+    setAnchorElAdmin(null)
+    setOpenAdmin(false)
+  }
   const handleClickHoneys = (e) => {
-    setAnchorElHoneys(e.currentTarget);
-    setOpenHoneys(true);
-  };
+    setAnchorElHoneys(e.currentTarget)
+    setOpenHoneys(true)
+  }
   const handleCloseHoneys = (e) => {
-    setAnchorElHoneys(null);
-    setOpenHoneys(false);
-  };
+    setAnchorElHoneys(null)
+    setOpenHoneys(false)
+  }
   const handleClickBees = (e) => {
-    setAnchorElBees(e.currentTarget);
-    setOpenBees(true);
-  };
+    setAnchorElBees(e.currentTarget)
+    setOpenBees(true)
+  }
   const handleCloseBees = (e) => {
-    setAnchorElBees(null);
-    setOpenBees(false);
-  };
+    setAnchorElBees(null)
+    setOpenBees(false)
+  }
   const handleClickTea = (e) => {
-    setAnchorElTea(e.currentTarget);
-    setOpenTea(true);
-  };
+    setAnchorElTea(e.currentTarget)
+    setOpenTea(true)
+  }
   const handleCloseTea = (e) => {
-    setAnchorElTea(null);
-    setOpenTea(false);
-  };
+    setAnchorElTea(null)
+    setOpenTea(false)
+  }
   const handleListKeyDown = (e) => {
     if (e.key === "Tab") {
-      e.preventDefault();
-      setOpenUser(false);
+      e.preventDefault()
+      setOpenUser(false)
     }
-  };
+  }
   const handleLogout = () => {
-    dispatch(logout());
-  };
+    dispatch(logout())
+  }
 
   return (
     <header className={classes.root}>
@@ -357,7 +357,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
                           onClick={(e) => {
-                            handleCloseUser(e);
+                            handleCloseUser(e)
                           }}
                         >
                           Profile
@@ -369,8 +369,8 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
                           onClick={(e) => {
-                            handleCloseUser(e);
-                            handleLogout();
+                            handleCloseUser(e)
+                            handleLogout()
                           }}
                         >
                           Log out
@@ -382,7 +382,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
                           onClick={(e) => {
-                            handleCloseUser(e);
+                            handleCloseUser(e)
                           }}
                         >
                           Log in
@@ -394,7 +394,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
                           onClick={(e) => {
-                            handleCloseUser(e);
+                            handleCloseUser(e)
                           }}
                         >
                           Sign up
@@ -439,7 +439,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
                         onClick={(e) => {
-                          handleCloseAdmin(e);
+                          handleCloseAdmin(e)
                         }}
                       >
                         Products
@@ -449,7 +449,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
                         onClick={(e) => {
-                          handleCloseUser(e);
+                          handleCloseUser(e)
                         }}
                       >
                         Orders
@@ -459,7 +459,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
                         onClick={(e) => {
-                          handleCloseUser(e);
+                          handleCloseUser(e)
                         }}
                       >
                         Users
@@ -555,7 +555,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           classes={{ root: classes.submenu }}
                           value="honeys"
                           onClick={(e) => {
-                            handleCloseHoneys(e);
+                            handleCloseHoneys(e)
                           }}
                         >
                           All honeys
@@ -566,7 +566,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           classes={{ root: classes.submenu }}
                           value="nl"
                           onClick={(e) => {
-                            handleCloseHoneys(e);
+                            handleCloseHoneys(e)
                           }}
                         >
                           Creamed honeys
@@ -577,7 +577,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           classes={{ root: classes.submenu }}
                           value="nl"
                           onClick={(e) => {
-                            handleCloseHoneys(e);
+                            handleCloseHoneys(e)
                           }}
                         >
                           Honeys with additives
@@ -588,7 +588,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           classes={{ root: classes.submenu }}
                           value="nl"
                           onClick={(e) => {
-                            handleCloseHoneys(e);
+                            handleCloseHoneys(e)
                           }}
                         >
                           Accessories
@@ -643,7 +643,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           to="/category/beefeathers"
                           classes={{ root: classes.submenu }}
                           onClick={(e) => {
-                            handleCloseBees(e);
+                            handleCloseBees(e)
                           }}
                         >
                           Bee feathers
@@ -653,7 +653,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           to="/category/propolis"
                           classes={{ root: classes.submenu }}
                           onClick={(e) => {
-                            handleCloseBees(e);
+                            handleCloseBees(e)
                           }}
                         >
                           Propolis
@@ -663,7 +663,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           to="/category/pollen"
                           classes={{ root: classes.submenu }}
                           onClick={(e) => {
-                            handleCloseBees(e);
+                            handleCloseBees(e)
                           }}
                         >
                           Bee pollen
@@ -673,7 +673,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           to="/category/beemilk"
                           classes={{ root: classes.submenu }}
                           onClick={(e) => {
-                            handleCloseBees(e);
+                            handleCloseBees(e)
                           }}
                         >
                           Bee milk
@@ -683,7 +683,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           to="/category/beewaxcandles"
                           classes={{ root: classes.submenu }}
                           onClick={(e) => {
-                            handleCloseBees(e);
+                            handleCloseBees(e)
                           }}
                         >
                           Beewax candles
@@ -700,7 +700,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
               onMouseOver={(e) => handleClickTea(e)}
               onMouseLeave={handleCloseTea}
             >
-              <Link to="/category/tea" className={classes.navLink}>
+              <Link to="/category/teas" className={classes.navLink}>
                 <li className={classes.tab}>
                   <div>Teas</div>
                   <ExpandIcon className={classes.expandIcon} />
@@ -735,30 +735,30 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       >
                         <MenuItem
                           component={Link}
-                          to="/category/tea"
+                          to="/category/teas"
                           className={classes.submenu}
                           onClick={(e) => {
-                            handleCloseTea(e);
+                            handleCloseTea(e)
                           }}
                         >
                           All teas
                         </MenuItem>
                         <MenuItem
                           component={Link}
-                          to="/category/blacktea"
+                          to="/category/blackteas"
                           className={classes.submenu}
                           onClick={(e) => {
-                            handleCloseTea(e);
+                            handleCloseTea(e)
                           }}
                         >
                           Black tea
                         </MenuItem>
                         <MenuItem
                           component={Link}
-                          to="/category/greentea"
+                          to="/category/greenteas"
                           className={classes.submenu}
                           onClick={(e) => {
-                            handleCloseTea(e);
+                            handleCloseTea(e)
                           }}
                         >
                           Green tea
@@ -768,7 +768,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           to="/category/fruittea"
                           className={classes.submenu}
                           onClick={(e) => {
-                            handleCloseTea(e);
+                            handleCloseTea(e)
                           }}
                         >
                           Fruit tea
@@ -799,7 +799,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
       </div>
       {/* </div> */}
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

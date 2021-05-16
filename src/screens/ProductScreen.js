@@ -8,6 +8,8 @@ import Loader from "../components/Loader"
 import Message from "../components/Message"
 import Breadcrumbs from "../components/CustomBreadcrumbs"
 import Counter from "../components/Counter"
+import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
+import RelatedProducts from "../components/RelatedProducts"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   backBtn: {
     textTransform: "uppercase",
+    letterSpacing: 1,
     padding: ".6rem 2rem .6rem 1.5rem",
     color: theme.palette.text.secondary,
     border: "1px solid rgba(0,0,0,.2)",
@@ -25,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     margin: "1rem 2rem",
     cursor: "pointer",
+    transition: "all .3s ease",
+    "&:hover": {
+      border: `1px solid ${theme.palette.primary.main}`,
+      color: theme.palette.primary.main,
+    },
   },
   card: {
     padding: "2rem",
@@ -66,7 +74,10 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   description: {
+    maxWidth: 700,
     color: theme.palette.text.secondary,
+    lineHeight: 1.7,
+    letterSpacing: 0.5,
   },
   listItem: {
     padding: "0 3rem",
@@ -75,11 +86,12 @@ const useStyles = makeStyles((theme) => ({
   detail: {
     color: theme.palette.text.secondary,
     fontSize: "1rem",
-    margin: ".8rem 0",
+    margin: "1rem 0",
   },
   descriptionContainer: {
-    marginTop: "6rem",
+    margin: "2rem 0 4rem",
     padding: "1.8rem",
+    paddingLeft: 0,
     position: "relative",
     "&::after": {
       content: "''",
@@ -94,23 +106,54 @@ const useStyles = makeStyles((theme) => ({
   },
   descriptionHeader: {
     color: theme.palette.primary.main,
-    textAlign: "right",
+    textAlign: "left",
     textTransform: "uppercase",
   },
-  input: {
-    padding: ".3rem",
+  buttonsContainer: {
+    display: "flex",
+    margin: "1.6rem auto 0 0",
+
+    color: theme.palette.common.white,
+    [theme.breakpoints.down("md")]: {
+      backgroundColor: theme.palette.secondary.main,
+    },
+  },
+  cartBtn: {
     border: "none",
-    color: "inherit",
-  },
-  addToCartButton: {
-    ...theme.typography.prosto,
-    textTransform: "uppercase",
-    width: "100%",
-    background: "black",
-    color: "white",
-    padding: ".6rem",
-    margin: "2rem 0",
+    padding: ".8rem 2.5rem",
     cursor: "pointer",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    ...theme.typography.mont,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    fontSize: "1rem",
+    fontWeight: 500,
+    borderRadius: 4,
+    backgroundColor: theme.palette.secondary.main,
+    transition: "all .3s ease",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.dark,
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: ".85rem",
+      flex: 1,
+      padding: ".3rem",
+    },
+  },
+  cartIcon: {
+    fontSize: "1.4rem",
+    marginRight: ".5rem",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1.2rem",
+      margin: 0,
+    },
+  },
+  hide: {
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
   },
 }))
 
@@ -130,7 +173,10 @@ const ProductScreen = ({ match, history }) => {
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`)
   }
-
+  const disabledButtonInline =
+    product.countInStock === 0
+      ? { color: "white", background: "rgba(0,0,0,.25", cursor: "default" }
+      : { color: "white" }
   return (
     <>
       <div className={classes.container}>
@@ -219,13 +265,18 @@ const ProductScreen = ({ match, history }) => {
                           </p>
                         </>
                       )}
-                      <button
-                        className={classes.addToCartButton}
-                        disabled={product.countInStock === 0}
-                        onClick={addToCartHandler}
-                      >
-                        Add to cart
-                      </button>
+
+                      <div className={classes.buttonsContainer}>
+                        <button
+                          className={classes.cartBtn}
+                          disabled={product.countInStock === 0}
+                          onClick={addToCartHandler}
+                          style={disabledButtonInline}
+                        >
+                          <CartIcon className={classes.cartIcon} />
+                          <div>Add to cart</div>
+                        </button>
+                      </div>
                     </div>
                   </Grid>
                 </Grid>
@@ -245,6 +296,9 @@ const ProductScreen = ({ match, history }) => {
                     </div>
                   </Grid>
                 </Grid>
+                {product && product.category && (
+                  <RelatedProducts category={product.category} />
+                )}
               </>
             )}
           </>

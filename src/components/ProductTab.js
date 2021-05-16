@@ -76,8 +76,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "auto",
     marginBottom: ".8rem",
     fontSize: "1.8rem",
+    fontWeight: 300,
     color: theme.palette.text.secondary,
-    letterSpacing: 2.5,
+    letterSpacing: 1,
   },
   buttonsContainer: {
     display: "flex",
@@ -100,6 +101,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     borderRadius: 4,
     backgroundColor: theme.palette.secondary.light,
+    transition: "all .3s ease",
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
@@ -149,6 +151,7 @@ const ProductTab = ({
               minWidth: `${slideWidth}%`,
             }
           : {
+              maxWidth: `${slideWidth}%`,
               minWidth: `${slideWidth}%`,
               transform: `translate3d(-${activeIndex * 100}%, 0, 0)`,
               transition: "transform .8s ease-in-out",
