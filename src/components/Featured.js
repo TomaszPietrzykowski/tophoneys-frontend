@@ -64,6 +64,7 @@ const Featured = ({ match }) => {
                   price={product.price}
                   img={product.image}
                   capacity={product.capacity}
+                  isSale={product.isPromo}
                   isFeatured={true}
                 />
                 // <div className={classes.productTab} key={product._id}>

@@ -82,7 +82,7 @@ const PromoLinks = () => {
               <div className={classes.mobileTab}>
                 <TimerIcon className={classes.desktopIcon} />
                 <div className={classes.desktopText}>
-                  Fast delivery 2 - 4 days
+                  Fast delivery 2-4 days
                 </div>
               </div>
               <div className={classes.mobileTab}>
@@ -113,7 +113,7 @@ const PromoLinks = () => {
                 <div className={classes.mobileTab}>
                   <TimerIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Fast delivery 2 - 4 days
+                    Fast delivery 2-4 days
                   </div>
                 </div>
                 <div className={classes.mobileTab}>
@@ -173,7 +173,7 @@ const PromoLinks = () => {
         <div className={classes.desktopLinks}>
           <div className={classes.desktopTab}>
             <TimerIcon className={classes.desktopIcon} />
-            <div className={classes.desktopText}>Fast delivery 2 - 4 days</div>
+            <div className={classes.desktopText}>Fast delivery 2-4 days</div>
           </div>
           <div className={classes.desktopTab}>
             <TruckIcon className={classes.desktopIcon} />

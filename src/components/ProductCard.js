@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
 import getCategoryLabel from "./GetCategoryLabel"
+import SaleIcon from "@material-ui/icons/Loyalty"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,21 @@ const useStyles = makeStyles((theme) => ({
     borderImage: `linear-gradient(transparent, 30%, ${theme.palette.secondary.main}, 55%, transparent) 1 100%`,
     flexDirection: "column",
     justifyContent: "stretch",
+    position: "relative",
+  },
+  saleBadge: {
+    position: "absolute",
+    ...theme.flex.col,
+    top: "45%",
+    right: 0,
+    backgroundColor: theme.palette.secondary.main,
+    color: "white",
+    // textTransform: "uppercase",
+    padding: ".45rem .4rem .3rem .5rem",
+    fontSize: ".7rem",
+    fontWeight: 500,
+    letterSpacing: 1,
+    borderRadius: "50%",
   },
   imageContainer: {
     ...theme.flex.col,
@@ -126,6 +142,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ProductCard = ({ product }) => {
   const classes = useStyles()
+  console.log(product.name)
 
   //   const slideWidth = 100 / 4
 
@@ -133,6 +150,11 @@ const ProductCard = ({ product }) => {
     <div className={classes.root}>
       <Link to={`/product/${product._id}`}>
         <div className={classes.card}>
+          {product.isPromo && (
+            <div className={classes.saleBadge}>
+              <SaleIcon />
+            </div>
+          )}
           <div className={classes.imageContainer}>
             <img src={product.image} alt="product" className={classes.img} />
           </div>
