@@ -18,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "3rem",
+    marginBottom: "6rem",
   },
   headerText: {
     ...theme.typography.merienda,
     padding: "15px",
-    fontSize: "1.5rem",
+    fontSize: "1.7rem",
     textAlign: "center",
     position: "relative",
     "&:after": {

@@ -10,13 +10,13 @@ const useStyles = makeStyles((theme) => ({
     // background: `linear-gradient(110deg,${theme.palette.primary.main}, ${theme.palette.secondary.dark})`,
     backgroundColor: theme.palette.primary.main,
     color: "white",
-    marginTop: "12rem",
+    marginTop: "4rem",
   },
   container: {
     maxWidth: 1300,
     minHeight: 200,
     margin: "auto",
-    padding: "0px 15px",
+    padding: "1.5rem 15px",
   },
   gridContainer: {
     width: "100%",
@@ -39,12 +39,12 @@ const useStyles = makeStyles((theme) => ({
   columnHeader: {
     ...theme.typography.prosto,
     fontSize: "1.2rem",
-    padding: ".8rem .3rem",
+    padding: ".8rem .4rem",
   },
   link: {
     ...theme.typography.mont,
     fontSize: ".9rem",
-    padding: ".3rem",
+    padding: ".4rem",
     cursor: "pointer",
     transition: "all .3s ease",
     "&:hover": {

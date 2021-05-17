@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import Message from "../components/Message";
-import { addToCart, removeFromCart } from "../actions/cartActions";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import { IconButton } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Tooltip from "@material-ui/core/Tooltip";
-import { makeStyles } from "@material-ui/styles";
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import Message from "../components/Message"
+import { addToCart, removeFromCart } from "../actions/cartActions"
+import Grid from "@material-ui/core/Grid"
+import Button from "@material-ui/core/Button"
+import { IconButton } from "@material-ui/core"
+import DeleteIcon from "@material-ui/icons/Delete"
+import Tooltip from "@material-ui/core/Tooltip"
+import { makeStyles } from "@material-ui/styles"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -82,33 +82,33 @@ const useStyles = makeStyles((theme) => ({
   messageContainer: {
     maxWidth: 600,
   },
-}));
+}))
 
 const CartScreen = ({ match, location, history }) => {
-  const classes = useStyles();
+  const classes = useStyles()
   // get product id from url
-  const productId = match.params.id;
+  const productId = match.params.id
   // get quantity from url query string
-  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
+  const qty = location.search ? Number(location.search.split("=")[1]) : 1
   // define dispatch
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   // get cart items read from local storage to redux as an initial state
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty));
+      dispatch(addToCart(productId, qty))
     }
-  }, [dispatch, productId, qty]);
+  }, [dispatch, productId, qty])
 
   const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id));
-  };
+    dispatch(removeFromCart(id))
+  }
 
   const checkoutHandler = () => {
-    history.push("/login?redirect=shipping", { from: "checkout" });
-  };
+    history.push("/login?redirect=shipping", { from: "checkout" })
+  }
 
   return (
     <div className={classes.container}>
@@ -118,7 +118,7 @@ const CartScreen = ({ match, location, history }) => {
           {cartItems.length === 0 ? (
             <div className={classes.messageContainer}>
               <Message
-                variant="info"
+                variant="warning"
                 message="Your cart is empty. Manage your orders in your profile"
                 action={
                   <Button
@@ -230,7 +230,7 @@ const CartScreen = ({ match, location, history }) => {
         </Grid>
       </Grid>
     </div>
-  );
-};
+  )
+}
 
-export default CartScreen;
+export default CartScreen

@@ -62,11 +62,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   content: {
-    // flex: 1,
     flexBasis: 1,
     flexGrow: 1,
     flexShrink: 1,
-    // border: "1px solid blue",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",

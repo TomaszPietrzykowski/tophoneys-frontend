@@ -10,16 +10,19 @@ import ProductTab from "./ProductTab"
 const useStyles = makeStyles((theme) => ({
   flex: {
     // border: "1px solid magenta",
-    margin: "7rem 0",
+    margin: "7rem auto",
     ...theme.flex.row,
     justifyContent: "space-around",
     alignItems: "stretch",
-    width: "100%",
+    width: "90%",
     minHeight: "100%",
     flexWrap: "wrap",
     overflow: "hidden",
     [theme.breakpoints.down("md")]: {
       margin: "4rem 0px 20px 0px",
+    },
+    "& > * > *": {
+      margin: "0 1rem",
     },
   },
   link: {

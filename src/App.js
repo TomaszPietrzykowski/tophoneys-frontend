@@ -31,6 +31,7 @@ import Footer from "./components/ui/Footer"
 import BottomNav from "./components/ui/BottomNav"
 import BottomNavMargin from "./components/ui/BottomNavMargin"
 import ScrollToTop from "./components/ui/ScrollToTop"
+import Brands from "./components/Brands"
 
 function App() {
   const isMobile = useMediaQuery("(max-width:600px)")
@@ -114,6 +115,7 @@ function App() {
           </Fragment>
         )} */}
             </Switch>
+            <Brands />
             <Footer />
             {isMobile && (
               <Fragment>

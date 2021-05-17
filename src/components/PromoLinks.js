@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "15px",
     ...theme.typography.prosto,
     // color: theme.palette.text.secondary,
-    color: "rgba(0,0,0,.6)",
+    color: "rgba(0,0,0,.7)",
   },
   desktopLinks: {
     display: "flex",

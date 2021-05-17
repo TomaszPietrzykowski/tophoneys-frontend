@@ -58,7 +58,7 @@ const CategoryScreen = ({ match, history }) => {
           <Message variant="error" message={error} />
         ) : products.length === 0 ? (
           <Message
-            variant="info"
+            variant="warning"
             message={"There are currently no products in this category"}
             action={
               <Button
