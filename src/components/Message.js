@@ -21,16 +21,18 @@ const useStyles = makeStyles((theme) => ({
       ...theme.typography.mont,
       fontWeight: 500,
     },
+    opacity: 0.8,
   },
 }))
 
-const Message = ({ variant = "success", message, onClose, action }) => {
+const Message = ({ variant = "info", message, onClose, action }) => {
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
       <Alert
         severity={variant}
+        color={variant === "error" ? "error" : "warning"}
         variant="outlined"
         onClose={onClose}
         action={action}

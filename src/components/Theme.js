@@ -62,6 +62,13 @@ export default createMuiTheme({
       maxWidth: 1400,
       margin: "auto",
     },
+    paragraph: {
+      fontFamily: "Montserrat, sans-serif",
+      fontWeight: 300,
+      lineHeight: 1.7,
+      letterSpacing: 0.3,
+      maxWidth: 560,
+    },
   },
   buttons: {
     primary: {

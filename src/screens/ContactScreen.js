@@ -70,9 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
   info: {
     color: theme.palette.text.primary,
-    lineHeight: 1.7,
-    letterSpacing: 0.3,
-    maxWidth: 560,
+    ...theme.utils.paragraph,
     margin: "4rem 0",
   },
   orderNumber: {

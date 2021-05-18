@@ -118,7 +118,7 @@ const CartScreen = ({ match, location, history }) => {
           {cartItems.length === 0 ? (
             <div className={classes.messageContainer}>
               <Message
-                variant="warning"
+                variant="info"
                 message="Your cart is empty. Manage your orders in your profile"
                 action={
                   <Button

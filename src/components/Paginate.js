@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginTop: "4rem",
     "& > * + *": {
       marginTop: theme.spacing(2),
     },

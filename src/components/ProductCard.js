@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "320px",
     // border: "2px solid pink",
     alignItems: "stretch",
-    padding: "2rem 1.8rem",
+    padding: "2rem 2rem",
   },
   card: {
     // border: "2px solid green",
@@ -99,9 +99,6 @@ const useStyles = makeStyles((theme) => ({
     margin: "0auto 0 0",
     cursor: "pointer",
     color: theme.palette.common.white,
-    [theme.breakpoints.down("md")]: {
-      backgroundColor: theme.palette.secondary.main,
-    },
   },
   cartBtn: {
     padding: ".55rem 1.4rem",

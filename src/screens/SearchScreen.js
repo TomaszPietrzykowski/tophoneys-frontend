@@ -5,19 +5,39 @@ import { getProductsByKeyword } from "../actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
 import Paginate from "../components/Paginate"
+import ProductCard from "../components/ProductCard"
+import NavbarMargin from "../components/ui/NavbarMargin"
 
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
     ...theme.flex.col,
-    marginTop: "20rem",
-    padding: "1rem",
-    [theme.breakpoints.down("md")]: {
-      marginTop: 130,
-    },
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 90,
-    },
+    justifyContent: "flex-start",
+    padding: "2rem 3rem 0",
+    ...theme.typography.mont,
+    // padding querry to do
+    // [theme.breakpoints.down("md")]: {
+    //   padding: ?,
+    // },
+    // [theme.breakpoints.down("sm")]: {
+    //   padding: ?,
+    // },
+  },
+  flex: {
+    paddingTop: "2rem",
+    ...theme.flex.row,
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+    overflow: "wrap",
+  },
+  searchResults: {
+    width: "100%",
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+    fontWeight: 300,
+    fontSize: ".8rem",
+    letterSpacing: 0.5,
   },
 }))
 
@@ -35,29 +55,35 @@ const SearchScreen = ({ match }) => {
   }, [dispatch, keyword, pageNumber])
 
   return (
-    <main className={classes.container}>
-      Search screen:
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="error" message={error} />
-      ) : products.length === 0 ? (
-        <Message
-          variant="info"
-          message={"No products matching search query..."}
-        />
-      ) : (
-        <>
-          <div>
-            <p>Search results for fraze: "{keyword}"</p>
-            {products.map((product) => {
-              return <h3 key={product._id}>{product.name}</h3>
-            })}
-          </div>
-          <Paginate id={keyword} page={page} pages={pages} url="search" />
-        </>
-      )}
-    </main>
+    <>
+      <NavbarMargin />
+      <main className={classes.container}>
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant="error" message={error} />
+        ) : products.length === 0 ? (
+          <Message
+            variant="info"
+            message={`No products matching keyword:  "${keyword}"`}
+          />
+        ) : (
+          <>
+            {products.length > 0 && (
+              <div className={classes.searchResults}>
+                Search results for keyword: "{keyword}"
+              </div>
+            )}
+            <div className={classes.flex}>
+              {products.map((product) => {
+                return <ProductCard product={product} />
+              })}
+            </div>
+            <Paginate id={keyword} page={page} pages={pages} url="search" />
+          </>
+        )}
+      </main>
+    </>
   )
 }
 
