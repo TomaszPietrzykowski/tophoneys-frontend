@@ -72,6 +72,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+const CssTextField = withStyles((theme) => ({
+  root: {
+    "& label.Mui-focused": {
+      color: theme.palette.secondary.light,
+    },
+    "& .MuiInput-focused fieldset": {
+      color: theme.palette.secondary.light,
+    },
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: theme.palette.secondary.light,
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: theme.palette.secondary.light,
+      },
+    },
+  },
+}))(TextField)
+
 const LoginScreen = ({ location, history }) => {
   const classes = useStyles()
   const [email, setEmail] = useState("")
@@ -100,25 +119,6 @@ const LoginScreen = ({ location, history }) => {
   const handleErrorClose = () => {
     dispatch({ type: USER_LOGIN_ERROR_RESET })
   }
-
-  const CssTextField = withStyles((theme) => ({
-    root: {
-      "& label.Mui-focused": {
-        color: theme.palette.secondary.light,
-      },
-      "& .MuiInput-focused fieldset": {
-        color: theme.palette.secondary.light,
-      },
-      "& .MuiOutlinedInput-root": {
-        "&:hover fieldset": {
-          borderColor: theme.palette.secondary.light,
-        },
-        "&.Mui-focused fieldset": {
-          borderColor: theme.palette.secondary.light,
-        },
-      },
-    },
-  }))(TextField)
 
   return (
     <>
