@@ -144,6 +144,7 @@ const useStyles = makeStyles((theme) => ({
   navLink: {
     color: theme.palette.text.primary,
     textDecoration: "none",
+    transition: "all .2s ease",
     "&:hover": {
       color: theme.palette.primary.dark,
     },
@@ -159,6 +160,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: ".9rem",
     padding: ".9rem 3rem .9rem 2rem",
     textTransform: "uppercase",
+    transition: "all .2s ease",
     "&:hover": {
       color: theme.palette.primary.dark,
     },
@@ -168,6 +170,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: ".9rem",
     fontWeight: 300,
     padding: ".9rem 3rem .9rem 2rem",
+    transition: "all .2s ease",
     "&:hover": {
       color: theme.palette.primary.dark,
     },

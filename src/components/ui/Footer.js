@@ -112,6 +112,9 @@ const Footer = () => {
           </div>
           <div className={classes.column}>
             <div className={classes.columnHeader}>Top Honeys</div>
+            <Link to="/">
+              <div className={classes.link}>Home</div>
+            </Link>
             <Link to="/abouthoney">
               <div className={classes.link}>About honey</div>
             </Link>
