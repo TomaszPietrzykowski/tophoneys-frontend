@@ -1,14 +1,14 @@
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    marginTop: "15rem",
+    padding: "3rem",
   },
-}))
+}));
 
 const AboutHoneyScreen = () => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <div className={classes.container}>
@@ -61,7 +61,7 @@ const AboutHoneyScreen = () => {
         stomach and in the evening before bedtime.
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default AboutHoneyScreen
+export default AboutHoneyScreen;

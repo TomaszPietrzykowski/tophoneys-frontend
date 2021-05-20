@@ -1,14 +1,14 @@
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    marginTop: "15rem",
+    padding: "3rem",
   },
-}))
+}));
 
 const GenralConditionsScreen = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <div className={classes.container}>
       <h1>General conditions</h1>
@@ -26,7 +26,7 @@ const GenralConditionsScreen = () => {
         and region of origin.
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default GenralConditionsScreen
+export default GenralConditionsScreen;

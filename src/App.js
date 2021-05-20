@@ -1,41 +1,42 @@
-import React, { Fragment, useState } from "react"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import { ThemeProvider } from "@material-ui/styles"
-import theme from "./components/Theme"
-import useMediaQuery from "@material-ui/core/useMediaQuery"
-import Header from "./components/ui/Header"
-import HomeScreen from "./screens/HomeScreen"
-import CategoryScreen from "./screens/CategoryScreen"
-import ProductScreen from "./screens/ProductScreen"
-import CartScreen from "./screens/CartScreen"
-import LoginScreen from "./screens/LoginScreen"
-import RegisterScreen from "./screens/RegisterScreen"
-import ProfileScreen from "./screens/ProfileScreen"
-import ShippingScreen from "./screens/ShippingScreen"
-import PaymentScreen from "./screens/PaymentScreen"
-import PlaceOrderScreen from "./screens/PlaceOrderScreen"
-import OrderScreen from "./screens/OrderScreen"
-import UserListScreen from "./screens/UserListScreen"
-import UserEditScreen from "./screens/UserEditScreen"
-import ProductListScreen from "./screens/ProductListScreen"
-import ProductCreateScreen from "./screens/ProductCreateScreen"
-import ProductEditScreen from "./screens/ProductEditScreen"
-import ContactScreen from "./screens/ContactScreen"
-import AboutHoneyScreen from "./screens/AboutHoneyScreen"
-import AboutUsScreen from "./screens/AboutUsScreen"
-import GeneralConditionsScreen from "./screens/GeneralConditionsScreen"
-import OrderListScreen from "./screens/OrderListScreen"
-import SearchScreen from "./screens/SearchScreen"
-import InfoPaymentScreen from "./screens/InfoPaymentScreen"
-import Footer from "./components/ui/Footer"
-import BottomNav from "./components/ui/BottomNav"
-import BottomNavMargin from "./components/ui/BottomNavMargin"
-import ScrollToTop from "./components/ui/ScrollToTop"
-import Brands from "./components/Brands"
+import React, { Fragment, useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/styles";
+import theme from "./components/Theme";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Header from "./components/ui/Header";
+import HomeScreen from "./screens/HomeScreen";
+import CategoryScreen from "./screens/CategoryScreen";
+import ProductScreen from "./screens/ProductScreen";
+import CartScreen from "./screens/CartScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import ShippingScreen from "./screens/ShippingScreen";
+import PaymentScreen from "./screens/PaymentScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import OrderScreen from "./screens/OrderScreen";
+import UserListScreen from "./screens/UserListScreen";
+import UserEditScreen from "./screens/UserEditScreen";
+import ProductListScreen from "./screens/ProductListScreen";
+import ProductCreateScreen from "./screens/ProductCreateScreen";
+import ProductEditScreen from "./screens/ProductEditScreen";
+import ContactScreen from "./screens/ContactScreen";
+import AboutHoneyScreen from "./screens/AboutHoneyScreen";
+import AboutUsScreen from "./screens/AboutUsScreen";
+import GeneralConditionsScreen from "./screens/GeneralConditionsScreen";
+import OrderListScreen from "./screens/OrderListScreen";
+import SearchScreen from "./screens/SearchScreen";
+import InfoPaymentScreen from "./screens/InfoPaymentScreen";
+import Footer from "./components/ui/Footer";
+import BottomNav from "./components/ui/BottomNav";
+import BottomNavMargin from "./components/ui/BottomNavMargin";
+import ScrollToTop from "./components/ui/ScrollToTop";
+import Brands from "./components/Brands";
+import NavbarMargin from "./components/ui/NavbarMargin";
 
 function App() {
-  const isMobile = useMediaQuery("(max-width:600px)")
-  const [openDrawer, setOpenDrawer] = useState(false)
+  const isMobile = useMediaQuery("(max-width:600px)");
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   return (
     <ThemeProvider theme={theme}>
@@ -43,6 +44,7 @@ function App() {
         <ScrollToTop>
           <Fragment>
             <Header openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
+            <NavbarMargin />
             <Switch>
               <Route path="/category/:id" component={CategoryScreen} exact />
               <Route
@@ -130,7 +132,7 @@ function App() {
         </ScrollToTop>
       </Router>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;

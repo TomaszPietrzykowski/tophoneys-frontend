@@ -1,14 +1,14 @@
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    marginTop: "15rem",
+    padding: "3rem",
   },
-}))
+}));
 
 const InfoPaymentScreen = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <div className={classes.container}>
       <h1>Payment and shipping</h1>
@@ -46,7 +46,7 @@ const InfoPaymentScreen = () => {
         info@tophoneys.com
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default InfoPaymentScreen
+export default InfoPaymentScreen;

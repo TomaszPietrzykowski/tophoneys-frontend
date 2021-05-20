@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from "react"
-import { makeStyles } from "@material-ui/styles"
-import { useDispatch, useSelector } from "react-redux"
-import { listProductDetails } from "../actions/productActions"
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { listProductDetails } from "../actions/productActions";
 // import { Link } from "react-router-dom";
-import Grid from "@material-ui/core/Grid"
-import Loader from "../components/Loader"
-import Message from "../components/Message"
-import Breadcrumbs from "../components/CustomBreadcrumbs"
-import Counter from "../components/Counter"
-import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
-import RelatedProducts from "../components/RelatedProducts"
+import Grid from "@material-ui/core/Grid";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import Breadcrumbs from "../components/CustomBreadcrumbs";
+import Counter from "../components/Counter";
+import CartIcon from "@material-ui/icons/ShoppingCartOutlined";
+import RelatedProducts from "../components/RelatedProducts";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: "3rem",
-    marginTop: "10rem",
     ...theme.utils.container,
     ...theme.typography.mont,
   },
@@ -155,28 +154,28 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-}))
+}));
 
 const ProductScreen = ({ match, history }) => {
-  const classes = useStyles()
-  const dispatch = useDispatch()
-  const [qty, setQty] = useState(1)
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const [qty, setQty] = useState(1);
 
   const { loading, error, product } = useSelector(
     (state) => state.productDetails
-  )
+  );
 
   useEffect(() => {
-    dispatch(listProductDetails(match.params.id))
-  }, [match, dispatch])
+    dispatch(listProductDetails(match.params.id));
+  }, [match, dispatch]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`)
-  }
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
   const disabledButtonInline =
     product.countInStock === 0
       ? { color: "white", background: "rgba(0,0,0,.25", cursor: "default" }
-      : { color: "white" }
+      : { color: "white" };
   return (
     <>
       <div className={classes.container}>
@@ -305,7 +304,7 @@ const ProductScreen = ({ match, history }) => {
         )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ProductScreen
+export default ProductScreen;

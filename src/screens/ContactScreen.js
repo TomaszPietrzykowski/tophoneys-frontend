@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { Button, TextField } from "@material-ui/core"
-import { makeStyles, withStyles } from "@material-ui/styles"
-import Message from "../components/Message"
-import Loader from "../components/Loader"
-import { login } from "../actions/userActions"
-import NavbarMargin from "../components/ui/NavbarMargin"
-import logo from "../assets/logotranspbg.png"
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, TextField } from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/styles";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
+import { login } from "../actions/userActions";
+import logo from "../assets/logotranspbg.png";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -98,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
     // color: theme.palette.text.primary,
     margin: "6rem 0 2rem 0",
   },
-}))
+}));
 
 const CssTextField = withStyles((theme) => ({
   root: {
@@ -117,28 +116,27 @@ const CssTextField = withStyles((theme) => ({
       },
     },
   },
-}))(TextField)
+}))(TextField);
 
 const ContactScreen = ({ history }) => {
-  const classes = useStyles()
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [content, setContent] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const classes = useStyles();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const sendEmail = async (name, email, content) => {
-    console.log("send email", name, email, content)
-  }
+    console.log("send email", name, email, content);
+  };
 
   const submitHandler = (e) => {
-    e.preventDefault()
-    sendEmail(name, email, content)
-  }
+    e.preventDefault();
+    sendEmail(name, email, content);
+  };
 
   return (
     <>
-      <NavbarMargin />
       <div className={classes.container}>
         <main className={classes.content}>
           <h1 className={classes.title}>Contact Us</h1>
@@ -178,11 +176,9 @@ const ContactScreen = ({ history }) => {
                   id="content"
                   type="text"
                   label="Message"
-                  // style={{ width: 560 }}
                   className={classes.textarea}
                   required
                   multiline={10}
-                  multiline
                   rows={16}
                   defaultValue="Your message here..."
                   variant="outlined"
@@ -225,7 +221,7 @@ const ContactScreen = ({ history }) => {
         </main>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ContactScreen
+export default ContactScreen;
