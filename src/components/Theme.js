@@ -44,17 +44,23 @@ export default createMuiTheme({
       alignItems: "center",
       justifyContent: "center",
     },
-    // colStart: {
-    //   display: "flex",
-    //   flexDirection: "column",
-    //   alignItems: "flex-start",
-    //   justifyContent: "flex-start",
-    // },
+    colStart: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      justifyContent: "flex-start",
+    },
     row: {
       display: "flex",
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
+    },
+    rowStart: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "flex-start",
+      justifyContent: "flex-start",
     },
   },
   utils: {

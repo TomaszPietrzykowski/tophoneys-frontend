@@ -144,22 +144,43 @@ const useStyles = makeStyles((theme) => ({
   navLink: {
     color: theme.palette.text.primary,
     textDecoration: "none",
+    "&:hover": {
+      color: theme.palette.primary.dark,
+    },
   },
   dropdown: {
     backgroundColor: theme.palette.common.white,
     boxShadow: theme.palette.shadows.primary,
+    paddingTop: ".9rem",
+    paddingBottom: ".9rem",
   },
   submenu: {
     ...theme.typography.prosto,
     fontSize: ".9rem",
-    padding: ".6rem 3rem .6rem 1.5rem",
-    // textTransform: "uppercase",
+    padding: ".9rem 3rem .9rem 2rem",
+    textTransform: "uppercase",
+    "&:hover": {
+      color: theme.palette.primary.dark,
+    },
+  },
+  submenu2: {
+    ...theme.typography.mont,
+    fontSize: ".9rem",
+    fontWeight: 300,
+    padding: ".9rem 3rem .9rem 2rem",
+    "&:hover": {
+      color: theme.palette.primary.dark,
+    },
   },
 
   expandIcon: {
-    color: theme.palette.text.secondary,
-    fontSize: "0.85rem",
-    margin: "3px 0px 0px 5px",
+    color: theme.palette.text.primary,
+    opacity: 0.8,
+    fontSize: "1.2rem",
+  },
+
+  dropdownFlex: {
+    ...theme.flex.rowStart,
   },
 
   // -------------------------------------------- DRAWER
@@ -217,8 +238,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
   const [openAdmin, setOpenAdmin] = useState(false)
   const [anchorElHoneys, setAnchorElHoneys] = useState(null)
   const [openHoneys, setOpenHoneys] = useState(false)
-  const [anchorElBees, setAnchorElBees] = useState(null)
-  const [openBees, setOpenBees] = useState(false)
   const [anchorElTea, setAnchorElTea] = useState(null)
   const [openTea, setOpenTea] = useState(false)
 
@@ -246,14 +265,6 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
   const handleCloseHoneys = (e) => {
     setAnchorElHoneys(null)
     setOpenHoneys(false)
-  }
-  const handleClickBees = (e) => {
-    setAnchorElBees(e.currentTarget)
-    setOpenBees(true)
-  }
-  const handleCloseBees = (e) => {
-    setAnchorElBees(null)
-    setOpenBees(false)
   }
   const handleClickTea = (e) => {
     setAnchorElTea(e.currentTarget)
@@ -548,154 +559,228 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         onMouseLeave={handleCloseHoneys}
                         onMouseOver={() => setOpenHoneys(true)}
                         disablePadding
+                        className={classes.dropdownFlex}
                       >
-                        <MenuItem
-                          component={Link}
-                          to="/category/honeys"
-                          classes={{ root: classes.submenu }}
-                          value="honeys"
-                          onClick={(e) => {
-                            handleCloseHoneys(e)
-                          }}
-                        >
-                          All honeys
-                        </MenuItem>
-                        <MenuItem
-                          component={Link}
-                          to="/category/creamed"
-                          classes={{ root: classes.submenu }}
-                          value="nl"
-                          onClick={(e) => {
-                            handleCloseHoneys(e)
-                          }}
-                        >
-                          Creamed honeys
-                        </MenuItem>
-                        <MenuItem
-                          component={Link}
-                          to="/category/additives"
-                          classes={{ root: classes.submenu }}
-                          value="nl"
-                          onClick={(e) => {
-                            handleCloseHoneys(e)
-                          }}
-                        >
-                          Honeys with additives
-                        </MenuItem>
-                        <MenuItem
-                          component={Link}
-                          to="/category/accessories"
-                          classes={{ root: classes.submenu }}
-                          value="nl"
-                          onClick={(e) => {
-                            handleCloseHoneys(e)
-                          }}
-                        >
-                          Accessories
-                        </MenuItem>
+                        <div>
+                          <MenuItem
+                            component={Link}
+                            to="/category/purehoneys"
+                            classes={{ root: classes.submenu }}
+                            value="purehoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Pure honeys:
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/acaciahoneys"
+                            classes={{ root: classes.submenu2 }}
+                            value="acaciahoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Acacia honey
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/sunflowerhoneys"
+                            classes={{ root: classes.submenu2 }}
+                            value="sunflowerhoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Sunflower honey
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/lindenhoneys"
+                            classes={{ root: classes.submenu2 }}
+                            value="lindenhoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Linden honey
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/buckwheathoneys"
+                            classes={{ root: classes.submenu2 }}
+                            value="buckwheathoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Buckwheat honey
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/mulitiflowerhoneys"
+                            classes={{ root: classes.submenu2 }}
+                            value="mulitiflowerhoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Multiflorous honey
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/goldenrodhoneys"
+                            classes={{ root: classes.submenu2 }}
+                            value="goldenrodhoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Goldenrod honeys
+                          </MenuItem>
+                        </div>
+                        <div>
+                          <MenuItem
+                            component={Link}
+                            to="/category/foresthoneys"
+                            classes={{ root: classes.submenu2 }}
+                            value="foresthoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Forest honey
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/raspberryhoneys"
+                            classes={{ root: classes.submenu2 }}
+                            value="raspberryhoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Raspberry honey
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/corianderhoneys"
+                            classes={{ root: classes.submenu2 }}
+                            value="corianderhoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Coriander honey
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/heatherhoneys"
+                            classes={{ root: classes.submenu2 }}
+                            value="heatherhoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Heather honey
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/dandelionhoneys"
+                            classes={{ root: classes.submenu2 }}
+                            value="dandelionhoneys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Dandelion honey
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/coniferoushoneydew"
+                            classes={{ root: classes.submenu2 }}
+                            value="coniferoushoneyfew"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Coniferous honeydew
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/deciduoushoneydew"
+                            classes={{ root: classes.submenu2 }}
+                            value="deciduoushoneydew"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Deciduous honeydew
+                          </MenuItem>
+                        </div>
+                        <div>
+                          <MenuItem
+                            component={Link}
+                            to="/category/creamed"
+                            classes={{ root: classes.submenu }}
+                            value="nl"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Creamed honeys
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/additives"
+                            classes={{ root: classes.submenu }}
+                            value="nl"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Honeys with additives
+                          </MenuItem>
+
+                          <MenuItem
+                            component={Link}
+                            to="/category/accessories"
+                            classes={{ root: classes.submenu }}
+                            value="nl"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            Accessories
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/honeys"
+                            classes={{ root: classes.submenu }}
+                            value="honeys"
+                            onClick={(e) => {
+                              handleCloseHoneys(e)
+                            }}
+                          >
+                            All honeys
+                          </MenuItem>
+                        </div>
                       </MenuList>
                     </ClickAwayListener>
                   </Paper>
                 </Grow>
               )}
             </Popper>
-            <div
-              aria-owns={anchorElBees ? "dropdown-bees" : undefined}
-              aria-haspopup={anchorElBees ? true : undefined}
-              onMouseOver={(e) => handleClickBees(e)}
-              onMouseLeave={handleCloseBees}
-            >
+            <div>
               <Link to="/category/beeproducts" className={classes.navLink}>
                 <li className={classes.tab}>
-                  <div>Bees products</div>
-                  <ExpandIcon className={classes.expandIcon} />
+                  <div>Bee products</div>
                 </li>
               </Link>
             </div>
-
-            <Popper
-              open={openBees}
-              anchorEl={anchorElBees}
-              role={undefined}
-              transition
-              disablePortal
-              placement="bottom-start"
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  style={{
-                    transformOrigin: "top left",
-                  }}
-                >
-                  <Paper className={classes.dropdown} elevation={0}>
-                    <ClickAwayListener onClickAway={handleCloseBees}>
-                      <MenuList
-                        autoFocusItem={false}
-                        id="dropdown-bees"
-                        onKeyDown={handleListKeyDown}
-                        onMouseLeave={handleCloseBees}
-                        onMouseOver={() => setOpenBees(true)}
-                        disablePadding
-                      >
-                        <MenuItem
-                          component={Link}
-                          to="/category/beefeathers"
-                          classes={{ root: classes.submenu }}
-                          onClick={(e) => {
-                            handleCloseBees(e)
-                          }}
-                        >
-                          Bee feathers
-                        </MenuItem>
-                        <MenuItem
-                          component={Link}
-                          to="/category/propolis"
-                          classes={{ root: classes.submenu }}
-                          onClick={(e) => {
-                            handleCloseBees(e)
-                          }}
-                        >
-                          Propolis
-                        </MenuItem>
-                        <MenuItem
-                          component={Link}
-                          to="/category/pollen"
-                          classes={{ root: classes.submenu }}
-                          onClick={(e) => {
-                            handleCloseBees(e)
-                          }}
-                        >
-                          Bee pollen
-                        </MenuItem>
-                        <MenuItem
-                          component={Link}
-                          to="/category/beemilk"
-                          classes={{ root: classes.submenu }}
-                          onClick={(e) => {
-                            handleCloseBees(e)
-                          }}
-                        >
-                          Bee milk
-                        </MenuItem>
-                        <MenuItem
-                          component={Link}
-                          to="/category/beewaxcandles"
-                          classes={{ root: classes.submenu }}
-                          onClick={(e) => {
-                            handleCloseBees(e)
-                          }}
-                        >
-                          Beewax candles
-                        </MenuItem>
-                      </MenuList>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
             <div
-              aria-owns={anchorElBees ? "dropdown-tea" : undefined}
+              aria-owns={"dropdown-tea"}
               aria-haspopup={anchorElTea ? true : undefined}
               onMouseOver={(e) => handleClickTea(e)}
               onMouseLeave={handleCloseTea}
@@ -732,47 +817,92 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         onMouseLeave={handleCloseTea}
                         onMouseOver={() => setOpenTea(true)}
                         disablePadding
+                        className={classes.dropdownFlex}
                       >
-                        <MenuItem
-                          component={Link}
-                          to="/category/teas"
-                          className={classes.submenu}
-                          onClick={(e) => {
-                            handleCloseTea(e)
-                          }}
-                        >
-                          All teas
-                        </MenuItem>
-                        <MenuItem
-                          component={Link}
-                          to="/category/blackteas"
-                          className={classes.submenu}
-                          onClick={(e) => {
-                            handleCloseTea(e)
-                          }}
-                        >
-                          Black tea
-                        </MenuItem>
-                        <MenuItem
-                          component={Link}
-                          to="/category/greenteas"
-                          className={classes.submenu}
-                          onClick={(e) => {
-                            handleCloseTea(e)
-                          }}
-                        >
-                          Green tea
-                        </MenuItem>
-                        <MenuItem
-                          component={Link}
-                          to="/category/fruittea"
-                          className={classes.submenu}
-                          onClick={(e) => {
-                            handleCloseTea(e)
-                          }}
-                        >
-                          Fruit tea
-                        </MenuItem>
+                        <div>
+                          <MenuItem
+                            component={Link}
+                            to="/category/tea"
+                            className={classes.submenu}
+                            onClick={(e) => {
+                              handleCloseTea(e)
+                            }}
+                          >
+                            All teas
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/blacktea"
+                            className={classes.submenu}
+                            onClick={(e) => {
+                              handleCloseTea(e)
+                            }}
+                          >
+                            Black tea
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/fruittea"
+                            className={classes.submenu}
+                            onClick={(e) => {
+                              handleCloseTea(e)
+                            }}
+                          >
+                            Fruit tea
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/greenteas"
+                            className={classes.submenu}
+                            onClick={(e) => {
+                              handleCloseTea(e)
+                            }}
+                          >
+                            Green tea
+                          </MenuItem>
+                        </div>
+                        <div>
+                          <MenuItem
+                            component={Link}
+                            to="/category/functionaltea"
+                            className={classes.submenu}
+                            onClick={(e) => {
+                              handleCloseTea(e)
+                            }}
+                          >
+                            Functional tea
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/rooibos"
+                            className={classes.submenu}
+                            onClick={(e) => {
+                              handleCloseTea(e)
+                            }}
+                          >
+                            Rooibos
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/yerbamate"
+                            className={classes.submenu}
+                            onClick={(e) => {
+                              handleCloseTea(e)
+                            }}
+                          >
+                            Yerba Mate
+                          </MenuItem>
+                          <MenuItem
+                            component={Link}
+                            to="/category/cannedtea"
+                            className={classes.submenu}
+                            onClick={(e) => {
+                              handleCloseTea(e)
+                            }}
+                          >
+                            Canned tea
+                          </MenuItem>
+                        </div>
                       </MenuList>
                     </ClickAwayListener>
                   </Paper>

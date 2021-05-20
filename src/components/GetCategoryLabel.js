@@ -13,14 +13,22 @@ const getCategoryLabel = (string) => {
       break
     case "beeproducts":
       return "Bee Products"
-    case "teas":
+    case "tea":
       return "Tea"
-    case "blackteas":
+    case "blacktea":
       return "Black Tea"
-    case "greenteas":
+    case "greentea":
       return "Green Tea"
-    case "fruitteas":
+    case "fruittea":
       return "Fruit Tea"
+    case "functionaltea":
+      return "Functional Tea"
+    case "cannedtea":
+      return "Canned Tea"
+    case "rooibos":
+      return "Rooibos"
+    case "yerbamate":
+      return "Yerba Mate"
     default:
       output = string.toString()
   }

@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
     "& > * + *": {
       marginTop: theme.spacing(2),
       fontFamily: "Montserrat, sans-serif",
+      fontWeight: 300,
     },
     "&:first-child > *": {
       paddingRight: "1.6rem",
@@ -32,7 +33,13 @@ const Message = ({ variant = "info", message, onClose, action }) => {
     <div className={classes.root}>
       <Alert
         severity={variant}
-        color={variant === "error" ? "error" : "warning"}
+        color={
+          variant === "error"
+            ? "error"
+            : variant === "success"
+            ? "success"
+            : "warning"
+        }
         variant="outlined"
         onClose={onClose}
         action={action}
