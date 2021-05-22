@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { makeStyles } from "@material-ui/styles"
 import { useDispatch, useSelector } from "react-redux"
 import { listProductDetails } from "../actions/productActions"
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 import Grid from "@material-ui/core/Grid"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
@@ -80,8 +80,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.4rem",
     color: "red",
     opacity: 0.5,
-    // textDecoration: "line-through",
-    // border: "1px solid blue",
     position: "relative",
     "&::after": {
       content: "''",
@@ -104,6 +102,26 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 3rem",
     color: theme.palette.text.secondary,
   },
+  capacitySelect: {
+    marginLeft: ".3rem",
+    padding: ".2rem .5rem",
+    ...theme.typography.mont,
+    fontSize: "1rem",
+    color: theme.palette.text.secondary,
+    borderColor: "rgba(0,0,0,.12)",
+    borderRadius: 4,
+    outline: "none",
+    "&:focus": {
+      borderColor: theme.palette.secondary.main,
+    },
+    "&:active": {
+      borderColor: theme.palette.secondary.main,
+    },
+  },
+  // capacityOption: {
+  //   color: "green",
+  //   textTransform: "uppercase",
+  // },
   detail: {
     color: theme.palette.text.secondary,
     fontSize: "1rem",
@@ -194,6 +212,10 @@ const ProductScreen = ({ match, history }) => {
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`)
   }
+  const handleCapacitySelect = (e) => {
+    history.push(`/product/${e.target.value}`)
+  }
+
   const disabledButtonInline =
     product.countInStock === 0
       ? { color: "white", background: "rgba(0,0,0,.25", cursor: "default" }
@@ -252,17 +274,57 @@ const ProductScreen = ({ match, history }) => {
                           </div>
                         )}
                       </div>
+                      {product.capacityDropdown &&
+                      product.capacityDropdown.length > 0 ? (
+                        <p className={classes.detail}>
+                          Contents:{" "}
+                          {
+                            <select
+                              className={classes.capacitySelect}
+                              label={product.capacity}
+                              onChange={handleCapacitySelect}
+                            >
+                              <option
+                                className={classes.capacityOption}
+                                value={product._id}
+                              >
+                                {product.capacity}
+                              </option>
+                              {product.capacityDropdown.map((obj) => (
+                                <option
+                                  className={classes.capacityOption}
+                                  key={obj.productId}
+                                  value={obj.productId}
+                                >
+                                  {obj.label}
+                                </option>
+                              ))}
+                            </select>
+                          }
+                        </p>
+                      ) : (
+                        <p className={classes.detail}>
+                          Contents: {product.capacity}
+                        </p>
+                      )}
                       {product.countryOfOrigin && (
                         <p className={classes.detail}>
-                          Country: {product.countryOfOrigin}
+                          Country:{" "}
+                          <span style={{ marginLeft: ".3rem" }}>
+                            {product.countryOfOrigin}
+                          </span>
                         </p>
                       )}
                       <p className={classes.detail}>
                         Status:{" "}
                         {product.countInStock > 0 ? (
-                          <span style={{ color: "green" }}>{"In Stock"}</span>
+                          <span style={{ color: "green", marginLeft: ".3rem" }}>
+                            {"In Stock"}
+                          </span>
                         ) : (
-                          <span style={{ color: "red" }}>{"Out of Stock"}</span>
+                          <span style={{ color: "red", marginLeft: ".3rem" }}>
+                            {"Out of Stock"}
+                          </span>
                         )}
                       </p>
 
