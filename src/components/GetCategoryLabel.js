@@ -1,16 +1,12 @@
 const getCategoryLabel = (string) => {
   if (!string) return
-  let output = ""
   switch (string.toString()) {
     case "honeys":
-      output = "Honeys"
-      break
+      return "Honeys"
     case "purehoneys":
-      output = "Pure Honeys"
-      break
+      return "Pure Honeys"
     case "creamedhoneys":
-      output = "Creamed Honeys"
-      break
+      return "Creamed Honeys"
     case "beeproducts":
       return "Bee Products"
     case "tea":
@@ -30,9 +26,7 @@ const getCategoryLabel = (string) => {
     case "yerbamate":
       return "Yerba Mate"
     default:
-      output = string.toString()
+      return string.toString()
   }
-
-  return output
 }
 module.exports = getCategoryLabel

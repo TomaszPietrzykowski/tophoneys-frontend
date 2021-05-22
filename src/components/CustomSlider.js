@@ -40,6 +40,7 @@ const CustomSlider = ({ timeout, slidesAtOnce, products }) => {
           capacity={product.capacity}
           category={product.category}
           price={product.price.toFixed(2)}
+          previousPrice={product.previousPrice.toFixed(2)}
         />
       ))}
     </div>

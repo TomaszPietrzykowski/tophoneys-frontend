@@ -65,25 +65,12 @@ const Featured = ({ match }) => {
                   slidesAtOnce={slides}
                   title={product.name}
                   price={product.price}
+                  previousPrice={product.previousPrice}
                   img={product.image}
                   capacity={product.capacity}
                   isSale={product.isPromo}
                   isFeatured={true}
                 />
-                // <div className={classes.productTab} key={product._id}>
-                //   <Link to={`/product/${product._id}`} className={classes.link}>
-                //     <img
-                //       src={`${product.image}`}
-                //       alt={product.name}
-                //       style={{ width: 230, height: 230, margin: 10 }}
-                //     />
-                //     <h3 style={{ margin: 10 }}>{product.name}</h3>
-                //     <p style={{ margin: 10 }}>
-                //       &euro; {product.price.toFixed(2)}
-                //     </p>
-                //     <p style={{ margin: 10 }}>{product.image}</p>
-                //   </Link>
-                // </div>
               )
             })}
         </div>

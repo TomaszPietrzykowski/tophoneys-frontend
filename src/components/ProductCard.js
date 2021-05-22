@@ -86,12 +86,36 @@ const useStyles = makeStyles((theme) => ({
     // border: "1px solid blue",
   },
   price: {
+    display: "flex",
+    alignItems: "flex-start",
     margin: "auto 0 0.8rem 0",
     fontSize: "1.9rem",
     color: theme.palette.text.secondary,
     // border: "1px solid blue",
     letterSpacing: 1,
     fontWeight: 300,
+    flexWrap: "no-wrap",
+    overflow: "hidden",
+  },
+  previousPrice: {
+    marginLeft: ".5rem",
+    padding: "0.3rem",
+    fontSize: "1.1rem",
+    color: "red",
+    opacity: 0.5,
+    // textDecoration: "line-through",
+    // border: "1px solid blue",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      position: "absolute",
+      top: "50%",
+      left: 0,
+      width: "100%",
+      height: 1,
+      backgroundColor: "red",
+      transform: "rotate(-10deg)",
+    },
   },
   buttonsContainer: {
     // border: "1px solid blue",
@@ -162,8 +186,15 @@ const ProductCard = ({ product }) => {
             <div className={classes.title}>{product.name}</div>
             <div className={classes.capacity}>{product.capacity}</div>
             <div className={classes.price}>
-              <span style={{ opacity: 0.45 }}>&euro; </span>
-              {product.price.toFixed(2)}
+              <div>
+                <span style={{ opacity: 0.45 }}>&euro; </span>
+                {product.price.toFixed(2)}
+              </div>
+              {product.isPromo && product.previousPrice > 0 && (
+                <div className={classes.previousPrice}>
+                  {product.previousPrice.toFixed(2)}
+                </div>
+              )}
             </div>
             <div className={classes.buttonsContainer}>
               <div className={classes.cartBtn}>

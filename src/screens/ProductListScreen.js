@@ -133,7 +133,7 @@ const ProductListScreen = ({ history, match }) => {
                         &euro; {product.price.toFixed(2)}
                       </StyledTableCell>
                       <StyledTableCell component="th" scope="row">
-                        {product.isSale ? (
+                        {product.isPromo ? (
                           <CheckIcon className={classes.checkIcon} />
                         ) : (
                           <CancelIcon className={classes.cancelIcon} />

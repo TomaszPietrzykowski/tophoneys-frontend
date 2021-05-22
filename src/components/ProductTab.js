@@ -89,12 +89,36 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.disabled,
   },
   price: {
+    display: "flex",
+    alignItems: "flex-start",
     marginTop: "auto",
     marginBottom: ".8rem",
     fontSize: "1.8rem",
     fontWeight: 300,
     color: theme.palette.text.secondary,
     letterSpacing: 1,
+    flexWrap: "no-wrap",
+    overflow: "hidden",
+  },
+  previousPrice: {
+    marginLeft: ".5rem",
+    padding: "0.3rem",
+    fontSize: "1rem",
+    color: "red",
+    opacity: 0.5,
+    // textDecoration: "line-through",
+    // border: "1px solid blue",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      position: "absolute",
+      top: "50%",
+      left: 0,
+      width: "100%",
+      height: 1,
+      backgroundColor: "red",
+      transform: "rotate(-10deg)",
+    },
   },
   buttonsContainer: {
     display: "flex",
@@ -149,6 +173,7 @@ const ProductTab = ({
   category,
   id,
   price,
+  previousPrice,
   slidesAtOnce,
   activeIndex,
   isFeatured,
@@ -195,8 +220,15 @@ const ProductTab = ({
             <div className={classes.title}>{title}</div>
             <div className={classes.capacity}>{capacity}</div>
             <div className={classes.price}>
-              <span style={{ opacity: 0.45 }}>&euro; </span>
-              {Number(price).toFixed(2)}
+              <div>
+                <span style={{ opacity: 0.45 }}>&euro;&nbsp;</span>
+                {Number(price).toFixed(2)}
+              </div>
+              {isSale && previousPrice > 0 && (
+                <div className={classes.previousPrice}>
+                  {Number(previousPrice).toFixed(2)}
+                </div>
+              )}
             </div>
             <div className={classes.buttonsContainer}>
               <div className={classes.cartBtn}>

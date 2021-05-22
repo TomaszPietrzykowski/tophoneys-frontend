@@ -6,7 +6,6 @@ import { makeStyles, withStyles } from "@material-ui/styles"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
 import { register } from "../actions/userActions"
-import NavbarMargin from "../components/ui/NavbarMargin"
 import { USER_REGISTER_ERROR_RESET } from "../constants/userConstants"
 
 const useStyles = makeStyles((theme) => ({
@@ -131,7 +130,6 @@ const RegisterScreen = ({ location, history }) => {
 
   return (
     <>
-      <NavbarMargin />
       <div className={classes.container}>
         <main className={classes.content}>
           <h1 className={classes.title}>Create Account</h1>
