@@ -6,7 +6,6 @@ import Loader from "../components/Loader"
 import Message from "../components/Message"
 import Paginate from "../components/Paginate"
 import ProductCard from "../components/ProductCard"
-import NavbarMargin from "../components/ui/NavbarMargin"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -56,7 +55,6 @@ const SearchScreen = ({ match }) => {
 
   return (
     <>
-      <NavbarMargin />
       <main className={classes.container}>
         {loading ? (
           <Loader />

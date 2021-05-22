@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/styles";
-import Button from "@material-ui/core/Button";
-import { getProductsByCategory } from "../actions/productActions";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import Paginate from "../components/Paginate";
-import ProductCard from "../components/ProductCard";
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { makeStyles } from "@material-ui/styles"
+import Button from "@material-ui/core/Button"
+import { getProductsByCategory } from "../actions/productActions"
+import Loader from "../components/Loader"
+import Message from "../components/Message"
+import Paginate from "../components/Paginate"
+import ProductCard from "../components/ProductCard"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,22 +30,22 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "wrap",
     overflow: "wrap",
   },
-}));
+}))
 
 const CategoryScreen = ({ match, history }) => {
-  const classes = useStyles();
+  const classes = useStyles()
   // const isTablet = useMediaQuery("(max-width: 990px)")
   // const isMobile = useMediaQuery("(max-width: 600px)")
   // const slides = isMobile ? 2 : isTablet ? 3 : 4
   const { loading, error, products, page, pages } = useSelector(
     (state) => state.productCategory
-  );
-  const dispatch = useDispatch();
-  const id = match.params.id;
-  const pageNumber = match.params.pageNumber || 1;
+  )
+  const dispatch = useDispatch()
+  const id = match.params.id
+  const pageNumber = match.params.pageNumber || 1
   useEffect(() => {
-    dispatch(getProductsByCategory(id, pageNumber));
-  }, [id, pageNumber, dispatch]);
+    dispatch(getProductsByCategory(id, pageNumber))
+  }, [id, pageNumber, dispatch])
 
   return (
     <>
@@ -72,7 +72,7 @@ const CategoryScreen = ({ match, history }) => {
           <>
             <div className={classes.flex}>
               {products.map((product) => {
-                return <ProductCard product={product} />;
+                return <ProductCard key={product._id} product={product} />
               })}
             </div>
             <Paginate id={id} page={page} pages={pages} url="category" />
@@ -80,7 +80,7 @@ const CategoryScreen = ({ match, history }) => {
         )}
       </main>
     </>
-  );
-};
+  )
+}
 
-export default CategoryScreen;
+export default CategoryScreen

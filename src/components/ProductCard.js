@@ -163,9 +163,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ProductCard = ({ product }) => {
   const classes = useStyles()
-  console.log(product.name)
-
-  //   const slideWidth = 100 / 4
 
   return (
     <div className={classes.root}>

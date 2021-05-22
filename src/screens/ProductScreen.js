@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { makeStyles } from "@material-ui/styles"
 import { useDispatch, useSelector } from "react-redux"
 import { listProductDetails } from "../actions/productActions"
-import { Link } from "react-router-dom"
 import Grid from "@material-ui/core/Grid"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
@@ -69,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   price: {
     margin: "1.6rem 0",
     fontWeight: 300,
-    fontSize: "2.4rem",
+    fontSize: "2.6rem",
     color: theme.palette.text.secondary,
     display: "flex",
     alignItems: "flex-start",

@@ -57,9 +57,9 @@ const Featured = ({ match }) => {
           {products
             .filter((p, i) => i < slides)
             .map((product) => {
-              console.log(product.price)
               return (
                 <ProductTab
+                  key={product._id}
                   id={product._id}
                   category={product.category}
                   slidesAtOnce={slides}

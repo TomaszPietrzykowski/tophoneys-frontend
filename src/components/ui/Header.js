@@ -79,6 +79,18 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "transparent",
     },
+    position: "relative",
+  },
+  itemsBadge: {
+    ...theme.flex.col,
+    position: "absolute",
+    top: 8,
+    right: 5,
+    borderRadius: "50%",
+    padding: ".15rem .35rem",
+    backgroundColor: theme.palette.secondary.main,
+    color: "white",
+    fontSize: ".6rem",
   },
   username: {
     ...theme.typography.prosto,
@@ -233,6 +245,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const { userInfo } = useSelector((state) => state.userLogin)
+  const { cartItems } = useSelector((state) => state.cart)
 
   // dropdown states:
   const [anchorElUser, setAnchorElUser] = useState(null)
@@ -322,6 +335,13 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
               <Link to="/cart">
                 <IconButton className={classes.iconButton}>
                   <CartIcon className={classes.sideIconCart} />
+                  {cartItems && cartItems.length > 0 && (
+                    <div className={classes.itemsBadge}>
+                      <span>
+                        {cartItems.reduce((acc, it) => acc + 1 * it.qty, 0)}
+                      </span>
+                    </div>
+                  )}
                 </IconButton>
               </Link>
               {userInfo && userInfo.isAdmin && (

@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Button, TextField } from "@material-ui/core";
-import { makeStyles, withStyles } from "@material-ui/styles";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import { login } from "../actions/userActions";
-import logo from "../assets/logotranspbg.png";
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
+import { Button, TextField } from "@material-ui/core"
+import { makeStyles, withStyles } from "@material-ui/styles"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import logo from "../assets/logotranspbg.png"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -97,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
     // color: theme.palette.text.primary,
     margin: "6rem 0 2rem 0",
   },
-}));
+}))
 
 const CssTextField = withStyles((theme) => ({
   root: {
@@ -116,24 +114,31 @@ const CssTextField = withStyles((theme) => ({
       },
     },
   },
-}))(TextField);
+}))(TextField)
 
-const ContactScreen = ({ history }) => {
-  const classes = useStyles();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+const ContactScreen = () => {
+  const classes = useStyles()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [content, setContent] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   const sendEmail = async (name, email, content) => {
-    console.log("send email", name, email, content);
-  };
+    try {
+      setLoading(true)
+      console.log("send email", name, email, content)
+      setLoading(false)
+    } catch (err) {
+      setError(err)
+      setLoading(false)
+    }
+  }
 
   const submitHandler = (e) => {
-    e.preventDefault();
-    sendEmail(name, email, content);
-  };
+    e.preventDefault()
+    sendEmail(name, email, content)
+  }
 
   return (
     <>
@@ -178,9 +183,8 @@ const ContactScreen = ({ history }) => {
                   label="Message"
                   className={classes.textarea}
                   required
-                  multiline={10}
+                  multiline
                   rows={16}
-                  defaultValue="Your message here..."
                   variant="outlined"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
@@ -221,7 +225,7 @@ const ContactScreen = ({ history }) => {
         </main>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ContactScreen;
+export default ContactScreen
