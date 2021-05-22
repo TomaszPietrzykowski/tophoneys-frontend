@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { makeStyles } from "@material-ui/styles"
 import { useDispatch, useSelector } from "react-redux"
 import { listProductDetails } from "../actions/productActions"
+import { addToCart } from "../actions/cartActions"
 import Grid from "@material-ui/core/Grid"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
@@ -209,7 +210,8 @@ const ProductScreen = ({ match, history }) => {
   }, [match, dispatch])
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`)
+    dispatch(addToCart(match.params.id, qty))
+    // history.push(`/cart/${match.params.id}?qty=${qty}`)
   }
   const handleCapacitySelect = (e) => {
     history.push(`/product/${e.target.value}`)
@@ -326,30 +328,16 @@ const ProductScreen = ({ match, history }) => {
                           </span>
                         )}
                       </p>
-
-                      {/* {product.brand && (
-                        <p className={classes.inStock}>
-                          Brand: {product.brand}
-                        </p>
-                      )} */}
                       {product.countInStock > 0 && (
                         <>
                           <p className={classes.detail}>Quantity: </p>
-                          <p className={classes.detail}>
+                          <div className={classes.detail}>
                             <Counter
                               count={qty}
                               max={product.countInStock}
                               setCount={setQty}
                             />
-                            {/* <input
-                              className={classes.input}
-                              type="number"
-                              value={qty}
-                              min={1}
-                              max={product.countInStock}
-                              onChange={(e) => setQty(Number(e.target.value))}
-                            /> */}
-                          </p>
+                          </div>
                         </>
                       )}
 

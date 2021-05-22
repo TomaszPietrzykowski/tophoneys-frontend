@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
     right: 5,
     borderRadius: "50%",
     padding: ".15rem .35rem",
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
     color: "white",
     fontSize: ".6rem",
   },

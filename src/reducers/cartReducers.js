@@ -4,6 +4,7 @@ import {
   CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
   CART_EMPTY_ITEMS,
+  CART_UPDATE_ITEM_QTY,
 } from "../constants/cartConstants"
 
 export const cartReducer = (
@@ -20,7 +21,9 @@ export const cartReducer = (
         return {
           ...state,
           cartItems: state.cartItems.map((ci) =>
-            ci.product === itemExists.product ? item : ci
+            ci.product === itemExists.product
+              ? { ...ci, qty: ci.qty + item.qty }
+              : ci
           ),
         }
       } else {
@@ -28,6 +31,13 @@ export const cartReducer = (
           ...state,
           cartItems: [...state.cartItems, item],
         }
+      }
+    case CART_UPDATE_ITEM_QTY:
+      return {
+        ...state,
+        cartItems: state.cartItems.map((ci) =>
+          ci.product === action.payload.product ? action.payload : ci
+        ),
       }
     case CART_REMOVE_ITEM:
       return {
