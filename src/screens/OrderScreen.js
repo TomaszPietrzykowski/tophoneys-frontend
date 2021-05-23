@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-// import { PayPalButton } from "react-paypal-button-v2"
 import { Link } from "react-router-dom"
 import { makeStyles } from "@material-ui/styles"
 import { Grid, Button } from "@material-ui/core"
 import { useSelector, useDispatch } from "react-redux"
 import Loader from "../components/Loader"
-import {
-  getOrderDetails,
-  // payOrder,
-  deliverOrder,
-} from "../actions/orderActions"
+import { getOrderDetails, deliverOrder } from "../actions/orderActions"
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
   ORDER_PAY_SUCCESS,
+  ORDER_PAY_FAIL,
 } from "../constants/orderConstants"
 import Message from "../components/Message"
 
@@ -118,14 +114,14 @@ const OrderScreen = ({ match, history }) => {
     window.paypal
       .Buttons({
         env: "sandbox", // Or 'production'
-        // Set up the payment:
+        // Set up the payment: call backend with order id, receive result with paypal payment id:
         createOrder: async function () {
           const { data } = await axios.post("/api/checkout/create", body, {
             headers: {
               "content-type": "application/json",
             },
           })
-          return data.result.id // Use the key sent by your server's response, ex. 'id' or 'token'
+          return data.result.id
         },
         // Execute the payment:
         // 1. Add an onApprove callback
@@ -144,36 +140,32 @@ const OrderScreen = ({ match, history }) => {
               return res.json()
             })
             .then(function (orderData) {
-              console.log(orderData)
+              // Check for errors:
+              const errorDetail =
+                Array.isArray(orderData.details) && orderData.details[0]
+
+              // 1. Recoverable errors: INSTRUMENT_DECLINED -> call actions.restart()
+              //    Recoverable state, per:
+              //    https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+              if (errorDetail && errorDetail.issue === "INSTRUMENT_DECLINED") {
+                return actions.restart()
+              }
+              // 2. Other non-recoverable errors:
+              if (errorDetail) {
+                if (errorDetail.description)
+                  console.log(errorDetail.description)
+                dispatch({
+                  type: ORDER_PAY_FAIL,
+                  payload: errorDetail,
+                })
+              }
+              // 3. Handle successful transaction
               if (orderData.result.status === "COMPLETED") {
                 dispatch({
                   type: ORDER_PAY_SUCCESS,
                   payload: data,
                 })
               }
-
-              // Three cases to handle:
-              //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
-              //   (2) Other non-recoverable errors -> Show a failure message
-              //   (3) Successful transaction -> Show confirmation or thank you
-
-              // This example reads a v2/checkout/orders capture response, propagated from the server
-              // You could use a different API or structure for your 'orderData'
-              // var errorDetail =
-              //   Array.isArray(orderData.details) && orderData.details[0]
-
-              // if (errorDetail && errorDetail.issue === "INSTRUMENT_DECLINED") {
-              //   return actions.restart() // Recoverable state, per:
-              //   // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
-              // }
-
-              // if (errorDetail) {
-              //   var msg = "Sorry, your transaction could not be processed."
-              //   if (errorDetail.description)
-              //     msg += "\n\n" + errorDetail.description
-              //   if (orderData.debug_id) msg += " (" + orderData.debug_id + ")"
-              //   return alert(msg) // Show a failure message
-              // }
             })
         },
       })
@@ -305,14 +297,6 @@ const OrderScreen = ({ match, history }) => {
                     &euro; {order.itemsPrice}
                   </Grid>
                 </Grid>
-                {/* <Grid container>
-            <Grid item md={6}>
-              Tax:
-            </Grid>
-            <Grid item md={6}>
-              &euro; {cart.taxPrice}
-            </Grid>
-          </Grid> */}
                 <Grid container>
                   <Grid item md={6} className={classes.mr}>
                     Shipping:
@@ -337,13 +321,6 @@ const OrderScreen = ({ match, history }) => {
                       <Loader />
                     ) : (
                       <div id="paypal-button-container"></div>
-
-                      // <PayPalButton
-                      //   amount={order.totalPrice}
-                      //   currency="EUR"
-                      //   shippingPreference="NO_SHIPPING"
-                      //   onSuccess={successPaymentHandler}
-                      // />
                     )}
                   </>
                 )}
