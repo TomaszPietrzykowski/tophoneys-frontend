@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/styles";
-import { useDispatch, useSelector } from "react-redux";
-import { Button, TextField } from "@material-ui/core";
-import { saveShippingAddress } from "../actions/cartActions";
-import CheckoutSteps from "../components/CheckoutSteps";
+import React, { useState } from "react"
+import { makeStyles } from "@material-ui/styles"
+import { useDispatch, useSelector } from "react-redux"
+import { Button, TextField } from "@material-ui/core"
+import { savePaymentMethod, saveShippingAddress } from "../actions/cartActions"
+import CheckoutSteps from "../components/CheckoutSteps"
+import { ORDER_ANONYMOUS_DATA } from "../constants/orderConstants"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -28,34 +29,66 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.dark,
     },
   },
-}));
+}))
 
 const ShippingScreen = ({ history }) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
+  const classes = useStyles()
+  const dispatch = useDispatch()
 
-  const cart = useSelector((state) => state.cart);
-  const { shippingAddress } = cart;
+  const cart = useSelector((state) => state.cart)
+  const { shippingAddress } = cart
+  // get contact data from anonymous customer
+  const [email, setEmail] = useState("")
+  const [name, setName] = useState("")
+  // get shipping  data
+  const [address, setAddress] = useState(shippingAddress.address || "")
+  const [city, setCity] = useState(shippingAddress.city || "")
+  const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || "")
+  const [country, setCountry] = useState(shippingAddress.country || "")
 
-  const [address, setAddress] = useState(shippingAddress.address || "");
-  const [city, setCity] = useState(shippingAddress.city || "");
-  const [postalCode, setPostalCode] = useState(
-    shippingAddress.postalCode || ""
-  );
-  const [country, setCountry] = useState(shippingAddress.country || "");
+  const { anonymousShoppingSelected } = useSelector(
+    (state) => state.orderAnonymous
+  )
 
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    dispatch(saveShippingAddress({ address, city, postalCode, country }));
-    history.push("/paymentmethod");
-  };
+    dispatch(saveShippingAddress({ address, city, postalCode, country }))
+
+    // dispatch save anonymous data
+    dispatch({ type: ORDER_ANONYMOUS_DATA, payload: { email, name } })
+
+    // dispatch save payment method
+    dispatch(savePaymentMethod("PayPal"))
+    history.push("/placeorder")
+  }
 
   return (
     <div className={classes.container}>
       <CheckoutSteps step1 />
       <h1>Shipping</h1>
       <form onSubmit={submitHandler} className={classes.form}>
+        {anonymousShoppingSelected && (
+          <>
+            <TextField
+              id="name"
+              label="Name"
+              variant="outlined"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <TextField
+              id="email"
+              label="Email"
+              variant="outlined"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </>
+        )}
         <TextField
           id="address"
           label="Address"
@@ -93,7 +126,7 @@ const ShippingScreen = ({ history }) => {
         </Button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ShippingScreen;
+export default ShippingScreen

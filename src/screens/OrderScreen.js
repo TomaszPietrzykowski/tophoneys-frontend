@@ -55,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline",
     },
   },
+  alertContainer: {
+    maxWidth: 300,
+    opacity: 0.7,
+  },
   column: {
     padding: "1rem",
     "& > *": {
@@ -94,12 +98,16 @@ const OrderScreen = ({ match, history }) => {
   const orderDeliver = useSelector((state) => state.orderDeliver)
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver
 
+  const { anonymousShoppingSelected } = useSelector(
+    (state) => state.orderAnonymous
+  )
+
   //   const userInfo = useSelector((state) => state.userLogin.userInfo);
 
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
   }
-  if (!loading) {
+  if (!loading && order) {
     order.itemsPrice = addDecimals(
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     )
@@ -173,7 +181,7 @@ const OrderScreen = ({ match, history }) => {
   }
 
   useEffect(() => {
-    if (!userInfo) {
+    if (!userInfo && !anonymousShoppingSelected) {
       history.push("/login")
     }
     const addPayPalScript = async () => {
@@ -231,26 +239,34 @@ const OrderScreen = ({ match, history }) => {
                 {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
-                <Message
-                  variant="success"
-                  message={`Sent on ${order.deliveredAt
-                    .substring(0, 16)
-                    .replace("T", " at ")}`}
-                />
+                <div className={classes.alertContainer}>
+                  <Message
+                    variant="success"
+                    message={`Sent on ${order.deliveredAt
+                      .substring(0, 16)
+                      .replace("T", " at ")}`}
+                  />
+                </div>
               ) : (
-                <Message variant="error" message="Status: not sent" />
+                <div className={classes.alertContainer}>
+                  <Message variant="info" message="Not sent" />
+                </div>
               )}
               <h2 className={classes.h2}>Payment:</h2>
               <div>
                 {order.isPaid ? (
-                  <Message
-                    variant="success"
-                    message={`Paid on ${order.paidAt
-                      .substring(0, 16)
-                      .replace("T", " at ")}`}
-                  />
+                  <div className={classes.alertContainer}>
+                    <Message
+                      variant="success"
+                      message={`Paid on ${order.paidAt
+                        .substring(0, 16)
+                        .replace("T", " at ")}`}
+                    />
+                  </div>
                 ) : (
-                  <Message variant="error" message="Not paid" />
+                  <div className={classes.alertContainer}>
+                    <Message variant="info" message="Not paid" />
+                  </div>
                 )}
               </div>
               <h2 className={classes.h2}>Order Items:</h2>

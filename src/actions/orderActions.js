@@ -34,7 +34,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: userInfo ? `Bearer ${userInfo.token}` : null,
       },
     }
 
@@ -71,7 +71,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: userInfo ? `Bearer ${userInfo.token}` : null,
       },
     }
 

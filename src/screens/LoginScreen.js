@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Button, TextField } from "@material-ui/core";
-import { makeStyles, withStyles } from "@material-ui/styles";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import { login } from "../actions/userActions";
-import { USER_LOGIN_ERROR_RESET } from "../constants/userConstants";
+import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { Button, TextField } from "@material-ui/core"
+import { makeStyles, withStyles } from "@material-ui/styles"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import { login } from "../actions/userActions"
+import { USER_LOGIN_ERROR_RESET } from "../constants/userConstants"
+import {
+  ORDER_ANONYMOUS_RESET,
+  ORDER_ANONYMOUS_SET,
+} from "../constants/orderConstants"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -69,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
   errorMargin: {
     marginBottom: "2rem",
   },
-}));
+}))
 
 const CssTextField = withStyles((theme) => ({
   root: {
@@ -88,36 +92,46 @@ const CssTextField = withStyles((theme) => ({
       },
     },
   },
-}))(TextField);
+}))(TextField)
 
 const LoginScreen = ({ location, history }) => {
-  const classes = useStyles();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const classes = useStyles()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
-  const redirect = location.search ? location.search.split("=")[1] : null;
+  const redirect = location.search ? location.search.split("=")[1] : null
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const { loading, error, userInfo } = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = useSelector((state) => state.userLogin)
+
+  const { anonymousShoppingSelected } = useSelector(
+    (state) => state.orderAnonymous
+  )
 
   useEffect(() => {
     if (userInfo) {
       if (redirect) {
-        history.push(redirect);
+        history.push(redirect)
       } else {
-        history.goBack();
+        history.goBack()
       }
     }
-  }, [userInfo, redirect, history]);
+  }, [userInfo, redirect, anonymousShoppingSelected, history])
+
+  const setAnonymous = () => {
+    dispatch({ type: ORDER_ANONYMOUS_SET })
+    history.push(redirect)
+  }
 
   const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(login(email, password));
-  };
+    e.preventDefault()
+    dispatch(login(email, password))
+    dispatch({ type: ORDER_ANONYMOUS_RESET })
+  }
   const handleErrorClose = () => {
-    dispatch({ type: USER_LOGIN_ERROR_RESET });
-  };
+    dispatch({ type: USER_LOGIN_ERROR_RESET })
+  }
 
   return (
     <>
@@ -177,8 +191,7 @@ const LoginScreen = ({ location, history }) => {
                   className={classes.registerBtn}
                   variant="outlined"
                   color="secondary"
-                  component={Link}
-                  to={"/anonymous"}
+                  onClick={setAnonymous}
                 >
                   Guest checkout
                 </Button>
@@ -187,7 +200,7 @@ const LoginScreen = ({ location, history }) => {
         </main>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default LoginScreen;
+export default LoginScreen

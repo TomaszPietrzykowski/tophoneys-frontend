@@ -1,25 +1,25 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Button, Tooltip } from "@material-ui/core";
-import { withStyles, makeStyles } from "@material-ui/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import CancelIcon from "@material-ui/icons/Cancel";
-import { listOrders } from "../actions/orderActions";
+import React, { useEffect } from "react"
+import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { Button, Tooltip } from "@material-ui/core"
+import { withStyles, makeStyles } from "@material-ui/styles"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableContainer from "@material-ui/core/TableContainer"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
+import Paper from "@material-ui/core/Paper"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import CancelIcon from "@material-ui/icons/Cancel"
+import { listOrders } from "../actions/orderActions"
 
 const StyledTableCell = withStyles((theme) => ({
   root: {
     ...theme.typography.source,
   },
-}))(TableCell);
+}))(TableCell)
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -44,25 +44,25 @@ const useStyles = makeStyles((theme) => ({
     fontSize: ".8rem",
     color: "white",
   },
-}));
+}))
 
 const OrderListScreen = ({ history }) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
+  const classes = useStyles()
+  const dispatch = useDispatch()
 
   // STATE
-  const userInfo = useSelector((state) => state.userLogin.userInfo);
+  const userInfo = useSelector((state) => state.userLogin.userInfo)
 
-  const orderList = useSelector((state) => state.orderList);
-  const { loading, error, orders } = orderList;
+  const orderList = useSelector((state) => state.orderList)
+  const { loading, error, orders } = orderList
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(listOrders());
+      dispatch(listOrders())
     } else {
-      history.push("/login");
+      history.push("/login")
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo])
 
   return (
     <div className={classes.container}>
@@ -137,7 +137,7 @@ const OrderListScreen = ({ history }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default OrderListScreen;
+export default OrderListScreen

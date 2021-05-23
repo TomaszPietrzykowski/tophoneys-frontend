@@ -65,6 +65,8 @@ const PlaceOrderScreen = ({ history }) => {
 
   const orderCreate = useSelector((state) => state.orderCreate)
   const { order, success, error } = orderCreate
+  const orderAnonymous = useSelector((state) => state.orderAnonymous)
+  const { anonymousShoppingSelected, name, email } = orderAnonymous
 
   useEffect(() => {
     if (success) {
@@ -77,8 +79,21 @@ const PlaceOrderScreen = ({ history }) => {
   }, [dispatch, success, history])
 
   const placeOrderHandler = () => {
+    const user =
+      userInfo && userInfo.name
+        ? {
+            _id: userInfo._id,
+            name: userInfo.name,
+            email: userInfo.email,
+          }
+        : {
+            _id: "Anonymous",
+            name,
+            email,
+          }
     dispatch(
       createOrder({
+        user,
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod || "PayPal",
@@ -97,7 +112,21 @@ const PlaceOrderScreen = ({ history }) => {
       <Grid container>
         <Grid item md={8}>
           <h3>Customer:</h3>
-          <p>{userInfo.name}</p>
+          <p>
+            {userInfo && userInfo.name
+              ? userInfo.name
+              : anonymousShoppingSelected
+              ? name
+              : null}
+          </p>
+          <h3>Email:</h3>
+          <p>
+            {userInfo && userInfo.email
+              ? userInfo.email
+              : anonymousShoppingSelected
+              ? email
+              : null}
+          </p>
           <h3>Shipping address:</h3>
           <p>{shippingAddress.address}</p>
           <p>{shippingAddress.postalCode}</p>
