@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { PayPalButton } from "react-paypal-button-v2";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/styles";
-import { Grid, Button } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
-import Loader from "../components/Loader";
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+// import { PayPalButton } from "react-paypal-button-v2"
+import { Link } from "react-router-dom"
+import { makeStyles } from "@material-ui/styles"
+import { Grid, Button } from "@material-ui/core"
+import { useSelector, useDispatch } from "react-redux"
+import Loader from "../components/Loader"
 import {
   getOrderDetails,
-  payOrder,
+  // payOrder,
   deliverOrder,
-} from "../actions/orderActions";
+} from "../actions/orderActions"
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
-} from "../constants/orderConstants";
-import Message from "../components/Message";
+  ORDER_PAY_SUCCESS,
+} from "../constants/orderConstants"
+import Message from "../components/Message"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -76,76 +77,144 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "1rem",
     width: "50%",
   },
-}));
+}))
 
 const OrderScreen = ({ match, history }) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
+  const classes = useStyles()
+  const dispatch = useDispatch()
 
-  const orderId = match.params.id;
+  const orderId = match.params.id
 
-  const [sdkReady, setSdkReady] = useState(false);
+  const [sdkReady, setSdkReady] = useState(false)
 
-  const { userInfo } = useSelector((state) => state.userLogin);
+  const { userInfo } = useSelector((state) => state.userLogin)
 
-  const orderDetails = useSelector((state) => state.orderDetails);
-  const { order, loading, error } = orderDetails;
+  const orderDetails = useSelector((state) => state.orderDetails)
+  const { order, loading, error } = orderDetails
 
-  const orderPay = useSelector((state) => state.orderPay);
-  const { loading: loadingPay, success: successPay } = orderPay;
+  const orderPay = useSelector((state) => state.orderPay)
+  const { loading: loadingPay, success: successPay } = orderPay
 
-  const orderDeliver = useSelector((state) => state.orderDeliver);
-  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+  const orderDeliver = useSelector((state) => state.orderDeliver)
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver
 
   //   const userInfo = useSelector((state) => state.userLogin.userInfo);
 
   const addDecimals = (num) => {
-    return (Math.round(num * 100) / 100).toFixed(2);
-  };
+    return (Math.round(num * 100) / 100).toFixed(2)
+  }
   if (!loading) {
     order.itemsPrice = addDecimals(
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-    );
+    )
+  }
+
+  const renderButtons = () => {
+    const body = {
+      customOrderId: order._id,
+      name: order.user.name,
+      email: order.user.email,
+    }
+    window.paypal
+      .Buttons({
+        env: "sandbox", // Or 'production'
+        // Set up the payment:
+        createOrder: async function () {
+          const { data } = await axios.post("/api/checkout/create", body, {
+            headers: {
+              "content-type": "application/json",
+            },
+          })
+          return data.result.id // Use the key sent by your server's response, ex. 'id' or 'token'
+        },
+        // Execute the payment:
+        // 1. Add an onApprove callback
+        onApprove: function (data, actions) {
+          return fetch("/api/checkout/execute", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              orderID: data.orderID,
+              payerID: data.payerID,
+            }),
+          })
+            .then(function (res) {
+              return res.json()
+            })
+            .then(function (orderData) {
+              console.log(orderData)
+              if (orderData.result.status === "COMPLETED") {
+                dispatch({
+                  type: ORDER_PAY_SUCCESS,
+                  payload: data,
+                })
+              }
+
+              // Three cases to handle:
+              //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+              //   (2) Other non-recoverable errors -> Show a failure message
+              //   (3) Successful transaction -> Show confirmation or thank you
+
+              // This example reads a v2/checkout/orders capture response, propagated from the server
+              // You could use a different API or structure for your 'orderData'
+              // var errorDetail =
+              //   Array.isArray(orderData.details) && orderData.details[0]
+
+              // if (errorDetail && errorDetail.issue === "INSTRUMENT_DECLINED") {
+              //   return actions.restart() // Recoverable state, per:
+              //   // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+              // }
+
+              // if (errorDetail) {
+              //   var msg = "Sorry, your transaction could not be processed."
+              //   if (errorDetail.description)
+              //     msg += "\n\n" + errorDetail.description
+              //   if (orderData.debug_id) msg += " (" + orderData.debug_id + ")"
+              //   return alert(msg) // Show a failure message
+              // }
+            })
+        },
+      })
+      .render("#paypal-button-container")
   }
 
   useEffect(() => {
     if (!userInfo) {
-      history.push("/login");
+      history.push("/login")
     }
     const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal");
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=EUR`;
-      script.async = true;
+      const { data: clientId } = await axios.get("/api/config/paypal")
+      const script = document.createElement("script")
+      script.type = "text/javascript"
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=EUR`
+      script.async = true
       script.onload = () => {
-        setSdkReady(true);
-      };
-      document.body.appendChild(script);
-    };
+        setSdkReady(true)
+        if (document.getElementById("paypal-button-container")) {
+          renderButtons()
+        }
+      }
+      document.body.appendChild(script)
+    }
 
     if (!order || successPay || successDeliver || order._id !== orderId) {
-      dispatch({ type: ORDER_PAY_RESET });
-      dispatch({ type: ORDER_DELIVER_RESET });
-      dispatch(getOrderDetails(orderId));
+      dispatch({ type: ORDER_PAY_RESET })
+      dispatch({ type: ORDER_DELIVER_RESET })
+      dispatch(getOrderDetails(orderId))
     } else if (!order.isPaid) {
-      if (!window.paypal) {
-        addPayPalScript();
-      } else {
-        setSdkReady(true);
-      }
+      addPayPalScript()
+      setSdkReady(true)
     }
-  }, [dispatch, order, orderId, successPay, successDeliver, userInfo, history]);
+    // eslint-disable-next-line
+  }, [dispatch, order, orderId, successPay, successDeliver, userInfo, history])
 
   // --------------------------------------------------------- HANDLERS
 
-  const successPaymentHandler = (paymentResult) => {
-    dispatch(payOrder(orderId, paymentResult));
-  };
-
   const deliverHandler = () => {
-    dispatch(deliverOrder(order));
-  };
+    dispatch(deliverOrder(order))
+  }
 
   return (
     <div className={classes.container}>
@@ -267,12 +336,14 @@ const OrderScreen = ({ match, history }) => {
                     ) : !sdkReady ? (
                       <Loader />
                     ) : (
-                      <PayPalButton
-                        amount={order.totalPrice}
-                        currency="EUR"
-                        shippingPreference="NO_SHIPPING"
-                        onSuccess={successPaymentHandler}
-                      />
+                      <div id="paypal-button-container"></div>
+
+                      // <PayPalButton
+                      //   amount={order.totalPrice}
+                      //   currency="EUR"
+                      //   shippingPreference="NO_SHIPPING"
+                      //   onSuccess={successPaymentHandler}
+                      // />
                     )}
                   </>
                 )}
@@ -294,7 +365,7 @@ const OrderScreen = ({ match, history }) => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default OrderScreen;
+export default OrderScreen
