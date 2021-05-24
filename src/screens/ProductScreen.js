@@ -11,6 +11,15 @@ import Counter from "../components/Counter"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
 import RelatedProducts from "../components/RelatedProducts"
 
+// snackbars:
+import Snackbar from "@material-ui/core/Snackbar"
+import MuiAlert from "@material-ui/lab/Alert"
+import { Button } from "@material-ui/core"
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />
+}
+
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: "3rem",
@@ -118,10 +127,6 @@ const useStyles = makeStyles((theme) => ({
       borderColor: theme.palette.secondary.main,
     },
   },
-  // capacityOption: {
-  //   color: "green",
-  //   textTransform: "uppercase",
-  // },
   detail: {
     color: theme.palette.text.secondary,
     fontSize: "1rem",
@@ -200,6 +205,16 @@ const ProductScreen = ({ match, history }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const [qty, setQty] = useState(1)
+  // successful alert state
+  const [open, setOpen] = useState(false)
+
+  const handleAlertClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return
+    }
+
+    setOpen(false)
+  }
 
   const { loading, error, product } = useSelector(
     (state) => state.productDetails
@@ -211,7 +226,7 @@ const ProductScreen = ({ match, history }) => {
 
   const addToCartHandler = () => {
     dispatch(addToCart(match.params.id, qty))
-    // history.push(`/cart/${match.params.id}?qty=${qty}`)
+    setOpen(true)
   }
   const handleCapacitySelect = (e) => {
     history.push(`/product/${e.target.value}`)
@@ -223,6 +238,24 @@ const ProductScreen = ({ match, history }) => {
       : { color: "white" }
   return (
     <>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleAlertClose}>
+        <Alert
+          onClose={handleAlertClose}
+          severity="success"
+          action={
+            <Button
+              style={{ marginLeft: "1rem", marginRight: "1rem" }}
+              color="inherit"
+              size="small"
+              onClick={() => history.push("/cart")}
+            >
+              Go to cart
+            </Button>
+          }
+        >
+          Product added to cart.
+        </Alert>
+      </Snackbar>
       <div className={classes.container}>
         {loading ? (
           <Loader />

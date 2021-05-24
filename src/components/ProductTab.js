@@ -1,9 +1,11 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
 import SaleIcon from "@material-ui/icons/Loyalty"
 import getCategoryLabel from "./GetCategoryLabel"
+import { addToCart } from "../actions/cartActions"
 // import HeartIcon from "@material-ui/icons/FavoriteBorder"
 
 const useStyles = makeStyles((theme) => ({
@@ -67,8 +69,8 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 1,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
-    padding: "1.4rem",
+    justifyContent: "flex-start",
+    padding: "1.4rem 1.4rem 0 1.4rem",
   },
   category: {
     fontSize: ".8rem",
@@ -121,6 +123,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   buttonsContainer: {
+    paddingLeft: "1.4rem",
     display: "flex",
     margin: "0auto 0 0",
     cursor: "pointer",
@@ -180,6 +183,11 @@ const ProductTab = ({
   isSale,
 }) => {
   const classes = useStyles()
+  const dispatch = useDispatch()
+
+  const addToCartHandler = () => {
+    dispatch(addToCart(id, 1))
+  }
 
   const slideWidth = 100 / slidesAtOnce
 
@@ -200,47 +208,49 @@ const ProductTab = ({
             }
       }
     >
-      <Link to={`/product/${id}`}>
-        <div className={classes.card}>
-          {isSale && (
-            <div className={classes.saleBadge}>
-              <SaleIcon />
-            </div>
-          )}
-          <div className={classes.imageContainer}>
-            <img src={img} alt="product" className={classes.img} />
+      <div className={classes.card}>
+        {isSale && (
+          <div className={classes.saleBadge}>
+            <SaleIcon />
           </div>
-          <div className={classes.content}>
-            {category && (
-              <div className={classes.category}>
-                {getCategoryLabel(category[0])}
-              </div>
-            )}
-
-            <div className={classes.title}>{title}</div>
-            <div className={classes.capacity}>{capacity}</div>
-            <div className={classes.price}>
-              <div>
-                <span style={{ opacity: 0.45 }}>&euro;&nbsp;</span>
-                {Number(price).toFixed(2)}
-              </div>
-              {isSale && previousPrice > 0 && (
-                <div className={classes.previousPrice}>
-                  {Number(previousPrice).toFixed(2)}
+        )}
+        <div className={classes.imageContainer}>
+          <img src={img} alt="product" className={classes.img} />
+        </div>
+        <div>
+          <Link to={`/product/${id}`}>
+            <div className={classes.content}>
+              {category && (
+                <div className={classes.category}>
+                  {getCategoryLabel(category[0])}
                 </div>
               )}
-            </div>
-            <div className={classes.buttonsContainer}>
-              <div className={classes.cartBtn}>
-                <CartIcon className={classes.cartIcon} />
+
+              <div className={classes.title}>{title}</div>
+              <div className={classes.capacity}>{capacity}</div>
+              <div className={classes.price}>
                 <div>
-                  <span className={classes.hide}>Add to cart</span>
+                  <span style={{ opacity: 0.45 }}>&euro;&nbsp;</span>
+                  {Number(price).toFixed(2)}
                 </div>
+                {isSale && previousPrice > 0 && (
+                  <div className={classes.previousPrice}>
+                    {Number(previousPrice).toFixed(2)}
+                  </div>
+                )}
+              </div>
+            </div>
+          </Link>
+          <div className={classes.buttonsContainer}>
+            <div className={classes.cartBtn} onClick={addToCartHandler}>
+              <CartIcon className={classes.cartIcon} />
+              <div>
+                <span className={classes.hide}>Add to cart</span>
               </div>
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   )
 }

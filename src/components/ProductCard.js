@@ -1,9 +1,11 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
 import getCategoryLabel from "./GetCategoryLabel"
 import SaleIcon from "@material-ui/icons/Loyalty"
+import { addToCart } from "../actions/cartActions"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,11 +61,11 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     display: "flex",
-    minHeight: 220,
+    minHeight: 180,
     // border: "1px solid blue",
     flexDirection: "column",
-    justifyContent: "space-between",
-    padding: "1rem",
+    justifyContent: "flex-start",
+    padding: "1rem 1rem 0 1rem",
   },
   category: {
     fontSize: ".85rem",
@@ -118,11 +120,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   buttonsContainer: {
-    // border: "1px solid blue",
     display: "flex",
     margin: "0auto 0 0",
     cursor: "pointer",
     color: theme.palette.common.white,
+    padding: "0 0 1rem 1rem",
   },
   cartBtn: {
     padding: ".55rem 1.4rem",
@@ -163,47 +165,56 @@ const useStyles = makeStyles((theme) => ({
 
 const ProductCard = ({ product }) => {
   const classes = useStyles()
+  const dispatch = useDispatch()
+
+  const addToCartHandler = () => {
+    dispatch(addToCart(product._id, 1))
+  }
 
   return (
     <div className={classes.root}>
-      <Link to={`/product/${product._id}`}>
-        <div className={classes.card}>
-          {product.isPromo && (
-            <div className={classes.saleBadge}>
-              <SaleIcon />
-            </div>
-          )}
+      <div className={classes.card}>
+        {product.isPromo && (
+          <div className={classes.saleBadge}>
+            <SaleIcon />
+          </div>
+        )}
+        <Link to={`/product/${product._id}`}>
           <div className={classes.imageContainer}>
             <img src={product.image} alt="product" className={classes.img} />
           </div>
-          <div className={classes.content}>
-            <div className={classes.category}>
-              {getCategoryLabel(product.category[0])}
-            </div>
-            <div className={classes.title}>{product.name}</div>
-            <div className={classes.capacity}>{product.capacity}</div>
-            <div className={classes.price}>
-              <div>
-                <span style={{ opacity: 0.45 }}>&euro; </span>
-                {product.price.toFixed(2)}
+        </Link>
+        <div>
+          <Link to={`/product/${product._id}`}>
+            <div className={classes.content}>
+              <div className={classes.category}>
+                {getCategoryLabel(product.category[0])}
               </div>
-              {product.isPromo && product.previousPrice > 0 && (
-                <div className={classes.previousPrice}>
-                  {product.previousPrice.toFixed(2)}
-                </div>
-              )}
-            </div>
-            <div className={classes.buttonsContainer}>
-              <div className={classes.cartBtn}>
-                <CartIcon className={classes.cartIcon} />
+              <div className={classes.title}>{product.name}</div>
+              <div className={classes.capacity}>{product.capacity}</div>
+              <div className={classes.price}>
                 <div>
-                  <span className={classes.hide}>Add to cart</span>
+                  <span style={{ opacity: 0.45 }}>&euro; </span>
+                  {product.price.toFixed(2)}
                 </div>
+                {product.isPromo && product.previousPrice > 0 && (
+                  <div className={classes.previousPrice}>
+                    {product.previousPrice.toFixed(2)}
+                  </div>
+                )}
+              </div>
+            </div>
+          </Link>
+          <div className={classes.buttonsContainer}>
+            <div className={classes.cartBtn} onClick={addToCartHandler}>
+              <CartIcon className={classes.cartIcon} />
+              <div>
+                <span className={classes.hide}>Add to cart</span>
               </div>
             </div>
           </div>
         </div>
-      </Link>
+      </div>
     </div>
   )
 }
