@@ -5,6 +5,7 @@ import SearchIcon from "@material-ui/icons/Search"
 
 const useStyles = makeStyles((theme) => ({
   search: {
+    ...theme.typography.mont,
     display: "flex",
     outline: "none",
     minHeight: 35,
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   searchMobile: {
+    ...theme.typography.mont,
     display: "none",
     outline: "none",
     width: "86%",

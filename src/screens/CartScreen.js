@@ -2,6 +2,7 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import Message from "../components/Message"
+import Counter from "../components/Counter"
 import { removeFromCart, updateQuantity } from "../actions/cartActions"
 import Grid from "@material-ui/core/Grid"
 import Button from "@material-ui/core/Button"
@@ -9,68 +10,159 @@ import { IconButton } from "@material-ui/core"
 import DeleteIcon from "@material-ui/icons/Delete"
 import Tooltip from "@material-ui/core/Tooltip"
 import { makeStyles } from "@material-ui/styles"
+import PaymentIcon from "@material-ui/icons/Payment"
 
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    ...theme.typography.source,
+    ...theme.typography.mont,
+    fontWeight: 300,
+    padding: "3rem",
+    // border: "1px solid blue",
   },
   title: {
-    ...theme.typography.prosto,
-    fontSize: "1.5rem",
-    padding: "1rem",
-    marginBottom: "2rem",
+    fontWeight: 300,
+    fontSize: "2.4rem",
+    color: theme.palette.text.primary,
+    margin: "2rem 0 5rem",
+  },
+  tableContainer: {
+    fontWeight: 500,
+    fontSize: ".9rem",
+    letterSpacing: 1,
+    paddingRight: "2rem",
   },
   tableHeader: {
+    paddingBottom: "1rem",
+    color: theme.palette.text.secondary,
+    textTransform: "uppercase",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      width: "100%",
+      height: 1,
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      background: `linear-gradient(90deg, transparent, ${theme.palette.text.disabled}, transparent)`,
+      opacity: 0.5,
+    },
     "& > *": {
-      ...theme.typography.open,
       ...theme.flex.col,
-      padding: ".5rem",
+      alignItems: "flex-start",
+      padding: ".5rem 1rem",
+      marginBottom: "2rem",
+      position: "relative",
+      "&::after": {
+        content: "''",
+        width: 1,
+        height: "100%",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        background: `linear-gradient(transparent, ${theme.palette.secondary.light}, transparent)`,
+      },
     },
   },
   table: {
+    color: theme.palette.text.secondary,
+    fontWeight: 300,
+    fontSize: ".95rem",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      width: "100%",
+      height: 1,
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      background: `linear-gradient(90deg, transparent, ${theme.palette.text.disabled}, transparent)`,
+      opacity: 0.5,
+    },
     "& > *": {
       ...theme.flex.col,
+      alignItems: "flex-start",
+      paddingLeft: "1rem",
     },
+  },
+  imgContainer: {
+    ...theme.flex.colStart,
+    padding: "1rem 2rem 1rem 0",
+    paddingLeft: 0,
   },
   image: {
-    width: "100%",
+    maxWidth: "100%",
     objectFit: "contain",
-    padding: ".5rem",
-  },
-  qtyInput: {
-    padding: ".2rem",
   },
   deleteIcon: {
-    color: "rgb(150,0,0)",
-    fontSize: "1.2rem",
+    color: theme.palette.text.disabled,
+    fontSize: "1.3rem",
+  },
+  deleteIconContainer: {
+    marginLeft: "1rem",
   },
   summary: {
+    ...theme.flex.colStart,
+    paddingLeft: "2rem",
     "& > *": {
-      ...theme.flex.col,
-      ...theme.typography.prosto,
+      marginLeft: "2rem",
+    },
+    position: "relative",
+    "&::after": {
+      content: "''",
+      width: 1,
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
     },
     [theme.breakpoints.down("md")]: {
-      // border: "1px solid green",
       marginLeft: "50%",
     },
   },
   subtotal: {
-    fontSize: "1.2rem",
-    marginBottom: "2rem",
+    fontWeight: 300,
+    fontSize: "1.8rem",
+    color: theme.palette.text.primary,
+    marginBottom: "3rem",
   },
   price: {
-    fontSize: "2rem",
+    color: theme.palette.text.secondary,
+    fontSize: "3rem",
+    marginBottom: "3rem",
   },
-  btnContainer: {
-    padding: "3rem",
+  paymentIcon: {
+    fontSize: "1.5rem",
+    marginRight: ".5rem",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1.2rem",
+      margin: 0,
+    },
   },
   checkoutBtn: {
-    ...theme.typography.prosto,
-    backgroundColor: theme.palette.primary.main,
-    width: "100%",
+    border: "none",
+    padding: ".8rem 2.5rem",
+    cursor: "pointer",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    ...theme.typography.mont,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    fontSize: "1rem",
+    fontWeight: 500,
+    borderRadius: 4,
+    color: "white",
+    backgroundColor: theme.palette.secondary.main,
+    transition: "all .3s ease",
     "&:hover": {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: theme.palette.secondary.dark,
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: ".85rem",
+      flex: 1,
+      padding: ".3rem",
     },
   },
   link: {
@@ -103,7 +195,7 @@ const CartScreen = ({ history }) => {
     <div className={classes.container}>
       <h1 className={classes.title}>Shopping cart</h1>
       <Grid container>
-        <Grid item md={12} lg={9}>
+        <Grid item md={12} lg={8} className={classes.tableContainer}>
           {cartItems.length === 0 ? (
             <div className={classes.messageContainer}>
               <Message
@@ -122,12 +214,13 @@ const CartScreen = ({ history }) => {
             </div>
           ) : (
             <div>
+              {/* <div className={classes.subtotal}>Cart items:</div> */}
               <Grid container className={classes.tableHeader}>
                 <Grid item md={2}>
-                  Preview
+                  View
                 </Grid>
                 <Grid item md={4}>
-                  Name
+                  Product
                 </Grid>
                 <Grid item md={2}>
                   Price
@@ -136,13 +229,16 @@ const CartScreen = ({ history }) => {
                   Quantity
                 </Grid>
                 <Grid item md={2}>
-                  Actions
+                  Remove
                 </Grid>
               </Grid>
               {cartItems.map((item) => (
                 <Grid container key={item.product} className={classes.table}>
-                  <Grid item md={2}>
-                    <Link to={`/product/${item.product}`}>
+                  <Grid item md={2} style={{ paddingLeft: 0 }}>
+                    <Link
+                      className={classes.imgContainer}
+                      to={`/product/${item.product}`}
+                    >
                       <img
                         src={item.image}
                         alt={item.name}
@@ -159,25 +255,21 @@ const CartScreen = ({ history }) => {
                     </Link>
                   </Grid>
                   <Grid item md={2}>
-                    &euro; {item.price}
+                    &euro; {item.price.toFixed(2)}
                   </Grid>
                   <Grid item md={2}>
-                    <input
-                      className={classes.qtyInput}
-                      type="number"
-                      value={item.qty}
-                      min={1}
+                    <Counter
+                      count={item.qty}
                       max={item.countInStock}
-                      onChange={(e) =>
-                        dispatch(
-                          updateQuantity(item.product, Number(e.target.value))
-                        )
+                      setCount={(value) =>
+                        dispatch(updateQuantity(item.product, Number(value)))
                       }
                     />
                   </Grid>
                   <Grid item md={2}>
-                    <Tooltip title="Delete" placement="right-start">
+                    <Tooltip title="Remove from cart" placement="right-start">
                       <IconButton
+                        className={classes.deleteIconContainer}
                         onClick={() => removeFromCartHandler(item.product)}
                       >
                         <DeleteIcon className={classes.deleteIcon} />
@@ -189,9 +281,9 @@ const CartScreen = ({ history }) => {
             </div>
           )}
         </Grid>
-        <Grid item md={6} lg={3} className={classes.summary}>
-          {cartItems.length > 0 && (
-            <>
+        {cartItems.length > 0 && (
+          <>
+            <Grid item md={6} lg={4} className={classes.summary}>
               <h2 className={classes.subtotal}>
                 Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}{" "}
                 {cartItems.reduce((acc, item) => acc + item.qty, 0) > 1
@@ -211,12 +303,13 @@ const CartScreen = ({ history }) => {
                   disabled={cartItems.length === 0}
                   onClick={checkoutHandler}
                 >
+                  <PaymentIcon className={classes.paymentIcon} />
                   checkout
                 </Button>
               </div>
-            </>
-          )}
-        </Grid>
+            </Grid>
+          </>
+        )}
       </Grid>
     </div>
   )

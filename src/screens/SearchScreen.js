@@ -73,8 +73,8 @@ const SearchScreen = ({ match }) => {
               </div>
             )}
             <div className={classes.flex}>
-              {products.map((product) => {
-                return <ProductCard product={product} />
+              {products.map((product, i) => {
+                return <ProductCard key={i} product={product} />
               })}
             </div>
             <Paginate id={keyword} page={page} pages={pages} url="search" />

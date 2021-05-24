@@ -158,7 +158,6 @@ const ProductEditScreen = ({ history, match }) => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log(previousPrice)
     dispatch(
       updateProduct({
         _id: editedProductId,
@@ -221,7 +220,6 @@ const ProductEditScreen = ({ history, match }) => {
           "Content-Type": "multipart/form-data",
         },
       }
-
       const { data } = await axios.post("/api/uploads", formData, config)
       setImage(data)
       setUploading(false)
@@ -431,7 +429,7 @@ const ProductEditScreen = ({ history, match }) => {
       ) : (
         <>
           {capacityDropdown.map((el, i) => (
-            <div>
+            <div key={i}>
               {el.label} : {el.productId}
             </div>
           ))}

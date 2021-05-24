@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: 1,
     fontSize: "2.4rem",
     color: theme.palette.text.primary,
-    marginBottom: "4rem",
+    marginBottom: "3rem",
   },
   form: {
     ...theme.flex.col,
