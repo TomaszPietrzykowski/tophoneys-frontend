@@ -1,11 +1,20 @@
-import React from "react"
+import React, { useState } from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
 import getCategoryLabel from "./GetCategoryLabel"
 import SaleIcon from "@material-ui/icons/Loyalty"
 import { addToCart } from "../actions/cartActions"
+
+// snackbars:
+import Snackbar from "@material-ui/core/Snackbar"
+import MuiAlert from "@material-ui/lab/Alert"
+import { Button } from "@material-ui/core"
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -127,6 +136,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 0 1rem 1rem",
   },
   cartBtn: {
+    border: "none",
+    cursor: "pointer",
+
     padding: ".55rem 1.4rem",
     display: "flex",
     justifyContent: "center",
@@ -139,6 +151,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     backgroundColor: theme.palette.secondary.light,
     transition: "all .3s ease",
+    color: theme.palette.common.white,
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
@@ -166,56 +179,94 @@ const useStyles = makeStyles((theme) => ({
 const ProductCard = ({ product }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const history = useHistory()
+
+  // successful alert state
+  const [open, setOpen] = useState(false)
+  const handleAlertClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return
+    }
+
+    setOpen(false)
+  }
 
   const addToCartHandler = () => {
     dispatch(addToCart(product._id, 1))
+    setOpen(true)
   }
 
   return (
-    <div className={classes.root}>
-      <div className={classes.card}>
-        {product.isPromo && (
-          <div className={classes.saleBadge}>
-            <SaleIcon />
-          </div>
-        )}
-        <Link to={`/product/${product._id}`}>
-          <div className={classes.imageContainer}>
-            <img src={product.image} alt="product" className={classes.img} />
-          </div>
-        </Link>
-        <div>
+    <>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleAlertClose}>
+        <Alert
+          onClose={handleAlertClose}
+          severity="success"
+          action={
+            <Button
+              style={{ marginLeft: "1rem", marginRight: "1rem" }}
+              color="inherit"
+              size="small"
+              onClick={() => history.push("/cart")}
+            >
+              Go to cart
+            </Button>
+          }
+        >
+          Product added to cart.
+        </Alert>
+      </Snackbar>
+      <div className={classes.root}>
+        <div className={classes.card}>
+          {product.isPromo && (
+            <div className={classes.saleBadge}>
+              <SaleIcon />
+            </div>
+          )}
           <Link to={`/product/${product._id}`}>
-            <div className={classes.content}>
-              <div className={classes.category}>
-                {getCategoryLabel(product.category[0])}
-              </div>
-              <div className={classes.title}>{product.name}</div>
-              <div className={classes.capacity}>{product.capacity}</div>
-              <div className={classes.price}>
-                <div>
-                  <span style={{ opacity: 0.45 }}>&euro; </span>
-                  {product.price.toFixed(2)}
-                </div>
-                {product.isPromo && product.previousPrice > 0 && (
-                  <div className={classes.previousPrice}>
-                    {product.previousPrice.toFixed(2)}
-                  </div>
-                )}
-              </div>
+            <div className={classes.imageContainer}>
+              <img src={product.image} alt="product" className={classes.img} />
             </div>
           </Link>
-          <div className={classes.buttonsContainer}>
-            <div className={classes.cartBtn} onClick={addToCartHandler}>
-              <CartIcon className={classes.cartIcon} />
-              <div>
-                <span className={classes.hide}>Add to cart</span>
+          <div>
+            <Link to={`/product/${product._id}`}>
+              <div className={classes.content}>
+                <div className={classes.category}>
+                  {getCategoryLabel(product.category[0])}
+                </div>
+                <div className={classes.title}>{product.name}</div>
+                <div className={classes.capacity}>{product.capacity}</div>
+                <div className={classes.price}>
+                  <div>
+                    <span style={{ opacity: 0.45 }}>&euro; </span>
+                    {product.price.toFixed(2)}
+                  </div>
+                  {product.isPromo && product.previousPrice > 0 && (
+                    <div className={classes.previousPrice}>
+                      {product.previousPrice.toFixed(2)}
+                    </div>
+                  )}
+                </div>
               </div>
+            </Link>
+            <div className={classes.buttonsContainer}>
+              <button
+                disabled={!product.countInStock > 0}
+                className={classes.cartBtn}
+                onClick={addToCartHandler}
+              >
+                <CartIcon className={classes.cartIcon} />
+                <div>
+                  <span className={classes.hide}>
+                    {product.countInStock > 0 ? "Add to cart" : "Out of stock"}
+                  </span>
+                </div>
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
