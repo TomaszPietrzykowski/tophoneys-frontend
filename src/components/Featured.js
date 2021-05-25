@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Featured = ({ match }) => {
+const Featured = () => {
   const classes = useStyles()
   const isTablet = useMediaQuery("(max-width: 990px)")
   const isMobile = useMediaQuery("(max-width: 600px)")
@@ -70,6 +70,7 @@ const Featured = ({ match }) => {
                   capacity={product.capacity}
                   isSale={product.isPromo}
                   isFeatured={true}
+                  countInStock={product.countInStock}
                 />
               )
             })}

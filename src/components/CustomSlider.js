@@ -31,6 +31,7 @@ const CustomSlider = ({ timeout, slidesAtOnce, products }) => {
       {products.map((product, i) => (
         <ProductTab
           isSale={product.isPromo}
+          countInStock={product.countInStock}
           key={i}
           id={product._id}
           activeIndex={index}

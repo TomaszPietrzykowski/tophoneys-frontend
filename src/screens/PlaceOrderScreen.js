@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { makeStyles } from "@material-ui/styles"
 import { Button, Grid } from "@material-ui/core"
 import { useSelector, useDispatch } from "react-redux"
-import CheckoutSteps from "../components/CheckoutSteps"
+// import CheckoutSteps from "../components/CheckoutSteps"
 import { createOrder } from "../actions/orderActions"
 import Message from "../components/Message"
 import { ORDER_CREATE_RESET } from "../constants/orderConstants"
@@ -12,29 +12,159 @@ import { CART_EMPTY_ITEMS } from "../constants/cartConstants"
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    ...theme.flex.col,
-    ...theme.typography.source,
-    marginTop: "15rem",
+    ...theme.typography.mont,
+    fontWeight: 300,
+    padding: "3rem",
+    // border: "1px solid blue",
+  },
+  title: {
+    fontWeight: 300,
+    fontSize: "2.4rem",
+    color: theme.palette.text.primary,
+    margin: "2rem 0 5rem",
+  },
+  tableContainer: {
+    fontWeight: 500,
+    fontSize: ".9rem",
+    letterSpacing: 1,
+    paddingRight: "2rem",
+  },
+  table: {
+    color: theme.palette.text.secondary,
+    fontWeight: 300,
+    fontSize: ".95rem",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      width: "100%",
+      height: 1,
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      background: `linear-gradient(90deg, transparent, ${theme.palette.text.disabled}, transparent)`,
+      opacity: 0.5,
+    },
+    "& > *": {
+      ...theme.flex.col,
+      alignItems: "flex-start",
+      paddingLeft: "1rem",
+    },
+  },
+  imgContainer: {
+    ...theme.flex.colStart,
+    padding: "1rem 2rem 1rem 0",
+    paddingLeft: 0,
   },
   image: {
-    width: "100%",
+    maxWidth: "100%",
     objectFit: "contain",
-    padding: ".5rem",
   },
   center: {
     ...theme.flex.row,
+  },
+  summary: {
+    ...theme.flex.colStart,
+    paddingLeft: "2rem",
+    "& > *": {
+      marginLeft: "2rem",
+    },
+    position: "relative",
+    "&::after": {
+      content: "''",
+      width: 1,
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+    },
+    [theme.breakpoints.down("md")]: {
+      marginLeft: "50%",
+    },
+  },
+  subtotal: {
+    fontWeight: 300,
+    fontSize: "1.8rem",
+    color: theme.palette.text.primary,
+    marginBottom: "3rem",
+  },
+  price: {
+    color: theme.palette.text.secondary,
+    fontSize: "1rem",
+    marginBottom: "1rem",
+  },
+  total: {
+    color: theme.palette.text.primary,
+    fontSize: "1.8rem",
+    margin: "1rem 0",
+  },
+  detailsSection: {
+    marginBottom: "3.5rem",
+  },
+  details: {
+    color: theme.palette.text.primary,
+    fontSize: "1.4rem",
+    marginBottom: "1rem",
+  },
+  label: {
+    color: theme.palette.text.secondary,
+    fontSize: "1rem",
+    marginBottom: "1rem",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      height: 1,
+      width: "100%",
+      position: "absolute",
+      top: "-.5rem",
+      left: 0,
+      background: `linear-gradient(90deg, ${theme.palette.secondary.light}, transparent)`,
+    },
   },
   link: {
     "&:hover": {
       textDecoration: "underline",
     },
   },
+  placeOrderBtn: {
+    marginTop: "2rem",
+    border: "none",
+    padding: ".8rem 2.5rem",
+    cursor: "pointer",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    ...theme.typography.mont,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    fontSize: "1rem",
+    fontWeight: 500,
+    borderRadius: 4,
+    color: "white",
+    backgroundColor: theme.palette.secondary.main,
+    transition: "all .3s ease",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.dark,
+    },
+    "&:disabled": {
+      backgroundColor: theme.palette.text.disabled,
+      color: "white",
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: ".85rem",
+      flex: 1,
+      padding: ".3rem",
+    },
+  },
+
+  messageContainer: {
+    maxWidth: 600,
+  },
 }))
 
 const PlaceOrderScreen = ({ history }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
-
   const cart = useSelector((state) => state.cart)
   const { cartItems, shippingAddress } = cart
 
@@ -107,45 +237,61 @@ const PlaceOrderScreen = ({ history }) => {
 
   return (
     <div className={classes.container}>
-      <CheckoutSteps step1 step2 step3 />
-      <h2>Order</h2>
+      <h1 className={classes.title}>Place order</h1>
+
       <Grid container>
-        <Grid item md={8}>
-          <h3>Customer:</h3>
-          <p>
-            {userInfo && userInfo.name
-              ? userInfo.name
-              : anonymousShoppingSelected
-              ? name
-              : null}
-          </p>
-          <h3>Email:</h3>
-          <p>
-            {userInfo && userInfo.email
-              ? userInfo.email
-              : anonymousShoppingSelected
-              ? email
-              : null}
-          </p>
-          <h3>Shipping address:</h3>
-          <p>{shippingAddress.address}</p>
-          <p>{shippingAddress.postalCode}</p>
-          <p>{shippingAddress.city}</p>
-          <p>{shippingAddress.country}</p>
-          <h3>Cart Items:</h3>
+        <Grid item md={12} lg={8}>
+          <Grid container className={classes.detailsSection}>
+            <Grid item className={classes.label}>
+              Customer:
+            </Grid>
+            <Grid item md={12} className={classes.details}>
+              {userInfo && userInfo.name
+                ? userInfo.name
+                : anonymousShoppingSelected
+                ? name
+                : "Anonymous"}
+            </Grid>
+          </Grid>
+          <Grid container className={classes.detailsSection}>
+            <Grid item className={classes.label}>
+              Shipping address:
+            </Grid>
+            <Grid item md={12} className={classes.details}>
+              {shippingAddress.address}
+            </Grid>
+            <Grid item md={12} className={classes.details}>
+              {shippingAddress.postalCode} {shippingAddress.city}
+            </Grid>
+            <Grid item md={12} className={classes.details}>
+              {shippingAddress.country}
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item className={classes.label}>
+              Order items:
+            </Grid>
+          </Grid>
           {cartItems.length === 0 ? (
-            <Message variant="info" message="Your cart is empty" />
+            <div className={classes.messageContainer}>
+              <Message variant="info" message="Your cart is empty" />
+            </div>
           ) : (
             cartItems.map((item) => (
-              <Grid container key={item.product}>
-                <Grid item md={2}>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className={classes.image}
-                  />
+              <Grid container key={item.product} className={classes.table}>
+                <Grid item md={2} style={{ paddingLeft: 0 }}>
+                  <Link
+                    className={classes.imgContainer}
+                    to={`/product/${item.product}`}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className={classes.image}
+                    />
+                  </Link>
                 </Grid>
-                <Grid item md={6} className={classes.center}>
+                <Grid item md={6}>
                   <Link
                     to={`/product/${item.product}`}
                     className={classes.link}
@@ -153,50 +299,47 @@ const PlaceOrderScreen = ({ history }) => {
                     {item.name}
                   </Link>
                 </Grid>
-                <Grid item md={4} className={classes.center}>
-                  {item.qty} x {item.price} ={" "}
+                <Grid item md={4}>
+                  {item.qty} x {item.price} = &euro;{" "}
                   {(item.qty * item.price).toFixed(2)}
                 </Grid>
               </Grid>
             ))
           )}
         </Grid>
-        <Grid item md={4}>
-          <h3>Order summary</h3>
+        {/* ------------------------------------------- RIGHT */}
+        <Grid item md={6} lg={4} className={classes.summary}>
+          <h2 className={classes.subtotal}>Order summary</h2>
           <Grid container>
-            <Grid item md={6}>
+            <Grid item md={6} className={classes.price}>
               Items:
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={6} className={classes.price}>
               &euro; {cart.itemsPrice}
             </Grid>
           </Grid>
-          {/* <Grid container>
-            <Grid item md={6}>
-              Tax:
-            </Grid>
-            <Grid item md={6}>
-              &euro; {cart.taxPrice}
-            </Grid>
-          </Grid> */}
           <Grid container>
-            <Grid item md={6}>
+            <Grid item md={6} className={classes.price}>
               Shipping:
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={6} className={classes.price}>
               &euro; {cart.shippingPrice}
             </Grid>
           </Grid>
           <Grid container>
-            <Grid item md={6}>
+            <Grid item md={6} className={classes.total}>
               Total:
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={6} className={classes.total}>
               &euro; {cart.totalPrice}
             </Grid>
           </Grid>
           {error && <Message variant="error" message={error} />}
-          <Button disabled={cartItems.length === 0} onClick={placeOrderHandler}>
+          <Button
+            disabled={cartItems.length === 0}
+            onClick={placeOrderHandler}
+            className={classes.placeOrderBtn}
+          >
             Place order
           </Button>
         </Grid>
