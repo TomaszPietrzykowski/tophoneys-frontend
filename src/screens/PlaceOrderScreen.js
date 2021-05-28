@@ -255,6 +255,14 @@ const PlaceOrderScreen = ({ history }) => {
           </Grid>
           <Grid container className={classes.detailsSection}>
             <Grid item className={classes.label}>
+              Email:
+            </Grid>
+            <Grid item md={12} className={classes.details}>
+              {userInfo && userInfo.email ? userInfo.email : email}
+            </Grid>
+          </Grid>
+          <Grid container className={classes.detailsSection}>
+            <Grid item className={classes.label}>
               Shipping address:
             </Grid>
             <Grid item md={12} className={classes.details}>

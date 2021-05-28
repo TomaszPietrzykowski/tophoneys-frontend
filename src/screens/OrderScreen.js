@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
-import { makeStyles } from "@material-ui/styles"
+import { makeStyles, useTheme } from "@material-ui/styles"
 import { Grid, Button } from "@material-ui/core"
 import { useSelector, useDispatch } from "react-redux"
 import Loader from "../components/Loader"
@@ -17,70 +17,168 @@ import Message from "../components/Message"
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    ...theme.typography.source,
-    marginTop: "15rem",
-    maxWidth: 1140,
-    color: theme.palette.text.secondary,
+    ...theme.typography.mont,
+    fontWeight: 300,
+    padding: "3rem",
+    // border: "1px solid blue",
   },
-  h1: {
-    ...theme.typography.prosto,
+  title: {
+    fontWeight: 300,
+    fontSize: "2.4rem",
     color: theme.palette.text.primary,
-    fontSize: "1.7rem",
-    padding: "1rem",
-    wordWrap: "break-word",
+    margin: "2rem 0 5rem",
+  },
+  subtitle: {
+    fontWeight: 300,
+    fontSize: "1.8rem",
+    color: theme.palette.text.primary,
+    margin: "2rem 0 5rem",
+  },
+
+  tableContainer: {
     fontWeight: 500,
+    fontSize: ".9rem",
+    letterSpacing: 1,
+    paddingRight: "2rem",
   },
-  h2: {
-    ...theme.typography.prosto,
-    fontSize: "1.4rem",
-    padding: ".5rem 0",
-    marginBottom: ".5rem",
-    fontWeight: 400,
-  },
-  image: {
-    width: "100%",
-    objectFit: "contain",
-    padding: "1rem",
-  },
-  productListItem: {
-    borderBottom: "1px solid rgba(0,0,0,.125)",
+  table: {
+    color: theme.palette.text.secondary,
+    fontWeight: 300,
+    fontSize: ".95rem",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      width: "100%",
+      height: 1,
+      position: "absolute",
+      bottom: 0,
+      left: 0,
+      background: `linear-gradient(90deg, transparent, ${theme.palette.text.disabled}, transparent)`,
+      opacity: 0.5,
+    },
+    "& > *": {
+      ...theme.flex.col,
+      alignItems: "flex-start",
+      paddingLeft: "1rem",
+    },
   },
   center: {
     ...theme.flex.row,
-    justifyContent: "flex-start",
-    paddingLeft: "1rem",
+  },
+  summary: {
+    ...theme.flex.colStart,
+    paddingLeft: "2rem",
+    "& > *": {
+      marginLeft: "2rem",
+    },
+    position: "relative",
+    "&::after": {
+      content: "''",
+      width: 1,
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+    },
+    [theme.breakpoints.down("md")]: {
+      marginLeft: "50%",
+    },
+  },
+  subtotal: {
+    fontWeight: 300,
+    fontSize: "1.8rem",
+    color: theme.palette.text.primary,
+    marginBottom: "3rem",
+  },
+  price: {
+    color: theme.palette.text.secondary,
+    fontSize: "1rem",
+    marginBottom: "1rem",
+  },
+  total: {
+    color: theme.palette.text.primary,
+    fontSize: "1.8rem",
+    margin: "1rem 0",
+  },
+  label: {
+    color: theme.palette.text.secondary,
+    fontSize: "1rem",
+    marginBottom: "1rem",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      height: 1,
+      width: "100%",
+      position: "absolute",
+      top: "-.5rem",
+      left: 0,
+      background: `linear-gradient(90deg, ${theme.palette.secondary.light}, transparent)`,
+    },
   },
   link: {
     "&:hover": {
       textDecoration: "underline",
     },
   },
-  alertContainer: {
-    maxWidth: 300,
-    opacity: 0.7,
+  detailsSection: {
+    marginBottom: "3.5rem",
   },
-  column: {
-    padding: "1rem",
-    "& > *": {
-      marginBottom: "1rem",
-    },
+  details: {
+    color: theme.palette.text.primary,
+    fontSize: "1.4rem",
+    marginBottom: "1rem",
   },
-  card: {
-    border: "1px solid rgba(0,0,0,.125)",
+  imgContainer: {
+    ...theme.flex.colStart,
+    padding: "1rem 2rem 1rem 0",
+    paddingLeft: 0,
+  },
+  image: {
+    maxWidth: "100%",
+    objectFit: "contain",
+  },
+
+  paypal: {
+    width: "100%",
+    paddingTop: "3rem",
+    paddingRight: "20%",
+  },
+  markAsSendBtn: {
+    marginTop: "2rem",
+    border: "none",
+    padding: ".8rem 2.5rem",
+    cursor: "pointer",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    ...theme.typography.mont,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    fontSize: "1rem",
+    fontWeight: 500,
     borderRadius: 4,
-    "& > *": {
-      padding: ".75rem 1.25rem",
-      borderBottom: "1px solid rgba(0,0,0,.125)",
+    color: "white",
+    backgroundColor: theme.palette.secondary.main,
+    transition: "all .3s ease",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.dark,
     },
-  },
-  mr: {
-    paddingRight: "1rem",
-    width: "50%",
+    "&:disabled": {
+      backgroundColor: theme.palette.text.disabled,
+      color: "white",
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: ".85rem",
+      flex: 1,
+      padding: ".3rem",
+    },
   },
 }))
 
 const OrderScreen = ({ match, history }) => {
   const classes = useStyles()
+  const theme = useTheme()
   const dispatch = useDispatch()
 
   const orderId = match.params.id
@@ -224,69 +322,115 @@ const OrderScreen = ({ match, history }) => {
         <Message variant="error" message={error} />
       ) : (
         <>
-          <h1 className={classes.h1}>Order {orderId}</h1>
+          <h1 className={classes.title}>Order details</h1>
           <Grid container>
-            <Grid item md={8} className={classes.column}>
-              <h2 className={classes.h2}>Shipping:</h2>
-              <p>Name: {order.user.name}</p>
-              <p>
-                Email:{" "}
-                <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
-              </p>
-              <p>
-                Address: {order.shippingAddress.address},{" "}
-                {order.shippingAddress.postalCode} {order.shippingAddress.city},{" "}
-                {order.shippingAddress.country}
-              </p>
-              {order.isDelivered ? (
-                <div className={classes.alertContainer}>
-                  <Message
-                    variant="success"
-                    message={`Sent on ${order.deliveredAt
-                      .substring(0, 16)
-                      .replace("T", " at ")}`}
-                  />
-                </div>
-              ) : (
-                <div className={classes.alertContainer}>
-                  <Message variant="info" message="Not sent" />
-                </div>
-              )}
-              <h2 className={classes.h2}>Payment:</h2>
-              <div>
-                {order.isPaid ? (
-                  <div className={classes.alertContainer}>
-                    <Message
-                      variant="success"
-                      message={`Paid on ${order.paidAt
+            <Grid item md={12} lg={8}>
+              <Grid container className={classes.detailsSection}>
+                <Grid item className={classes.label}>
+                  Order number:
+                </Grid>
+                <Grid item md={12} className={classes.details}>
+                  {orderId}
+                </Grid>
+              </Grid>
+              <Grid container className={classes.detailsSection}>
+                <Grid item className={classes.label}>
+                  Customer:
+                </Grid>
+                <Grid item md={12} className={classes.details}>
+                  {order.user.name}
+                </Grid>
+              </Grid>
+              <Grid container className={classes.detailsSection}>
+                <Grid item className={classes.label}>
+                  Email:
+                </Grid>
+                <Grid item md={12} className={classes.details}>
+                  {order.user.email}
+                </Grid>
+              </Grid>
+              <Grid container className={classes.detailsSection}>
+                <Grid item className={classes.label}>
+                  Payment status:
+                </Grid>
+                <Grid
+                  item
+                  md={12}
+                  className={classes.details}
+                  style={
+                    order.isPaid
+                      ? { color: theme.palette.common.success }
+                      : { color: theme.palette.text.secondary }
+                  }
+                >
+                  {order.isPaid
+                    ? `Paid on ${order.paidAt
                         .substring(0, 16)
-                        .replace("T", " at ")}`}
-                    />
-                  </div>
-                ) : (
-                  <div className={classes.alertContainer}>
-                    <Message variant="info" message="Not paid" />
-                  </div>
-                )}
-              </div>
-              <h2 className={classes.h2}>Order Items:</h2>
+                        .replace("T", " at ")}`
+                    : "Not paid"}
+                </Grid>
+              </Grid>
+              <Grid container className={classes.detailsSection}>
+                <Grid item className={classes.label}>
+                  Shipping status:
+                </Grid>
+                <Grid
+                  item
+                  md={12}
+                  className={classes.details}
+                  style={
+                    order.isDelivered
+                      ? { color: theme.palette.common.success }
+                      : { color: theme.palette.text.secondary }
+                  }
+                >
+                  {order.isDelivered
+                    ? `Sent on ${order.deliveredAt
+                        .substring(0, 16)
+                        .replace("T", " at ")}`
+                    : "Not sent"}
+                </Grid>
+              </Grid>
+              <Grid container className={classes.detailsSection}>
+                <Grid item className={classes.label}>
+                  Shipping address:
+                </Grid>
+                <Grid item md={12} className={classes.details}>
+                  {order.shippingAddress.address}
+                </Grid>
+                <Grid item md={12} className={classes.details}>
+                  {order.shippingAddress.postalCode}{" "}
+                  {order.shippingAddress.city}
+                </Grid>
+                <Grid item md={12} className={classes.details}>
+                  {order.shippingAddress.country}
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item className={classes.label}>
+                  Order items:
+                </Grid>
+              </Grid>
               {order.orderItems.length === 0 ? (
-                <Message variant="info" message="Order is empty" />
+                <div className={classes.messageContainer}>
+                  <Message variant="info" message="Your cart is empty" />
+                </div>
               ) : (
                 order.orderItems.map((item) => (
-                  <Grid
-                    container
-                    key={item.product}
-                    className={classes.productListItem}
-                  >
-                    <Grid item md={2}>
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className={classes.image}
-                      />
+                  <Grid container key={item.product} className={classes.table}>
+                    <Grid item md={2} style={{ paddingLeft: 0 }}>
+                      <Link
+                        className={classes.imgContainer}
+                        to={`/product/${item.product}`}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className={classes.image}
+                        />
+                      </Link>
                     </Grid>
-                    <Grid item md={6} className={classes.center}>
+                    <Grid item md={6}>
                       <Link
                         to={`/product/${item.product}`}
                         className={classes.link}
@@ -294,65 +438,71 @@ const OrderScreen = ({ match, history }) => {
                         {item.name}
                       </Link>
                     </Grid>
-                    <Grid item md={4} className={classes.center}>
-                      {item.qty} x &euro;{item.price} = &euro;
+                    <Grid item md={4}>
+                      {item.qty} x {item.price} = &euro;{" "}
                       {(item.qty * item.price).toFixed(2)}
                     </Grid>
                   </Grid>
                 ))
               )}
             </Grid>
-            <Grid item md={4}>
-              <div className={classes.card}>
-                <h2 className={classes.h2}>Order summary:</h2>
-                <Grid container>
-                  <Grid item md={6} className={classes.mr}>
-                    Products:
-                  </Grid>
-                  <Grid item md={6}>
-                    &euro; {order.itemsPrice}
-                  </Grid>
+            {/* -------------------------------------------------------- Right */}
+            <Grid item md={6} lg={4} className={classes.summary}>
+              <h2 className={classes.subtotal}>Order summary:</h2>
+              <Grid container>
+                <Grid item md={6} className={classes.price}>
+                  Products:
                 </Grid>
-                <Grid container>
-                  <Grid item md={6} className={classes.mr}>
-                    Shipping:
-                  </Grid>
-                  <Grid item md={6}>
-                    &euro; {order.shippingPrice}
-                  </Grid>
+                <Grid item md={6} className={classes.price}>
+                  &euro; {order.itemsPrice}
                 </Grid>
-                <Grid container>
-                  <Grid item md={6} className={classes.mr}>
-                    Total:
-                  </Grid>
-                  <Grid item md={6}>
-                    &euro; {order.totalPrice}
-                  </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item md={6} className={classes.price}>
+                  Shipping:
                 </Grid>
-                {!order.isPaid && (
-                  <>
-                    {loadingPay ? (
-                      <Loader />
-                    ) : !sdkReady ? (
-                      <Loader />
-                    ) : (
-                      <div id="paypal-button-container"></div>
-                    )}
-                  </>
-                )}
-                {loadingDeliver ? (
-                  <Loader />
-                ) : (
-                  userInfo &&
-                  userInfo.isAdmin &&
-                  order.isPaid &&
-                  !order.isDelivered && (
-                    <div className={classes.btnContainer}>
-                      <Button onClick={deliverHandler}>Mark as sent</Button>
-                    </div>
-                  )
-                )}
-              </div>
+                <Grid item md={6} className={classes.price}>
+                  &euro; {order.shippingPrice}
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item md={6} className={classes.total}>
+                  Total:
+                </Grid>
+                <Grid item md={6} className={classes.total}>
+                  &euro; {order.totalPrice}
+                </Grid>
+              </Grid>
+              <Grid container>
+                <Grid item className={classes.paypal}>
+                  {!order.isPaid && (
+                    <>
+                      {loadingPay ? (
+                        <Loader />
+                      ) : !sdkReady ? (
+                        <Loader />
+                      ) : (
+                        <div id="paypal-button-container"></div>
+                      )}
+                    </>
+                  )}
+                  {loadingDeliver ? (
+                    <Loader />
+                  ) : (
+                    userInfo &&
+                    userInfo.isAdmin &&
+                    order.isPaid &&
+                    !order.isDelivered && (
+                      <Button
+                        onClick={deliverHandler}
+                        className={classes.markAsSendBtn}
+                      >
+                        Mark as sent
+                      </Button>
+                    )
+                  )}
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </>

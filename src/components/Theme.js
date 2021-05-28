@@ -10,6 +10,8 @@ export default createMuiTheme({
       // brown1: "rgb(179, 107, 0)",
       brown2: "rgb(77, 46, 0)",
       lightYellow: "rgb(77, 46, 0)",
+      success: "rgb(0, 150, 30)",
+      error: "rgb(150, 0, 0)",
     },
     primary: {
       main: `rgba(215, 170, 14, 1)`,
