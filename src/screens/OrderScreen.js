@@ -13,6 +13,7 @@ import {
   ORDER_PAY_FAIL,
 } from "../constants/orderConstants"
 import Message from "../components/Message"
+import CheckoutSteps from "../components/CheckoutSteps"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.mont,
     fontWeight: 300,
     padding: "3rem",
+    paddingTop: 0,
     // border: "1px solid blue",
   },
   title: {
@@ -315,199 +317,211 @@ const OrderScreen = ({ match, history }) => {
   }
 
   return (
-    <div className={classes.container}>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="error" message={error} />
-      ) : (
-        <>
-          <h1 className={classes.title}>Order details</h1>
-          <Grid container>
-            <Grid item md={12} lg={8}>
-              <Grid container className={classes.detailsSection}>
-                <Grid item className={classes.label}>
-                  Order number:
-                </Grid>
-                <Grid item md={12} className={classes.details}>
-                  {orderId}
-                </Grid>
-              </Grid>
-              <Grid container className={classes.detailsSection}>
-                <Grid item className={classes.label}>
-                  Customer:
-                </Grid>
-                <Grid item md={12} className={classes.details}>
-                  {order.user.name}
-                </Grid>
-              </Grid>
-              <Grid container className={classes.detailsSection}>
-                <Grid item className={classes.label}>
-                  Email:
-                </Grid>
-                <Grid item md={12} className={classes.details}>
-                  {order.user.email}
-                </Grid>
-              </Grid>
-              <Grid container className={classes.detailsSection}>
-                <Grid item className={classes.label}>
-                  Payment status:
-                </Grid>
-                <Grid
-                  item
-                  md={12}
-                  className={classes.details}
-                  style={
-                    order.isPaid
-                      ? { color: theme.palette.common.success }
-                      : { color: theme.palette.text.secondary }
-                  }
-                >
-                  {order.isPaid
-                    ? `Paid on ${order.paidAt
-                        .substring(0, 16)
-                        .replace("T", " at ")}`
-                    : "Not paid"}
-                </Grid>
-              </Grid>
-              <Grid container className={classes.detailsSection}>
-                <Grid item className={classes.label}>
-                  Shipping status:
-                </Grid>
-                <Grid
-                  item
-                  md={12}
-                  className={classes.details}
-                  style={
-                    order.isDelivered
-                      ? { color: theme.palette.common.success }
-                      : { color: theme.palette.text.secondary }
-                  }
-                >
-                  {order.isDelivered
-                    ? `Sent on ${order.deliveredAt
-                        .substring(0, 16)
-                        .replace("T", " at ")}`
-                    : "Not sent"}
-                </Grid>
-              </Grid>
-              <Grid container className={classes.detailsSection}>
-                <Grid item className={classes.label}>
-                  Shipping address:
-                </Grid>
-                <Grid item md={12} className={classes.details}>
-                  {order.shippingAddress.address}
-                </Grid>
-                <Grid item md={12} className={classes.details}>
-                  {order.shippingAddress.postalCode}{" "}
-                  {order.shippingAddress.city}
-                </Grid>
-                <Grid item md={12} className={classes.details}>
-                  {order.shippingAddress.country}
-                </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item className={classes.label}>
-                  Order items:
-                </Grid>
-              </Grid>
-              {order.orderItems.length === 0 ? (
-                <div className={classes.messageContainer}>
-                  <Message variant="info" message="Your cart is empty" />
-                </div>
-              ) : (
-                order.orderItems.map((item) => (
-                  <Grid container key={item.product} className={classes.table}>
-                    <Grid item md={2} style={{ paddingLeft: 0 }}>
-                      <Link
-                        className={classes.imgContainer}
-                        to={`/product/${item.product}`}
-                      >
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className={classes.image}
-                        />
-                      </Link>
-                    </Grid>
-                    <Grid item md={6}>
-                      <Link
-                        to={`/product/${item.product}`}
-                        className={classes.link}
-                      >
-                        {item.name}
-                      </Link>
-                    </Grid>
-                    <Grid item md={4}>
-                      {item.qty} x {item.price} = &euro;{" "}
-                      {(item.qty * item.price).toFixed(2)}
-                    </Grid>
-                  </Grid>
-                ))
-              )}
-            </Grid>
-            {/* -------------------------------------------------------- Right */}
-            <Grid item md={6} lg={4} className={classes.summary}>
-              <h2 className={classes.subtotal}>Order summary:</h2>
-              <Grid container>
-                <Grid item md={6} className={classes.price}>
-                  Products:
-                </Grid>
-                <Grid item md={6} className={classes.price}>
-                  &euro; {order.itemsPrice}
-                </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item md={6} className={classes.price}>
-                  Shipping:
-                </Grid>
-                <Grid item md={6} className={classes.price}>
-                  &euro; {order.shippingPrice}
-                </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item md={6} className={classes.total}>
-                  Total:
-                </Grid>
-                <Grid item md={6} className={classes.total}>
-                  &euro; {order.totalPrice}
-                </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item className={classes.paypal}>
-                  {!order.isPaid && (
-                    <>
-                      {loadingPay ? (
-                        <Loader />
-                      ) : !sdkReady ? (
-                        <Loader />
-                      ) : (
-                        <div id="paypal-button-container"></div>
-                      )}
-                    </>
-                  )}
-                  {loadingDeliver ? (
-                    <Loader />
-                  ) : (
-                    userInfo &&
-                    userInfo.isAdmin &&
-                    order.isPaid &&
-                    !order.isDelivered && (
-                      <Button
-                        onClick={deliverHandler}
-                        className={classes.markAsSendBtn}
-                      >
-                        Mark as sent
-                      </Button>
-                    )
-                  )}
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
-        </>
+    <>
+      {order && !order.isPaid && (
+        <CheckoutSteps step1 step2 step3 orderId={orderId} />
       )}
-    </div>
+      <div
+        className={classes.container}
+        style={order && order.isPaid && { paddingTop: "3rem" }}
+      >
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant="error" message={error} />
+        ) : (
+          <>
+            <h1 className={classes.title}>Order details</h1>
+            <Grid container>
+              <Grid item md={12} lg={8}>
+                <Grid container className={classes.detailsSection}>
+                  <Grid item className={classes.label}>
+                    Order number:
+                  </Grid>
+                  <Grid item md={12} className={classes.details}>
+                    {orderId}
+                  </Grid>
+                </Grid>
+                <Grid container className={classes.detailsSection}>
+                  <Grid item className={classes.label}>
+                    Customer:
+                  </Grid>
+                  <Grid item md={12} className={classes.details}>
+                    {order.user.name}
+                  </Grid>
+                </Grid>
+                <Grid container className={classes.detailsSection}>
+                  <Grid item className={classes.label}>
+                    Email:
+                  </Grid>
+                  <Grid item md={12} className={classes.details}>
+                    {order.user.email}
+                  </Grid>
+                </Grid>
+                <Grid container className={classes.detailsSection}>
+                  <Grid item className={classes.label}>
+                    Payment status:
+                  </Grid>
+                  <Grid
+                    item
+                    md={12}
+                    className={classes.details}
+                    style={
+                      order.isPaid
+                        ? { color: theme.palette.common.success }
+                        : { color: theme.palette.text.secondary }
+                    }
+                  >
+                    {order.isPaid
+                      ? `Paid on ${order.paidAt
+                          .substring(0, 16)
+                          .replace("T", " at ")}`
+                      : "Not paid"}
+                  </Grid>
+                </Grid>
+                <Grid container className={classes.detailsSection}>
+                  <Grid item className={classes.label}>
+                    Shipping status:
+                  </Grid>
+                  <Grid
+                    item
+                    md={12}
+                    className={classes.details}
+                    style={
+                      order.isDelivered
+                        ? { color: theme.palette.common.success }
+                        : { color: theme.palette.text.secondary }
+                    }
+                  >
+                    {order.isDelivered
+                      ? `Sent on ${order.deliveredAt
+                          .substring(0, 16)
+                          .replace("T", " at ")}`
+                      : "Not sent"}
+                  </Grid>
+                </Grid>
+                <Grid container className={classes.detailsSection}>
+                  <Grid item className={classes.label}>
+                    Shipping address:
+                  </Grid>
+                  <Grid item md={12} className={classes.details}>
+                    {order.shippingAddress.address}
+                  </Grid>
+                  <Grid item md={12} className={classes.details}>
+                    {order.shippingAddress.postalCode}{" "}
+                    {order.shippingAddress.city}
+                  </Grid>
+                  <Grid item md={12} className={classes.details}>
+                    {order.shippingAddress.country}
+                  </Grid>
+                </Grid>
+                <Grid container>
+                  <Grid item className={classes.label}>
+                    Order items:
+                  </Grid>
+                </Grid>
+                {order.orderItems.length === 0 ? (
+                  <div className={classes.messageContainer}>
+                    <Message variant="info" message="Your cart is empty" />
+                  </div>
+                ) : (
+                  order.orderItems.map((item) => (
+                    <Grid
+                      container
+                      key={item.product}
+                      className={classes.table}
+                    >
+                      <Grid item md={2} style={{ paddingLeft: 0 }}>
+                        <Link
+                          className={classes.imgContainer}
+                          to={`/product/${item.product}`}
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className={classes.image}
+                          />
+                        </Link>
+                      </Grid>
+                      <Grid item md={6}>
+                        <Link
+                          to={`/product/${item.product}`}
+                          className={classes.link}
+                        >
+                          {item.name}
+                        </Link>
+                      </Grid>
+                      <Grid item md={4}>
+                        {item.qty} x {item.price} = &euro;{" "}
+                        {(item.qty * item.price).toFixed(2)}
+                      </Grid>
+                    </Grid>
+                  ))
+                )}
+              </Grid>
+              {/* -------------------------------------------------------- Right */}
+              <Grid item md={6} lg={4} className={classes.summary}>
+                <h2 className={classes.subtotal}>Order summary:</h2>
+                <Grid container>
+                  <Grid item md={6} className={classes.price}>
+                    Products:
+                  </Grid>
+                  <Grid item md={6} className={classes.price}>
+                    &euro; {order.itemsPrice}
+                  </Grid>
+                </Grid>
+                <Grid container>
+                  <Grid item md={6} className={classes.price}>
+                    Shipping:
+                  </Grid>
+                  <Grid item md={6} className={classes.price}>
+                    &euro; {order.shippingPrice}
+                  </Grid>
+                </Grid>
+                <Grid container>
+                  <Grid item md={6} className={classes.total}>
+                    Total:
+                  </Grid>
+                  <Grid item md={6} className={classes.total}>
+                    &euro; {order.totalPrice}
+                  </Grid>
+                </Grid>
+                <Grid container>
+                  <Grid item className={classes.paypal}>
+                    {!order.isPaid && (
+                      <>
+                        {loadingPay ? (
+                          <Loader />
+                        ) : !sdkReady ? (
+                          <Loader />
+                        ) : (
+                          <div id="paypal-button-container"></div>
+                        )}
+                      </>
+                    )}
+                    {loadingDeliver ? (
+                      <Loader />
+                    ) : (
+                      userInfo &&
+                      userInfo.isAdmin &&
+                      order.isPaid &&
+                      !order.isDelivered && (
+                        <Button
+                          onClick={deliverHandler}
+                          className={classes.markAsSendBtn}
+                        >
+                          Mark as sent
+                        </Button>
+                      )
+                    )}
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </>
+        )}
+      </div>
+    </>
   )
 }
 

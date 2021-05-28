@@ -8,6 +8,7 @@ import { createOrder } from "../actions/orderActions"
 import Message from "../components/Message"
 import { ORDER_CREATE_RESET } from "../constants/orderConstants"
 import { CART_EMPTY_ITEMS } from "../constants/cartConstants"
+import CheckoutSteps from "../components/CheckoutSteps"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.mont,
     fontWeight: 300,
     padding: "3rem",
+    paddingTop: 0,
     // border: "1px solid blue",
   },
   title: {
@@ -236,123 +238,126 @@ const PlaceOrderScreen = ({ history }) => {
   }
 
   return (
-    <div className={classes.container}>
-      <h1 className={classes.title}>Place order</h1>
+    <>
+      <CheckoutSteps step1 step2 />
+      <div className={classes.container}>
+        <h1 className={classes.title}>Place order</h1>
 
-      <Grid container>
-        <Grid item md={12} lg={8}>
-          <Grid container className={classes.detailsSection}>
-            <Grid item className={classes.label}>
-              Customer:
-            </Grid>
-            <Grid item md={12} className={classes.details}>
-              {userInfo && userInfo.name
-                ? userInfo.name
-                : anonymousShoppingSelected
-                ? name
-                : "Anonymous"}
-            </Grid>
-          </Grid>
-          <Grid container className={classes.detailsSection}>
-            <Grid item className={classes.label}>
-              Email:
-            </Grid>
-            <Grid item md={12} className={classes.details}>
-              {userInfo && userInfo.email ? userInfo.email : email}
-            </Grid>
-          </Grid>
-          <Grid container className={classes.detailsSection}>
-            <Grid item className={classes.label}>
-              Shipping address:
-            </Grid>
-            <Grid item md={12} className={classes.details}>
-              {shippingAddress.address}
-            </Grid>
-            <Grid item md={12} className={classes.details}>
-              {shippingAddress.postalCode} {shippingAddress.city}
-            </Grid>
-            <Grid item md={12} className={classes.details}>
-              {shippingAddress.country}
-            </Grid>
-          </Grid>
-          <Grid container>
-            <Grid item className={classes.label}>
-              Order items:
-            </Grid>
-          </Grid>
-          {cartItems.length === 0 ? (
-            <div className={classes.messageContainer}>
-              <Message variant="info" message="Your cart is empty" />
-            </div>
-          ) : (
-            cartItems.map((item) => (
-              <Grid container key={item.product} className={classes.table}>
-                <Grid item md={2} style={{ paddingLeft: 0 }}>
-                  <Link
-                    className={classes.imgContainer}
-                    to={`/product/${item.product}`}
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className={classes.image}
-                    />
-                  </Link>
-                </Grid>
-                <Grid item md={6}>
-                  <Link
-                    to={`/product/${item.product}`}
-                    className={classes.link}
-                  >
-                    {item.name}
-                  </Link>
-                </Grid>
-                <Grid item md={4}>
-                  {item.qty} x {item.price} = &euro;{" "}
-                  {(item.qty * item.price).toFixed(2)}
-                </Grid>
+        <Grid container>
+          <Grid item md={12} lg={8}>
+            <Grid container className={classes.detailsSection}>
+              <Grid item className={classes.label}>
+                Customer:
               </Grid>
-            ))
-          )}
+              <Grid item md={12} className={classes.details}>
+                {userInfo && userInfo.name
+                  ? userInfo.name
+                  : anonymousShoppingSelected
+                  ? name
+                  : "Anonymous"}
+              </Grid>
+            </Grid>
+            <Grid container className={classes.detailsSection}>
+              <Grid item className={classes.label}>
+                Email:
+              </Grid>
+              <Grid item md={12} className={classes.details}>
+                {userInfo && userInfo.email ? userInfo.email : email}
+              </Grid>
+            </Grid>
+            <Grid container className={classes.detailsSection}>
+              <Grid item className={classes.label}>
+                Shipping address:
+              </Grid>
+              <Grid item md={12} className={classes.details}>
+                {shippingAddress.address}
+              </Grid>
+              <Grid item md={12} className={classes.details}>
+                {shippingAddress.postalCode} {shippingAddress.city}
+              </Grid>
+              <Grid item md={12} className={classes.details}>
+                {shippingAddress.country}
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item className={classes.label}>
+                Order items:
+              </Grid>
+            </Grid>
+            {cartItems.length === 0 ? (
+              <div className={classes.messageContainer}>
+                <Message variant="info" message="Your cart is empty" />
+              </div>
+            ) : (
+              cartItems.map((item) => (
+                <Grid container key={item.product} className={classes.table}>
+                  <Grid item md={2} style={{ paddingLeft: 0 }}>
+                    <Link
+                      className={classes.imgContainer}
+                      to={`/product/${item.product}`}
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className={classes.image}
+                      />
+                    </Link>
+                  </Grid>
+                  <Grid item md={6}>
+                    <Link
+                      to={`/product/${item.product}`}
+                      className={classes.link}
+                    >
+                      {item.name}
+                    </Link>
+                  </Grid>
+                  <Grid item md={4}>
+                    {item.qty} x {item.price} = &euro;{" "}
+                    {(item.qty * item.price).toFixed(2)}
+                  </Grid>
+                </Grid>
+              ))
+            )}
+          </Grid>
+          {/* ------------------------------------------- RIGHT */}
+          <Grid item md={6} lg={4} className={classes.summary}>
+            <h2 className={classes.subtotal}>Order summary</h2>
+            <Grid container>
+              <Grid item md={6} className={classes.price}>
+                Items:
+              </Grid>
+              <Grid item md={6} className={classes.price}>
+                &euro; {cart.itemsPrice}
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item md={6} className={classes.price}>
+                Shipping:
+              </Grid>
+              <Grid item md={6} className={classes.price}>
+                &euro; {cart.shippingPrice}
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item md={6} className={classes.total}>
+                Total:
+              </Grid>
+              <Grid item md={6} className={classes.total}>
+                &euro; {cart.totalPrice}
+              </Grid>
+            </Grid>
+            {error && <Message variant="error" message={error} />}
+            <Button
+              disabled={cartItems.length === 0}
+              onClick={placeOrderHandler}
+              className={classes.placeOrderBtn}
+            >
+              Place order
+            </Button>
+          </Grid>
         </Grid>
-        {/* ------------------------------------------- RIGHT */}
-        <Grid item md={6} lg={4} className={classes.summary}>
-          <h2 className={classes.subtotal}>Order summary</h2>
-          <Grid container>
-            <Grid item md={6} className={classes.price}>
-              Items:
-            </Grid>
-            <Grid item md={6} className={classes.price}>
-              &euro; {cart.itemsPrice}
-            </Grid>
-          </Grid>
-          <Grid container>
-            <Grid item md={6} className={classes.price}>
-              Shipping:
-            </Grid>
-            <Grid item md={6} className={classes.price}>
-              &euro; {cart.shippingPrice}
-            </Grid>
-          </Grid>
-          <Grid container>
-            <Grid item md={6} className={classes.total}>
-              Total:
-            </Grid>
-            <Grid item md={6} className={classes.total}>
-              &euro; {cart.totalPrice}
-            </Grid>
-          </Grid>
-          {error && <Message variant="error" message={error} />}
-          <Button
-            disabled={cartItems.length === 0}
-            onClick={placeOrderHandler}
-            className={classes.placeOrderBtn}
-          >
-            Place order
-          </Button>
-        </Grid>
-      </Grid>
-    </div>
+      </div>
+    </>
   )
 }
 

@@ -3,7 +3,7 @@ import { makeStyles, withStyles } from "@material-ui/styles"
 import { useDispatch, useSelector } from "react-redux"
 import { Button, TextField } from "@material-ui/core"
 import { savePaymentMethod, saveShippingAddress } from "../actions/cartActions"
-// import CheckoutSteps from "../components/CheckoutSteps"
+import CheckoutSteps from "../components/CheckoutSteps"
 import { ORDER_ANONYMOUS_DATA } from "../constants/orderConstants"
 
 const useStyles = makeStyles((theme) => ({
@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     ...theme.flex.row,
     justifyContent: "flex-start",
     ...theme.typography.mont,
-    padding: "2rem 0 0",
   },
   content: {
     margin: "0 auto 2rem 25%",
@@ -118,72 +117,75 @@ const ShippingScreen = ({ history }) => {
   }
 
   return (
-    <div className={classes.container}>
-      <main className={classes.content}>
-        <h1 className={classes.title}>Shipping address</h1>
-        <form onSubmit={submitHandler} className={classes.form}>
-          {anonymousShoppingSelected && (
-            <>
-              <CssTextField
-                id="name"
-                label="Full Name"
-                variant="outlined"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <CssTextField
-                id="email"
-                label="Email"
-                variant="outlined"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </>
-          )}
-          <CssTextField
-            id="address"
-            label="Address"
-            variant="outlined"
-            className={classes.textarea}
-            required
-            multiline
-            rows={3}
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-          <CssTextField
-            id="city"
-            label="City"
-            variant="outlined"
-            required
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <CssTextField
-            id="postalCode"
-            label="Postal Code"
-            variant="outlined"
-            required
-            value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value)}
-          />
-          <CssTextField
-            id="country"
-            label="Country"
-            variant="outlined"
-            required
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-          />
-          <Button type="submit" className={classes.submitBtn}>
-            Confirm
-          </Button>
-        </form>
-      </main>
-    </div>
+    <>
+      <CheckoutSteps step1 />
+      <div className={classes.container}>
+        <main className={classes.content}>
+          <h1 className={classes.title}>Shipping address</h1>
+          <form onSubmit={submitHandler} className={classes.form}>
+            {anonymousShoppingSelected && (
+              <>
+                <CssTextField
+                  id="name"
+                  label="Full Name"
+                  variant="outlined"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <CssTextField
+                  id="email"
+                  label="Email"
+                  variant="outlined"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </>
+            )}
+            <CssTextField
+              id="address"
+              label="Address"
+              variant="outlined"
+              className={classes.textarea}
+              required
+              multiline
+              rows={3}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+            <CssTextField
+              id="city"
+              label="City"
+              variant="outlined"
+              required
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+            <CssTextField
+              id="postalCode"
+              label="Postal Code"
+              variant="outlined"
+              required
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
+            />
+            <CssTextField
+              id="country"
+              label="Country"
+              variant="outlined"
+              required
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            />
+            <Button type="submit" className={classes.submitBtn}>
+              Confirm
+            </Button>
+          </form>
+        </main>
+      </div>
+    </>
   )
 }
 

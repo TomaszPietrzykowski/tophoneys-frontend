@@ -1,11 +1,11 @@
-import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import { Link } from "react-router-dom";
+import React from "react"
+import { makeStyles } from "@material-ui/styles"
 
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    ...theme.typography.prosto,
+    ...theme.typography.mont,
+    paddingTop: "1rem",
   },
   nav: {
     ...theme.flex.row,
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
   liActive: {
     ...theme.flex.row,
-    color: theme.palette.primary.main,
+    color: theme.palette.secondary.light,
   },
   liDisabled: {
     ...theme.flex.row,
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   circleActive: {
     ...theme.flex.col,
     padding: ".5rem",
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.light,
     color: "white",
     width: 30,
     height: 30,
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.flex.col,
     padding: ".5rem",
     backgroundColor: "white",
-    border: `3px solid ${theme.palette.text.disabled}`,
+    border: `1px solid ${theme.palette.text.disabled}`,
     color: theme.palette.text.disabled,
     width: 30,
     height: 30,
@@ -49,11 +49,11 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     "&::before": {
       content: "''",
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.secondary.main,
       position: "absolute",
-      top: "calc(50% - 2px)",
+      top: "calc(50% - 1px)",
       width: "100%",
-      height: "4px",
+      height: "2px",
       zIndex: -2,
     },
   },
@@ -63,9 +63,9 @@ const useStyles = makeStyles((theme) => ({
       content: "''",
       backgroundColor: theme.palette.text.disabled,
       position: "absolute",
-      top: "calc(50% - 2px)",
+      top: "calc(50% - 1px)",
       width: "100%",
-      height: "4px",
+      height: "2px",
       zIndex: -2,
     },
   },
@@ -76,22 +76,20 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-}));
+}))
 
-const CheckoutSteps = ({ step1, step2, step3 }) => {
-  const classes = useStyles();
+const CheckoutSteps = ({ step1, step2, step3, orderId = "#" }) => {
+  const classes = useStyles()
 
   return (
     <div className={classes.container}>
       <ul className={classes.nav}>
         {step1 ? (
           <div className={classes.stepContainerActive}>
-            <Link to="/shipping" className={classes.link}>
-              <li className={classes.liActive}>
-                <div className={classes.circleActive}>1</div>
-                <span className={classes.span}>Shipping</span>
-              </li>
-            </Link>
+            <li className={classes.liActive}>
+              <div className={classes.circleActive}>1</div>
+              <span className={classes.span}>Shipping</span>
+            </li>
           </div>
         ) : (
           <div className={classes.stepContainerDisabled}>
@@ -103,41 +101,37 @@ const CheckoutSteps = ({ step1, step2, step3 }) => {
         )}
         {step2 ? (
           <div className={classes.stepContainerActive}>
-            <Link to="/paymentmethod" className={classes.link}>
-              <li className={classes.liActive}>
-                <div className={classes.circleActive}>2</div>
-                <span className={classes.span}>Payment</span>
-              </li>
-            </Link>
+            <li className={classes.liActive}>
+              <div className={classes.circleActive}>2</div>
+              <span className={classes.span}>Place order</span>
+            </li>
           </div>
         ) : (
           <div className={classes.stepContainerDisabled}>
             <li className={classes.liDisabled}>
               <div className={classes.circleDisabled}>2</div>
-              <span className={classes.span}>Payment</span>
+              <span className={classes.span}>Place order</span>
             </li>
           </div>
         )}
         {step3 ? (
           <div>
-            <Link to="/placeorder" className={classes.link}>
-              <li className={classes.liActive}>
-                <div className={classes.circleActive}>3</div>
-                <span className={classes.span}>Order</span>
-              </li>
-            </Link>
+            <li className={classes.liActive}>
+              <div className={classes.circleActive}>3</div>
+              <span className={classes.span}>Pay</span>
+            </li>
           </div>
         ) : (
           <div>
             <li className={classes.liDisabled}>
               <div className={classes.circleDisabled}>3</div>
-              <span className={classes.span}>Order</span>
+              <span className={classes.span}>Pay</span>
             </li>
           </div>
         )}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default CheckoutSteps;
+export default CheckoutSteps
