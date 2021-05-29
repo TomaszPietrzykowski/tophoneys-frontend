@@ -1,36 +1,104 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { Button, Tooltip } from "@material-ui/core"
+import { Tooltip } from "@material-ui/core"
 import { withStyles, makeStyles } from "@material-ui/styles"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
+import IconButton from "@material-ui/core/IconButton"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
-import Paper from "@material-ui/core/Paper"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
-import CancelIcon from "@material-ui/icons/Cancel"
+import DetailsIcon from "@material-ui/icons/MenuOpenRounded"
 import { listOrders } from "../actions/orderActions"
 
 const StyledTableCell = withStyles((theme) => ({
   root: {
-    ...theme.typography.source,
+    ...theme.typography.mont,
+    color: theme.palette.text.secondary,
+    fontSize: ".9rem",
+    border: "none",
+    outline: "none",
+    whiteSpace: "nowrap",
   },
 }))(TableCell)
 
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(even)": {
+      backgroundColor: "rgba(0,0,0,.02)",
+    },
+  },
+}))(TableRow)
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    marginTop: "15rem",
+    ...theme.typography.mont,
+    padding: "3rem",
+  },
+  header: {
+    ...theme.flex.rowStart,
+  },
+  title: {
+    fontWeight: 300,
+    fontSize: "2.4rem",
+    color: theme.palette.text.primary,
+    margin: "3rem 0 5rem",
+    position: "relative",
+  },
+  adminBadge: {
+    ...theme.utils.adminBadge,
+    color: theme.palette.secondary.light,
+  },
+  deco: {
+    position: "relative",
+    padding: "0 3rem",
+    "&::before": {
+      content: "''",
+      width: 1,
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+    },
+    "&::after": {
+      content: "''",
+      width: 1,
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      right: 0,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+    },
   },
   tableContainer: {
+    width: "100%",
     overflowX: "scroll",
   },
-  table: {
-    minWidth: 650,
+  head: {
+    padding: ".5rem 1rem",
+    textTransform: "uppercase",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      width: 1,
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.light}, transparent)`,
+    },
+  },
+  info: {
+    fontSize: ".8rem",
+    textTransform: "uppercase",
+  },
+  success: {
+    fontSize: ".8rem",
+    color: theme.palette.common.success,
   },
   checkIcon: {
     fontSize: ".9rem",
@@ -40,9 +108,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: ".9rem",
     color: "red",
   },
-  button: {
-    fontSize: ".8rem",
-    color: "white",
+  detailsBtn: {
+    marginLeft: ".5rem",
+  },
+  detailsIcon: {
+    color: theme.palette.text.disabled,
   },
 }))
 
@@ -66,36 +136,57 @@ const OrderListScreen = ({ history }) => {
 
   return (
     <div className={classes.container}>
-      <h1>Orders</h1>
+      <div className={classes.header}>
+        <h1 className={classes.title}>
+          Orders<span className={classes.adminBadge}>Admin</span>
+        </h1>
+      </div>
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="error" message={error} />
       ) : (
-        <div className={classes.tableContainer}>
-          <TableContainer component={Paper}>
+        <div className={classes.deco}>
+          <div className={classes.tableContainer}>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
-                <TableRow>
-                  <StyledTableCell>ID</StyledTableCell>
-                  <StyledTableCell>USER</StyledTableCell>
-                  <StyledTableCell>DATE</StyledTableCell>
-                  <StyledTableCell>TOTAL</StyledTableCell>
-                  <StyledTableCell>PAID</StyledTableCell>
-                  <StyledTableCell>SENT</StyledTableCell>
-                  <StyledTableCell></StyledTableCell>
-                </TableRow>
+                <StyledTableRow>
+                  <StyledTableCell className={classes.head}>Id</StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    User
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    Date
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    TOTAL
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    Paid
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    Sent
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    Details
+                  </StyledTableCell>
+                </StyledTableRow>
               </TableHead>
+              <div style={{ marginTop: "1rem" }} />
               <TableBody>
                 {orders.map((order) => (
-                  <TableRow key={order._id}>
+                  <StyledTableRow key={order._id}>
                     <StyledTableCell component="th" scope="row">
                       {order._id}
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
                       {order.user && order.user.name}
                     </StyledTableCell>
-                    <StyledTableCell component="th" scope="row">
+                    <StyledTableCell
+                      component="th"
+                      scope="row"
+                      style={{ fontSize: ".8rem" }}
+                    >
                       {order.createdAt.substring(0, 10)}
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
@@ -103,37 +194,36 @@ const OrderListScreen = ({ history }) => {
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
                       {order.isPaid ? (
-                        order.paidAt.substring(0, 10)
+                        <span className={classes.success}>
+                          {order.paidAt.substring(0, 10)}
+                        </span>
                       ) : (
-                        <CancelIcon className={classes.cancelIcon} />
+                        <span className={classes.info}>Not paid</span>
                       )}
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
                       {order.isDelivered ? (
-                        order.deliveredAt.substring(0, 10)
+                        <span className={classes.success}>
+                          {order.deliveredAt.substring(0, 10)}
+                        </span>
                       ) : (
-                        <CancelIcon className={classes.cancelIcon} />
+                        <span className={classes.info}>Not sent</span>
                       )}
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
                       <Tooltip title="View order" placement="top-start">
                         <Link to={`/order/${order._id}`}>
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            size="small"
-                            className={classes.button}
-                          >
-                            Details
-                          </Button>
+                          <IconButton className={classes.detailsBtn}>
+                            <DetailsIcon className={classes.detailsIcon} />
+                          </IconButton>
                         </Link>
                       </Tooltip>
                     </StyledTableCell>
-                  </TableRow>
+                  </StyledTableRow>
                 ))}
               </TableBody>
             </Table>
-          </TableContainer>
+          </div>
         </div>
       )}
     </div>
