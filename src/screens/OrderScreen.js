@@ -24,11 +24,15 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 0,
     // border: "1px solid blue",
   },
+  marginTop: {
+    // margin applied to container when checkout steps component not rendered
+    height: "3rem",
+  },
   title: {
     fontWeight: 300,
     fontSize: "2.4rem",
     color: theme.palette.text.primary,
-    margin: "2rem 0 5rem",
+    margin: "3rem 0 5rem",
   },
   subtitle: {
     fontWeight: 300,
@@ -318,13 +322,12 @@ const OrderScreen = ({ match, history }) => {
 
   return (
     <>
-      {order && !order.isPaid && (
+      {order && !order.isPaid ? (
         <CheckoutSteps step1 step2 step3 orderId={orderId} />
+      ) : (
+        <div className={classes.marginTop} />
       )}
-      <div
-        className={classes.container}
-        style={order && order.isPaid && { paddingTop: "3rem" }}
-      >
+      <div className={classes.container}>
         {loading ? (
           <Loader />
         ) : error ? (

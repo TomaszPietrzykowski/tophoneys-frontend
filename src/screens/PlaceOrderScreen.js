@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { makeStyles } from "@material-ui/styles"
 import { Button, Grid } from "@material-ui/core"
 import { useSelector, useDispatch } from "react-redux"
-// import CheckoutSteps from "../components/CheckoutSteps"
 import { createOrder } from "../actions/orderActions"
 import Message from "../components/Message"
 import { ORDER_CREATE_RESET } from "../constants/orderConstants"
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     fontSize: "2.4rem",
     color: theme.palette.text.primary,
-    margin: "2rem 0 5rem",
+    margin: "3rem 0 5rem",
   },
   tableContainer: {
     fontWeight: 500,

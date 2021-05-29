@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     margin: "0 auto 2rem 25%",
-    padding: "5rem",
+    padding: "3rem 5rem 5rem",
     position: "relative",
     "&::before": {
       content: "''",
