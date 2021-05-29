@@ -78,6 +78,14 @@ export default createMuiTheme({
       letterSpacing: 0.3,
       maxWidth: 560,
     },
+    adminBadge: {
+      position: "absolute",
+      top: "-.5rem",
+      right: "-4rem",
+      textTransform: "uppercase",
+      fontSize: "1rem",
+      fontWeight: 400,
+    },
   },
   buttons: {
     primary: {

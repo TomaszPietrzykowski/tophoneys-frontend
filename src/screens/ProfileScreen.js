@@ -7,10 +7,8 @@ import IconButton from "@material-ui/core/IconButton"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
-import TableContainer from "@material-ui/core/TableContainer"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
-import Paper from "@material-ui/core/Paper"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
 import DetailsIcon from "@material-ui/icons/MenuOpenRounded"
@@ -34,19 +32,6 @@ const StyledTableRow = withStyles((theme) => ({
   root: {
     "&:nth-of-type(even)": {
       backgroundColor: "rgba(0,0,0,.02)",
-    },
-  },
-  body: {
-    position: "relative",
-    "&::after": {
-      content: "''",
-      width: "100%",
-      height: 1,
-      position: "absolute",
-      bottom: 0,
-      left: 0,
-      background: `linear-gradient(90deg, transparent, ${theme.palette.text.disabled}, transparent)`,
-      opacity: 0.5,
     },
   },
 }))(TableRow)
