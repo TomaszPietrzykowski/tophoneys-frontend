@@ -13,6 +13,7 @@ import Message from "../components/Message"
 import Loader from "../components/Loader"
 import DetailsIcon from "@material-ui/icons/MenuOpenRounded"
 import { listOrders } from "../actions/orderActions"
+import Paginate from "../components/Paginate"
 
 const StyledTableCell = withStyles((theme) => ({
   root: {
@@ -116,23 +117,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const OrderListScreen = ({ history }) => {
+const OrderListScreen = ({ match, history }) => {
   const classes = useStyles()
   const dispatch = useDispatch()
 
   // STATE
   const userInfo = useSelector((state) => state.userLogin.userInfo)
+  const { loading, error, orders, page, pages } = useSelector(
+    (state) => state.orderList
+  )
 
-  const orderList = useSelector((state) => state.orderList)
-  const { loading, error, orders } = orderList
+  const pageNumber = match.params.pageNumber || 1
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(listOrders())
+      dispatch(listOrders(pageNumber))
     } else {
       history.push("/login")
     }
-  }, [dispatch, history, userInfo])
+  }, [dispatch, history, userInfo, pageNumber])
 
   return (
     <div className={classes.container}>
@@ -224,6 +227,7 @@ const OrderListScreen = ({ history }) => {
               </TableBody>
             </Table>
           </div>
+          <Paginate id={"orderlist"} page={page} pages={pages} url="admin" />
         </div>
       )}
     </div>
