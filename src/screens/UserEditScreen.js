@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { Button, TextField } from "@material-ui/core";
-import { withStyles, makeStyles } from "@material-ui/styles";
-import Checkbox from "@material-ui/core/Checkbox";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import { getUserDetails, updateUser } from "../actions/userActions";
-import { USER_UPDATE_RESET } from "../constants/userConstants";
+import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { Button, TextField } from "@material-ui/core"
+import { withStyles, makeStyles } from "@material-ui/styles"
+import Checkbox from "@material-ui/core/Checkbox"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import { getUserDetails, updateUser } from "../actions/userActions"
+import { USER_UPDATE_RESET } from "../constants/userConstants"
 
 const CustomCheckbox = withStyles((theme) => ({
   root: {
@@ -17,132 +17,207 @@ const CustomCheckbox = withStyles((theme) => ({
     },
   },
   checked: {},
-}))(Checkbox);
+}))(Checkbox)
+
+const CssTextField = withStyles((theme) => ({
+  root: {
+    "& label.Mui-focused": {
+      color: theme.palette.secondary.light,
+    },
+    "& .MuiInput-focused fieldset": {
+      color: theme.palette.secondary.light,
+    },
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: theme.palette.secondary.light,
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: theme.palette.secondary.light,
+      },
+    },
+  },
+}))(TextField)
 
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    ...theme.flex.col,
-    ...theme.typography.source,
-    marginTop: "15rem",
-    color: theme.palette.text.primary,
+    ...theme.flex.row,
+    justifyContent: "flex-start",
+    ...theme.typography.mont,
+    padding: "2rem 0 0",
+  },
+  content: {
+    margin: "0 auto 2rem 25%",
+    padding: "5rem",
+    position: "relative",
+    "&::before": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      height: "100%",
+      width: 2,
+      background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+    },
+  },
+  header: {
+    ...theme.flex.rowStart,
   },
   title: {
-    ...theme.typography.prosto,
-    marginBottom: "2rem",
+    fontWeight: 300,
+    fontSize: "2.4rem",
+    color: theme.palette.text.primary,
+    marginBottom: "3rem",
+    position: "relative",
+  },
+  adminBadge: {
+    ...theme.utils.adminBadge,
+    color: theme.palette.secondary.light,
   },
   form: {
     ...theme.flex.col,
+    minWidth: 280,
     "& > *": {
       marginBottom: "2rem",
-      width: "auto",
+      width: 280,
     },
   },
   checkboxContainer: {
     ...theme.flex.row,
     justifyContent: "flex-start",
     width: "100%",
+    marginBottom: 0,
   },
   checkboxLabel: {
     fontSize: "1.2rem",
   },
   submitBtn: {
-    backgroundColor: theme.palette.primary.main,
-    width: "100%",
-    ...theme.typography.open,
-    fontWeight: 600,
+    ...theme.buttons.primary,
+    backgroundColor: theme.palette.secondary.light,
+    transition: "all .3s ease",
     "&:hover": {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: theme.palette.secondary.main,
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: ".85rem",
+      flex: 1,
+      padding: ".3rem",
     },
   },
-}));
+  backBtn: {
+    ...theme.buttons.secondary,
+    [theme.breakpoints.down("md")]: {
+      fontSize: ".85rem",
+      flex: 1,
+      padding: ".3rem",
+    },
+  },
+}))
 
 const UserEditScreen = ({ match, history }) => {
-  const classes = useStyles();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
+  const classes = useStyles()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [isAdmin, setIsAdmin] = useState(false)
 
-  const userId = match.params.id;
+  const userId = match.params.id
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const { loading, error, user } = useSelector((state) => state.userDetails);
+  const { loading, error, user } = useSelector((state) => state.userDetails)
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-  } = useSelector((state) => state.userUpdate);
+  } = useSelector((state) => state.userUpdate)
 
   useEffect(() => {
     if (successUpdate) {
-      dispatch({ type: USER_UPDATE_RESET });
-      history.push("/admin/userlist");
+      dispatch({ type: USER_UPDATE_RESET })
+      history.push("/admin/userlist")
     } else {
       if (!user.name || user._id !== userId) {
-        dispatch(getUserDetails(userId));
+        dispatch(getUserDetails(userId))
       } else {
-        setName(user.name);
-        setEmail(user.email);
-        setIsAdmin(user.isAdmin);
+        setName(user.name)
+        setEmail(user.email)
+        setIsAdmin(user.isAdmin)
       }
     }
-  }, [dispatch, history, user, userId, successUpdate]);
+  }, [dispatch, history, user, userId, successUpdate])
 
   const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(updateUser({ _id: userId, name, email, isAdmin }));
-  };
+    e.preventDefault()
+    dispatch(updateUser({ _id: userId, name, email, isAdmin }))
+  }
 
   const adminHandler = (e) => {
     if (
       window.confirm("Are you sure you want to change user's admin status?")
     ) {
-      setIsAdmin(e.target.checked);
+      setIsAdmin(e.target.checked)
     }
-  };
+  }
 
   return (
     <div className={classes.container}>
-      <Link to="/admin/userlist">
+      <main className={classes.content}>
+        <div className={classes.header}>
+          <h1 className={classes.title}>
+            Edit User<span className={classes.adminBadge}>Admin</span>
+          </h1>
+        </div>
+        {/* <Link to="/admin/userlist">
         <Button className={classes.backBtn}>&larr; Back</Button>
-      </Link>
-      <form onSubmit={submitHandler} className={classes.form}>
-        <h1 className={classes.title}>Edit user</h1>
-        {loading || loadingUpdate ? (
-          <Loader />
-        ) : error ? (
-          <Message variant="error" message={error} />
-        ) : errorUpdate ? (
-          <Message variant="error" message={errorUpdate} />
-        ) : (
-          <>
-            <TextField
-              id="name"
-              label="Name"
-              variant="outlined"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <TextField
-              id="email"
-              label="Email"
-              variant="outlined"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <div className={classes.checkboxContainer}>
-              <CustomCheckbox checked={isAdmin} onChange={adminHandler} />
-              <span className={classes.checkboxLabel}>Admin permissions</span>
-            </div>
-            <Button type="submit" className={classes.submitBtn}>
-              Update
-            </Button>
-          </>
-        )}
-      </form>
+      </Link> */}
+        <form onSubmit={submitHandler} className={classes.form}>
+          {loading || loadingUpdate ? (
+            <Loader />
+          ) : error ? (
+            <Message variant="error" message={error} />
+          ) : errorUpdate ? (
+            <Message variant="error" message={errorUpdate} />
+          ) : (
+            <>
+              <CssTextField
+                id="name"
+                label="Name"
+                variant="outlined"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <CssTextField
+                id="email"
+                type="email"
+                required
+                label="Email"
+                variant="outlined"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <div className={classes.checkboxContainer}>
+                <CustomCheckbox checked={isAdmin} onChange={adminHandler} />
+                <span className={classes.checkboxLabel}>Admin</span>
+              </div>
+              <Button type="submit" className={classes.submitBtn}>
+                Update
+              </Button>
+              <Button
+                className={classes.backBtn}
+                variant="outlined"
+                color="secondary"
+                component={Link}
+                to="/admin/userlist"
+              >
+                All users
+              </Button>
+            </>
+          )}
+        </form>
+      </main>
     </div>
-  );
-};
+  )
+}
 
-export default UserEditScreen;
+export default UserEditScreen

@@ -154,7 +154,9 @@ const OrderListScreen = ({ match, history }) => {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <StyledTableRow>
-                  <StyledTableCell className={classes.head}>Id</StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    Order Id
+                  </StyledTableCell>
                   <StyledTableCell className={classes.head}>
                     User
                   </StyledTableCell>

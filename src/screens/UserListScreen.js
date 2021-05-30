@@ -177,7 +177,9 @@ const UserListScreen = ({ history }) => {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <StyledTableRow>
-                  <StyledTableCell className={classes.head}>Id</StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    User id
+                  </StyledTableCell>
                   <StyledTableCell className={classes.head}>
                     Name
                   </StyledTableCell>

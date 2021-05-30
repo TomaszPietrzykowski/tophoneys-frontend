@@ -222,7 +222,9 @@ const ProductListScreen = ({ history, match }) => {
             <Table className={classes.table}>
               <TableHead>
                 <StyledTableRow>
-                  <StyledTableCell className={classes.head}>Id</StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    Product Id
+                  </StyledTableCell>
                   <StyledTableCell className={classes.head}>
                     Name
                   </StyledTableCell>
