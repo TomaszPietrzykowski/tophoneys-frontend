@@ -1,19 +1,56 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import img1 from "../assets/bee01.jpeg"
 
 const useStyles = makeStyles((theme) => ({
   container: {
+    ...theme.utils.container,
+    ...theme.typography.mont,
     padding: "3rem",
+    paddingBottom: 0,
   },
-}));
+  title: {
+    fontWeight: 300,
+    fontSize: "2.4rem",
+    color: theme.palette.text.primary,
+    margin: "3rem 0 5rem",
+  },
+  flexContainer: {
+    ...theme.typography.mont,
+    ...theme.flex.row,
+    alignItems: "flex-start",
+  },
+  flexItem: {
+    border: "1px solid magenta",
+    flex: 1,
+  },
+  innerContainer: {
+    border: "1px solid blue",
+    marginLeft: "auto",
+    maxWidth: 700,
+    padding: "3rem",
+    height: "100%",
+  },
+  flexImg: {
+    flex: 1,
+    // padding: "3rem 0 3rem 3rem",
+    maxWidth: "50%",
+  },
+  img: {
+    maxWidth: "100%",
+    objectFit: "contain",
+  },
+}))
 
 const AboutHoneyScreen = () => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
-    <div className={classes.container}>
-      <h1>About honey</h1>
-      <p>
+    <>
+      <div className={classes.container}>
+        <h1 className={classes.title}>About honey</h1>
+
+        {/* <p>
         Honey is one of nature's most valuable nutrients and medicinal
         substances. It consists mainly of simple sugars, it is extremely easily
         absorbed by the human body. In addition to carbohydrates, it contains
@@ -59,9 +96,38 @@ const AboutHoneyScreen = () => {
         boiled water, leave it covered in a dark place at room temperature for
         12 hours. It is recommended to drink honey every morning on an empty
         stomach and in the evening before bedtime.
-      </p>
-    </div>
-  );
-};
+      </p> */}
+      </div>
+      <div className={classes.flexContainer}>
+        <div className={classes.flexItem}>
+          <div className={classes.innerContainer}>
+            <p>
+              Honey is one of nature's most valuable nutrients and medicinal
+              substances. It consists mainly of simple sugars, it is extremely
+              easily absorbed by the human body. In addition to carbohydrates,
+              it contains acids, protein, enzymes, bactericidal substances,
+              vitamins from group B and A, C and K, all amino acids and about 30
+              macro- and microelements (the most important of them are iron,
+              manganese, cobalt and magnesium)
+            </p>
+            <p>
+              It also contains inhibin, (a substance that inhibits the growth of
+              bacteria and kills some of its strains). All these ingredients are
+              very valuable for humans, thanks to their extraordinary properties
+              (antibacterial, regenerating, detoxifying, nutritional and healing
+              properties), honey strengthens the body physically and mentally,
+              improves immunity and gives energy. Honey is especially
+              recommended for patients with heart disease, liver disease,
+              rheumatism, anemia
+            </p>
+          </div>
+        </div>
+        <div className={classes.flexImg}>
+          <img src={img1} alt="bee" className={classes.img} />
+        </div>
+      </div>
+    </>
+  )
+}
 
-export default AboutHoneyScreen;
+export default AboutHoneyScreen

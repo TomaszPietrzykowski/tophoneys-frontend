@@ -153,7 +153,8 @@ const useStyles = makeStyles((theme) => ({
   },
   uploadBtn: {
     ...theme.buttons.primary,
-    padding: ".5rem 0 .4rem",
+    minWidth: 80,
+    padding: ".5rem 2rem .4rem",
     backgroundColor: theme.palette.secondary.light,
     transition: "all .3s ease",
     "&:hover": {
@@ -193,7 +194,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   capacityDropdownContainer: {
-    marginTop: "3rem",
+    marginTop: "5rem",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      width: "100%",
+      height: 1,
+      position: "absolute",
+      top: "-2rem",
+      left: 0,
+      background: `linear-gradient(90deg, ${theme.palette.divider}, transparent)`,
+    },
   },
   dropdownItem: {
     background: theme.palette.action.hover,
@@ -483,7 +494,7 @@ const ProductEditScreen = ({ history, match }) => {
                   component="span"
                   className={classes.uploadBtn}
                 >
-                  Add image
+                  Change image
                 </Button>
               </label>
 
