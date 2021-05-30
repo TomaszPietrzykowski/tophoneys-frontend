@@ -13,7 +13,7 @@ const CustomCheckbox = withStyles((theme) => ({
   root: {
     color: theme.palette.text.secondary,
     "&$checked": {
-      color: "green",
+      color: theme.palette.common.success,
     },
   },
   checked: {},

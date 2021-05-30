@@ -98,6 +98,11 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
+  mail: {
+    "&:hover": {
+      color: theme.palette.text.primary,
+    },
+  },
   center: {
     paddingLeft: "2rem",
   },
@@ -205,7 +210,9 @@ const UserListScreen = ({ history }) => {
                       {user.name}
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
-                      <a href={`mailto:${user.email}`}>{user.email}</a>
+                      <a href={`mailto:${user.email}`} className={classes.mail}>
+                        {user.email}
+                      </a>
                     </StyledTableCell>
                     <StyledTableCell
                       component="th"

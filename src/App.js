@@ -33,6 +33,7 @@ import BottomNavMargin from "./components/ui/BottomNavMargin"
 import ScrollToTop from "./components/ui/ScrollToTop"
 import Brands from "./components/Brands"
 import NavbarMargin from "./components/ui/NavbarMargin"
+import PrivacyPolicyScreen from "./screens/PrivacyPolicyScreen"
 
 function App() {
   const isMobile = useMediaQuery("(max-width:600px)")
@@ -62,6 +63,7 @@ function App() {
                 component={GeneralConditionsScreen}
                 exact
               />
+              <Route path="/privacy" component={PrivacyPolicyScreen} exact />
               <Route path="/info" component={InfoPaymentScreen} exact />
               <Route path="/login" component={LoginScreen} exact />
               <Route path="/register" component={RegisterScreen} exact />

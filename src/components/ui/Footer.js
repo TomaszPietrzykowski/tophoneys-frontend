@@ -131,7 +131,10 @@ const Footer = () => {
               <div className={classes.link}>General conditions</div>
             </Link>
             <Link to="/info">
-              <div className={classes.link}>Payment and shipping</div>
+              <div className={classes.link}>Payment, shipping and return</div>
+            </Link>
+            <Link to="/privacy">
+              <div className={classes.link}>Privacy policy</div>
             </Link>
           </div>
         </div>
