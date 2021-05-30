@@ -1,108 +1,201 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { IconButton, Tooltip } from "@material-ui/core";
-import { withStyles, makeStyles } from "@material-ui/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import CancelIcon from "@material-ui/icons/Cancel";
-import CheckIcon from "@material-ui/icons/CheckCircle";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import { listUsers, deleteUser } from "../actions/userActions";
+import React, { useEffect } from "react"
+import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { IconButton, Tooltip } from "@material-ui/core"
+import { withStyles, makeStyles } from "@material-ui/styles"
+import Table from "@material-ui/core/Table"
+import TableBody from "@material-ui/core/TableBody"
+import TableCell from "@material-ui/core/TableCell"
+import TableHead from "@material-ui/core/TableHead"
+import TableRow from "@material-ui/core/TableRow"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import CancelIcon from "@material-ui/icons/CloseRounded"
+import CheckIcon from "@material-ui/icons/Check"
+import DeleteIcon from "@material-ui/icons/Delete"
+import EditIcon from "@material-ui/icons/Edit"
+import { listUsers, deleteUser } from "../actions/userActions"
 
 const StyledTableCell = withStyles((theme) => ({
   root: {
-    ...theme.typography.source,
+    ...theme.typography.mont,
+    color: theme.palette.text.secondary,
+    fontSize: ".9rem",
+    border: "none",
+    outline: "none",
+    whiteSpace: "nowrap",
   },
-}))(TableCell);
+}))(TableCell)
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(even)": {
+      backgroundColor: "rgba(0,0,0,.02)",
+    },
+  },
+}))(TableRow)
 
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    marginTop: "15rem",
+    ...theme.typography.mont,
+    padding: "3rem",
+  },
+  header: {
+    ...theme.flex.rowStart,
+  },
+  title: {
+    fontWeight: 300,
+    fontSize: "2.4rem",
+    color: theme.palette.text.primary,
+    margin: "3rem 0 5rem",
+    position: "relative",
+  },
+  adminBadge: {
+    ...theme.utils.adminBadge,
+    color: theme.palette.secondary.light,
+  },
+  deco: {
+    position: "relative",
+    padding: "0 3rem",
+    "&::before": {
+      content: "''",
+      width: 1,
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+    },
+    "&::after": {
+      content: "''",
+      width: 1,
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      right: 0,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+    },
   },
   tableContainer: {
+    width: "100%",
     overflowX: "scroll",
+  },
+  head: {
+    padding: ".5rem 1rem",
+    textTransform: "uppercase",
+    position: "relative",
+    "&::after": {
+      content: "''",
+      width: 1,
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.light}, transparent)`,
+    },
   },
   table: {
     minWidth: 650,
   },
+  center: {
+    paddingLeft: "2rem",
+  },
   checkIcon: {
     fontSize: ".9rem",
-    color: "green",
+    color: theme.palette.common.success,
   },
   cancelIcon: {
     fontSize: ".9rem",
     color: "red",
   },
+  editIconBtn: {
+    fontSize: ".9rem",
+    color: theme.palette.text.secondary,
+    "&:hover $editIcon": {
+      color: theme.palette.secondary.main,
+    },
+  },
   editIcon: {
     fontSize: ".9rem",
-    color: "blue",
+    color: theme.palette.text.secondary,
+  },
+  deleteIconBtn: {
+    fontSize: ".9rem",
+    color: theme.palette.text.secondary,
+    "&:hover $deleteIcon": {
+      color: theme.palette.secondary.main,
+    },
   },
   deleteIcon: {
     fontSize: ".9rem",
-    color: "red",
+    color: theme.palette.text.secondary,
   },
-}));
+}))
 
 const UserListScreen = ({ history }) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
+  const classes = useStyles()
+  const dispatch = useDispatch()
 
   // STATE
-  const userInfo = useSelector((state) => state.userLogin.userInfo);
+  const userInfo = useSelector((state) => state.userLogin.userInfo)
 
-  const userList = useSelector((state) => state.userList);
-  const { loading, error, users } = userList;
+  const userList = useSelector((state) => state.userList)
+  const { loading, error, users } = userList
 
-  const userDelete = useSelector((state) => state.userDelete);
-  const { success: successDelete } = userDelete;
+  const userDelete = useSelector((state) => state.userDelete)
+  const { success: successDelete } = userDelete
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(listUsers());
+      dispatch(listUsers())
     } else {
-      history.push("/login");
+      history.push("/login")
     }
-  }, [dispatch, history, userInfo, successDelete]);
+  }, [dispatch, history, userInfo, successDelete])
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
-      dispatch(deleteUser(id));
+      dispatch(deleteUser(id))
     }
-  };
+  }
 
   return (
     <div className={classes.container}>
-      <h1>Users</h1>
+      <div className={classes.header}>
+        <h1 className={classes.title}>
+          Users<span className={classes.adminBadge}>Admin</span>
+        </h1>
+      </div>
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="error" message={error} />
       ) : (
-        <div className={classes.tableContainer}>
-          <TableContainer component={Paper}>
+        <div className={classes.deco}>
+          <div className={classes.tableContainer}>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
-                <TableRow>
-                  <StyledTableCell>ID</StyledTableCell>
-                  <StyledTableCell>NAME</StyledTableCell>
-                  <StyledTableCell>EMAIL</StyledTableCell>
-                  <StyledTableCell>ADMIN</StyledTableCell>
-                  <StyledTableCell></StyledTableCell>
-                </TableRow>
+                <StyledTableRow>
+                  <StyledTableCell className={classes.head}>Id</StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    Name
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    Email
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    Admin
+                  </StyledTableCell>
+                  <StyledTableCell className={classes.head}>
+                    Actions
+                  </StyledTableCell>
+                </StyledTableRow>
               </TableHead>
+              <div style={{ marginTop: "1rem" }} />
               <TableBody>
                 {users.map((user) => (
-                  <TableRow key={user._id}>
+                  <StyledTableRow key={user._id}>
                     <StyledTableCell component="th" scope="row">
                       {user._id}
                     </StyledTableCell>
@@ -110,9 +203,13 @@ const UserListScreen = ({ history }) => {
                       {user.name}
                     </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
-                      <Link to={`mailto:${user.email}`}>{user.email}</Link>
+                      <a href={`mailto:${user.email}`}>{user.email}</a>
                     </StyledTableCell>
-                    <StyledTableCell component="th" scope="row">
+                    <StyledTableCell
+                      component="th"
+                      scope="row"
+                      className={classes.center}
+                    >
                       {user.isAdmin ? (
                         <CheckIcon className={classes.checkIcon} />
                       ) : (
@@ -122,26 +219,29 @@ const UserListScreen = ({ history }) => {
                     <StyledTableCell component="th" scope="row">
                       <Tooltip title="Edit" placement="top-start">
                         <Link to={`/admin/user/${user._id}/edit`}>
-                          <IconButton>
+                          <IconButton className={classes.editIconBtn}>
                             <EditIcon className={classes.editIcon} />
                           </IconButton>
                         </Link>
                       </Tooltip>
                       <Tooltip title="Delete" placement="top-start">
-                        <IconButton onClick={() => deleteHandler(user._id)}>
+                        <IconButton
+                          onClick={() => deleteHandler(user._id)}
+                          className={classes.deleteIconBtn}
+                        >
                           <DeleteIcon className={classes.deleteIcon} />
                         </IconButton>
                       </Tooltip>
                     </StyledTableCell>
-                  </TableRow>
+                  </StyledTableRow>
                 ))}
               </TableBody>
             </Table>
-          </TableContainer>
+          </div>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default UserListScreen;
+export default UserListScreen
