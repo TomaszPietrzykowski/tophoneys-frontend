@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import { Link } from "react-router-dom"
+import AddIcon from "@material-ui/icons/AddRounded"
 import { useDispatch, useSelector } from "react-redux"
 import {
   Button,
   TextField,
-  Grid,
-  Select,
-  MenuItem,
-  InputLabel,
+  InputBase,
+  NativeSelect,
+  Tooltip,
   FormControl,
   IconButton,
 } from "@material-ui/core"
@@ -20,42 +19,112 @@ import Loader from "../components/Loader"
 import { listProductDetails, updateProduct } from "../actions/productActions"
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants"
 import DeleteIcon from "@material-ui/icons/Delete"
+import categories from "../config/categories"
 
 const CustomCheckbox = withStyles((theme) => ({
   root: {
     color: theme.palette.text.secondary,
     "&$checked": {
-      color: "green",
+      color: theme.palette.common.success,
     },
   },
   checked: {},
 }))(Checkbox)
 
+const CssTextField = withStyles((theme) => ({
+  root: {
+    "& label.Mui-focused": {
+      color: theme.palette.secondary.light,
+    },
+    "& .MuiInput-focused fieldset": {
+      color: theme.palette.secondary.light,
+    },
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: theme.palette.secondary.light,
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: theme.palette.secondary.light,
+      },
+    },
+  },
+}))(TextField)
+
+const CssSelect = withStyles((theme) => ({
+  root: {
+    "label.MuiSelect-nativeInput": {
+      color: theme.palette.secondary.light,
+    },
+  },
+  input: {
+    borderRadius: 4,
+    position: "relative",
+    border: `1px solid ${"#ced4da"}`,
+    fontSize: "1rem",
+    padding: "1rem",
+    "&:focus": {
+      borderRadius: 4,
+      borderColor: theme.palette.secondary.light,
+    },
+    "&:hover": {
+      borderRadius: 4,
+      borderColor: theme.palette.secondary.light,
+    },
+  },
+}))(InputBase)
+
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    ...theme.typography.source,
-    marginTop: "15rem",
-    color: theme.palette.text.primary,
-  },
-  title: {
-    ...theme.typography.prosto,
-    marginBottom: "2rem",
-  },
-  formControl: {
-    minWidth: 220,
-  },
-  col: {
-    ...theme.flex.col,
-    alignItems: "flex-start",
+    ...theme.flex.row,
     justifyContent: "flex-start",
-    "& > *": {
-      marginBottom: "2rem",
+    ...theme.typography.mont,
+    padding: "2rem 0 0",
+  },
+  content: {
+    margin: "0 auto 2rem 25%",
+    padding: "5rem",
+    position: "relative",
+    "&::before": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      height: "100%",
+      width: 2,
+      background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
     },
   },
+  header: {
+    ...theme.flex.rowStart,
+  },
+  title: {
+    fontWeight: 300,
+    fontSize: "2.4rem",
+    color: theme.palette.text.primary,
+    marginBottom: "5rem",
+    position: "relative",
+  },
+  adminBadge: {
+    ...theme.utils.adminBadge,
+    color: theme.palette.secondary.light,
+  },
+  form: {
+    ...theme.flex.col,
+    alignItems: "flex-start",
+    minWidth: 280,
+    "& > *": {
+      marginBottom: "2rem",
+      width: 280,
+    },
+  },
+  textarea: {
+    width: 540,
+    // maxWidth: 400,
+  },
   imagePreview: {
-    width: 200,
-    height: 200,
+    width: 280,
+    height: 280,
   },
   checkboxContainer: {
     ...theme.flex.row,
@@ -64,6 +133,7 @@ const useStyles = makeStyles((theme) => ({
   },
   checkboxLabel: {
     fontSize: "1.2rem",
+    fontWeight: 300,
   },
   chipContainer: {
     ...theme.flex.row,
@@ -73,20 +143,105 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(0.5),
     },
   },
+  chip: {
+    ...theme.typography.mont,
+    color: "white",
+    backgroundColor: theme.palette.text.secondary,
+  },
   priceInput: {
     minWidth: 200,
   },
-  text: {
-    minWidth: 250,
+  uploadBtn: {
+    ...theme.buttons.primary,
+    padding: ".5rem 0 .4rem",
+    backgroundColor: theme.palette.secondary.light,
+    transition: "all .3s ease",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: ".85rem",
+      flex: 1,
+      padding: ".3rem",
+    },
   },
   submitBtn: {
-    backgroundColor: theme.palette.primary.main,
-    width: "100%",
-    ...theme.typography.open,
-    fontWeight: 600,
+    ...theme.buttons.primary,
+    paddingTop: ".7rem",
+    backgroundColor: theme.palette.secondary.light,
+    transition: "all .3s ease",
     "&:hover": {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: theme.palette.secondary.main,
     },
+    [theme.breakpoints.down("md")]: {
+      fontSize: ".85rem",
+      flex: 1,
+      padding: ".3rem",
+    },
+  },
+  inputLabel: {
+    fontSize: "1.2rem",
+    fontWeight: 300,
+    color: theme.palette.text.primary,
+    marginBottom: "1rem",
+    marginTop: "1rem",
+  },
+  deleteIcon: {
+    color: theme.palette.text.secondary,
+    "&:hover": {
+      color: theme.palette.secondary.light,
+    },
+  },
+  capacityDropdownContainer: {
+    marginTop: "3rem",
+  },
+  dropdownItem: {
+    background: theme.palette.action.hover,
+    ...theme.flex.rowStart,
+    fontSize: "1rem",
+    padding: ".7rem",
+    "& > *": {
+      marginRight: "3rem",
+    },
+    "&:last-of-type": {
+      marginBottom: "2rem",
+    },
+  },
+  dropdownForm: {
+    ...theme.flex.rowStart,
+    alignItems: "center",
+    // fontSize: "1rem",
+    // padding: ".7rem",
+    "& > *": {
+      marginRight: "2rem",
+    },
+  },
+  addBtn: {
+    ...theme.buttons.primary,
+    minWidth: 100,
+    margin: 0,
+    padding: ".5rem 2rem .4rem 1rem",
+    backgroundColor: theme.palette.secondary.light,
+    transition: "all .3s ease",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+    },
+    // [theme.breakpoints.down("md")]: {
+    //   fontSize: ".85rem",
+    //   flex: 1,
+    //   padding: ".3rem",
+    // },
+  },
+  addIcon: {
+    fontSize: "1.4rem",
+    marginRight: ".5rem",
+    // marginBottom: ".2rem",
+    // [theme.breakpoints.down("md")]: {
+    //   fontSize: "1rem",
+    // },
+  },
+  dropdownInfo: {
+    color: theme.palette.text.secondary,
   },
 }))
 
@@ -178,36 +333,7 @@ const ProductEditScreen = ({ history, match }) => {
     )
   }
 
-  const categories = [
-    ["All honeys", "honeys"],
-    ["Pure honeys", "purehoneys"],
-    ["Acacia honeys", "acaciahoneys"],
-    ["Sunflower honeys", "sunflowerhoneys"],
-    ["Linden honeys", "lindenhoneys"],
-    ["Buckweat honeys", "buckwheathoneys"],
-    ["Multiflorous honeys", "multiflowerhoneys"],
-    ["Goldenrod honeys", "goldenrodhoneys"],
-    ["Forest honeys", "foresthoneys"],
-    ["Raspberry honeys", "raspberryhoneys"],
-    ["Corriander honeys", "corianderhoneys"],
-    ["Heather honeys", "heatherhoneys"],
-    ["Dandelion honeys", "dandelionhoneys"],
-    ["Coniferous honeydew", "coniferoushoneydew"],
-    ["Deciduous honeydew", "deciduoushoneydew"],
-    ["Creamed honeys", "creamedhoneys"],
-    ["Honeys with additives", "additives"],
-    ["Accessories", "accessories"],
-    ["Bee products", "beeproducts"],
-    ["All tea", "tea"],
-    ["Black tea", "blacktea"],
-    ["Green tea", "greentea"],
-    ["Fruit tea", "fruittea"],
-    ["Functional tea", "functionaltea"],
-    ["Rooibos", "rooibos"],
-    ["Yerba Mate", "yerbamate"],
-    ["Canned tea", "cannedtea"],
-    ["Gift sets", "giftsets"],
-  ]
+  const rootCategories = categories
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0]
@@ -255,12 +381,15 @@ const ProductEditScreen = ({ history, match }) => {
 
   return (
     <div className={classes.container}>
-      <Link to="/admin/productlist">
-        <Button className={classes.backBtn}>&larr; All products</Button>
-      </Link>
-      <h1 className={classes.title}>Edit product</h1>
-      <form onSubmit={submitHandler} className={classes.form}>
-        <Grid container>
+      {/* ------------------------------------------------------------------------------------------------------- sandbox */}
+
+      <main className={classes.content}>
+        <div className={classes.header}>
+          <h1 className={classes.title}>
+            Edit product<span className={classes.adminBadge}>Admin</span>
+          </h1>
+        </div>
+        <form onSubmit={submitHandler} className={classes.form}>
           {loading || loadingUpdate ? (
             <Loader />
           ) : error ? (
@@ -269,198 +398,232 @@ const ProductEditScreen = ({ history, match }) => {
             <Message variant="error" message={errorUpdate} />
           ) : (
             <>
-              <Grid item md={4} className={classes.col}>
-                <TextField
-                  className={classes.text}
-                  required
-                  id="name"
-                  label="Name"
-                  variant="outlined"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
+              <div className={classes.inputLabel}>Product info:</div>
+              <CssTextField
+                className={classes.textarea}
+                style={{ marginTop: ".5rem" }}
+                required
+                id="name"
+                label="Name"
+                variant="outlined"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
 
-                <TextField
-                  className={classes.text}
-                  required
-                  id="description"
-                  label="Description"
-                  variant="outlined"
-                  multiline
-                  rows="12"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </Grid>
-              <Grid item md={4} className={classes.col}>
-                <TextField
-                  required
-                  id="capacity"
-                  label="Capacity"
-                  variant="outlined"
-                  value={capacity}
-                  onChange={(e) => setCapacity(e.target.value)}
-                />
-                <TextField
-                  id="countryOfOrigin"
-                  label="Country of origin"
-                  variant="outlined"
-                  value={countryOfOrigin}
-                  onChange={(e) => setCountryOfOrigin(e.target.value)}
-                />
-                <TextField
-                  id="brand"
-                  label="Brand"
-                  variant="outlined"
-                  value={brand}
-                  onChange={(e) => setBrand(e.target.value)}
-                />
-                <input
-                  accept="image/*"
-                  id="contained-button-file"
-                  type="file"
-                  hidden
-                  onChange={uploadFileHandler}
-                />
-                <label htmlFor="contained-button-file">
-                  <Button variant="contained" component="span">
-                    Upload image
-                  </Button>
-                </label>
-                {uploading ? (
-                  <Loader />
-                ) : (
-                  <img
-                    src={image}
-                    alt={name}
-                    className={classes.imagePreview}
-                  />
-                )}
-              </Grid>
-              <Grid item md={4} className={classes.col}>
-                <FormControl variant="outlined" className={classes.formControl}>
-                  <InputLabel id="category-label">Add category</InputLabel>
-                  <Select
-                    labelId="category-label"
-                    id="demo-simple-select-outlined"
-                    value={""}
-                    onChange={categoryHandler}
-                    label="Add category"
-                  >
-                    {categories.map((cat, i) => (
-                      <MenuItem key={i} value={cat[1]}>
-                        {cat[0]}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-                <div className={classes.chipContainer}>
-                  {category.length > 0 &&
-                    category.map((cat, i) => (
-                      <Chip key={i} label={cat} color="primary" />
-                    ))}
-                  {category.length > 0 && (
-                    <IconButton onClick={() => setCategory([])}>
-                      <DeleteIcon style={{ color: "red" }} />
-                    </IconButton>
-                  )}
-                </div>
+              <CssTextField
+                className={classes.textarea}
+                required
+                id="description"
+                label="Description"
+                variant="outlined"
+                multiline
+                rows={10}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <CssTextField
+                required
+                className={classes.priceInput}
+                id="standard-number"
+                label="Price (cents)"
+                type="number"
+                variant="outlined"
+                helperText="Price x 100 e.g: 1999 for &euro;19,99"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                InputProps={{ inputProps: { min: 0 } }}
+              />
+              <CssTextField
+                className={classes.priceInput}
+                id="standard-number"
+                label="Previous price (cents)"
+                type="number"
+                variant="outlined"
+                helperText="Price x 100 e.g: 1999 for &euro;19,99"
+                value={previousPrice}
+                onChange={(e) => setPreviousPrice(e.target.value)}
+                InputProps={{ inputProps: { min: 0 } }}
+              />
+              <CssTextField
+                required
+                className={classes.priceInput}
+                id="standard-number"
+                label="Count in stock"
+                type="number"
+                variant="outlined"
+                value={countInStock}
+                onChange={(e) => setCountInStock(e.target.value)}
+                InputProps={{ inputProps: { min: 0 } }}
+              />
+              <CssTextField
+                required
+                id="capacity"
+                label="Capacity"
+                variant="outlined"
+                value={capacity}
+                onChange={(e) => setCapacity(e.target.value)}
+              />
 
-                <TextField
-                  required
-                  className={classes.priceInput}
-                  id="standard-number"
-                  label="Price (cents)"
-                  type="number"
-                  variant="outlined"
-                  helperText="Price x 100 e.g: 1999 for &euro;19,99"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                  InputProps={{ inputProps: { min: 0 } }}
-                />
-                <TextField
-                  className={classes.priceInput}
-                  id="standard-number"
-                  label="Previous Price (cents)"
-                  type="number"
-                  variant="outlined"
-                  helperText="Price x 100 e.g: 1999 for &euro;19,99"
-                  value={previousPrice}
-                  onChange={(e) => setPreviousPrice(e.target.value)}
-                  InputProps={{ inputProps: { min: 0 } }}
-                />
-
-                <TextField
-                  required
-                  className={classes.priceInput}
-                  id="standard-number"
-                  label="Count in stock"
-                  type="number"
-                  variant="outlined"
-                  value={countInStock}
-                  onChange={(e) => setCountInStock(e.target.value)}
-                  InputProps={{ inputProps: { min: 0 } }}
-                />
-
-                <div className={classes.checkboxContainer}>
-                  <CustomCheckbox
-                    checked={isPromo}
-                    onChange={(e) => setIsPromo(e.target.checked)}
-                  />
-                  <span className={classes.checkboxLabel}>Sale</span>
-                </div>
-                <div className={classes.checkboxContainer}>
-                  <CustomCheckbox
-                    checked={isPublished}
-                    onChange={(e) => setIsPublished(e.target.checked)}
-                  />
-                  <span className={classes.checkboxLabel}>Publish in shop</span>
-                </div>
-                <Button type="submit" className={classes.submitBtn}>
-                  Update
+              <div className={classes.inputLabel}>Product image:</div>
+              {uploading ? (
+                <Loader />
+              ) : (
+                <img src={image} alt={name} className={classes.imagePreview} />
+              )}
+              <input
+                accept="image/*"
+                id="contained-button-file"
+                type="file"
+                hidden
+                onChange={uploadFileHandler}
+              />
+              <label htmlFor="contained-button-file">
+                <Button
+                  variant="contained"
+                  component="span"
+                  className={classes.uploadBtn}
+                >
+                  Add image
                 </Button>
-              </Grid>
+              </label>
+
+              <FormControl
+                variant="outlined"
+                color="secondary"
+                className={classes.formControl}
+              >
+                <label
+                  htmlFor="demo-simple-select-outlined"
+                  className={classes.inputLabel}
+                >
+                  Categories:
+                </label>
+                <NativeSelect
+                  id="demo-simple-select-outlined"
+                  value={""}
+                  input={<CssSelect />}
+                  onChange={categoryHandler}
+                  label="Add category"
+                >
+                  <option value="" disabled>
+                    +
+                  </option>
+                  {rootCategories.map((cat, i) => (
+                    <option key={i} value={cat[1]}>
+                      {cat[0]}
+                    </option>
+                  ))}
+                </NativeSelect>
+              </FormControl>
+              <div className={classes.chipContainer}>
+                {category.length > 0 &&
+                  category.map((cat, i) => (
+                    <Chip key={i} label={cat} className={classes.chip} />
+                  ))}
+                {category.length > 0 && (
+                  <Tooltip title="Clear" placement="top-start">
+                    <IconButton onClick={() => setCategory([])}>
+                      <DeleteIcon className={classes.deleteIcon} />
+                    </IconButton>
+                  </Tooltip>
+                )}
+              </div>
+              <div className={classes.inputLabel}>Optional info:</div>
+              <CssTextField
+                id="countryOfOrigin"
+                label="Country of origin"
+                variant="outlined"
+                value={countryOfOrigin}
+                onChange={(e) => setCountryOfOrigin(e.target.value)}
+              />
+              <CssTextField
+                id="brand"
+                label="Brand"
+                variant="outlined"
+                value={brand}
+                onChange={(e) => setBrand(e.target.value)}
+              />
+              <div className={classes.checkboxContainer}>
+                <CustomCheckbox
+                  checked={isPromo}
+                  onChange={(e) => setIsPromo(e.target.checked)}
+                />
+                <span className={classes.checkboxLabel}>Sale</span>
+              </div>
+              <div className={classes.checkboxContainer}>
+                <CustomCheckbox
+                  checked={isPublished}
+                  onChange={(e) => setIsPublished(e.target.checked)}
+                />
+                <span className={classes.checkboxLabel}>Public</span>
+              </div>
+              <Button type="submit" className={classes.submitBtn}>
+                Save product
+              </Button>
             </>
           )}
-        </Grid>
-      </form>
-      {loading || loadingUpdate ? (
-        <Loader />
-      ) : (
-        <>
-          {capacityDropdown.map((el, i) => (
-            <div key={i}>
-              {el.label} : {el.productId}
-            </div>
-          ))}
-          {dropdownOpen && (
-            <form onSubmit={addDropdownHandler}>
-              <TextField
-                id="label"
-                label="Label"
-                variant="outlined"
-                value={label}
-                onChange={(e) => setLabel(e.target.value)}
-              />
-              <TextField
-                id="productId"
-                label="Product ID"
-                variant="outlined"
-                value={productId}
-                onChange={(e) => setProductId(e.target.value)}
-              />
-              <Button type="submit">Add</Button>
-            </form>
-          )}
-          {dropdownOpen ? (
-            <Button onClick={clearDropdown}>Clear dropdown</Button>
-          ) : (
-            <Button onClick={() => setDropdownOpen(true)}>
-              Add capacity dropdown
-            </Button>
-          )}
-        </>
-      )}
+        </form>
+        {loading || loadingUpdate ? (
+          <Loader />
+        ) : (
+          <div className={classes.capacityDropdownContainer}>
+            <div className={classes.inputLabel}>Capacity dropdown:</div>
+            {capacityDropdown.length === 0 && !dropdownOpen ? (
+              <div className={classes.dropdownInfo}>
+                Product has no dropdown
+              </div>
+            ) : (
+              <div style={{ height: "2rem" }} />
+            )}
+
+            {capacityDropdown.map((el, i) => (
+              <div key={i} className={classes.dropdownItem}>
+                <div>{el.label}:</div>
+                <div>{el.productId}</div>
+              </div>
+            ))}
+            {dropdownOpen && (
+              <form
+                onSubmit={addDropdownHandler}
+                className={classes.dropdownForm}
+              >
+                <CssTextField
+                  id="label"
+                  label="Label"
+                  variant="outlined"
+                  value={label}
+                  onChange={(e) => setLabel(e.target.value)}
+                />
+                <CssTextField
+                  id="productId"
+                  label="Product ID"
+                  variant="outlined"
+                  value={productId}
+                  onChange={(e) => setProductId(e.target.value)}
+                />
+                <Button type="submit" className={classes.addBtn}>
+                  <AddIcon className={classes.addIcon} />
+                  Add
+                </Button>
+              </form>
+            )}
+            {dropdownOpen ? (
+              <Button onClick={clearDropdown} className={classes.uploadBtn}>
+                Clear
+              </Button>
+            ) : (
+              <Button
+                onClick={() => setDropdownOpen(true)}
+                className={classes.uploadBtn}
+              >
+                Manage
+              </Button>
+            )}
+          </div>
+        )}
+      </main>
+
+      {/* ------------------------------------------------------------------------------------------------------- sandbox */}
     </div>
   )
 }
