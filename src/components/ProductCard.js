@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     ...theme.typography.mont,
     display: "flex",
-    width: "320px",
+    // width: "320px",
     maxWidth: "320px",
     // border: "2px solid pink",
     alignItems: "stretch",
@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
   saleBadge: {
     position: "absolute",
     ...theme.flex.col,
-    top: "45%",
-    right: 0,
+    top: "-1.2rem",
+    right: 5,
     backgroundColor: theme.palette.secondary.main,
     color: "white",
     // textTransform: "uppercase",
@@ -75,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "flex-start",
     padding: "1rem 1rem 0 1rem",
+    position: "relative",
   },
   category: {
     fontSize: ".85rem",
@@ -218,11 +219,11 @@ const ProductCard = ({ product }) => {
       </Snackbar>
       <div className={classes.root}>
         <div className={classes.card}>
-          {product.isPromo && (
+          {/* {product.isPromo && (
             <div className={classes.saleBadge}>
               <SaleIcon />
             </div>
-          )}
+          )} */}
           <Link to={`/product/${product._id}`}>
             <div className={classes.imageContainer}>
               <img src={product.image} alt="product" className={classes.img} />
@@ -231,6 +232,11 @@ const ProductCard = ({ product }) => {
           <div>
             <Link to={`/product/${product._id}`}>
               <div className={classes.content}>
+                {product.isPromo && (
+                  <div className={classes.saleBadge}>
+                    <SaleIcon />
+                  </div>
+                )}
                 <div className={classes.category}>
                   {getCategoryLabel(product.category[0])}
                 </div>

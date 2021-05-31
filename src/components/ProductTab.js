@@ -41,21 +41,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     position: "relative",
   },
-  saleBadge: {
-    position: "absolute",
-    ...theme.flex.col,
-    top: "50%",
-    right: 5,
-    transform: "translate(0, 50%)",
-    backgroundColor: theme.palette.secondary.main,
-    color: "white",
-    // textTransform: "uppercase",
-    padding: ".45rem .4rem .3rem .5rem",
-    fontSize: ".7rem",
-    fontWeight: 500,
-    letterSpacing: 1,
-    borderRadius: "50%",
-  },
   imageContainer: {
     flexBasis: 1,
     flexGrow: 1,
@@ -72,14 +57,37 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: "100%",
     },
   },
-  content: {
+  bottom: {
     flexBasis: 1,
     flexGrow: 1,
     flexShrink: 1,
+    // border: "1px solid magenta",
+    position: "relative",
+    display: "flex",
+    ...theme.flex.colStart,
+    justifyContent: "space-between",
+  },
+  saleBadge: {
+    position: "absolute",
+    ...theme.flex.col,
+    top: "-1.2rem",
+    right: 5,
+    // transform: "translate(0, 50%)",
+    backgroundColor: theme.palette.secondary.main,
+    color: "white",
+    // textTransform: "uppercase",
+    padding: ".45rem .4rem .3rem .5rem",
+    fontSize: ".7rem",
+    fontWeight: 500,
+    letterSpacing: 1,
+    borderRadius: "50%",
+  },
+
+  content: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
-    padding: "1.4rem 1.4rem 0 1.4rem",
+    padding: "1.4rem 0 0 1.4rem",
   },
   category: {
     fontSize: ".8rem",
@@ -110,6 +118,7 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: 1,
     flexWrap: "no-wrap",
     overflow: "hidden",
+    paddingLeft: "1.4rem",
   },
   previousPrice: {
     marginLeft: ".5rem",
@@ -134,7 +143,7 @@ const useStyles = makeStyles((theme) => ({
   buttonsContainer: {
     paddingLeft: "1.4rem",
     display: "flex",
-    margin: "0auto 0 0",
+    marginTop: "auto",
     cursor: "pointer",
     color: theme.palette.common.white,
     [theme.breakpoints.down("md")]: {
@@ -241,8 +250,9 @@ const ProductTab = ({
         style={
           isFeatured
             ? {
-                width: `${slideWidth}%`,
+                maxWidth: `${slideWidth}%`,
                 minWidth: `${slideWidth}%`,
+                padding: "1.5rem",
               }
             : {
                 maxWidth: `${slideWidth}%`,
@@ -253,15 +263,15 @@ const ProductTab = ({
         }
       >
         <div className={classes.card}>
-          {isSale && (
-            <div className={classes.saleBadge}>
-              <SaleIcon />
-            </div>
-          )}
           <div className={classes.imageContainer}>
             <img src={img} alt="product" className={classes.img} />
           </div>
-          <div>
+          <div className={classes.bottom}>
+            {isSale && (
+              <div className={classes.saleBadge}>
+                <SaleIcon />
+              </div>
+            )}
             <Link to={`/product/${id}`}>
               <div className={classes.content}>
                 {category && (
@@ -272,7 +282,7 @@ const ProductTab = ({
 
                 <div className={classes.title}>{title}</div>
                 <div className={classes.capacity}>{capacity}</div>
-                <div className={classes.price}>
+                {/* <div className={classes.price}>
                   <div>
                     <span style={{ opacity: 0.45 }}>&euro;&nbsp;</span>
                     {Number(price).toFixed(2)}
@@ -282,22 +292,36 @@ const ProductTab = ({
                       {Number(previousPrice).toFixed(2)}
                     </div>
                   )}
-                </div>
+                </div> */}
               </div>
             </Link>
-            <div className={classes.buttonsContainer}>
-              <button
-                disabled={!countInStock > 0}
-                className={classes.cartBtn}
-                onClick={addToCartHandler}
-              >
-                <CartIcon className={classes.cartIcon} />
+            <div>
+              <div className={classes.price}>
                 <div>
-                  <span className={classes.hide}>
-                    {countInStock > 0 ? "Add to cart" : "Out of stock"}
-                  </span>
+                  <span style={{ opacity: 0.45 }}>&euro;&nbsp;</span>
+                  {Number(price).toFixed(2)}
                 </div>
-              </button>
+                {isSale && previousPrice > 0 && (
+                  <div className={classes.previousPrice}>
+                    {Number(previousPrice).toFixed(2)}
+                  </div>
+                )}
+              </div>
+
+              <div className={classes.buttonsContainer}>
+                <button
+                  disabled={!countInStock > 0}
+                  className={classes.cartBtn}
+                  onClick={addToCartHandler}
+                >
+                  <CartIcon className={classes.cartIcon} />
+                  <div>
+                    <span className={classes.hide}>
+                      {countInStock > 0 ? "Add to cart" : "Out of stock"}
+                    </span>
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
         </div>

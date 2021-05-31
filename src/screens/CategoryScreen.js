@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     // },
   },
   flex: {
+    width: "100%",
     paddingTop: "2rem",
     ...theme.flex.row,
     alignItems: "stretch",
