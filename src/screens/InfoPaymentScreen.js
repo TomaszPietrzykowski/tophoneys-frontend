@@ -86,6 +86,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     opacity: 0.8,
   },
+  link: {
+    "&:hover": {
+      color: theme.palette.text.primary,
+    },
+  },
 }))
 
 const InfoPaymentScreen = () => {
@@ -201,7 +206,10 @@ const InfoPaymentScreen = () => {
               </p>
               <p className={classes.block}>
                 Questions can be submitted by e-mail to the following e-mail
-                address: office@tophoneys.com
+                address:{" "}
+                <a href="mailto:office@tophoneys.com" className={classes.link}>
+                  office@tophoneys.com
+                </a>
               </p>
             </section>
           </div>
