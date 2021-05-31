@@ -115,14 +115,6 @@ function App() {
                 exact
               />
               <Route path="/" component={HomeScreen} exact />
-              {/* <Newsletter />
-        <Footer />
-        {isMobile && (
-          <Fragment>
-            <BottomNavMargin />
-            <BottomNav openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
-          </Fragment>
-        )} */}
             </Switch>
             <Brands />
             <Footer />
