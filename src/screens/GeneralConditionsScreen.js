@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       left: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent, ${theme.palette.secondary.main}, transparent)`,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
     },
     "&::after": {
       content: "''",
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       right: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent, ${theme.palette.secondary.main}, transparent)`,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
     },
   },
   content: {
@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "1rem 0",
     lineHeight: 1.7,
     letterSpacing: 0.3,
+    maxWidth: 900,
   },
   // emphasis: {
   //   color: theme.palette.text.primary,
