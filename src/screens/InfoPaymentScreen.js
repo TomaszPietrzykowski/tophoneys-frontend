@@ -10,6 +10,8 @@ import b7 from "../assets/maestro-logo.svg"
 import b8 from "../assets/jcb-logo.svg"
 import b9 from "../assets/amex-logo.svg"
 import b10 from "../assets/diners-logo.svg"
+import b11 from "../assets/postnl-logo.jpeg"
+import b12 from "../assets/dhl-logo.svg"
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance"
 
 const useStyles = makeStyles((theme) => ({
@@ -169,6 +171,17 @@ const InfoPaymentScreen = () => {
               <h3 className={classes.sectionHead}>Shipping</h3>
               <p className={classes.block}>Standard Shipping – 4,95 €</p>
               <p className={classes.block}>FREE shipping above 39,00 €</p>
+              <div
+                className={classes.logosContainer}
+                style={{ margin: "2rem 0rem" }}
+              >
+                <div className={classes.logo}>
+                  <img src={b11} alt="producers logo" className={classes.img} />
+                </div>
+                <div className={classes.logo}>
+                  <img src={b12} alt="producers logo" className={classes.img} />
+                </div>
+              </div>
               <p className={classes.block}>
                 We usually ship orders within 24 hours from the moment the
                 payment is credited. Sometimes it may take up to 2-4 days.
