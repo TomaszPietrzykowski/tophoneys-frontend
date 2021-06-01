@@ -101,12 +101,7 @@ const useStyles = makeStyles((theme) => ({
       transform: "rotate(-10deg)",
     },
   },
-  description: {
-    maxWidth: 700,
-    color: theme.palette.text.secondary,
-    lineHeight: 1.7,
-    letterSpacing: 0.5,
-  },
+
   listItem: {
     padding: "0 3rem",
     color: theme.palette.text.secondary,
@@ -152,6 +147,13 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
     textAlign: "left",
     textTransform: "uppercase",
+  },
+  description: {
+    maxWidth: 700,
+    color: theme.palette.text.secondary,
+    lineHeight: 1.7,
+    letterSpacing: 0.5,
+    marginBottom: "1rem",
   },
   buttonsContainer: {
     display: "flex",
@@ -236,6 +238,7 @@ const ProductScreen = ({ match, history }) => {
     product.countInStock === 0
       ? { color: "white", background: "rgba(0,0,0,.25", cursor: "default" }
       : { color: "white" }
+
   return (
     <>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleAlertClose}>
@@ -398,9 +401,12 @@ const ProductScreen = ({ match, history }) => {
                   </Grid>
                   <Grid item xs={12} md={8} lg={8} className={classes.card}>
                     <div className={classes.filler}>
-                      <p className={classes.description}>
-                        {product.description}
-                      </p>
+                      {product.description &&
+                        product.description
+                          .split("\n")
+                          .map((string) => (
+                            <p className={classes.description}>{string}</p>
+                          ))}
                     </div>
                   </Grid>
                 </Grid>

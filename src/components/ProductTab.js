@@ -26,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
 
   card: {
     flexBasis: 1,
-    flexGrow: 1,
-    flexShrink: 0,
+    flexGrow: "1",
+    flexShrink: 1,
     // border: "2px solid green",
     minHeight: "100%",
     margin: "0 1rem",

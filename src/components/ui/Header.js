@@ -218,8 +218,7 @@ const useStyles = makeStyles((theme) => ({
   drawerNav: {
     display: "flex",
     justifyContent: "flex-end",
-    padding: "1rem",
-    paddingBottom: 0,
+    padding: "1rem 0 0 1rem",
   },
   drawerItem: {
     ...theme.flex.row,
@@ -228,6 +227,7 @@ const useStyles = makeStyles((theme) => ({
   drawerText: {
     padding: "1rem",
     flex: 1,
+    cursor: "pointer",
   },
   drawerDropdown: {
     width: "100%",
@@ -241,6 +241,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     textTransform: "none",
     fontSize: ".9rem",
+    cursor: "pointer",
   },
   drawerIconContainer: {
     padding: ".5rem",
