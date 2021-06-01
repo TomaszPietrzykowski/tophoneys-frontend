@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { makeStyles } from "@material-ui/styles"
 import logo from "../../assets/logotranspbg.png"
@@ -8,7 +8,7 @@ import UserIcon from "@material-ui/icons/Person"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
 import SettingsIcon from "@material-ui/icons/Settings"
 import ExpandIcon from "@material-ui/icons/ExpandMore"
-import RightArrowIcon from "@material-ui/icons/ArrowForwardIos"
+import ContractIcon from "@material-ui/icons/ExpandLess"
 import MenuIcon from "@material-ui/icons/MenuRounded"
 import CloseIcon from "@material-ui/icons/Close"
 import Divider from "@material-ui/core/Divider"
@@ -200,34 +200,57 @@ const useStyles = makeStyles((theme) => ({
 
   // -------------------------------------------- DRAWER
   drawer: {
+    ...theme.typography.mont,
+    textTransform: "uppercase",
+    fontSize: "1rem",
     position: "fixed",
     top: 0,
     left: 0,
     backgroundColor: theme.palette.common.white,
     height: "100%",
     width: "100%",
-    zIndex: 10,
-    paddingLeft: 0,
+    maxWidth: 460,
+    padding: "0 1rem 5rem",
+    transformOrigin: "0% 50%",
+    transition: "all .2s ease",
+    overflowY: "scroll",
   },
   drawerNav: {
     display: "flex",
     justifyContent: "flex-end",
     padding: "1rem",
+    paddingBottom: 0,
   },
   drawerItem: {
-    display: "flex",
-    width: "calc(100% - 40px)",
+    ...theme.flex.row,
     justifyContent: "space-between",
+  },
+  drawerText: {
     padding: "1rem",
+    flex: 1,
+  },
+  drawerDropdown: {
+    width: "100%",
+    transition: "all .2s ease",
+    overflow: "hidden",
+  },
+  drawerTextSmall: {
+    padding: "1rem",
+    paddingLeft: "2rem",
+    flex: 1,
+    fontWeight: 300,
+    textTransform: "none",
+    fontSize: ".9rem",
   },
   drawerIconContainer: {
+    padding: ".5rem",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   drawerIcon: {
     color: theme.palette.primary.main,
-    fontSize: "1rem",
+    fontSize: "1.8rem",
   },
   closeIconContainer: {
     padding: ".5rem",
@@ -242,8 +265,12 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Header = ({ openDrawer, setOpenDrawer }) => {
+  // hooks
   const classes = useStyles()
   const dispatch = useDispatch()
+  const history = useHistory()
+
+  // redux
   const { userInfo } = useSelector((state) => state.userLogin)
   const { cartItems } = useSelector((state) => state.cart)
 
@@ -256,8 +283,10 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
   const [openHoneys, setOpenHoneys] = useState(false)
   const [anchorElTea, setAnchorElTea] = useState(null)
   const [openTea, setOpenTea] = useState(false)
+  const [drawerHoneysOpen, setDrawerHoneysOpen] = useState(false)
+  const [drawerTeaOpen, setDrawerTeaOpen] = useState(false)
 
-  //dropdown handlers
+  //desktop dropdown handlers
   const handleClickUser = (e) => {
     setAnchorElUser(e.currentTarget)
     setOpenUser(true)
@@ -299,6 +328,25 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
   const handleLogout = () => {
     dispatch(logout())
   }
+
+  // mobile dropdown handlers
+  const handleDrawerChoice = (link) => {
+    setDrawerHoneysOpen(false)
+    setDrawerTeaOpen(false)
+    setOpenDrawer(false)
+    window.scrollTo(0, 0)
+    history.push(link)
+  }
+
+  const drawerScale = openDrawer
+    ? { transform: "scale(1, 1)" }
+    : { transform: "scale(0, 1)" }
+  const drawerPureStyle = drawerHoneysOpen
+    ? { maxHeight: "37.7rem" }
+    : { maxHeight: 0 }
+  const drawerTeaStyle = drawerTeaOpen
+    ? { maxHeight: "23.1rem" }
+    : { maxHeight: 0 }
 
   return (
     <header className={classes.root}>
@@ -505,38 +553,250 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
             </Grow>
           )}
         </Popper>
+        {/* ----------------------------------------------------------------------------------------- DRAWER */}
+        {/* {openDrawer && ( */}
+        <ul className={classes.drawer} style={drawerScale}>
+          <li className={classes.drawerNav}>
+            <div
+              className={classes.closeIconContainer}
+              onClick={() => setOpenDrawer(false)}
+            >
+              <CloseIcon className={classes.closeIcon} />
+            </div>
+          </li>
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/")}
+          >
+            <div className={classes.drawerText}>Home</div>
+          </li>
+          <Divider />
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/new")}
+          >
+            <div className={classes.drawerText}>New</div>
+          </li>
+          <Divider />
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/honeys")}
+          >
+            <div className={classes.drawerText}>All honeys</div>
+          </li>
+          <Divider />
+          <li className={classes.drawerItem}>
+            <div
+              className={classes.drawerText}
+              onClick={() => handleDrawerChoice("/category/purehoneys")}
+            >
+              Pure honeys
+            </div>
+            <IconButton
+              className={classes.drawerIconContainer}
+              onClick={() => setDrawerHoneysOpen(!drawerHoneysOpen)}
+            >
+              {drawerHoneysOpen ? (
+                <ContractIcon className={classes.drawerIcon} />
+              ) : (
+                <ExpandIcon className={classes.drawerIcon} />
+              )}
+            </IconButton>
+          </li>
+          <div className={classes.drawerDropdown} style={drawerPureStyle}>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/acaciahoneys")}
+            >
+              <div className={classes.drawerTextSmall}>Acacia honey</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/sunflowerhoneys")}
+            >
+              <div className={classes.drawerTextSmall}>Sunflower honey</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/lindenhoneys")}
+            >
+              <div className={classes.drawerTextSmall}>Linden honey</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/buckwheathoneys")}
+            >
+              <div className={classes.drawerTextSmall}>Buckwheat honey</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/multiflowerhoneys")}
+            >
+              <div className={classes.drawerTextSmall}>Multiflorous honey</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/goldenrodhoneys")}
+            >
+              <div className={classes.drawerTextSmall}>Goldenrod honey</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/foresthoneys")}
+            >
+              <div className={classes.drawerTextSmall}>Forest honey</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/raspberryhoneys")}
+            >
+              <div className={classes.drawerTextSmall}>Raspberry honey</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/corianderhoneys")}
+            >
+              <div className={classes.drawerTextSmall}>Coriander honey</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/heatherhoneys")}
+            >
+              <div className={classes.drawerTextSmall}>Heather honey</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/dandelionhoneys")}
+            >
+              <div className={classes.drawerTextSmall}>Dandelion honey</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/coniferoushoneydew")}
+            >
+              <div className={classes.drawerTextSmall}>Coniferous honeydew</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/decidoushoneydew")}
+            >
+              <div className={classes.drawerTextSmall}>Decidous honeydew</div>
+            </li>
+          </div>
+          <Divider />
 
-        {openDrawer && (
-          <ul className={classes.drawer}>
-            <li className={classes.drawerNav}>
-              <div
-                className={classes.closeIconContainer}
-                onClick={() => setOpenDrawer(false)}
-              >
-                <CloseIcon className={classes.closeIcon} />
-              </div>
-            </li>
-            <Divider />
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/creamedhoneys")}
+          >
+            <div className={classes.drawerText}>Creamed honeys</div>
+          </li>
+          <Divider />
+
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/additives")}
+          >
+            <div className={classes.drawerText}>Honeys with additives</div>
+          </li>
+          <Divider />
+
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/accessories")}
+          >
+            <div className={classes.drawerText}>Accessories</div>
+          </li>
+          <Divider />
+
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/beeproducts")}
+          >
+            <div className={classes.drawerText}>Bee products</div>
+          </li>
+          <Divider />
+
+          <li className={classes.drawerItem}>
+            <div
+              className={classes.drawerText}
+              onClick={() => handleDrawerChoice("/category/tea")}
+            >
+              Tea
+            </div>
+            <IconButton
+              className={classes.drawerIconContainer}
+              onClick={() => setDrawerTeaOpen(!drawerTeaOpen)}
+            >
+              {drawerTeaOpen ? (
+                <ContractIcon className={classes.drawerIcon} />
+              ) : (
+                <ExpandIcon className={classes.drawerIcon} />
+              )}
+            </IconButton>
+          </li>
+          <div className={classes.drawerDropdown} style={drawerTeaStyle}>
             <li
               className={classes.drawerItem}
-              onClick={() => setOpenDrawer(false)}
+              onClick={() => handleDrawerChoice("/category/blacktea")}
             >
-              <div className={classes.drawerText}>Akcesoria</div>
-              <div className={classes.drawerIconContainer}>
-                <RightArrowIcon className={classes.drawerIcon} />
-              </div>
+              <div className={classes.drawerTextSmall}>Black tea</div>
             </li>
-            <Divider />
+
             <li
               className={classes.drawerItem}
-              onClick={() => setOpenDrawer(false)}
+              onClick={() => handleDrawerChoice("/category/fruittea")}
             >
-              <div className={classes.drawerText}>Marki</div>
+              <div className={classes.drawerTextSmall}>Fruit tea</div>
             </li>
-            <Divider />
-          </ul>
-        )}
-        {/* <div className={classes.container}> */}
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/greentea")}
+            >
+              <div className={classes.drawerTextSmall}>Green tea</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/functionaltea")}
+            >
+              <div className={classes.drawerTextSmall}>Functional tea</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/rooibos")}
+            >
+              <div className={classes.drawerTextSmall}>Rooibos</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/yerbamate")}
+            >
+              <div className={classes.drawerTextSmall}>Yerba Mate</div>
+            </li>
+            <li
+              className={classes.drawerItem}
+              onClick={() => handleDrawerChoice("/category/cannedtea")}
+            >
+              <div className={classes.drawerTextSmall}>Canned tea</div>
+            </li>
+          </div>
+          <Divider />
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/giftsets")}
+          >
+            <div className={classes.drawerText}>Gift sets</div>
+          </li>
+          <Divider />
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/specialoffer")}
+          >
+            <div className={classes.drawerText}>Special offer</div>
+          </li>
+        </ul>
+        {/* )} */}
+        {/* ----------------------------------------------------------------------------------------- DRAWER */}
         <nav className={classes.menuBar}>
           <ul className={classes.navigation}>
             <li className={classes.tab}>
@@ -745,9 +1005,8 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         <div>
                           <MenuItem
                             component={Link}
-                            to="/category/creamed"
+                            to="/category/creamedhoneys"
                             classes={{ root: classes.submenu }}
-                            value="nl"
                             onClick={(e) => {
                               handleCloseHoneys(e)
                             }}
@@ -808,9 +1067,9 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
               onMouseOver={(e) => handleClickTea(e)}
               onMouseLeave={handleCloseTea}
             >
-              <Link to="/category/teas" className={classes.navLink}>
+              <Link to="/category/tea" className={classes.navLink}>
                 <li className={classes.tab}>
-                  <div>Teas</div>
+                  <div>Tea</div>
                   <ExpandIcon className={classes.expandIcon} />
                 </li>
               </Link>
