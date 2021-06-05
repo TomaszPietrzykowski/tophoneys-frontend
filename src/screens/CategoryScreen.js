@@ -18,6 +18,18 @@ const useStyles = makeStyles((theme) => ({
       padding: 0,
     },
   },
+  messageContainer: {
+    width: "100%",
+    maxWidth: 1400,
+    margin: "auto",
+    padding: "0 3rem",
+    ...theme.flex.col,
+    marginBottom: "12rem",
+    opacity: 0.8,
+    [theme.breakpoints.down("md")]: {
+      padding: ".8rem",
+    },
+  },
   flex: {
     width: "100%",
     paddingTop: "2rem",
@@ -55,7 +67,7 @@ const CategoryScreen = ({ match, history }) => {
         ) : error ? (
           <Message variant="error" message={error} />
         ) : products.length === 0 ? (
-          <>
+          <div className={classes.messageContainer}>
             <Message
               variant="info"
               message={"There are currently no products in this category"}
@@ -70,7 +82,7 @@ const CategoryScreen = ({ match, history }) => {
               }
             />
             <div style={{ height: "12rem" }} />
-          </>
+          </div>
         ) : (
           <>
             <div className={classes.flex}>

@@ -18,6 +18,18 @@ const useStyles = makeStyles((theme) => ({
       padding: 0,
     },
   },
+  messageContainer: {
+    width: "100%",
+    maxWidth: 1400,
+    margin: "auto",
+    padding: "0 3rem",
+    ...theme.flex.col,
+    marginBottom: "12rem",
+    opacity: 0.8,
+    [theme.breakpoints.down("md")]: {
+      padding: ".8rem",
+    },
+  },
   flex: {
     paddingTop: "2rem",
     ...theme.flex.row,
@@ -62,12 +74,16 @@ const SearchScreen = ({ match }) => {
         {loading ? (
           <Loader />
         ) : error ? (
-          <Message variant="error" message={error} />
+          <div className={classes.messageContainer}>
+            <Message variant="error" message={error} />
+          </div>
         ) : products.length === 0 ? (
-          <Message
-            variant="info"
-            message={`No products matching keyword:  "${keyword}"`}
-          />
+          <div className={classes.messageContainer}>
+            <Message
+              variant="info"
+              message={`No products matching keyword:  "${keyword}"`}
+            />
+          </div>
         ) : (
           <>
             {products.length > 0 && (

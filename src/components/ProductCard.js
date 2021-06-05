@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     [theme.breakpoints.down("sm")]: {
       padding: ".5rem 0 0 .5rem",
-      minHeight: 140,
+      minHeight: 145,
     },
   },
   category: {
@@ -187,6 +187,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       padding: 0,
       paddingLeft: ".5rem",
+      margin: "auto auto 0 0",
     },
   },
   cartBtn: {
