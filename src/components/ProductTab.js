@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
+import useMediaQuery from "@material-ui/core/useMediaQuery"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
@@ -40,12 +41,19 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      margin: "0 .5rem",
+    },
   },
   imageContainer: {
     flexBasis: 1,
     flexGrow: 1,
     flexShrink: 1,
     // border: "1px solid orange",
+    [theme.breakpoints.down("sm")]: {
+      ...theme.flex.colStart,
+      justifyContent: "flex-end",
+    },
   },
   img: {
     display: "block",
@@ -53,9 +61,6 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     objectFit: "contain",
     flex: 1,
-    [theme.breakpoints.down("md")]: {
-      maxWidth: "100%",
-    },
   },
   bottom: {
     flexBasis: 1,
@@ -75,12 +80,21 @@ const useStyles = makeStyles((theme) => ({
     // transform: "translate(0, 50%)",
     backgroundColor: theme.palette.secondary.main,
     color: "white",
-    // textTransform: "uppercase",
     padding: ".45rem .4rem .3rem .5rem",
     fontSize: ".7rem",
-    fontWeight: 500,
     letterSpacing: 1,
     borderRadius: "50%",
+    [theme.breakpoints.down("sm")]: {
+      padding: ".3rem",
+      paddingLeft: ".4rem",
+      top: "-1rem",
+      right: 5,
+    },
+  },
+  saleIcon: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem",
+    },
   },
 
   content: {
@@ -88,6 +102,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "flex-start",
     padding: "1.4rem 0 0 1.4rem",
+    [theme.breakpoints.down("sm")]: {
+      padding: ".5rem 0 0 .5rem",
+    },
   },
   category: {
     fontSize: ".8rem",
@@ -97,15 +114,26 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     letterSpacing: 0.5,
     // border: "1px solid blue",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".75rem",
+      letterSpacing: 0.4,
+    },
   },
   title: {
     fontSize: "1rem",
     color: theme.palette.text.primary,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".85rem",
+      letterSpacing: 0.4,
+    },
   },
   capacity: {
     fontSize: ".8rem",
     margin: ".5rem 0",
     color: theme.palette.text.disabled,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".75rem",
+    },
   },
   price: {
     display: "flex",
@@ -119,13 +147,24 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: "no-wrap",
     overflow: "hidden",
     paddingLeft: "1.4rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.2rem",
+      letterSpacing: 0.5,
+      paddingLeft: ".5rem",
+    },
   },
+
   previousPrice: {
     marginLeft: ".5rem",
     padding: "0.3rem",
     fontSize: "1rem",
     color: "red",
     opacity: 0.5,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".8rem",
+      letterSpacing: 0.4,
+      padding: "0 0.3rem",
+    },
     // textDecoration: "line-through",
     // border: "1px solid blue",
     position: "relative",
@@ -144,16 +183,15 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "1.4rem",
     display: "flex",
     marginTop: "auto",
-    cursor: "pointer",
     color: theme.palette.common.white,
-    [theme.breakpoints.down("md")]: {
-      backgroundColor: theme.palette.secondary.main,
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: ".5rem",
     },
   },
   cartBtn: {
     border: "none",
     cursor: "pointer",
-    padding: ".55rem 1.4rem",
+    padding: ".55rem .8rem",
     display: "flex",
     justifyContent: "center",
     color: "white",
@@ -166,13 +204,15 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     backgroundColor: theme.palette.secondary.light,
     transition: "all .3s ease",
+    whiteSpace: "nowrap",
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
     [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
+      fontSize: ".7rem",
       flex: 1,
-      padding: ".3rem",
+      padding: ".4rem .7rem",
+      letterSpacing: 0.3,
     },
   },
   cartIcon: {
@@ -182,12 +222,16 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "1.2rem",
       margin: 0,
     },
-  },
-  hide: {
-    [theme.breakpoints.down("md")]: {
-      display: "none",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".85rem",
+      margin: "0 .3rem 0 0",
     },
   },
+  // hide: {
+  //   [theme.breakpoints.down("md")]: {
+  //     whiteSpace: "nowrap",
+  //   },
+  // },
 }))
 
 const ProductTab = ({
@@ -207,6 +251,8 @@ const ProductTab = ({
   const classes = useStyles()
   const dispatch = useDispatch()
   const history = useHistory()
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"))
   // successful alert state
   const [open, setOpen] = useState(false)
 
@@ -249,11 +295,13 @@ const ProductTab = ({
         className={classes.root}
         style={
           isFeatured
-            ? {
-                maxWidth: `${slideWidth}%`,
-                minWidth: `${slideWidth}%`,
-                padding: "1.5rem",
-              }
+            ? isMobile
+              ? { maxWidth: `${slideWidth}%`, minWidth: `${slideWidth}%` }
+              : {
+                  maxWidth: `${slideWidth}%`,
+                  minWidth: `${slideWidth}%`,
+                  padding: "1.5rem",
+                }
             : {
                 maxWidth: `${slideWidth}%`,
                 minWidth: `${slideWidth}%`,
@@ -269,7 +317,7 @@ const ProductTab = ({
           <div className={classes.bottom}>
             {isSale && (
               <div className={classes.saleBadge}>
-                <SaleIcon />
+                <SaleIcon className={classes.saleIcon} />
               </div>
             )}
             <Link to={`/product/${id}`}>
@@ -314,7 +362,9 @@ const ProductTab = ({
                   className={classes.cartBtn}
                   onClick={addToCartHandler}
                 >
-                  <CartIcon className={classes.cartIcon} />
+                  {countInStock > 0 && (
+                    <CartIcon className={classes.cartIcon} />
+                  )}
                   <div>
                     <span className={classes.hide}>
                       {countInStock > 0 ? "Add to cart" : "Out of stock"}

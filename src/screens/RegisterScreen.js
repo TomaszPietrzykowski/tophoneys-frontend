@@ -109,12 +109,13 @@ const RegisterScreen = ({ location, history }) => {
   const { loading, error, userInfo } = useSelector(
     (state) => state.userRegister
   )
+  const { userInfo: alreadyLoggedIn } = useSelector((state) => state.userLogin)
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo || alreadyLoggedIn) {
       history.push(redirect)
     }
-  }, [userInfo, redirect, history])
+  }, [userInfo, redirect, history, alreadyLoggedIn])
 
   const submitHandler = (e) => {
     e.preventDefault()

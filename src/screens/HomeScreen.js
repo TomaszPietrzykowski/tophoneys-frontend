@@ -1,13 +1,13 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
 
-import Search from "../components/ui/Search";
-import Showcase from "../components/ui/Showcase";
-import Teasers from "../components/ui/Teasers";
-import Featured from "../components/Featured";
-import ProductsSlider from "../components/ProductsSlider";
-import PromoLinks from "../components/PromoLinks";
-import SecondaryBanner from "../components/SecondaryBanner";
+import Search from "../components/ui/Search"
+import Showcase from "../components/ui/Showcase"
+import Teasers from "../components/ui/Teasers"
+import Featured from "../components/Featured"
+import ProductsSlider from "../components/ProductsSlider"
+import PromoLinks from "../components/PromoLinks"
+import SecondaryBanner from "../components/SecondaryBanner"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -19,22 +19,22 @@ const useStyles = makeStyles((theme) => ({
     //   marginTop: 90,
     // },
   },
-}));
+}))
 
 const Home = () => {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <main className={classes.container}>
       <PromoLinks />
       <Search isMobile={true} />
       <Showcase />
       <Featured />
-      <Teasers />
+      {/* <Teasers /> */}
       <ProductsSlider title="New delivery" endpoint={"new"} timeout={10000} />
       <SecondaryBanner />
       <ProductsSlider title="Sale" endpoint={"honeys"} timeout={8000} />
     </main>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

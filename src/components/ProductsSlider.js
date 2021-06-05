@@ -13,13 +13,21 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       padding: "0px",
     },
+    [theme.breakpoints.down("sm")]: {
+      padding: "0px",
+      margin: "3rem auto 4rem",
+    },
   },
   sliderHeader: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: "6rem",
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: "1.5rem",
+    },
   },
+
   headerText: {
     ...theme.typography.merienda,
     padding: "15px",

@@ -56,19 +56,22 @@ const CategoryScreen = ({ match, history }) => {
         ) : error ? (
           <Message variant="error" message={error} />
         ) : products.length === 0 ? (
-          <Message
-            variant="info"
-            message={"There are currently no products in this category"}
-            action={
-              <Button
-                color="inherit"
-                size="small"
-                onClick={() => history.goBack()}
-              >
-                Back
-              </Button>
-            }
-          />
+          <>
+            <Message
+              variant="info"
+              message={"There are currently no products in this category"}
+              action={
+                <Button
+                  color="inherit"
+                  size="small"
+                  onClick={() => history.goBack()}
+                >
+                  Back
+                </Button>
+              }
+            />
+            <div style={{ height: "12rem" }} />
+          </>
         ) : (
           <>
             <div className={classes.flex}>

@@ -1,7 +1,8 @@
 import React from "react"
 import { makeStyles } from "@material-ui/styles"
 import useMediaQuery from "@material-ui/core/useMediaQuery"
-import banner from "../../assets/iPhone8-119.jpeg"
+import bannerMobile from "../../assets/banner-mobile.jpeg"
+import bannerDesktop from "../../assets/iPhone8-119.jpeg"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -17,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "auto",
     borderRadius: 7,
+    [theme.breakpoints.down("xs")]: {
+      padding: "0px .5rem",
+    },
   },
   banner: {
     width: "100%",
@@ -26,11 +30,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Showcase = () => {
-  const isMobile = useMediaQuery("(max-width:860px)")
+  const isTablet = useMediaQuery("(max-width:860px)")
   const classes = useStyles()
+  const isMobile = useMediaQuery("(max-width: 600px)")
+  const banner = isMobile ? bannerMobile : bannerDesktop
 
   return (
-    <div className={isMobile ? classes.containerMobile : classes.container}>
+    <div className={isTablet ? classes.containerMobile : classes.container}>
       <img src={banner} alt="I love TOP HONEYS" className={classes.banner} />
     </div>
   )

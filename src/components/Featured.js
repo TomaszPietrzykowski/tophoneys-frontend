@@ -18,11 +18,22 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100%",
     flexWrap: "wrap",
     overflow: "hidden",
-    [theme.breakpoints.down("md")]: {
-      margin: "4rem 0px 20px 0px",
+    // [theme.breakpoints.down("md")]: {
+    //   margin: "4rem 0px 20px 0px",
+    // },
+    [theme.breakpoints.down("sm")]: {
+      margin: "4rem 0",
+      width: "100%",
+    },
+    [theme.breakpoints.down("xs")]: {
+      margin: "3rem 0",
     },
     "& > * > *": {
       margin: "0 1rem",
+      [theme.breakpoints.down("sm")]: {
+        margin: "0 .5rem",
+        // paddingLeft: ".5rem",
+      },
     },
   },
   link: {
