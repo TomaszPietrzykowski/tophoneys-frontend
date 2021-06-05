@@ -13,23 +13,22 @@ const useStyles = makeStyles((theme) => ({
     ...theme.utils.container,
     ...theme.flex.col,
     justifyContent: "flex-start",
-    padding: "2rem 3rem 0",
-    // padding querry to do
-    // [theme.breakpoints.down("md")]: {
-    //   padding: ?,
-    // },
-    // [theme.breakpoints.down("sm")]: {
-    //   padding: ?,
-    // },
+    padding: "2rem 0 0",
+    [theme.breakpoints.down("md")]: {
+      padding: 0,
+    },
   },
   flex: {
     width: "100%",
     paddingTop: "2rem",
     ...theme.flex.row,
     alignItems: "stretch",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     flexWrap: "wrap",
     overflow: "wrap",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "1rem",
+    },
   },
 }))
 

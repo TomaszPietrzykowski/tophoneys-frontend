@@ -14,21 +14,20 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     padding: "2rem 3rem 0",
     ...theme.typography.mont,
-    // padding querry to do
-    // [theme.breakpoints.down("md")]: {
-    //   padding: ?,
-    // },
-    // [theme.breakpoints.down("sm")]: {
-    //   padding: ?,
-    // },
+    [theme.breakpoints.down("md")]: {
+      padding: 0,
+    },
   },
   flex: {
     paddingTop: "2rem",
     ...theme.flex.row,
     alignItems: "stretch",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     flexWrap: "wrap",
     overflow: "wrap",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "1rem",
+    },
   },
   searchResults: {
     width: "100%",
@@ -37,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     fontSize: ".8rem",
     letterSpacing: 0.5,
+    [theme.breakpoints.down("sm")]: {
+      padding: "1rem .5rem 0",
+      letterSpacing: 0.4,
+    },
   },
 }))
 
