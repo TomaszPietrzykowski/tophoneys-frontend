@@ -9,28 +9,31 @@ import teaser3 from "../../assets/teaser3.jpeg"
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    maxWidth: 1300,
+    maxWidth: 1400,
     margin: "3rem",
     marginBottom: "9rem",
     display: "flex",
     justifyContent: "center",
     // border: "1px solid green",
+    // [theme.breakpoints.down("md")]: {
+    //   flexDirection: "column",
+    // },
     [theme.breakpoints.down("md")]: {
-      flexDirection: "column",
+      margin: "3rem 0",
     },
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       flexDirection: "column",
       margin: 0,
     },
   },
   teaser: {
     margin: ".8rem",
-    flex: 1,
+    // flex: 1,
     ...theme.flex.col,
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("xs")]: {
       width: "100%",
       margin: 0,
-      padding: "1rem",
+      padding: ".5rem",
     },
     transition: "all .3s ease",
     "&:hover": {
@@ -40,7 +43,13 @@ const useStyles = makeStyles((theme) => ({
   img: {
     maxWidth: 380,
     objectFit: "contain",
-    borderRadius: 9,
+    borderRadius: 7,
+    [theme.breakpoints.down("xl")]: {
+      maxWidth: "100%",
+    },
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: "100%",
+    },
   },
 }))
 

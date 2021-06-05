@@ -20,11 +20,24 @@ const useStyles = makeStyles((theme) => ({
   root: {
     ...theme.typography.mont,
     display: "flex",
-    // width: "320px",
     maxWidth: "320px",
     // border: "2px solid pink",
     alignItems: "stretch",
     padding: "2rem 2rem",
+    [theme.breakpoints.down("md")]: {
+      marginBottom: "3rem",
+      maxWidth: 290,
+      padding: "1rem",
+    },
+    // [theme.breakpoints.down("sm")]: {
+    //   maxWidth: 300,
+    //   padding: "1rem",
+    // },
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: "50%",
+      padding: "0 .5rem",
+      alignItems: "flex-end",
+    },
   },
   card: {
     // border: "2px solid green",
@@ -36,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     borderLeftStyle: "solid",
     borderImage: `linear-gradient(transparent, 30%, ${theme.palette.secondary.main}, 55%, transparent) 1 100%`,
     flexDirection: "column",
-    justifyContent: "stretch",
+    justifyContent: "center",
     position: "relative",
   },
   saleBadge: {
@@ -52,12 +65,25 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     letterSpacing: 1,
     borderRadius: "50%",
+    [theme.breakpoints.down("sm")]: {
+      padding: ".3rem",
+      paddingLeft: ".4rem",
+      top: "-1rem",
+      right: 5,
+    },
+  },
+  saleIcon: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem",
+    },
   },
   imageContainer: {
     ...theme.flex.col,
     justifyContent: "flex-end",
-    height: 320,
-    // border: "1px solid orange",
+    height: 255,
+    [theme.breakpoints.down("sm")]: {
+      height: "auto",
+    },
   },
   img: {
     display: "block",
@@ -74,8 +100,12 @@ const useStyles = makeStyles((theme) => ({
     // border: "1px solid blue",
     flexDirection: "column",
     justifyContent: "flex-start",
-    padding: "1rem 1rem 0 1rem",
+    padding: "1rem 0 0 1rem",
     position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      padding: ".5rem 0 0 .5rem",
+      minHeight: 140,
+    },
   },
   category: {
     fontSize: ".85rem",
@@ -85,17 +115,28 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     letterSpacing: 0.5,
     // border: "1px solid blue",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".75rem",
+      letterSpacing: 0.4,
+    },
   },
   title: {
     fontSize: "1rem",
     color: theme.palette.text.primary,
     // border: "1px solid blue",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".85rem",
+      letterSpacing: 0.4,
+    },
   },
   capacity: {
     fontSize: ".8rem",
     margin: ".5rem 0",
     color: theme.palette.text.disabled,
     // border: "1px solid blue",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".75rem",
+    },
   },
   price: {
     display: "flex",
@@ -107,7 +148,12 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: 1,
     fontWeight: 300,
     flexWrap: "no-wrap",
+    whiteSpace: "nowrap",
     overflow: "hidden",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.2rem",
+      letterSpacing: 0.5,
+    },
   },
   previousPrice: {
     marginLeft: ".5rem",
@@ -115,9 +161,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.1rem",
     color: "red",
     opacity: 0.5,
-    // textDecoration: "line-through",
-    // border: "1px solid blue",
     position: "relative",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".8rem",
+      letterSpacing: 0.4,
+      padding: "0 0.3rem",
+    },
     "&::after": {
       content: "''",
       position: "absolute",
@@ -131,15 +180,18 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonsContainer: {
     display: "flex",
-    margin: "0auto 0 0",
+    margin: "0 auto 0 0",
     cursor: "pointer",
     color: theme.palette.common.white,
     padding: "0 0 1rem 1rem",
+    [theme.breakpoints.down("sm")]: {
+      padding: 0,
+      paddingLeft: ".5rem",
+    },
   },
   cartBtn: {
     border: "none",
     cursor: "pointer",
-
     padding: ".55rem 1.4rem",
     display: "flex",
     justifyContent: "center",
@@ -153,13 +205,20 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.light,
     transition: "all .3s ease",
     color: theme.palette.common.white,
+    whiteSpace: "nowrap",
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+      // flex: 1,
+      // padding: ".3rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".7rem",
+      // flex: 1,
+      padding: ".5rem .8rem",
+      letterSpacing: 0.3,
     },
   },
   cartIcon: {
@@ -169,12 +228,16 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "1.2rem",
       margin: 0,
     },
-  },
-  hide: {
-    [theme.breakpoints.down("md")]: {
-      display: "none",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".85rem",
+      margin: "0 .3rem 0 0",
     },
   },
+  // hide: {
+  //   [theme.breakpoints.down("md")]: {
+  //     display: "none",
+  //   },
+  // },
 }))
 
 const ProductCard = ({ product }) => {
@@ -234,7 +297,7 @@ const ProductCard = ({ product }) => {
               <div className={classes.content}>
                 {product.isPromo && (
                   <div className={classes.saleBadge}>
-                    <SaleIcon />
+                    <SaleIcon className={classes.saleIcon} />
                   </div>
                 )}
                 <div className={classes.category}>
@@ -261,7 +324,9 @@ const ProductCard = ({ product }) => {
                 className={classes.cartBtn}
                 onClick={addToCartHandler}
               >
-                <CartIcon className={classes.cartIcon} />
+                {product.countInStock > 0 && (
+                  <CartIcon className={classes.cartIcon} />
+                )}
                 <div>
                   <span className={classes.hide}>
                     {product.countInStock > 0 ? "Add to cart" : "Out of stock"}

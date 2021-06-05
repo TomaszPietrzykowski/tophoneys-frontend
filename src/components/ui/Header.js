@@ -139,7 +139,6 @@ const useStyles = makeStyles((theme) => ({
   dropdownItemIcons: {
     ...theme.typography.prosto,
     fontSize: ".8rem",
-    fontWeight: 400,
   },
 
   // ------------------------------------------- LOGO
@@ -196,6 +195,10 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.palette.shadows.primary,
     paddingTop: ".9rem",
     paddingBottom: ".9rem",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: 0,
+      paddingBottom: 0,
+    },
   },
   submenu: {
     ...theme.typography.prosto,
@@ -510,7 +513,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             handleCloseUser(e)
                           }}
                         >
-                          Sign up
+                          Register
                         </MenuItem>
                       </Link>
                     )}

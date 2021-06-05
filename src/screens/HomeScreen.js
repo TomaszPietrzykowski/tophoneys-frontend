@@ -29,7 +29,7 @@ const Home = () => {
       <Search isMobile={true} />
       <Showcase />
       <Featured />
-      {/* <Teasers /> */}
+      <Teasers />
       <ProductsSlider title="New delivery" endpoint={"new"} timeout={10000} />
       <SecondaryBanner />
       <ProductsSlider title="Sale" endpoint={"honeys"} timeout={8000} />

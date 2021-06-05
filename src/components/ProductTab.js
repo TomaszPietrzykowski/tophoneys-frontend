@@ -208,10 +208,10 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: ".7rem",
       flex: 1,
-      padding: ".4rem .7rem",
+      padding: ".5rem .8rem",
       letterSpacing: 0.3,
     },
   },
@@ -312,7 +312,9 @@ const ProductTab = ({
       >
         <div className={classes.card}>
           <div className={classes.imageContainer}>
-            <img src={img} alt="product" className={classes.img} />
+            <Link to={`/product/${id}`}>
+              <img src={img} alt="product" className={classes.img} />
+            </Link>
           </div>
           <div className={classes.bottom}>
             {isSale && (

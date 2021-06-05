@@ -42,10 +42,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     // border: "1px solid red",
     margin: "1.2rem",
+    [theme.breakpoints.down("xs")]: {
+      margin: "1rem",
+    },
   },
   brandImg: {
     width: "7vmin",
-    // opacity: 0.85,
+    [theme.breakpoints.down("xs")]: {
+      width: "10vmin",
+      minWidth: 45,
+    },
   },
 }))
 
