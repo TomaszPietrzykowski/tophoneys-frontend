@@ -1,4 +1,5 @@
 import React from "react"
+import { useHistory } from "react-router-dom"
 import { makeStyles } from "@material-ui/styles"
 import MenuIcon from "@material-ui/icons/MenuRounded"
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     display: "flex",
     justifyContent: "space-between",
-    padding: "10px 0",
+    padding: ".9rem 0 .8rem",
   },
   tab: {
     display: "flex",
@@ -34,13 +35,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "2rem",
   },
   label: {
-    fontFamily: "Open Sans",
+    ...theme.typography.mont,
     fontSize: ".7rem",
+    textTransform: "uppercase",
   },
 }))
 
 const BottomNav = ({ openDrawer, setOpenDrawer }) => {
   const classes = useStyles()
+  const history = useHistory()
 
   return (
     <div className={classes.root}>
@@ -49,19 +52,43 @@ const BottomNav = ({ openDrawer, setOpenDrawer }) => {
           <MenuIcon className={classes.icon} />
           <div className={classes.label}>Menu</div>
         </div>
-        <div className={classes.tab}>
+        <div
+          className={classes.tab}
+          onClick={() => {
+            setOpenDrawer(false)
+            history.push("/category/new")
+          }}
+        >
           <EcoIcon className={classes.icon} />
           <div className={classes.label}>New</div>
         </div>
-        <div className={classes.tab}>
+        <div
+          className={classes.tab}
+          onClick={() => {
+            setOpenDrawer(false)
+            history.push("/category/sale")
+          }}
+        >
           <HeartIcon className={classes.icon} />
           <div className={classes.label}>Sale</div>
         </div>
-        <div className={classes.tab}>
+        <div
+          className={classes.tab}
+          onClick={() => {
+            setOpenDrawer(false)
+            history.push("/cart")
+          }}
+        >
           <CartIcon className={classes.icon} />
           <div className={classes.label}>Cart</div>
         </div>
-        <div className={classes.tab}>
+        <div
+          className={classes.tab}
+          onClick={() => {
+            setOpenDrawer(false)
+            history.push("/profile")
+          }}
+        >
           <UserIcon className={classes.icon} />
           <div className={classes.label}>Profile</div>
         </div>

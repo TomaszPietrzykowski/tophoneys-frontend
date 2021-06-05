@@ -46,12 +46,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: ".9rem",
     padding: ".4rem",
     cursor: "pointer",
-    transition: "all .3s ease",
+    transition: "all .2s ease",
+    letterSpacing: 0.5,
     "&:hover": {
       color: theme.palette.common.brown2,
     },
     [theme.breakpoints.down("md")]: {
-      fontSize: ".8rem",
+      fontSize: ".85rem",
     },
   },
   social: {
@@ -68,13 +69,24 @@ const useStyles = makeStyles((theme) => ({
     },
     "&:before": {
       content: '""',
-      width: "30%",
+      width: "50%",
       height: 1,
-      backgroundColor: "white",
+      background: `linear-gradient(90deg, transparent, white, transparent)`,
       position: "absolute",
       top: 0,
       [theme.breakpoints.down("md")]: {
-        width: "50%",
+        width: "70%",
+      },
+    },
+    "&:after": {
+      content: '""',
+      width: "50%",
+      height: 1,
+      background: `linear-gradient(90deg, transparent, white, transparent)`,
+      position: "absolute",
+      bottom: 0,
+      [theme.breakpoints.down("md")]: {
+        width: "80%",
       },
     },
   },
@@ -82,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "3rem",
     margin: "1rem",
     cursor: "pointer",
-    transition: "all .3s ease",
+    transition: "all .2s ease",
     "&:hover": {
       color: theme.palette.common.brown2,
     },
