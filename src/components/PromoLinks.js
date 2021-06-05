@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.prosto,
     // color: theme.palette.text.secondary,
     color: "rgba(0,0,0,.7)",
+    [theme.breakpoints.down("sm")]: {
+      paddingBottom: 0,
+    },
   },
   desktopLinks: {
     display: "flex",
@@ -48,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
     width: "100%",
-    padding: "10px 0px",
+    padding: "10px 0 0 0",
     borderBottom: "1px solid #eee",
     minHeight: "2rem",
   },

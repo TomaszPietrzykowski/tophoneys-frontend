@@ -122,7 +122,7 @@ export default createMuiTheme({
   breakpoints: {
     keys: ["xxs", "xs", "sm", "md", "lg", "xl"],
     values: {
-      xxs: 0,
+      xxs: 345,
       xs: 360,
       sm: 600,
       md: 860,

@@ -7,6 +7,12 @@ const useStyles = makeStyles((theme) => ({
     ...theme.utils.container,
     padding: "4rem 10rem",
     minHeight: 0,
+    [theme.breakpoints.down("md")]: {
+      padding: "3rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "1rem",
+    },
   },
   banner: {
     width: "100%",

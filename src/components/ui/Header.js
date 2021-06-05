@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       padding: ".8rem",
     },
+    [theme.breakpoints.down("sm")]: {
+      padding: ".5rem",
+    },
   },
   navbar: {
     ...theme.flex.col,
@@ -74,12 +77,21 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "flex-end",
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: "1rem",
+    },
   },
   iconButton: {
     "&:hover": {
       backgroundColor: "transparent",
     },
     position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      padding: ".35rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: ".3rem",
+    },
   },
   itemsBadge: {
     ...theme.flex.col,
@@ -91,20 +103,38 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     color: "white",
     fontSize: ".6rem",
+    [theme.breakpoints.down("sm")]: {
+      top: 0,
+      right: 0,
+    },
   },
   username: {
-    ...theme.typography.prosto,
+    ...theme.typography.mont,
     fontSize: ".9rem",
     fontWeight: 400,
     marginRight: ".5rem",
+    paddingTop: ".3rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".8rem",
+      marginRight: ".3rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
   },
   sideIconCart: {
     color: theme.palette.text.primary,
     height: "2rem",
+    [theme.breakpoints.down("sm")]: {
+      height: "1.2rem",
+    },
   },
   sideIconUser: {
     color: theme.palette.text.primary,
     height: "2rem",
+    [theme.breakpoints.down("sm")]: {
+      height: "1.2rem",
+    },
   },
   dropdownItemIcons: {
     ...theme.typography.prosto,
@@ -126,7 +156,7 @@ const useStyles = makeStyles((theme) => ({
       height: "3rem",
     },
     [theme.breakpoints.down("xs")]: {
-      height: "2.8rem",
+      height: "2.6rem",
     },
   },
   // ------------------------------------------------ NAVIGATION
