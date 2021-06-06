@@ -18,19 +18,35 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.mont,
     fontWeight: 300,
     padding: "3rem",
-    // border: "1px solid blue",
+    [theme.breakpoints.down("sm")]: {
+      padding: "1.5rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: ".5rem",
+    },
   },
   title: {
     fontWeight: 300,
     fontSize: "2.4rem",
     color: theme.palette.text.primary,
-    margin: "2rem 0 5rem",
+    margin: "2rem 0 3rem",
+    [theme.breakpoints.down("sm")]: {
+      margin: "1.5rem .5rem 1.5rem",
+      fontSize: "2rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      margin: "1rem .5rem 1rem",
+      fontSize: "1.6rem",
+    },
   },
   tableContainer: {
     fontWeight: 500,
     fontSize: ".9rem",
     letterSpacing: 1,
     paddingRight: "2rem",
+    [theme.breakpoints.down("xs")]: {
+      paddingRight: 0,
+    },
   },
   tableHeader: {
     paddingBottom: "1rem",
@@ -63,6 +79,9 @@ const useStyles = makeStyles((theme) => ({
         background: `linear-gradient(transparent, ${theme.palette.secondary.light}, transparent)`,
       },
     },
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   table: {
     color: theme.palette.text.secondary,
@@ -88,7 +107,10 @@ const useStyles = makeStyles((theme) => ({
   imgContainer: {
     ...theme.flex.colStart,
     padding: "1rem 2rem 1rem 0",
-    paddingLeft: 0,
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: 400,
+      padding: "3rem 1rem 3rem 0",
+    },
   },
   image: {
     maxWidth: "100%",
@@ -100,6 +122,13 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteIconContainer: {
     marginLeft: "1rem",
+    [theme.breakpoints.down("sm")]: {
+      paddingBottom: "1rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: 0,
+      paddingLeft: 0,
+    },
   },
   summary: {
     ...theme.flex.colStart,
@@ -119,6 +148,15 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("md")]: {
       marginLeft: "50%",
+      marginTop: "3rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: 0,
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: 0,
+      marginBottom: "12rem",
+      paddingLeft: "1rem",
     },
   },
   subtotal: {
@@ -126,17 +164,29 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.8rem",
     color: theme.palette.text.primary,
     marginBottom: "3rem",
+    [theme.breakpoints.down("xs")]: {
+      margin: "2rem 0",
+      fontSize: "1.5rem",
+    },
   },
   price: {
     color: theme.palette.text.secondary,
     fontSize: "3rem",
     marginBottom: "3rem",
+    [theme.breakpoints.down("xs")]: {
+      margin: "0 0 2rem 0",
+      fontSize: "2.2rem",
+    },
   },
   paymentIcon: {
     fontSize: "1.5rem",
     marginRight: ".5rem",
     [theme.breakpoints.down("md")]: {
       fontSize: "1.2rem",
+    },
+  },
+  btnContainer: {
+    [theme.breakpoints.down("xs")]: {
       margin: 0,
     },
   },
@@ -159,10 +209,10 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.dark,
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
       flex: 1,
-      padding: ".3rem",
+      padding: ".6rem 1.5rem",
     },
   },
   link: {
@@ -170,8 +220,35 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline",
     },
   },
+  productName: {
+    [theme.breakpoints.down("sm")]: {
+      color: theme.palette.text.primary,
+      fontSize: "1.1rem",
+      marginBottom: "1.5rem",
+    },
+  },
+  tablePrice: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.5rem",
+      padding: ".5rem 0 1rem 1rem",
+    },
+  },
+  counter: {
+    [theme.breakpoints.down("sm")]: {
+      paddingBottom: "1rem",
+    },
+  },
   messageContainer: {
-    maxWidth: 600,
+    width: "100%",
+    maxWidth: 1400,
+    margin: "auto",
+    padding: 0,
+    ...theme.flex.col,
+    marginBottom: "12rem",
+    opacity: 0.7,
+    [theme.breakpoints.down("xs")]: {
+      padding: ".5rem",
+    },
   },
 }))
 
@@ -200,14 +277,14 @@ const CartScreen = ({ history }) => {
             <div className={classes.messageContainer}>
               <Message
                 variant="info"
-                message="Your cart is empty. Manage your orders in your profile"
+                message="Your cart is empty"
                 action={
                   <Button
                     color="inherit"
                     size="small"
-                    onClick={() => history.push("/profile")}
+                    onClick={() => history.goBack()}
                   >
-                    Profile
+                    BACK
                   </Button>
                 }
               />
@@ -234,7 +311,7 @@ const CartScreen = ({ history }) => {
               </Grid>
               {cartItems.map((item) => (
                 <Grid container key={item.product} className={classes.table}>
-                  <Grid item md={2} style={{ paddingLeft: 0 }}>
+                  <Grid item xs={12} sm={6} md={2}>
                     <Link
                       className={classes.imgContainer}
                       to={`/product/${item.product}`}
@@ -246,7 +323,13 @@ const CartScreen = ({ history }) => {
                       />
                     </Link>
                   </Grid>
-                  <Grid item md={4}>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    className={classes.productName}
+                  >
                     <Link
                       to={`/product/${item.product}`}
                       className={classes.link}
@@ -254,10 +337,10 @@ const CartScreen = ({ history }) => {
                       {item.name}
                     </Link>
                   </Grid>
-                  <Grid item md={2}>
-                    &euro; {item.price.toFixed(2)}
+                  <Grid item md={2} className={classes.tablePrice}>
+                    &euro;{item.price.toFixed(2)}
                   </Grid>
-                  <Grid item md={2}>
+                  <Grid item md={2} className={classes.counter}>
                     <Counter
                       count={item.qty}
                       max={item.countInStock}
