@@ -108,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.flex.colStart,
     padding: "1rem 2rem 1rem 0",
     [theme.breakpoints.down("sm")]: {
-      maxWidth: 400,
+      maxWidth: 280,
       padding: "3rem 1rem 3rem 0",
     },
   },
