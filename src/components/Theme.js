@@ -126,7 +126,7 @@ export default createMuiTheme({
       xs: 360,
       sm: 600,
       md: 900,
-      lg: 1050,
+      lg: 1090,
       xl: 1250,
     },
   },

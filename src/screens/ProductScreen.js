@@ -25,6 +25,14 @@ const useStyles = makeStyles((theme) => ({
     padding: "3rem",
     ...theme.utils.container,
     ...theme.typography.mont,
+    [theme.breakpoints.down("sm")]: {
+      padding: "1.5rem",
+      marginBottom: "5rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: ".5rem",
+      marginBottom: "5rem",
+    },
   },
   backBtn: {
     textTransform: "uppercase",
@@ -41,9 +49,27 @@ const useStyles = makeStyles((theme) => ({
       border: `1px solid ${theme.palette.primary.main}`,
       color: theme.palette.primary.main,
     },
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   card: {
     padding: "2rem",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "2rem",
+      padding: ".5rem",
+    },
+  },
+  card2: {
+    padding: "2rem",
+    [theme.breakpoints.down("sm")]: {
+      padding: ".5rem",
+    },
+  },
+  filler: {
+    [theme.breakpoints.down("xs")]: {
+      marginTop: "1rem",
+    },
   },
   filler1: {
     width: "100%",
@@ -64,16 +90,26 @@ const useStyles = makeStyles((theme) => ({
       background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent )`,
       opacity: 0.7,
     },
+    [theme.breakpoints.down("xs")]: {
+      padding: "0 .5rem 0 1rem",
+    },
   },
   image: {
     width: "100%",
     objectFit: "contain",
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: 420,
+    },
   },
   name: {
     margin: "1.6rem 0",
     fontWeight: 400,
     fontSize: "1.8rem",
     color: theme.palette.text.primary,
+    [theme.breakpoints.down("xs")]: {
+      margin: ".8rem 0",
+      fontSize: "1.4rem",
+    },
   },
   price: {
     margin: "1.6rem 0",
@@ -82,6 +118,10 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     display: "flex",
     alignItems: "flex-start",
+    [theme.breakpoints.down("xs")]: {
+      // margin: "1.2rem 0",
+      fontSize: "2.4rem",
+    },
   },
   previousPrice: {
     marginLeft: "1rem",
@@ -99,6 +139,10 @@ const useStyles = makeStyles((theme) => ({
       height: 1,
       backgroundColor: "red",
       transform: "rotate(-10deg)",
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.2rem",
+      paddingTop: ".3rem",
     },
   },
 
@@ -126,6 +170,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     fontSize: "1rem",
     margin: "1rem 0",
+    [theme.breakpoints.down("xs")]: {
+      fontWeight: 300,
+    },
   },
   descriptionContainer: {
     margin: "2rem 0 4rem",
@@ -141,6 +188,14 @@ const useStyles = makeStyles((theme) => ({
       height: 2,
       background: `linear-gradient(90deg, transparent, ${theme.palette.secondary.main}, transparent )`,
       opacity: 0.7,
+      [theme.breakpoints.down("sm")]: {
+        height: 1,
+      },
+    },
+    [theme.breakpoints.down("xs")]: {
+      margin: "4rem 0",
+      padding: ".5rem",
+      fontSize: ".9rem",
     },
   },
   descriptionHeader: {
@@ -159,10 +214,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     margin: "1.6rem auto 0 0",
 
-    color: theme.palette.common.white,
-    [theme.breakpoints.down("md")]: {
-      backgroundColor: theme.palette.secondary.main,
-    },
+    // color: theme.palette.common.white,
+    // [theme.breakpoints.down("md")]: {
+    //   backgroundColor: theme.palette.secondary.main,
+    // },
   },
   cartBtn: {
     border: "none",
@@ -182,10 +237,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.dark,
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+      padding: ".6rem 1.6",
     },
   },
   cartIcon: {
@@ -298,7 +352,7 @@ const ProductScreen = ({ match, history }) => {
                     s={12}
                     md={6}
                     lg={6}
-                    className={classes.card}
+                    className={classes.card2}
                   >
                     <div className={classes.filler2}>
                       {product && <Breadcrumbs category={product.category} />}
@@ -392,14 +446,14 @@ const ProductScreen = ({ match, history }) => {
                   </Grid>
                 </Grid>
                 <Grid container className={classes.descriptionContainer}>
-                  <Grid item xs={12} md={4} lg={4} className={classes.card}>
+                  <Grid item xs={12} md={4} lg={4} className={classes.card2}>
                     <div className={classes.filler}>
                       <p className={classes.descriptionHeader}>
                         {product.name}
                       </p>
                     </div>
                   </Grid>
-                  <Grid item xs={12} md={8} lg={8} className={classes.card}>
+                  <Grid item xs={12} md={8} lg={8} className={classes.card2}>
                     <div className={classes.filler}>
                       {product.description &&
                         product.description

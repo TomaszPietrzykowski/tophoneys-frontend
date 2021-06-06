@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
       height: 2,
       background: `linear-gradient(90deg, transparent, ${theme.palette.secondary.main}, transparent )`,
       opacity: 0.7,
+      [theme.breakpoints.down("sm")]: {
+        height: 1,
+      },
     },
   },
   title: {
@@ -32,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
     textTransform: "uppercase",
     padding: "2rem 3rem",
+    [theme.breakpoints.down("xs")]: {
+      padding: ".5rem",
+    },
   },
   margin: {
     // flex: 2,
