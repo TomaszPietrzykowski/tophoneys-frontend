@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     ...theme.typography.mont,
     padding: "2rem 0 0",
+    [theme.breakpoints.down("xs")]: {
+      padding: "1rem 0 0",
+    },
   },
   content: {
     margin: "0 auto 2rem 25%",
@@ -26,6 +29,19 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       width: 2,
       background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+      [theme.breakpoints.down("xs")]: {
+        width: 1,
+      },
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "1.5rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "min-content",
+      minWidth: "80%",
+      margin: "0 auto 2rem",
+      padding: "1.5rem",
+      paddingRight: ".5rem",
     },
   },
   title: {
@@ -34,14 +50,24 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "2.4rem",
     color: theme.palette.text.primary,
     marginBottom: "4rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.6rem",
+      marginBottom: "3rem",
+    },
   },
   form: {
     ...theme.flex.col,
     alignItems: "flex-start",
     minWidth: 280,
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: 380,
+    },
     "& > *": {
       marginBottom: "2rem",
       width: 380,
+      [theme.breakpoints.down("xs")]: {
+        width: 280,
+      },
     },
   },
   submitBtn: {
@@ -52,15 +78,18 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+      padding: ".6rem 1.6",
     },
   },
   textarea: {
     width: "100%",
     maxWidth: 560,
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: 380,
+      width: "100%",
+    },
   },
   errorMargin: {
     marginBottom: "2rem",
@@ -69,6 +98,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     ...theme.utils.paragraph,
     margin: "4rem 0",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+    },
   },
   orderNumber: {
     margin: "2rem 0",
@@ -90,10 +122,16 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 280,
     margin: "2rem 0",
     opacity: 0.8,
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: 200,
+    },
   },
   logoContainer: {
     // color: theme.palette.text.primary,
     margin: "6rem 0 2rem 0",
+    [theme.breakpoints.down("xs")]: {
+      margin: "2rem 0 0",
+    },
   },
 }))
 
@@ -209,12 +247,12 @@ const ContactScreen = () => {
                 </div>
                 <div className={classes.link}>
                   Email:{" "}
-                  <a href="mailto:info@tophoneys.com">info@tophoneys.com</a>
+                  <a href="mailto:office@tophoneys.com">office@tophoneys.com</a>
                 </div>
                 <div className={classes.link}>
                   Facebook: <a href="http://facebook.com">@tophoneys</a>
                 </div>
-                <div className={classes.link}>KVK 12345678</div>
+                <div className={classes.link}>KVK: 82891087</div>
                 <div className={classes.address}>
                   <p>Coyotestraat 12</p>
                   <p>1448WE PURMEREND</p>

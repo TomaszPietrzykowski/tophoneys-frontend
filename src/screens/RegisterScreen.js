@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     ...theme.typography.mont,
     padding: "2rem 0 0",
+    [theme.breakpoints.down("xs")]: {
+      padding: "1rem 0 0",
+    },
   },
   content: {
     margin: "0 auto 2rem 25%",
@@ -28,6 +31,13 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       width: 2,
       background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+      [theme.breakpoints.down("xs")]: {
+        width: 1,
+      },
+    },
+    [theme.breakpoints.down("xs")]: {
+      margin: "0 auto 2rem",
+      padding: "1.5rem",
     },
   },
   title: {
@@ -36,10 +46,17 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "2.4rem",
     color: theme.palette.text.primary,
     marginBottom: "3rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.6rem",
+      marginBottom: "3rem",
+    },
   },
   form: {
     ...theme.flex.col,
     minWidth: 280,
+    [theme.breakpoints.down("xs")]: {
+      minWidth: 270,
+    },
     "& > *": {
       marginBottom: "2rem",
       width: "100%",
@@ -56,18 +73,16 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+      padding: ".6rem 1.6",
     },
   },
   loginBtn: {
     ...theme.buttons.secondary,
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+      padding: ".6rem 1.6",
     },
   },
   errorMargin: {
