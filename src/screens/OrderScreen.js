@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "3rem",
     paddingTop: 0,
     // border: "1px solid blue",
+    [theme.breakpoints.down("xs")]: {
+      padding: ".5rem",
+    },
   },
   marginTop: {
     // margin applied to container when checkout steps component not rendered
@@ -33,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "2.4rem",
     color: theme.palette.text.primary,
     margin: "3rem 0 5rem",
+    [theme.breakpoints.down("xs")]: {
+      margin: "1rem .5rem 2rem",
+      fontSize: "1.6rem",
+    },
   },
   subtitle: {
     fontWeight: 300,
@@ -71,11 +78,36 @@ const useStyles = makeStyles((theme) => ({
   center: {
     ...theme.flex.row,
   },
+  imgContainer: {
+    ...theme.flex.colStart,
+    padding: "1rem 2rem 1rem 0",
+    paddingLeft: 0,
+    [theme.breakpoints.down("xs")]: {
+      padding: "1rem",
+    },
+  },
+  image: {
+    maxWidth: "100%",
+    objectFit: "contain",
+    [theme.breakpoints.down("sm")]: {
+      maxHeight: 270,
+    },
+  },
+  tableMobileRow: {
+    [theme.breakpoints.down("sm")]: {
+      padding: "0 0 1rem 1rem",
+      fontSize: "1rem",
+      color: theme.palette.text.primary,
+    },
+  },
   summary: {
     ...theme.flex.colStart,
     paddingLeft: "2rem",
     "& > *": {
       marginLeft: "2rem",
+      [theme.breakpoints.down("md")]: {
+        marginLeft: 0,
+      },
     },
     position: "relative",
     "&::after": {
@@ -89,6 +121,15 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("md")]: {
       marginLeft: "50%",
+      marginTop: "3rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: 0,
+    },
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: "12rem",
+      paddingLeft: "1rem",
+      width: "100%",
     },
   },
   subtotal: {
@@ -96,6 +137,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.8rem",
     color: theme.palette.text.primary,
     marginBottom: "3rem",
+    [theme.breakpoints.down("xs")]: {
+      margin: "2rem 0",
+      fontSize: "1.5rem",
+    },
   },
   price: {
     color: theme.palette.text.secondary,
@@ -106,6 +151,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     fontSize: "1.8rem",
     margin: "1rem 0",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.5rem",
+    },
   },
   label: {
     color: theme.palette.text.secondary,
@@ -121,6 +169,10 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       background: `linear-gradient(90deg, ${theme.palette.secondary.light}, transparent)`,
     },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+      marginBottom: ".5rem",
+    },
   },
   link: {
     "&:hover": {
@@ -129,26 +181,29 @@ const useStyles = makeStyles((theme) => ({
   },
   detailsSection: {
     marginBottom: "3.5rem",
+    [theme.breakpoints.down("xs")]: {
+      padding: ".5rem",
+      marginBottom: "1rem",
+    },
   },
   details: {
     color: theme.palette.text.primary,
     fontSize: "1.4rem",
     marginBottom: "1rem",
-  },
-  imgContainer: {
-    ...theme.flex.colStart,
-    padding: "1rem 2rem 1rem 0",
-    paddingLeft: 0,
-  },
-  image: {
-    maxWidth: "100%",
-    objectFit: "contain",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1rem",
+    },
   },
 
   paypal: {
     width: "100%",
     paddingTop: "3rem",
     paddingRight: "20%",
+    [theme.breakpoints.down("xs")]: {
+      padding: "2rem 1rem 0 0",
+      width: "100%",
+      maxWidth: 380,
+    },
   },
   markAsSendBtn: {
     marginTop: "2rem",
@@ -174,10 +229,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.text.disabled,
       color: "white",
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+      padding: ".6rem 1.5rem",
     },
   },
 }))
@@ -341,7 +395,7 @@ const OrderScreen = ({ match, history }) => {
                   <Grid item className={classes.label}>
                     Order number:
                   </Grid>
-                  <Grid item md={12} className={classes.details}>
+                  <Grid item xs={12} md={12} className={classes.details}>
                     {orderId}
                   </Grid>
                 </Grid>
@@ -349,7 +403,7 @@ const OrderScreen = ({ match, history }) => {
                   <Grid item className={classes.label}>
                     Customer:
                   </Grid>
-                  <Grid item md={12} className={classes.details}>
+                  <Grid item xs={12} md={12} className={classes.details}>
                     {order.user.name}
                   </Grid>
                 </Grid>
@@ -357,7 +411,7 @@ const OrderScreen = ({ match, history }) => {
                   <Grid item className={classes.label}>
                     Email:
                   </Grid>
-                  <Grid item md={12} className={classes.details}>
+                  <Grid item xs={12} md={12} className={classes.details}>
                     {order.user.email}
                   </Grid>
                 </Grid>
@@ -367,6 +421,7 @@ const OrderScreen = ({ match, history }) => {
                   </Grid>
                   <Grid
                     item
+                    xs={12}
                     md={12}
                     className={classes.details}
                     style={
@@ -388,6 +443,7 @@ const OrderScreen = ({ match, history }) => {
                   </Grid>
                   <Grid
                     item
+                    xs={12}
                     md={12}
                     className={classes.details}
                     style={
@@ -407,14 +463,14 @@ const OrderScreen = ({ match, history }) => {
                   <Grid item className={classes.label}>
                     Shipping address:
                   </Grid>
-                  <Grid item md={12} className={classes.details}>
+                  <Grid item xs={12} md={12} className={classes.details}>
                     {order.shippingAddress.address}
                   </Grid>
-                  <Grid item md={12} className={classes.details}>
+                  <Grid item xs={12} md={12} className={classes.details}>
                     {order.shippingAddress.postalCode}{" "}
                     {order.shippingAddress.city}
                   </Grid>
-                  <Grid item md={12} className={classes.details}>
+                  <Grid item xs={12} md={12} className={classes.details}>
                     {order.shippingAddress.country}
                   </Grid>
                 </Grid>
@@ -446,7 +502,12 @@ const OrderScreen = ({ match, history }) => {
                           />
                         </Link>
                       </Grid>
-                      <Grid item md={6}>
+                      <Grid
+                        item
+                        xs={12}
+                        md={6}
+                        className={classes.tableMobileRow}
+                      >
                         <Link
                           to={`/product/${item.product}`}
                           className={classes.link}
@@ -454,7 +515,12 @@ const OrderScreen = ({ match, history }) => {
                           {item.name}
                         </Link>
                       </Grid>
-                      <Grid item md={4}>
+                      <Grid
+                        item
+                        xs={12}
+                        md={4}
+                        className={classes.tableMobileRow}
+                      >
                         {item.qty} x {item.price} = &euro;{" "}
                         {(item.qty * item.price).toFixed(2)}
                       </Grid>
@@ -466,26 +532,26 @@ const OrderScreen = ({ match, history }) => {
               <Grid item md={6} lg={4} className={classes.summary}>
                 <h2 className={classes.subtotal}>Order summary:</h2>
                 <Grid container>
-                  <Grid item md={6} className={classes.price}>
+                  <Grid item xs={6} md={6} className={classes.price}>
                     Products:
                   </Grid>
-                  <Grid item md={6} className={classes.price}>
+                  <Grid item xs={6} md={6} className={classes.price}>
                     &euro; {order.itemsPrice}
                   </Grid>
                 </Grid>
                 <Grid container>
-                  <Grid item md={6} className={classes.price}>
+                  <Grid item xs={6} md={6} className={classes.price}>
                     Shipping:
                   </Grid>
-                  <Grid item md={6} className={classes.price}>
+                  <Grid item xs={6} md={6} className={classes.price}>
                     &euro; {order.shippingPrice}
                   </Grid>
                 </Grid>
                 <Grid container>
-                  <Grid item md={6} className={classes.total}>
+                  <Grid item xs={6} md={6} className={classes.total}>
                     Total:
                   </Grid>
-                  <Grid item md={6} className={classes.total}>
+                  <Grid item xs={6} md={6} className={classes.total}>
                     &euro; {order.totalPrice}
                   </Grid>
                 </Grid>
