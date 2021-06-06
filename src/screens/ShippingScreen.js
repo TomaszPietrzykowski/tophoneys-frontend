@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
     ...theme.flex.row,
     justifyContent: "flex-start",
     ...theme.typography.mont,
+    [theme.breakpoints.down("xs")]: {
+      padding: "1rem 0 0",
+    },
   },
   content: {
     margin: "0 auto 2rem 25%",
@@ -25,6 +28,13 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       width: 2,
       background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+      [theme.breakpoints.down("xs")]: {
+        width: 1,
+      },
+    },
+    [theme.breakpoints.down("sm")]: {
+      margin: "0 auto 2rem",
+      padding: "1.5rem",
     },
   },
   title: {
@@ -33,14 +43,24 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "2.4rem",
     color: theme.palette.text.primary,
     marginBottom: "4rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.6rem",
+      marginBottom: "3rem",
+    },
   },
   form: {
     ...theme.flex.col,
     alignItems: "flex-start",
     minWidth: 280,
+    [theme.breakpoints.down("xs")]: {
+      minWidth: "auto",
+    },
     "& > *": {
       marginBottom: "2rem",
       width: 380,
+      [theme.breakpoints.down("xs")]: {
+        width: 270,
+      },
     },
   },
   textarea: {
@@ -55,10 +75,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+      padding: ".6rem 1.6",
     },
   },
 }))

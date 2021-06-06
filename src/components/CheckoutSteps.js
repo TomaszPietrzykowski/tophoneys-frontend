@@ -10,6 +10,10 @@ const useStyles = makeStyles((theme) => ({
     padding: "3rem 3rem 2rem",
     ...theme.typography.mont,
     opacity: 0.8,
+    [theme.breakpoints.down("xs")]: {
+      padding: "2rem",
+      maxWidth: 380,
+    },
   },
   containerPassive: {
     ...theme.flex.row,
@@ -29,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
       width: "50%",
       height: 2,
       zIndex: -2,
+      [theme.breakpoints.down("xs")]: {
+        height: 1,
+      },
     },
     "&::after": {
       content: "''",
@@ -40,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
       width: "50%",
       height: 2,
       zIndex: -2,
+      [theme.breakpoints.down("xs")]: {
+        height: 1,
+      },
     },
   },
   container: {
@@ -60,6 +70,9 @@ const useStyles = makeStyles((theme) => ({
       width: "50%",
       height: 2,
       zIndex: -2,
+      [theme.breakpoints.down("xs")]: {
+        height: 1,
+      },
     },
     "&::after": {
       content: "''",
@@ -71,6 +84,9 @@ const useStyles = makeStyles((theme) => ({
       width: "50%",
       height: 2,
       zIndex: -2,
+      [theme.breakpoints.down("xs")]: {
+        height: 1,
+      },
     },
   },
   containerActive: {
@@ -90,6 +106,9 @@ const useStyles = makeStyles((theme) => ({
       width: "50%",
       height: 2,
       zIndex: -2,
+      [theme.breakpoints.down("xs")]: {
+        height: 1,
+      },
     },
     "&::after": {
       content: "''",
@@ -100,6 +119,9 @@ const useStyles = makeStyles((theme) => ({
       width: "50%",
       height: 2,
       zIndex: -2,
+      [theme.breakpoints.down("xs")]: {
+        height: 1,
+      },
     },
   },
   circle: {
@@ -113,6 +135,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "50%",
     position: "relative",
     fontSize: ".85rem",
+    [theme.breakpoints.down("xs")]: {
+      border: `1px solid ${theme.palette.text.disabled}`,
+      fontSize: ".7rem",
+      width: 26,
+      height: 26,
+    },
   },
   circleActive: {
     fontSize: ".85rem",
@@ -125,6 +153,12 @@ const useStyles = makeStyles((theme) => ({
     height: 30,
     borderRadius: "50%",
     position: "relative",
+    [theme.breakpoints.down("xs")]: {
+      border: `1px solid ${theme.palette.secondary.light}`,
+      fontSize: ".7rem",
+      width: 26,
+      height: 26,
+    },
   },
   label: {
     fontSize: ".85rem",
@@ -136,9 +170,15 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     transform: "translateX(-50%)",
     color: "inherit",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".75rem",
+    },
   },
   check: {
     fontSize: "1.2rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+    },
   },
 }))
 
