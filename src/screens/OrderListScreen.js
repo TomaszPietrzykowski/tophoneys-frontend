@@ -23,6 +23,10 @@ const StyledTableCell = withStyles((theme) => ({
     border: "none",
     outline: "none",
     whiteSpace: "nowrap",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".8rem",
+      padding: ".3rem .6rem",
+    },
   },
 }))(TableCell)
 
@@ -38,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     ...theme.utils.container,
     ...theme.typography.mont,
     padding: "3rem",
+    [theme.breakpoints.down("sm")]: {
+      padding: "1rem .5rem 0",
+    },
   },
   header: {
     ...theme.flex.rowStart,
@@ -48,10 +55,18 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     margin: "3rem 0 5rem",
     position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.6rem",
+      margin: "3rem .5rem",
+    },
   },
   adminBadge: {
     ...theme.utils.adminBadge,
     color: theme.palette.secondary.light,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".85rem",
+      right: "-3.3rem",
+    },
   },
   deco: {
     position: "relative",
@@ -74,6 +89,9 @@ const useStyles = makeStyles((theme) => ({
       right: 0,
       background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
     },
+    [theme.breakpoints.down("sm")]: {
+      padding: "0 .5rem",
+    },
   },
   tableContainer: {
     width: "100%",
@@ -92,10 +110,17 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       background: `linear-gradient(transparent, ${theme.palette.secondary.light}, transparent)`,
     },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".8rem",
+      padding: ".4rem 1rem",
+    },
   },
   info: {
     fontSize: ".8rem",
     textTransform: "uppercase",
+    [theme.breakpoints.down("sm")]: {
+      padding: ".3rem .6rem",
+    },
   },
   success: {
     fontSize: ".8rem",

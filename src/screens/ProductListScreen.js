@@ -26,6 +26,10 @@ const StyledTableCell = withStyles((theme) => ({
     border: "none",
     outline: "none",
     whiteSpace: "nowrap",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".8rem",
+      padding: ".3rem .6rem",
+    },
   },
 }))(TableCell)
 
@@ -43,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.mont,
     padding: "3rem",
     fontWeight: 300,
+    [theme.breakpoints.down("sm")]: {
+      padding: "1rem .5rem 0",
+    },
   },
   title: {
     fontWeight: 300,
@@ -50,15 +57,26 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     margin: "3rem 0 0",
     position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.6rem",
+      margin: "3rem .5rem",
+    },
   },
   adminBadge: {
     ...theme.utils.adminBadge,
     color: theme.palette.secondary.light,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".85rem",
+      right: "-3.3rem",
+    },
   },
   btnRoot: {
     ...theme.flex.row,
     justifyContent: "space-between",
     marginBottom: "5rem",
+    [theme.breakpoints.down("sm")]: {
+      marginBottom: 0,
+    },
   },
   btnContainer: {
     // border: "1px solid magenta",
@@ -73,19 +91,19 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".8rem",
+      padding: ".2rem",
+      minWidth: 80,
+      marginRight: ".5rem",
     },
   },
   addIcon: {
     fontSize: "1.4rem",
     marginRight: ".5rem",
-    // marginBottom: ".2rem",
-    // [theme.breakpoints.down("md")]: {
-    //   fontSize: "1rem",
-    // },
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
   deco: {
     position: "relative",
@@ -108,6 +126,9 @@ const useStyles = makeStyles((theme) => ({
       right: 0,
       background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
     },
+    [theme.breakpoints.down("sm")]: {
+      padding: "0 .5rem",
+    },
   },
   tableContainer: {
     width: "100%",
@@ -125,6 +146,10 @@ const useStyles = makeStyles((theme) => ({
       top: 0,
       left: 0,
       background: `linear-gradient(transparent, ${theme.palette.secondary.light}, transparent)`,
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".8rem",
+      padding: ".4rem 1rem",
     },
   },
   center: {
