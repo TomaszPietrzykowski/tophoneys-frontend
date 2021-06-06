@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     ...theme.typography.mont,
     padding: "2rem 0 0",
+    [theme.breakpoints.down("xs")]: {
+      padding: "1rem 0 0",
+    },
   },
   content: {
     margin: "0 auto 2rem 25%",
@@ -58,6 +61,19 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       width: 2,
       background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+      [theme.breakpoints.down("xs")]: {
+        width: 1,
+      },
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "1.5rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "min-content",
+      minWidth: "80%",
+      margin: "0 auto 2rem",
+      padding: "1.5rem",
+      paddingRight: ".5rem",
     },
   },
   header: {
@@ -69,17 +85,31 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     marginBottom: "3rem",
     position: "relative",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.6rem",
+      marginBottom: "3rem",
+    },
   },
   adminBadge: {
     ...theme.utils.adminBadge,
     color: theme.palette.secondary.light,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".85rem",
+      right: "-3.3rem",
+    },
   },
   form: {
     ...theme.flex.col,
     minWidth: 280,
+    [theme.breakpoints.down("xs")]: {
+      alignItems: "flex-start",
+    },
     "& > *": {
       marginBottom: "2rem",
       width: 280,
+      [theme.breakpoints.down("xs")]: {
+        width: 270,
+      },
     },
   },
   checkboxContainer: {
@@ -90,6 +120,10 @@ const useStyles = makeStyles((theme) => ({
   },
   checkboxLabel: {
     fontSize: "1.2rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1rem",
+      fontWeight: 300,
+    },
   },
   submitBtn: {
     ...theme.buttons.primary,
@@ -98,18 +132,16 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+      padding: ".6rem 1.6",
     },
   },
   backBtn: {
     ...theme.buttons.secondary,
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+      padding: ".6rem 1.6",
     },
   },
 }))

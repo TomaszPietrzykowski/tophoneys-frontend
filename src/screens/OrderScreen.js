@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   marginTop: {
     // margin applied to container when checkout steps component not rendered
     height: "3rem",
+    [theme.breakpoints.down("xs")]: {
+      height: ".5rem",
+    },
   },
   title: {
     fontWeight: 300,
