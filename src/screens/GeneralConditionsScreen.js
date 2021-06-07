@@ -7,6 +7,13 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.mont,
     padding: "3rem",
     fontWeight: 300,
+    [theme.breakpoints.down("md")]: {
+      padding: "1rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "1rem .5rem 0rem",
+      marginBottom: "8rem",
+    },
   },
   title: {
     fontWeight: 300,
@@ -14,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     margin: "3rem 0 5rem",
     position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.6rem",
+      margin: "2rem 1rem",
+    },
   },
   deco: {
     position: "relative",
@@ -36,17 +47,33 @@ const useStyles = makeStyles((theme) => ({
       right: 0,
       background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
     },
+    [theme.breakpoints.down("md")]: {
+      padding: "0 1rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: "0 .5rem",
+    },
   },
   content: {
     width: "100%",
   },
   section: {
     padding: "3rem 3rem 0",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2rem 2rem 0",
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: "1rem .5rem 0",
+    },
   },
   sectionHead: {
     fontSize: "1.8rem",
     fontWeight: 300,
     margin: "3rem 0",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.2rem",
+      margin: "1.5rem 0",
+    },
   },
   block: {
     color: theme.palette.text.secondary,
@@ -55,6 +82,10 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1.7,
     letterSpacing: 0.3,
     maxWidth: 900,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "0.9rem",
+      fontWeight: 300,
+    },
   },
   // emphasis: {
   //   color: theme.palette.text.primary,
@@ -95,7 +126,7 @@ const GenralConditionsScreen = () => {
                 2. Seller - a natural person running a business under the name
                 GD TOP, entered in the Central Register and Information on
                 Economic Activity kept by the minister competent for economy,
-                BTW (VAT) - BTW VAT , KvK number - KVK:....
+                BTW (VAT) - BTW VAT , KvK number 82891087
               </p>
               <p className={classes.block}>
                 3. Customer - each entity making purchases through the Store.
@@ -166,16 +197,16 @@ const GenralConditionsScreen = () => {
                 § 2. Contact with the Store
               </h3>
               <p className={classes.block}>
-                1. Seller's address: Coyotestraat 12, 1448 WE Purmerend
+                1. Seller's address: Coyotestraat 12, 1448WE Purmerend
               </p>
               <p className={classes.block}>
                 2. Seller's e-mail address: office@tophoneys.com
               </p>
               <p className={classes.block}>
-                3. Seller's telephone number: 0628753850
+                3. Seller's telephone number: 06 28753850
               </p>
               <p className={classes.block}>
-                4. Seller's bank account number: GD TOP NL90 ABNA 0400 7841 22
+                4. Seller's bank account number: GD TOP NL00 3744 8248 83
               </p>
               <p className={classes.block}>
                 5. The Customer may communicate with the Seller using the

@@ -20,6 +20,13 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.mont,
     padding: "3rem",
     fontWeight: 300,
+    [theme.breakpoints.down("md")]: {
+      padding: "1rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "1rem .5rem 0rem",
+      marginBottom: "8rem",
+    },
   },
   title: {
     fontWeight: 300,
@@ -27,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     margin: "3rem 0 5rem",
     position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.6rem",
+      margin: "2rem 1rem",
+    },
   },
   deco: {
     position: "relative",
@@ -49,17 +60,33 @@ const useStyles = makeStyles((theme) => ({
       right: 0,
       background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
     },
+    [theme.breakpoints.down("md")]: {
+      padding: "0 1rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: "0 .5rem",
+    },
   },
   content: {
     width: "100%",
   },
   section: {
     padding: "3rem 3rem 0",
+    [theme.breakpoints.down("sm")]: {
+      padding: "2rem 2rem 0",
+    },
+    [theme.breakpoints.down("xs")]: {
+      padding: "1rem .5rem 0",
+    },
   },
   sectionHead: {
     fontSize: "1.8rem",
     fontWeight: 300,
     margin: "3rem 0",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.2rem",
+      margin: "1.5rem 0",
+    },
   },
   block: {
     color: theme.palette.text.secondary,
@@ -68,10 +95,15 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1.7,
     letterSpacing: 0.3,
     maxWidth: 900,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "0.9rem",
+      fontWeight: 300,
+    },
   },
   logosContainer: {
     ...theme.flex.rowStart,
     margin: "5rem 0 0 0",
+    flexWrap: "wrap",
   },
   logo: {
     margin: "0 2rem 0 0",
@@ -80,6 +112,10 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
     height: 48,
     objectFit: "contain",
+    [theme.breakpoints.down("xs")]: {
+      height: 32,
+      margin: ".5rem 0",
+    },
   },
   bank: {
     fontSize: 48,
@@ -170,12 +206,14 @@ const InfoPaymentScreen = () => {
               </p>
               <p className={classes.block}>Our account number:</p>
               <p className={classes.block}>GD TOP</p>
-              <p className={classes.block}>NL90 ABNA 0400 7841 22</p>
+              <p className={classes.block}>NL00 3744 8248 83</p>
             </section>
             <section className={classes.section}>
               <h3 className={classes.sectionHead}>Shipping</h3>
-              <p className={classes.block}>Standard Shipping – 4,95 €</p>
-              <p className={classes.block}>FREE shipping above 39,00 €</p>
+              <p className={classes.block}>
+                Shipping in the Netherlands: €4,95
+              </p>
+              <p className={classes.block}>FREE shipping above €39,00</p>
               <div
                 className={classes.logosContainer}
                 style={{ margin: "2rem 0rem" }}
