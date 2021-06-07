@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { ThemeProvider } from "@material-ui/styles"
 import theme from "./components/Theme"
+import CookieConsent from "react-cookie-consent"
 import useMediaQuery from "@material-ui/core/useMediaQuery"
 import Header from "./components/ui/Header"
 import HomeScreen from "./screens/HomeScreen"
@@ -127,6 +128,35 @@ function App() {
                 />
               </Fragment>
             )}
+            <CookieConsent
+              location="bottom"
+              buttonText="AGREED"
+              cookieName="TopHoneysCookieGranted"
+              style={{
+                background: "#2B373B",
+                padding: "1rem 0",
+                fontFamily: "Montserrat, sans-serif",
+                fontWeight: 300,
+                letterSpacing: 1.5,
+                lineHeight: 1.5,
+              }}
+              buttonStyle={{
+                color: "#2B373B",
+                background: `rgba(215, 170, 14, 1)`,
+                borderRadius: 4,
+                fontSize: ".9rem",
+                fontFamily: "Montserrat, sans-serif",
+                fontWeight: 600,
+                letterSpacing: 1,
+                padding: ".5rem 1.6rem",
+                marginRight: "2rem",
+              }}
+              expires={150}
+              overlay
+            >
+              TOP HONEYS website uses cookies to enhance your e-commerce
+              experience.
+            </CookieConsent>
           </Fragment>
         </ScrollToTop>
       </Router>

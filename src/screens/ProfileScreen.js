@@ -237,6 +237,16 @@ const useStyles = makeStyles((theme) => ({
   detailsIcon: {
     color: theme.palette.text.disabled,
   },
+  noOrders: {
+    padding: "3rem 1rem",
+    fontSize: "1.2rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+    },
+  },
 }))
 
 const ProfileScreen = ({ location, history }) => {
@@ -408,6 +418,11 @@ const ProfileScreen = ({ location, history }) => {
                   ))}
                 </TableBody>
               </Table>
+              {orders.length === 0 && (
+                <div className={classes.noOrders}>
+                  You haven't placed any orders yet.
+                </div>
+              )}
             </div>
           )}
         </Grid>
