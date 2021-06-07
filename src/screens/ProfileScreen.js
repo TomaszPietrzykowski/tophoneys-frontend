@@ -25,6 +25,10 @@ const StyledTableCell = withStyles((theme) => ({
     border: "none",
     outline: "none",
     whiteSpace: "nowrap",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".8rem",
+      padding: ".3rem .6rem",
+    },
   },
 }))(TableCell)
 
@@ -39,6 +43,7 @@ const StyledTableRow = withStyles((theme) => ({
 const CssTextField = withStyles((theme) => ({
   root: {
     ...theme.typography.mont,
+    opacity: 0.8,
     "& label.Mui-focused": {
       color: theme.palette.secondary.light,
     },
@@ -63,26 +68,53 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.mont,
     padding: "3rem",
     fontWeight: 300,
+    [theme.breakpoints.down("md")]: {
+      padding: "1rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "1rem .5rem 0rem",
+      marginBottom: "8rem",
+    },
   },
   title: {
     fontWeight: 300,
     fontSize: "2.4rem",
     color: theme.palette.text.primary,
     margin: "3rem 0 5rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.6rem",
+      margin: "2rem .5rem",
+    },
+  },
+  userData: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.2rem",
+      padding: "0.5rem",
+    },
   },
   subtitle: {
     fontWeight: 300,
     fontSize: "1.8rem",
     color: theme.palette.text.primary,
     marginBottom: "3rem",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.2rem",
+      margin: "1.5rem 0",
+    },
   },
   form: {
-    // border: "1px solid green",
     ...theme.flex.col,
     alignItems: "flex-start",
+
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: 380,
+    },
     "& > *": {
       marginBottom: "2rem",
       width: 300,
+      [theme.breakpoints.down("xs")]: {
+        width: 270,
+      },
     },
   },
   submitBtn: {
@@ -97,28 +129,51 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+      padding: ".6rem 1.6rem .6rem .8rem",
     },
   },
   editIcon: {
     fontSize: "1.2rem",
     marginRight: ".5rem",
     marginBottom: ".2rem",
-    // [theme.breakpoints.down("md")]: {
-    //   fontSize: "1rem",
-    // },
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1rem",
+    },
+  },
+  separator: {
+    width: "100%",
+    height: "1rem",
+    position: "relative",
+    "&::before": {
+      content: "''",
+      height: 1,
+      width: "100%",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      background: `linear-gradient(90deg, transparent, ${theme.palette.text.secondary}, transparent)`,
+      opacity: 0.3,
+    },
+    [theme.breakpoints.up("lg")]: {
+      display: "none",
+    },
+    [theme.breakpoints.up("md")]: {
+      marginTop: "2rem",
+    },
   },
   myOrders: {
     ...theme.flex.colStart,
     paddingLeft: "2rem",
     "& > *": {
       marginLeft: "2rem",
+      [theme.breakpoints.down("md")]: {
+        marginLeft: 0,
+      },
     },
     position: "relative",
-    "&::after": {
+    "&::before": {
       content: "''",
       width: 1,
       height: "100%",
@@ -127,10 +182,28 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
     },
+    "&::after": {
+      content: "''",
+      width: 1,
+      height: "100%",
+      position: "absolute",
+      top: 0,
+      right: 0,
+      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+      [theme.breakpoints.up("lg")]: {
+        display: "none",
+      },
+    },
+    [theme.breakpoints.down("md")]: {
+      padding: "0 .5rem",
+    },
   },
   tableContainer: {
     width: "100%",
     overflowX: "scroll",
+    [theme.breakpoints.down("md")]: {
+      margin: 0,
+    },
   },
   head: {
     padding: ".5rem 1rem",
@@ -144,6 +217,10 @@ const useStyles = makeStyles((theme) => ({
       top: 0,
       left: 0,
       background: `linear-gradient(transparent, ${theme.palette.secondary.light}, transparent)`,
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: ".8rem",
+      padding: ".4rem 1rem",
     },
   },
   info: {
@@ -211,7 +288,7 @@ const ProfileScreen = ({ location, history }) => {
     <div className={classes.container}>
       <h1 className={classes.title}>User profile</h1>
       <Grid container>
-        <Grid item md={12} lg={4}>
+        <Grid item md={12} lg={4} className={classes.userData}>
           <h2 className={classes.subtitle}>My data</h2>
           <form onSubmit={(e) => submitHandler(e)} className={classes.form}>
             {loading && <Loader />}
@@ -255,6 +332,7 @@ const ProfileScreen = ({ location, history }) => {
           </form>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={8} className={classes.myOrders}>
+          <div className={classes.separator} />
           <h2 className={classes.subtitle}>My orders</h2>
           {loadingOrders ? (
             <Loader />
