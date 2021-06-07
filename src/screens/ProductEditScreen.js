@@ -80,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     ...theme.typography.mont,
     padding: "2rem 0 0",
+    [theme.breakpoints.down("xs")]: {
+      padding: "1rem 0 0",
+    },
   },
   content: {
     margin: "0 auto 2rem 25%",
@@ -93,6 +96,18 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
       width: 2,
       background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+      [theme.breakpoints.down("xs")]: {
+        width: 1,
+      },
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "1.5rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "min-content",
+      minWidth: "80%",
+      margin: "0 auto 2rem",
+      padding: "1.5rem .5rem 1.5rem 1rem",
     },
   },
   header: {
@@ -104,23 +119,40 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     marginBottom: "5rem",
     position: "relative",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.6rem",
+      marginBottom: "3rem",
+    },
   },
   adminBadge: {
     ...theme.utils.adminBadge,
     color: theme.palette.secondary.light,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".85rem",
+      right: "-3.3rem",
+    },
   },
   form: {
     ...theme.flex.col,
     alignItems: "flex-start",
     minWidth: 280,
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: 380,
+    },
     "& > *": {
       marginBottom: "2rem",
       width: 280,
+      [theme.breakpoints.down("xs")]: {
+        width: 270,
+      },
     },
   },
   textarea: {
     width: 540,
-    // maxWidth: 400,
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: 380,
+      width: "100%",
+    },
   },
   imagePreview: {
     width: 280,
@@ -130,10 +162,16 @@ const useStyles = makeStyles((theme) => ({
     ...theme.flex.row,
     justifyContent: "flex-start",
     width: "100%",
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: 0,
+    },
   },
   checkboxLabel: {
     fontSize: "1.2rem",
     fontWeight: 300,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1rem",
+    },
   },
   chipContainer: {
     ...theme.flex.row,
@@ -160,10 +198,10 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("xs")]: {
       fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+      padding: ".4rem 1.6rem",
+      minWidth: 120,
     },
   },
   submitBtn: {
@@ -174,10 +212,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: ".85rem",
-      flex: 1,
-      padding: ".3rem",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".9rem",
+      padding: ".6rem 1.6rem",
     },
   },
   inputLabel: {
@@ -211,25 +248,39 @@ const useStyles = makeStyles((theme) => ({
     ...theme.flex.rowStart,
     fontSize: "1rem",
     padding: ".7rem",
+    marginRight: "2rem",
     "& > *": {
       marginRight: "3rem",
+      [theme.breakpoints.down("xs")]: {
+        margin: "0 0 .5rem",
+      },
     },
     "&:last-of-type": {
       marginBottom: "2rem",
+    },
+    [theme.breakpoints.down("xs")]: {
+      ...theme.flex.colStart,
+      margin: "0 0 1rem",
     },
   },
   dropdownForm: {
     ...theme.flex.rowStart,
     alignItems: "center",
-    // fontSize: "1rem",
-    // padding: ".7rem",
     "& > *": {
       marginRight: "2rem",
+      [theme.breakpoints.down("xs")]: {
+        ...theme.flex.colStart,
+        margin: "1rem 0",
+      },
+    },
+    [theme.breakpoints.down("xs")]: {
+      ...theme.flex.colStart,
+      margin: 0,
     },
   },
   addBtn: {
     ...theme.buttons.primary,
-    minWidth: 100,
+    minWidth: 120,
     margin: 0,
     padding: ".5rem 2rem .4rem 1rem",
     backgroundColor: theme.palette.secondary.light,
@@ -237,19 +288,15 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
     },
-    // [theme.breakpoints.down("md")]: {
-    //   fontSize: ".85rem",
-    //   flex: 1,
-    //   padding: ".3rem",
-    // },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".85rem",
+      padding: ".4rem 1.5",
+      margin: "1.5rem 0 0",
+    },
   },
   addIcon: {
     fontSize: "1.4rem",
     marginRight: ".5rem",
-    // marginBottom: ".2rem",
-    // [theme.breakpoints.down("md")]: {
-    //   fontSize: "1rem",
-    // },
   },
   dropdownInfo: {
     color: theme.palette.text.secondary,
