@@ -245,8 +245,8 @@ const InfoPaymentScreen = () => {
               <p className={classes.block}>
                 Questions can be submitted by e-mail to the following e-mail
                 address:{" "}
-                <a href="mailto:office@tophoneys.com" className={classes.link}>
-                  office@tophoneys.com
+                <a href="mailto:info@tophoneys.com" className={classes.link}>
+                  info@tophoneys.com
                 </a>
               </p>
             </section>

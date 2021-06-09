@@ -200,7 +200,7 @@ const GenralConditionsScreen = () => {
                 1. Seller's address: Coyotestraat 12, 1448WE Purmerend
               </p>
               <p className={classes.block}>
-                2. Seller's e-mail address: office@tophoneys.com
+                2. Seller's e-mail address: info@tophoneys.com
               </p>
               <p className={classes.block}>
                 3. Seller's telephone number: 06 28753850

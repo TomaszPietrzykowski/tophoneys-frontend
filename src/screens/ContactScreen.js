@@ -1,10 +1,50 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
 import { Button, TextField } from "@material-ui/core"
 import { makeStyles, withStyles } from "@material-ui/styles"
+import Checkbox from "@material-ui/core/Checkbox"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
 import logo from "../assets/logotranspbg.png"
+import axios from "axios"
+
+// snackbars:
+import Snackbar from "@material-ui/core/Snackbar"
+import MuiAlert from "@material-ui/lab/Alert"
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />
+}
+
+const CssTextField = withStyles((theme) => ({
+  root: {
+    "& label.Mui-focused": {
+      color: theme.palette.secondary.light,
+    },
+    "& .MuiInput-focused fieldset": {
+      color: theme.palette.secondary.light,
+    },
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: theme.palette.secondary.light,
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: theme.palette.secondary.light,
+      },
+    },
+  },
+}))(TextField)
+
+const CustomCheckbox = withStyles((theme) => ({
+  root: {
+    color: theme.palette.text.secondary,
+    "&$checked": {
+      color: theme.palette.common.success,
+      opacity: 0.7,
+    },
+  },
+  checked: {},
+}))(Checkbox)
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -94,6 +134,44 @@ const useStyles = makeStyles((theme) => ({
   errorMargin: {
     marginBottom: "2rem",
   },
+  checkboxContainer: {
+    ...theme.flex.row,
+    justifyContent: "flex-start",
+    width: "100%",
+    paddingRight: "1rem",
+    border: "1px solid transparent",
+    borderRadius: 4,
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: 0,
+    },
+  },
+  checkboxContainerError: {
+    ...theme.flex.row,
+    justifyContent: "flex-start",
+    width: "100%",
+    paddingRight: "1rem",
+    border: `1px solid ${theme.palette.common.error}`,
+    borderRadius: 4,
+    [theme.breakpoints.down("xs")]: {
+      marginBottom: 0,
+    },
+  },
+  checkboxLabel: {
+    fontSize: ".9rem",
+    fontWeight: 300,
+    color: theme.palette.text.secondary,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".8rem",
+    },
+  },
+  checkboxLabelError: {
+    fontSize: ".9rem",
+    fontWeight: 300,
+    color: theme.palette.common.error,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: ".8rem",
+    },
+  },
   info: {
     color: theme.palette.text.primary,
     ...theme.utils.paragraph,
@@ -135,51 +213,83 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const CssTextField = withStyles((theme) => ({
-  root: {
-    "& label.Mui-focused": {
-      color: theme.palette.secondary.light,
-    },
-    "& .MuiInput-focused fieldset": {
-      color: theme.palette.secondary.light,
-    },
-    "& .MuiOutlinedInput-root": {
-      "&:hover fieldset": {
-        borderColor: theme.palette.secondary.light,
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: theme.palette.secondary.light,
-      },
-    },
-  },
-}))(TextField)
-
 const ContactScreen = () => {
   const classes = useStyles()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
-  const [content, setContent] = useState("")
+  const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [legalConsent, setLegalConsent] = useState(false)
+  const [consentError, setConsentError] = useState(false)
+  // successful alert state
+  const [open, setOpen] = useState(false)
 
-  const sendEmail = async (name, email, content) => {
+  // STATE
+  const { userInfo } = useSelector((state) => state.userLogin)
+
+  useEffect(() => {
+    if (userInfo && userInfo.name) {
+      setName(userInfo.name)
+    }
+    if (userInfo && userInfo.email) {
+      setEmail(userInfo.email)
+    }
+  }, [userInfo])
+
+  const handleAlertClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return
+    }
+    setOpen(false)
+  }
+
+  const sendEmail = async (name, email, message) => {
     try {
       setLoading(true)
-      console.log("send email", name, email, content)
+      const { data } = await axios.post(
+        "/api/email",
+        { name, email, message },
+        {
+          headers: { "Content-type": "application/json" },
+        }
+      )
+      if (data.status === "success") {
+        // display popup
+        setOpen(true)
+        // clean form
+        setName("")
+        setEmail("")
+        setMessage("")
+        setLegalConsent(false)
+      }
       setLoading(false)
     } catch (err) {
-      setError(err)
+      setError(`${err}`)
       setLoading(false)
     }
   }
 
   const submitHandler = (e) => {
     e.preventDefault()
-    sendEmail(name, email, content)
+    if (legalConsent) {
+      sendEmail(name, email, message)
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      })
+    } else {
+      setConsentError(true)
+    }
   }
 
   return (
     <>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleAlertClose}>
+        <Alert onClose={handleAlertClose} severity="success">
+          Message sent, thank you!
+        </Alert>
+      </Snackbar>
       <div className={classes.container}>
         <main className={classes.content}>
           <h1 className={classes.title}>Contact Us</h1>
@@ -216,7 +326,7 @@ const ContactScreen = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <CssTextField
-                  id="content"
+                  id="message"
                   type="text"
                   label="Message"
                   className={classes.textarea}
@@ -224,9 +334,39 @@ const ContactScreen = () => {
                   multiline
                   rows={16}
                   variant="outlined"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                 />
+
+                {/* ----------------------------------------------------------------------------------- */}
+
+                <div
+                  className={
+                    consentError
+                      ? classes.checkboxContainerError
+                      : classes.checkboxContainer
+                  }
+                >
+                  <CustomCheckbox
+                    checked={legalConsent}
+                    onChange={(e) => {
+                      setLegalConsent(e.target.checked)
+                      setConsentError(false)
+                    }}
+                  />
+                  <span
+                    className={
+                      consentError
+                        ? classes.checkboxLabelError
+                        : classes.checkboxLabel
+                    }
+                  >
+                    I grant all permissions legaly required in order to send
+                    this email
+                  </span>
+                </div>
+                {/* ----------------------------------------------------------------------------------- */}
+
                 <Button type="submit" className={classes.submitBtn}>
                   Send
                 </Button>
@@ -247,7 +387,7 @@ const ContactScreen = () => {
                 </div>
                 <div className={classes.link}>
                   Email:{" "}
-                  <a href="mailto:office@tophoneys.com">office@tophoneys.com</a>
+                  <a href="mailto:info@tophoneys.com">info@tophoneys.com</a>
                 </div>
                 <div className={classes.link}>
                   Facebook: <a href="http://facebook.com">@tophoneys</a>
