@@ -1,7 +1,9 @@
 import React, { useState } from "react"
-import { makeStyles, withStyles } from "@material-ui/styles"
 import { useDispatch, useSelector } from "react-redux"
+// mui
+import { makeStyles, withStyles } from "@material-ui/styles"
 import { Button, TextField } from "@material-ui/core"
+// CUSTOM
 import { savePaymentMethod, saveShippingAddress } from "../actions/cartActions"
 import CheckoutSteps from "../components/CheckoutSteps"
 import { ORDER_ANONYMOUS_DATA } from "../constants/orderConstants"

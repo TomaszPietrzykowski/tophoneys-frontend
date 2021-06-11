@@ -1,5 +1,7 @@
 import React from "react"
+// mui
 import { makeStyles } from "@material-ui/core/styles"
+// custom
 import img1 from "../assets/beekeeper.jpeg"
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   flexContainer: {
-    // border: "1px solid green",
     ...theme.typography.mont,
     ...theme.flex.row,
     alignItems: "flex-start",
@@ -36,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   flexItem: {
-    // border: "1px solid magenta",
     width: "50%",
     [theme.breakpoints.down("sm")]: {
       width: "100%",

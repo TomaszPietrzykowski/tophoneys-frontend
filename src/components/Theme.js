@@ -13,7 +13,6 @@ export default createMuiTheme({
       main: `rgba(215, 170, 14, 1)`,
     },
     secondary: {
-      // main: `rgba(215, 170, 14, 1)`,
       main: `rgb(253,153,0)`,
     },
     shadows: {

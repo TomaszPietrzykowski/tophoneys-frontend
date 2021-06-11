@@ -1,5 +1,7 @@
 import React from "react"
+// mui
 import { makeStyles } from "@material-ui/core/styles"
+// custom
 import b11 from "../assets/postnl-logo.jpeg"
 import b12 from "../assets/dhl-logo.svg"
 

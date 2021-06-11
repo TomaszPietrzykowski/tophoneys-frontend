@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
+// mui
 import { IconButton, Tooltip } from "@material-ui/core"
 import { withStyles, makeStyles } from "@material-ui/styles"
 import Table from "@material-ui/core/Table"
@@ -8,13 +9,14 @@ import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
-import Message from "../components/Message"
-import Loader from "../components/ui/Loader"
 import CancelIcon from "@material-ui/icons/CloseRounded"
 import CheckIcon from "@material-ui/icons/Check"
 import DeleteIcon from "@material-ui/icons/Delete"
 import EditIcon from "@material-ui/icons/Edit"
+// custom
 import { listUsers, deleteUser } from "../actions/userActions"
+import Message from "../components/Message"
+import Loader from "../components/ui/Loader"
 
 const StyledTableCell = withStyles((theme) => ({
   root: {

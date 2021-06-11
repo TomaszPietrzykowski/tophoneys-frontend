@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
+// mui
 import { Tooltip } from "@material-ui/core"
 import { withStyles, makeStyles } from "@material-ui/styles"
 import Table from "@material-ui/core/Table"
@@ -12,6 +13,7 @@ import TableRow from "@material-ui/core/TableRow"
 import Message from "../components/Message"
 import Loader from "../components/ui/Loader"
 import DetailsIcon from "@material-ui/icons/MenuOpenRounded"
+// custom
 import { listOrders } from "../actions/orderActions"
 import Paginate from "../components/Paginate"
 

@@ -1,5 +1,7 @@
 import React from "react"
+// mui
 import { makeStyles } from "@material-ui/core/styles"
+// custom
 import img1 from "../assets/honeycomb.jpeg"
 import img2 from "../assets/honey-saucer.jpeg"
 import img3 from "../assets/honey-jars.jpeg"

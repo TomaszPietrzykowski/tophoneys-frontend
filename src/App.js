@@ -1,10 +1,20 @@
 import React, { Fragment, useState } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+// mui
 import { ThemeProvider } from "@material-ui/styles"
-import theme from "./components/Theme"
-import CookieConsent from "react-cookie-consent"
 import useMediaQuery from "@material-ui/core/useMediaQuery"
+// legal
+import CookieConsent from "react-cookie-consent"
+//custom
+import theme from "./components/Theme"
 import Header from "./components/ui/Header"
+import Footer from "./components/ui/Footer"
+import BottomNav from "./components/ui/BottomNav"
+import BottomNavMargin from "./components/ui/BottomNavMargin"
+import ScrollToTop from "./components/ui/ScrollToTop"
+import Brands from "./components/Brands"
+import NavbarMargin from "./components/ui/NavbarMargin"
+// screens
 import HomeScreen from "./screens/HomeScreen"
 import CategoryScreen from "./screens/CategoryScreen"
 import ProductScreen from "./screens/ProductScreen"
@@ -13,7 +23,6 @@ import LoginScreen from "./screens/LoginScreen"
 import RegisterScreen from "./screens/RegisterScreen"
 import ProfileScreen from "./screens/ProfileScreen"
 import ShippingScreen from "./screens/ShippingScreen"
-// import PaymentScreen from "./screens/PaymentScreen"
 import PlaceOrderScreen from "./screens/PlaceOrderScreen"
 import OrderScreen from "./screens/OrderScreen"
 import UserListScreen from "./screens/UserListScreen"
@@ -28,12 +37,6 @@ import GeneralConditionsScreen from "./screens/GeneralConditionsScreen"
 import OrderListScreen from "./screens/OrderListScreen"
 import SearchScreen from "./screens/SearchScreen"
 import InfoPaymentScreen from "./screens/InfoPaymentScreen"
-import Footer from "./components/ui/Footer"
-import BottomNav from "./components/ui/BottomNav"
-import BottomNavMargin from "./components/ui/BottomNavMargin"
-import ScrollToTop from "./components/ui/ScrollToTop"
-import Brands from "./components/Brands"
-import NavbarMargin from "./components/ui/NavbarMargin"
 import PrivacyPolicyScreen from "./screens/PrivacyPolicyScreen"
 import InfoShippingScreen from "./screens/InfoShippingScreen"
 
@@ -76,7 +79,6 @@ function App() {
               <Route path="/register" component={RegisterScreen} exact />
               <Route path="/profile" component={ProfileScreen} exact />
               <Route path="/shipping" component={ShippingScreen} exact />
-              {/* <Route path="/paymentmethod" component={PaymentScreen} exact /> */}
               <Route path="/placeorder" component={PlaceOrderScreen} exact />
               <Route path="/order/:id" component={OrderScreen} exact />
               <Route path="/search/:keyword" component={SearchScreen} exact />

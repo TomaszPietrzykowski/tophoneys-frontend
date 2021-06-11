@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
+// mui
 import { Button, TextField } from "@material-ui/core"
 import { makeStyles, withStyles } from "@material-ui/styles"
+// custom
 import Message from "../components/Message"
 import Loader from "../components/ui/Loader"
 import { register } from "../actions/userActions"

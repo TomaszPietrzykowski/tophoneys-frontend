@@ -9,7 +9,6 @@ import ProductTab from "./ProductTab"
 
 const useStyles = makeStyles((theme) => ({
   flex: {
-    // border: "1px solid magenta",
     margin: "7rem auto",
     ...theme.flex.row,
     justifyContent: "space-around",
@@ -18,9 +17,6 @@ const useStyles = makeStyles((theme) => ({
     minHeight: "100%",
     flexWrap: "wrap",
     overflow: "hidden",
-    // [theme.breakpoints.down("md")]: {
-    //   margin: "4rem 0px 20px 0px",
-    // },
     [theme.breakpoints.down("sm")]: {
       margin: "4rem 0",
       width: "100%",
@@ -32,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
       margin: "0 1rem",
       [theme.breakpoints.down("sm")]: {
         margin: "0 .5rem",
-        // paddingLeft: ".5rem",
       },
     },
   },

@@ -1,6 +1,7 @@
 import React from "react"
+// mui
 import { makeStyles } from "@material-ui/core/styles"
-
+// custom
 import Search from "../components/ui/Search"
 import Showcase from "../components/Showcase"
 import Teasers from "../components/Teasers"
@@ -12,12 +13,6 @@ import SecondaryBanner from "../components/SecondaryBanner"
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
-    // [theme.breakpoints.down("sm")]: {
-    //   marginTop: 165,
-    // },
-    // [theme.breakpoints.down("sm")]: {
-    //   marginTop: 90,
-    // },
   },
 }))
 

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
-import axios from "axios"
 import { Link } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import axios from "axios"
+// mui
 import { makeStyles, useTheme } from "@material-ui/styles"
 import { Grid, Button } from "@material-ui/core"
-import { useSelector, useDispatch } from "react-redux"
+// custom
 import Loader from "../components/ui/Loader"
 import { getOrderDetails, deliverOrder } from "../actions/orderActions"
 import {
@@ -22,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     padding: "3rem",
     paddingTop: 0,
-    // border: "1px solid blue",
     [theme.breakpoints.down("xs")]: {
       padding: ".5rem",
     },

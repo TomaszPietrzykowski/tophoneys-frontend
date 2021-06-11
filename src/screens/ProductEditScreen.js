@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import axios from "axios"
 import AddIcon from "@material-ui/icons/AddRounded"
 import { useDispatch, useSelector } from "react-redux"
+// mui
+import { withStyles, makeStyles } from "@material-ui/styles"
 import {
   Button,
   TextField,
@@ -12,13 +14,13 @@ import {
   IconButton,
 } from "@material-ui/core"
 import Chip from "@material-ui/core/Chip"
-import { withStyles, makeStyles } from "@material-ui/styles"
 import Checkbox from "@material-ui/core/Checkbox"
+import DeleteIcon from "@material-ui/icons/Delete"
+// custom
 import Message from "../components/Message"
 import Loader from "../components/ui/Loader"
 import { listProductDetails, updateProduct } from "../actions/productActions"
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants"
-import DeleteIcon from "@material-ui/icons/Delete"
 import categories from "../config/categories"
 
 const CustomCheckbox = withStyles((theme) => ({

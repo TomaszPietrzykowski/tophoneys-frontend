@@ -1,9 +1,7 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import Message from "../components/Message"
-import Counter from "../components/Counter"
-import { removeFromCart, updateQuantity } from "../actions/cartActions"
+// mui
 import Grid from "@material-ui/core/Grid"
 import Button from "@material-ui/core/Button"
 import { IconButton } from "@material-ui/core"
@@ -11,6 +9,10 @@ import DeleteIcon from "@material-ui/icons/Delete"
 import Tooltip from "@material-ui/core/Tooltip"
 import { makeStyles } from "@material-ui/styles"
 import PaymentIcon from "@material-ui/icons/Payment"
+// custom
+import Message from "../components/Message"
+import Counter from "../components/Counter"
+import { removeFromCart, updateQuantity } from "../actions/cartActions"
 
 const useStyles = makeStyles((theme) => ({
   container: {

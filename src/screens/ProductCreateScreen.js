@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
+// mui
+import { withStyles, makeStyles } from "@material-ui/styles"
 import {
   Button,
   TextField,
@@ -11,13 +13,13 @@ import {
   Tooltip,
 } from "@material-ui/core"
 import Chip from "@material-ui/core/Chip"
-import { withStyles, makeStyles } from "@material-ui/styles"
 import Checkbox from "@material-ui/core/Checkbox"
+import DeleteIcon from "@material-ui/icons/Delete"
+// custom
 import Message from "../components/Message"
 import Loader from "../components/ui/Loader"
 import { createProduct } from "../actions/productActions"
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants"
-import DeleteIcon from "@material-ui/icons/Delete"
 import categories from "../config/categories"
 
 const CustomCheckbox = withStyles((theme) => ({
@@ -286,7 +288,6 @@ const ProductCreateScreen = ({ history }) => {
   const rootCategories = categories
 
   const uploadFileHandler = async (e) => {
-    console.log("uploadHandler called")
     const file = e.target.files[0]
     const formData = new FormData()
     formData.append("image", file)
@@ -300,7 +301,6 @@ const ProductCreateScreen = ({ history }) => {
 
       const { data } = await axios.post("/api/uploads", formData, config)
       const iMac = data.replaceAll(`\\`, "/")
-      console.log(iMac)
       setImage(data)
       setUploading(false)
     } catch (error) {

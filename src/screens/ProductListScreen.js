@@ -1,22 +1,24 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { IconButton, Button, Tooltip } from "@material-ui/core"
+// mui
 import { withStyles, makeStyles } from "@material-ui/styles"
+import { IconButton, Button, Tooltip } from "@material-ui/core"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
 import TableHead from "@material-ui/core/TableHead"
 import TableRow from "@material-ui/core/TableRow"
-import Message from "../components/Message"
-import Loader from "../components/ui/Loader"
 import DeleteIcon from "@material-ui/icons/Delete"
 import CancelIcon from "@material-ui/icons/CloseRounded"
 import CheckIcon from "@material-ui/icons/Check"
 import EditIcon from "@material-ui/icons/Edit"
-import { deleteProduct, listProducts } from "../actions/productActions"
-import Paginate from "../components/Paginate"
 import AddIcon from "@material-ui/icons/AddRounded"
+// custom
+import { deleteProduct, listProducts } from "../actions/productActions"
+import Message from "../components/Message"
+import Loader from "../components/ui/Loader"
+import Paginate from "../components/Paginate"
 
 const StyledTableCell = withStyles((theme) => ({
   root: {

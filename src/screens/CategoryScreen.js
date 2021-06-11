@@ -1,7 +1,9 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+// mui
 import { makeStyles } from "@material-ui/styles"
 import Button from "@material-ui/core/Button"
+// custom
 import { getProductsByCategory } from "../actions/productActions"
 import Loader from "../components/ui/Loader"
 import Message from "../components/Message"

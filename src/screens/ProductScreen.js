@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react"
-import { makeStyles } from "@material-ui/styles"
 import { useDispatch, useSelector } from "react-redux"
+// mui
+import { makeStyles } from "@material-ui/styles"
+import Grid from "@material-ui/core/Grid"
+import Snackbar from "@material-ui/core/Snackbar"
+import MuiAlert from "@material-ui/lab/Alert"
+import { Button } from "@material-ui/core"
+import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
+// custom
 import { listProductDetails } from "../actions/productActions"
 import { addToCart } from "../actions/cartActions"
-import Grid from "@material-ui/core/Grid"
 import Loader from "../components/ui/Loader"
 import Message from "../components/Message"
 import Breadcrumbs from "../components/CustomBreadcrumbs"
 import Counter from "../components/Counter"
-import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
 import RelatedProducts from "../components/RelatedProducts"
 
 // snackbars:
-import Snackbar from "@material-ui/core/Snackbar"
-import MuiAlert from "@material-ui/lab/Alert"
-import { Button } from "@material-ui/core"
-
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />
 }
@@ -119,7 +120,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "flex-start",
     [theme.breakpoints.down("xs")]: {
-      // margin: "1.2rem 0",
       fontSize: "2.4rem",
     },
   },
@@ -213,11 +213,6 @@ const useStyles = makeStyles((theme) => ({
   buttonsContainer: {
     display: "flex",
     margin: "1.6rem auto 0 0",
-
-    // color: theme.palette.common.white,
-    // [theme.breakpoints.down("md")]: {
-    //   backgroundColor: theme.palette.secondary.main,
-    // },
   },
   cartBtn: {
     border: "none",

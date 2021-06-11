@@ -1,8 +1,10 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+// mui
 import { makeStyles } from "@material-ui/styles"
 import { Button, Grid } from "@material-ui/core"
-import { useSelector, useDispatch } from "react-redux"
+// custom
 import { createOrder } from "../actions/orderActions"
 import Message from "../components/Message"
 import { ORDER_CREATE_RESET } from "../constants/orderConstants"
@@ -16,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     padding: "3rem",
     paddingTop: 0,
-    // border: "1px solid blue",
     [theme.breakpoints.down("xs")]: {
       padding: ".5rem",
     },

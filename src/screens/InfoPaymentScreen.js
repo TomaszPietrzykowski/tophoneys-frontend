@@ -1,5 +1,8 @@
 import React from "react"
+// mui
 import { makeStyles } from "@material-ui/core/styles"
+import AccountBalanceIcon from "@material-ui/icons/AccountBalance"
+// custom
 import b1 from "../assets/ideal-logo.svg"
 import b2 from "../assets/bancontact-logo.svg"
 import b3 from "../assets/paypal-logo.svg"
@@ -10,7 +13,6 @@ import b7 from "../assets/maestro-logo.svg"
 import b8 from "../assets/jcb-logo.svg"
 import b9 from "../assets/amex-logo.svg"
 import b10 from "../assets/diners-logo.svg"
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance"
 
 const useStyles = makeStyles((theme) => ({
   container: {

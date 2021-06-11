@@ -81,7 +81,7 @@ const ProductsSlider = ({ title, endpoint, timeout, hideHeader = false }) => {
       setLoading(false)
     } catch (err) {
       setLoading(false)
-      console.log(err)
+      console.error(err)
     }
   }
 

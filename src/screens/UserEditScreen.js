@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
+// mui
 import { Button, TextField } from "@material-ui/core"
 import { withStyles, makeStyles } from "@material-ui/styles"
 import Checkbox from "@material-ui/core/Checkbox"
+// custom
 import Message from "../components/Message"
 import Loader from "../components/ui/Loader"
 import { getUserDetails, updateUser } from "../actions/userActions"
