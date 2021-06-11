@@ -13,7 +13,7 @@ import LoginScreen from "./screens/LoginScreen"
 import RegisterScreen from "./screens/RegisterScreen"
 import ProfileScreen from "./screens/ProfileScreen"
 import ShippingScreen from "./screens/ShippingScreen"
-import PaymentScreen from "./screens/PaymentScreen"
+// import PaymentScreen from "./screens/PaymentScreen"
 import PlaceOrderScreen from "./screens/PlaceOrderScreen"
 import OrderScreen from "./screens/OrderScreen"
 import UserListScreen from "./screens/UserListScreen"
@@ -35,6 +35,7 @@ import ScrollToTop from "./components/ui/ScrollToTop"
 import Brands from "./components/Brands"
 import NavbarMargin from "./components/ui/NavbarMargin"
 import PrivacyPolicyScreen from "./screens/PrivacyPolicyScreen"
+import InfoShippingScreen from "./screens/InfoShippingScreen"
 
 function App() {
   const isMobile = useMediaQuery("(max-width:600px)")
@@ -65,12 +66,17 @@ function App() {
                 exact
               />
               <Route path="/privacy" component={PrivacyPolicyScreen} exact />
-              <Route path="/info" component={InfoPaymentScreen} exact />
+              <Route path="/payment-info" component={InfoPaymentScreen} exact />
+              <Route
+                path="/shipping-info"
+                component={InfoShippingScreen}
+                exact
+              />
               <Route path="/login" component={LoginScreen} exact />
               <Route path="/register" component={RegisterScreen} exact />
               <Route path="/profile" component={ProfileScreen} exact />
               <Route path="/shipping" component={ShippingScreen} exact />
-              <Route path="/paymentmethod" component={PaymentScreen} exact />
+              {/* <Route path="/paymentmethod" component={PaymentScreen} exact /> */}
               <Route path="/placeorder" component={PlaceOrderScreen} exact />
               <Route path="/order/:id" component={OrderScreen} exact />
               <Route path="/search/:keyword" component={SearchScreen} exact />
@@ -152,7 +158,7 @@ function App() {
                 marginRight: "2rem",
               }}
               expires={150}
-              overlay
+              // overlay
             >
               TOP HONEYS website uses cookies to enhance your e-commerce
               experience.

@@ -338,7 +338,7 @@ const CartScreen = ({ history }) => {
                     </Link>
                   </Grid>
                   <Grid item md={2} className={classes.tablePrice}>
-                    &euro;{item.price.toFixed(2)}
+                    &euro; {item.price.toFixed(2)}
                   </Grid>
                   <Grid item md={2} className={classes.counter}>
                     <Counter

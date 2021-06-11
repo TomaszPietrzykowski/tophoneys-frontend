@@ -3,9 +3,9 @@ import React from "react"
 import { makeStyles } from "@material-ui/styles"
 import { Link } from "react-router-dom"
 // custom
-import teaser1 from "../../assets/teaser1.jpeg"
-import teaser2 from "../../assets/teaser2.jpeg"
-import teaser3 from "../../assets/teaser3.jpeg"
+import teaser1 from "../assets/teaser1.jpeg"
+import teaser2 from "../assets/teaser2.jpeg"
+import teaser3 from "../assets/teaser3.jpeg"
 
 const useStyles = makeStyles((theme) => ({
   container: {

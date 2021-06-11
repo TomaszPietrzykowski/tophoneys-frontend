@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Button, TextField } from "@material-ui/core"
 import { makeStyles, withStyles } from "@material-ui/styles"
 import Message from "../components/Message"
-import Loader from "../components/Loader"
+import Loader from "../components/ui/Loader"
 import { login } from "../actions/userActions"
 import { USER_LOGIN_ERROR_RESET } from "../constants/userConstants"
 import {

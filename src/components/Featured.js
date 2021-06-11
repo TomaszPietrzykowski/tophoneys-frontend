@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { makeStyles } from "@material-ui/styles"
 import { useMediaQuery } from "@material-ui/core"
 import { getProductsByCategory } from "../actions/productActions"
-import Loader from "../components/Loader"
+import Loader from "./ui/Loader"
 import Message from "../components/Message"
 import ProductTab from "./ProductTab"
 

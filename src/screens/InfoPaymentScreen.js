@@ -133,7 +133,7 @@ const InfoPaymentScreen = () => {
   const classes = useStyles()
   return (
     <div className={classes.container}>
-      <h1 className={classes.title}>Payment and shipping</h1>
+      <h1 className={classes.title}>Payment</h1>
       <div className={classes.deco}>
         <main className={classes.content}>
           <div className={classes.table}>
@@ -208,46 +208,17 @@ const InfoPaymentScreen = () => {
               <p className={classes.block}>GD TOP</p>
               <p className={classes.block}>NL00 3744 8248 83</p>
             </section>
+            {/* -------------------------------------------- */}
             <section className={classes.section}>
-              <h3 className={classes.sectionHead}>Shipping</h3>
+              <h3 className={classes.sectionHead}>Payment conditions</h3>
               <p className={classes.block}>
-                Shipping in the Netherlands: €4,95
-              </p>
-              <p className={classes.block}>FREE shipping above €39,00</p>
-              <div
-                className={classes.logosContainer}
-                style={{ margin: "2rem 0rem" }}
-              >
-                <div className={classes.logo}>
-                  <img src={b11} alt="producers logo" className={classes.img} />
-                </div>
-                <div className={classes.logo}>
-                  <img src={b12} alt="producers logo" className={classes.img} />
-                </div>
-              </div>
-              <p className={classes.block}>
-                We usually ship orders within 24 hours from the moment the
-                payment is credited. Sometimes it may take up to 2-4 days.
+                If you choose electronic payments or payment by bank transfer
+                you should pay within 2 calendar days from the date of placing
+                an order.
               </p>
               <p className={classes.block}>
-                Packaging costs are included in shipping costs.
-              </p>
-              <p className={classes.block}>
-                We send the products new and safely packed.
-              </p>
-            </section>
-            <section className={classes.section}>
-              <h3 className={classes.sectionHead}>Returns</h3>
-              <p className={classes.block}>
-                The customer has the right to return the goods intact within 14
-                days of purchase.
-              </p>
-              <p className={classes.block}>
-                Questions can be submitted by e-mail to the following e-mail
-                address:{" "}
-                <a href="mailto:info@tophoneys.com" className={classes.link}>
-                  info@tophoneys.com
-                </a>
+                If you decide to collect products in person payment should be
+                done in cash upon personal collection from the parcel.
               </p>
             </section>
           </div>

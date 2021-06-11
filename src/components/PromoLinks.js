@@ -91,13 +91,13 @@ const PromoLinks = () => {
               <div className={classes.mobileTab}>
                 <TruckIcon className={classes.desktopIcon} />
                 <div className={classes.desktopText}>
-                  Free delivery from 39 &euro;
+                  Free delivery from &euro; 39
                 </div>
               </div>
               <div className={classes.mobileTab}>
                 <GiftIcon className={classes.desktopIcon} />
                 <div className={classes.desktopText}>
-                  Extra gift from 60 &euro;
+                  Extra gift from &euro; 60
                 </div>
               </div>
               <div className={classes.mobileTab}>
@@ -122,7 +122,7 @@ const PromoLinks = () => {
                 <div className={classes.mobileTab}>
                   <TruckIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Free delivery from 39 &euro;
+                    Free delivery from &euro; 39
                   </div>
                 </div>
               </div>
@@ -130,7 +130,7 @@ const PromoLinks = () => {
                 <div className={classes.mobileTab}>
                   <GiftIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Extra gift from 60 &euro;
+                    Extra gift from &euro; 60
                   </div>
                 </div>
                 <div className={classes.mobileTab}>
@@ -150,7 +150,7 @@ const PromoLinks = () => {
                 <div className={classes.mobileTab}>
                   <TruckIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Free delivery from 39 &euro;
+                    Free delivery from &euro; 39
                   </div>
                 </div>
               </div>
@@ -158,7 +158,7 @@ const PromoLinks = () => {
                 <div className={classes.mobileTab}>
                   <GiftIcon className={classes.desktopIcon} />
                   <div className={classes.desktopText}>
-                    Extra gift from 60 &euro;
+                    Extra gift from &euro; 60
                   </div>
                 </div>
                 <div className={classes.mobileTab}>
@@ -181,12 +181,12 @@ const PromoLinks = () => {
           <div className={classes.desktopTab}>
             <TruckIcon className={classes.desktopIcon} />
             <div className={classes.desktopText}>
-              Free delivery from 39 &euro;
+              Free delivery from &euro; 39
             </div>
           </div>
           <div className={classes.desktopTab}>
             <GiftIcon className={classes.desktopIcon} />
-            <div className={classes.desktopText}>Extra gift from 60 &euro;</div>
+            <div className={classes.desktopText}>Extra gift from &euro; 60</div>
           </div>
           <div className={classes.desktopTab}>
             <SecurityIcon className={classes.desktopIcon} />

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { makeStyles, useTheme } from "@material-ui/styles"
 import { Grid, Button } from "@material-ui/core"
 import { useSelector, useDispatch } from "react-redux"
-import Loader from "../components/Loader"
+import Loader from "../components/ui/Loader"
 import { getOrderDetails, deliverOrder } from "../actions/orderActions"
 import {
   ORDER_PAY_RESET,

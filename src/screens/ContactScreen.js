@@ -5,7 +5,7 @@ import { Button, TextField } from "@material-ui/core"
 import { makeStyles, withStyles } from "@material-ui/styles"
 import Checkbox from "@material-ui/core/Checkbox"
 import Message from "../components/Message"
-import Loader from "../components/Loader"
+import Loader from "../components/ui/Loader"
 import logo from "../assets/logotranspbg.png"
 import axios from "axios"
 
@@ -337,9 +337,6 @@ const ContactScreen = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                 />
-
-                {/* ----------------------------------------------------------------------------------- */}
-
                 <div
                   className={
                     consentError
@@ -365,8 +362,6 @@ const ContactScreen = () => {
                     this email
                   </span>
                 </div>
-                {/* ----------------------------------------------------------------------------------- */}
-
                 <Button type="submit" className={classes.submitBtn}>
                   Send
                 </Button>

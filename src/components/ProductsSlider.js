@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { makeStyles } from "@material-ui/styles"
 import { useMediaQuery } from "@material-ui/core"
-import Loader from "../components/Loader"
+import Loader from "./ui/Loader"
 import CustomSlider from "./CustomSlider"
 import axios from "axios"
 

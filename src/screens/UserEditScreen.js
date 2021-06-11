@@ -5,7 +5,7 @@ import { Button, TextField } from "@material-ui/core"
 import { withStyles, makeStyles } from "@material-ui/styles"
 import Checkbox from "@material-ui/core/Checkbox"
 import Message from "../components/Message"
-import Loader from "../components/Loader"
+import Loader from "../components/ui/Loader"
 import { getUserDetails, updateUser } from "../actions/userActions"
 import { USER_UPDATE_RESET } from "../constants/userConstants"
 

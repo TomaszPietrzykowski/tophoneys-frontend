@@ -107,7 +107,7 @@ const GenralConditionsScreen = () => {
                 1. TOPHONEY online store, available at the internet address
                 tophoneys.com is run by Grzegorz Dabrowski running a business
                 under the name GD TOP, entered into the Kamer van Kophandel run
-                by the minister responsible for the economy of KvK:....
+                by the minister responsible for the economy of KvK 82891087
               </p>
               <p className={classes.block}>
                 2. These regulations are addressed to Consumers and define the
