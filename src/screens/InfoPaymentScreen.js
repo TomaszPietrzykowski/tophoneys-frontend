@@ -10,8 +10,6 @@ import b7 from "../assets/maestro-logo.svg"
 import b8 from "../assets/jcb-logo.svg"
 import b9 from "../assets/amex-logo.svg"
 import b10 from "../assets/diners-logo.svg"
-import b11 from "../assets/postnl-logo.jpeg"
-import b12 from "../assets/dhl-logo.svg"
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance"
 
 const useStyles = makeStyles((theme) => ({

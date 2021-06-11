@@ -21,7 +21,7 @@ export default createMuiTheme({
     },
     text: {
       primary: "rgb(26, 26, 26)",
-      secondary: "rgba(85, 89, 92, .6)",
+      secondary: "rgba(85, 89, 92, .65)",
     },
   },
   typography: {
