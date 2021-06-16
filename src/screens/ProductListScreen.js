@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       left: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, ${theme.palette.secondary.main}, ${theme.palette.common.background})`,
     },
     "&::after": {
       content: "''",
@@ -126,7 +126,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       right: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, ${theme.palette.secondary.main}, ${theme.palette.common.background})`,
     },
     [theme.breakpoints.down("sm")]: {
       padding: "0 .5rem",
@@ -147,7 +147,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       left: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.light}, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, ${theme.palette.secondary.light}, ${theme.palette.common.background})`,
     },
     [theme.breakpoints.down("sm")]: {
       fontSize: ".8rem",

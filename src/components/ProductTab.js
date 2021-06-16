@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     borderLeftWidth: "1px",
     borderLeftStyle: "solid",
-    borderImage: `linear-gradient(transparent, 30%, ${theme.palette.secondary.main}, 55%, transparent) 1 100%`,
+    borderImage: `linear-gradient(${theme.palette.common.background}, 30%, ${theme.palette.secondary.main}, 55%, ${theme.palette.common.background}) 1 100%`,
     flexDirection: "column",
     justifyContent: "center",
     position: "relative",

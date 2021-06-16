@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       height: "100%",
       width: 2,
-      background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, 40%, ${theme.palette.secondary.main}, 60%, ${theme.palette.common.background})`,
       [theme.breakpoints.down("xs")]: {
         width: 1,
       },

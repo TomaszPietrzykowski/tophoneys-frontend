@@ -72,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
   },
   // ------------------------------------------- SIDE ICONS
   icons: {
-    // border: '1px solid lime',
     display: "flex",
     flex: 1,
     justifyContent: "flex-end",
@@ -83,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   },
   iconButton: {
     "&:hover": {
-      backgroundColor: "transparent",
+      backgroundColor: theme.palette.common.background,
     },
     position: "relative",
     [theme.breakpoints.down("sm")]: {

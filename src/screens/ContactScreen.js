@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       height: "100%",
       width: 2,
-      background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, 40%, ${theme.palette.secondary.main}, 60%, ${theme.palette.common.background})`,
       [theme.breakpoints.down("xs")]: {
         width: 1,
       },
@@ -141,7 +141,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     width: "100%",
     paddingRight: "1rem",
-    border: "1px solid transparent",
+    border: `1px solid ${theme.palette.common.background}`,
     borderRadius: 4,
     [theme.breakpoints.down("xs")]: {
       marginBottom: 0,

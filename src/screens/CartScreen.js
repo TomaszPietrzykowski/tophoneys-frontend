@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       bottom: 0,
       left: 0,
-      background: `linear-gradient(90deg, transparent, ${theme.palette.text.disabled}, transparent)`,
+      background: `linear-gradient(90deg, ${theme.palette.common.background}, ${theme.palette.text.disabled}, ${theme.palette.common.background})`,
       opacity: 0.5,
     },
     "& > *": {
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
         position: "absolute",
         top: 0,
         left: 0,
-        background: `linear-gradient(transparent, ${theme.palette.secondary.light}, transparent)`,
+        background: `linear-gradient(${theme.palette.common.background}, ${theme.palette.secondary.light}, ${theme.palette.common.background})`,
       },
     },
     [theme.breakpoints.down("sm")]: {
@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       bottom: 0,
       left: 0,
-      background: `linear-gradient(90deg, transparent, ${theme.palette.text.disabled}, transparent)`,
+      background: `linear-gradient(90deg, ${theme.palette.common.background}, ${theme.palette.text.disabled}, ${theme.palette.common.background})`,
       opacity: 0.5,
     },
     "& > *": {
@@ -146,7 +146,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       left: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, ${theme.palette.secondary.main}, ${theme.palette.common.background})`,
     },
     [theme.breakpoints.down("md")]: {
       marginLeft: "50%",

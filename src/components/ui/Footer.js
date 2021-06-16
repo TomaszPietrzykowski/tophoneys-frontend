@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
       content: '""',
       width: "50%",
       height: 1,
-      background: `linear-gradient(90deg, transparent, white, transparent)`,
+      background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.common.background}, ${theme.palette.primary.main})`,
       position: "absolute",
       top: 0,
       [theme.breakpoints.down("md")]: {
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
       content: '""',
       width: "50%",
       height: 1,
-      background: `linear-gradient(90deg, transparent, white, transparent)`,
+      background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.common.background}, ${theme.palette.primary.main})`,
       position: "absolute",
       bottom: 0,
       [theme.breakpoints.down("md")]: {
