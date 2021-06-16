@@ -27,7 +27,7 @@ const Home = () => {
       <Teasers />
       <ProductsSlider title="New delivery" endpoint={"new"} timeout={10000} />
       <SecondaryBanner />
-      <ProductsSlider title="Sale" endpoint={"honeys"} timeout={8000} />
+      <ProductsSlider title="Sale" endpoint={"sale"} timeout={8000} />
     </main>
   )
 }
