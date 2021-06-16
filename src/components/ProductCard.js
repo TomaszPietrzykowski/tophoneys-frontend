@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.mont,
     display: "flex",
     maxWidth: "320px",
-    // border: "2px solid pink",
     alignItems: "stretch",
     padding: "2rem 2rem",
     [theme.breakpoints.down("md")]: {
@@ -29,28 +28,27 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: 290,
       padding: "1rem",
     },
-    // [theme.breakpoints.down("sm")]: {
-    //   maxWidth: 300,
-    //   padding: "1rem",
-    // },
     [theme.breakpoints.down("xs")]: {
+      // width: "50%",
       maxWidth: "50%",
       padding: "0 .5rem",
       alignItems: "flex-end",
     },
   },
   card: {
-    // border: "2px solid green",
-    minHeight: "100%",
-    display: "flex",
-    alignItems: "left",
+    display: "grid",
+    gridTemplateRows: "1fr 1fr",
     cursor: "pointer",
-    borderLeftWidth: "1px",
-    borderLeftStyle: "solid",
-    borderImage: `linear-gradient(${theme.palette.common.background}, 30%, ${theme.palette.secondary.main}, 55%, ${theme.palette.common.background}) 1 100%`,
-    flexDirection: "column",
-    justifyContent: "center",
     position: "relative",
+    "&::before": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      height: "100%",
+      width: 1,
+      background: `linear-gradient(${theme.palette.common.background}, 40%, ${theme.palette.secondary.main}, 60%, ${theme.palette.common.background})`,
+    },
   },
   saleBadge: {
     position: "absolute",
@@ -79,8 +77,6 @@ const useStyles = makeStyles((theme) => ({
   },
   imageContainer: {
     ...theme.flex.col,
-    justifyContent: "flex-end",
-    height: 255,
     [theme.breakpoints.down("sm")]: {
       height: "auto",
     },
@@ -92,12 +88,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       maxWidth: "100%",
     },
-    // border: "1px solid red",
   },
   content: {
     display: "flex",
     minHeight: 180,
-    // border: "1px solid blue",
     flexDirection: "column",
     justifyContent: "flex-start",
     padding: "1rem 0 0 1rem",
@@ -114,7 +108,6 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
     fontWeight: 500,
     letterSpacing: 0.5,
-    // border: "1px solid blue",
     [theme.breakpoints.down("xs")]: {
       fontSize: ".75rem",
       letterSpacing: 0.4,
@@ -123,7 +116,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: "1rem",
     color: theme.palette.text.primary,
-    // border: "1px solid blue",
     [theme.breakpoints.down("xs")]: {
       fontSize: ".85rem",
       letterSpacing: 0.4,
@@ -133,7 +125,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: ".8rem",
     margin: ".5rem 0",
     color: theme.palette.text.disabled,
-    // border: "1px solid blue",
     [theme.breakpoints.down("xs")]: {
       fontSize: ".75rem",
     },
@@ -143,8 +134,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     margin: "auto 0 0.8rem 0",
     fontSize: "1.9rem",
-    color: theme.palette.text.secondary,
-    // border: "1px solid blue",
+    color: theme.palette.common.price,
     letterSpacing: 1,
     fontWeight: 300,
     flexWrap: "no-wrap",
@@ -212,12 +202,9 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("sm")]: {
       fontSize: ".85rem",
-      // flex: 1,
-      // padding: ".3rem",
     },
     [theme.breakpoints.down("xs")]: {
       fontSize: ".7rem",
-      // flex: 1,
       padding: ".5rem .8rem",
       letterSpacing: 0.3,
     },
@@ -234,11 +221,6 @@ const useStyles = makeStyles((theme) => ({
       margin: "0 .3rem 0 0",
     },
   },
-  // hide: {
-  //   [theme.breakpoints.down("md")]: {
-  //     display: "none",
-  //   },
-  // },
 }))
 
 const ProductCard = ({ product }) => {
