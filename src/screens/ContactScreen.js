@@ -382,17 +382,18 @@ const ContactScreen = () => {
                     className={classes.logo}
                   />
                 </div>
+                <div className={classes.link}>GD TOP</div>
+                <div className={classes.link}>Coyotestraat 12</div>
+                <div className={classes.link}>1448WE PURMEREND</div>
+                <div className={classes.link}>KVK nr: 82891087</div>
+                <div className={classes.link}>BTW nr: NL003744824B83</div>
+                <div className={classes.link}>Bank acc: NL71ABNA0101598440</div>
                 <div className={classes.link}>
                   Email:{" "}
                   <a href="mailto:info@tophoneys.com">info@tophoneys.com</a>
                 </div>
                 <div className={classes.link}>
                   Facebook: <a href="http://facebook.com">@tophoneys</a>
-                </div>
-                <div className={classes.link}>KVK: 82891087</div>
-                <div className={classes.address}>
-                  <p>Coyotestraat 12</p>
-                  <p>1448WE PURMEREND</p>
                 </div>
               </div>
             </>

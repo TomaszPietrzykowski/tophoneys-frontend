@@ -102,6 +102,12 @@ const useStyles = makeStyles((theme) => ({
   anchor: {
     color: "white",
   },
+  copy: {
+    ...theme.flex.col,
+    ...theme.typography.mont,
+    fontSize: ".9rem",
+    margin: "2rem",
+  },
 }))
 
 const Footer = () => {
@@ -171,6 +177,9 @@ const Footer = () => {
           >
             <InstagramIcon className={classes.socialIcon} />
           </a>
+        </div>
+        <div className={classes.copy}>
+          &copy; Copyright {new Date().getFullYear()} GD TOP
         </div>
       </div>
     </div>

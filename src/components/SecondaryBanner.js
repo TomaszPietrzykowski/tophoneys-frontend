@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import { makeStyles } from "@material-ui/styles"
 import image from "../assets/Frame 63.jpeg"
 
@@ -25,7 +26,13 @@ const SecondaryBanner = () => {
   const classes = useStyles()
   return (
     <div className={classes.container}>
-      <img src={image} alt="Great idea for a gift" className={classes.banner} />
+      <Link to="/category/giftsets">
+        <img
+          src={image}
+          alt="Great idea for a gift"
+          className={classes.banner}
+        />
+      </Link>
     </div>
   )
 }

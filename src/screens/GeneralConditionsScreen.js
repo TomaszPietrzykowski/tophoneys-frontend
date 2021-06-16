@@ -127,7 +127,7 @@ const GenralConditionsScreen = () => {
                 2. Seller - a natural person running a business under the name
                 GD TOP, entered in the Central Register and Information on
                 Economic Activity kept by the minister competent for economy,
-                BTW (VAT) - BTW VAT , KvK number 82891087
+                BTW nr NL003744824B83 , KvK number 82891087
               </p>
               <p className={classes.block}>
                 3. Customer - each entity making purchases through the Store.
@@ -207,7 +207,7 @@ const GenralConditionsScreen = () => {
                 3. Seller's telephone number: 06 28753850
               </p>
               <p className={classes.block}>
-                4. Seller's bank account number: GD TOP NL00 3744 8248 83
+                4. Seller's bank account number: GD TOP NL71ABNA0101598440
               </p>
               <p className={classes.block}>
                 5. The Customer may communicate with the Seller using the

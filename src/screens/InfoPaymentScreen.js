@@ -206,7 +206,7 @@ const InfoPaymentScreen = () => {
               </p>
               <p className={classes.block}>Our account number:</p>
               <p className={classes.block}>GD TOP</p>
-              <p className={classes.block}>NL00 3744 8248 83</p>
+              <p className={classes.block}>NL71 ABNA 0101 5984 40</p>
             </section>
             {/* -------------------------------------------- */}
             <section className={classes.section}>

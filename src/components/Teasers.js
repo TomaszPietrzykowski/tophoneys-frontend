@@ -14,10 +14,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "9rem",
     display: "flex",
     justifyContent: "center",
-    // border: "1px solid green",
-    // [theme.breakpoints.down("md")]: {
-    //   flexDirection: "column",
-    // },
     [theme.breakpoints.down("md")]: {
       margin: "3rem 0",
     },
@@ -28,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   teaser: {
     margin: ".8rem",
-    // flex: 1,
     ...theme.flex.col,
     [theme.breakpoints.down("xs")]: {
       width: "100%",
@@ -38,6 +33,15 @@ const useStyles = makeStyles((theme) => ({
     transition: "all .3s ease",
     "&:hover": {
       opacity: 0.87,
+    },
+  },
+  teaser1: {
+    margin: ".8rem",
+    ...theme.flex.col,
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      margin: 0,
+      padding: ".5rem",
     },
   },
   img: {
@@ -63,11 +67,9 @@ const Teasers = () => {
           <img src={teaser1} alt="teaser one" className={classes.img} />
         </div>
       </Link>
-      <Link to="/category/specialoffer">
-        <div className={classes.teaser}>
-          <img src={teaser2} alt="teaser one" className={classes.img} />
-        </div>
-      </Link>
+      <div className={classes.teaser1}>
+        <img src={teaser2} alt="teaser one" className={classes.img} />
+      </div>
       <Link to="/category/teas">
         <div className={classes.teaser}>
           <img src={teaser3} alt="teaser one" className={classes.img} />
