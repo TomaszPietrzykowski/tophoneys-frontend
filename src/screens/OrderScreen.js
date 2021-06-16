@@ -260,12 +260,6 @@ const OrderScreen = ({ match, history }) => {
   const orderDeliver = useSelector((state) => state.orderDeliver)
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver
 
-  const { anonymousShoppingSelected } = useSelector(
-    (state) => state.orderAnonymous
-  )
-
-  //   const userInfo = useSelector((state) => state.userLogin.userInfo);
-
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
   }

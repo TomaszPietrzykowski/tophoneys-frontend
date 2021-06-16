@@ -300,7 +300,6 @@ const ProductCreateScreen = ({ history }) => {
       }
 
       const { data } = await axios.post("/api/uploads", formData, config)
-      const iMac = data.replaceAll(`\\`, "/")
       setImage(data)
       setUploading(false)
     } catch (error) {
