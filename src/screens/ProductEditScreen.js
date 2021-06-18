@@ -35,6 +35,8 @@ const CustomCheckbox = withStyles((theme) => ({
 
 const CssTextField = withStyles((theme) => ({
   root: {
+    ...theme.typography.mont,
+    opacity: 0.8,
     "& label.Mui-focused": {
       color: theme.palette.secondary.light,
     },

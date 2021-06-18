@@ -67,8 +67,10 @@ const Teasers = () => {
           <img src={teaser1} alt="teaser one" className={classes.img} />
         </div>
       </Link>
-      <div className={classes.teaser1}>
-        <img src={teaser2} alt="teaser one" className={classes.img} />
+      <div>
+        <div className={classes.teaser1}>
+          <img src={teaser2} alt="teaser one" className={classes.img} />
+        </div>
       </div>
       <Link to="/category/teas">
         <div className={classes.teaser}>

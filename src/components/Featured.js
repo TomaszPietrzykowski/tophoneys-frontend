@@ -63,7 +63,7 @@ const Featured = () => {
   }
 
   useEffect(() => {
-    getRandom()
+    getRandom(5)
   }, [])
 
   return (

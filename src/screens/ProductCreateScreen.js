@@ -236,7 +236,8 @@ const ProductCreateScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const [name, setName] = useState("")
-  const [image, setImage] = useState("")
+  const [image, setImage] = useState("/public/images/default-img.jpeg")
+  const [imageUploaded, setImageUploaded] = useState(false)
   const [description, setDescription] = useState("")
   const [capacity, setCapacity] = useState("")
   const [price, setPrice] = useState(0)
@@ -268,21 +269,25 @@ const ProductCreateScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(
-      createProduct({
-        name,
-        image,
-        description,
-        category,
-        capacity,
-        price: (price / 100).toFixed(2),
-        countInStock,
-        countryOfOrigin,
-        brand,
-        isPromo,
-        isPublished,
-      })
-    )
+    if (imageUploaded) {
+      dispatch(
+        createProduct({
+          name,
+          image,
+          description,
+          category,
+          capacity,
+          price: (price / 100).toFixed(2),
+          countInStock,
+          countryOfOrigin,
+          brand,
+          isPromo,
+          isPublished,
+        })
+      )
+    } else {
+      window.alert("Don't forget to upload image!")
+    }
   }
 
   const rootCategories = categories
@@ -301,6 +306,7 @@ const ProductCreateScreen = ({ history }) => {
 
       const { data } = await axios.post("/api/uploads", formData, config)
       setImage(data)
+      setImageUploaded(true)
       setUploading(false)
     } catch (error) {
       console.error(error)

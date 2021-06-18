@@ -222,6 +222,12 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline",
     },
   },
+  emptyLink: {
+    color: theme.palette.secondary.main,
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
   productName: {
     [theme.breakpoints.down("sm")]: {
       color: theme.palette.text.primary,
@@ -245,11 +251,12 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1400,
     margin: "auto",
     padding: 0,
-    ...theme.flex.col,
     marginBottom: "12rem",
-    opacity: 0.7,
+    fontWeight: 300,
+    fontSize: "1.3rem",
     [theme.breakpoints.down("xs")]: {
       padding: ".5rem",
+      fontSize: "1rem",
     },
   },
 }))
@@ -277,7 +284,11 @@ const CartScreen = ({ history }) => {
         <Grid item md={12} lg={8} className={classes.tableContainer}>
           {cartItems.length === 0 ? (
             <div className={classes.messageContainer}>
-              <Message
+              Your cart is empty. Let's{" "}
+              <Link to="/" className={classes.emptyLink}>
+                go shopping!
+              </Link>
+              {/* <Message
                 variant="info"
                 message="Your cart is empty"
                 action={
@@ -289,7 +300,7 @@ const CartScreen = ({ history }) => {
                     BACK
                   </Button>
                 }
-              />
+              /> */}
             </div>
           ) : (
             <div>

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     display: "flex",
     justifyContent: "space-between",
-    padding: ".9rem 0 .8rem",
+    padding: ".5rem 0 .4rem",
   },
   tab: {
     display: "flex",

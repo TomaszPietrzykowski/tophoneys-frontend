@@ -321,7 +321,11 @@ const ProductTab = ({
 
                 <div className={classes.title}>{title}</div>
                 <div className={classes.capacity}>{capacity}</div>
-                {/* <div className={classes.price}>
+              </div>
+            </Link>
+            <div>
+              <Link to={`/product/${id}`}>
+                <div className={classes.price}>
                   <div>
                     <span style={{ opacity: 0.45 }}>&euro;&nbsp;</span>
                     {Number(price).toFixed(2)}
@@ -331,21 +335,8 @@ const ProductTab = ({
                       {Number(previousPrice).toFixed(2)}
                     </div>
                   )}
-                </div> */}
-              </div>
-            </Link>
-            <div>
-              <div className={classes.price}>
-                <div>
-                  <span style={{ opacity: 0.45 }}>&euro;&nbsp;</span>
-                  {Number(price).toFixed(2)}
                 </div>
-                {isSale && previousPrice > 0 && (
-                  <div className={classes.previousPrice}>
-                    {Number(previousPrice).toFixed(2)}
-                  </div>
-                )}
-              </div>
+              </Link>
 
               <div className={classes.buttonsContainer}>
                 <button

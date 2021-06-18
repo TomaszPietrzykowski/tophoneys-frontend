@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 2rem",
     margin: "1rem",
     borderBottom: "1px solid #eee",
+    overflow: "hidden",
   },
   links: {
     height: 41,

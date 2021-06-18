@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.flex.col,
     ...theme.typography.mont,
     fontSize: ".9rem",
-    margin: "2rem",
+    margin: "2rem 0 0",
   },
 }))
 
@@ -121,11 +121,11 @@ const Footer = () => {
             <Link to="/register">
               <div className={classes.link}>Create account</div>
             </Link>
-            <Link to="/cart">
-              <div className={classes.link}>Cart</div>
-            </Link>
             <Link to="/profile">
               <div className={classes.link}>My orders and profile</div>
+            </Link>
+            <Link to="/cart">
+              <div className={classes.link}>Cart</div>
             </Link>
           </div>
           <div className={classes.column}>
@@ -148,14 +148,14 @@ const Footer = () => {
             <Link to="/conditions">
               <div className={classes.link}>General conditions</div>
             </Link>
-            <Link to="/privacy">
-              <div className={classes.link}>Privacy policy</div>
-            </Link>
             <Link to="/payment-info">
               <div className={classes.link}>Payment and invoices</div>
             </Link>
             <Link to="/shipping-info">
               <div className={classes.link}>Shipping and return</div>
+            </Link>
+            <Link to="/privacy">
+              <div className={classes.link}>Privacy policy</div>
             </Link>
           </div>
         </div>
