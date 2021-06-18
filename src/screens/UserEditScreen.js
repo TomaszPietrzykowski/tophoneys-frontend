@@ -153,6 +153,7 @@ const UserEditScreen = ({ match, history }) => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [isAdmin, setIsAdmin] = useState(false)
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false)
 
   const userId = match.params.id
 
@@ -176,6 +177,7 @@ const UserEditScreen = ({ match, history }) => {
         setName(user.name)
         setEmail(user.email)
         setIsAdmin(user.isAdmin)
+        setIsSuperAdmin(user.isSuperAdmin)
       }
     }
   }, [dispatch, history, user, userId, successUpdate])
@@ -189,7 +191,11 @@ const UserEditScreen = ({ match, history }) => {
     if (
       window.confirm("Are you sure you want to change user's admin status?")
     ) {
-      setIsAdmin(e.target.checked)
+      if (!isSuperAdmin) {
+        setIsAdmin(e.target.checked)
+      } else {
+        window.alert("Unathorized to change Super Admin settings.")
+      }
     }
   }
 
