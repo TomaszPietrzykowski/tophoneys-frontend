@@ -387,7 +387,9 @@ const ContactScreen = () => {
                 <div className={classes.link}>1448WE PURMEREND</div>
                 <div className={classes.link}>KVK nr: 82891087</div>
                 <div className={classes.link}>BTW nr: NL003744824B83</div>
-                <div className={classes.link}>Bank acc: NL71ABNA0101598440</div>
+                <div className={classes.link}>
+                  Bank account: NL71ABNA0101598440
+                </div>
                 <div className={classes.link}>
                   Email:{" "}
                   <a href="mailto:info@tophoneys.com">info@tophoneys.com</a>

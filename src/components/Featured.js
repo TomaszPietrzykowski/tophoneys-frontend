@@ -1,8 +1,7 @@
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import React, { useState, useEffect } from "react"
 import { makeStyles } from "@material-ui/styles"
 import { useMediaQuery } from "@material-ui/core"
-import { getProductsByCategory } from "../actions/productActions"
+import axios from "axios"
 import Loader from "./ui/Loader"
 import Message from "../components/Message"
 import ProductTab from "./ProductTab"
@@ -41,16 +40,31 @@ const Featured = () => {
   const classes = useStyles()
   const isTablet = useMediaQuery("(max-width: 990px)")
   const isMobile = useMediaQuery("(max-width: 600px)")
+  const [loading, setLoading] = useState(false)
+  const [products, setProducts] = useState([])
+  const [error, setError] = useState(null)
   const slides = isMobile ? 2 : isTablet ? 3 : 4
-  const { loading, error, products } = useSelector(
-    (state) => state.productCategory
-  )
-  const dispatch = useDispatch()
-  const id = "honeys"
+
+  const getRandom = async (number) => {
+    try {
+      setLoading(true)
+      const nr = number || 4
+      const { data } = await axios.get(`/api/products/featured?number=${nr}`)
+      setProducts(data)
+      setLoading(false)
+    } catch (error) {
+      const err =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      setError(err)
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    dispatch(getProductsByCategory(id))
-  }, [id, dispatch])
+    getRandom()
+  }, [])
 
   return (
     <>
