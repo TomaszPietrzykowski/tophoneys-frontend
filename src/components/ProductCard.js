@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
       padding: "1rem",
     },
     [theme.breakpoints.down("xs")]: {
-      // width: "50%",
       maxWidth: "50%",
       padding: "0 .5rem",
       alignItems: "flex-end",
