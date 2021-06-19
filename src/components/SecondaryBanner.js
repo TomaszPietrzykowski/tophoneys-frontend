@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
   },
   banner: {
     width: "100%",
-    // height: "auto",
     objectFit: "contain",
   },
 }))
