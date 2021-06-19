@@ -234,8 +234,10 @@ const PlaceOrderScreen = ({ history }) => {
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   )
-  cart.shippingPrice = cart.itemsPrice >= 39 ? 0 : 4.95
-  // cart.taxPrice = addDecimals(Number((0.1 * cart.itemsPrice).toFixed(2)));
+  cart.shippingPrice =
+    cart.itemsPrice >= 39 || shippingAddress.city.toLowerCase() === "purmerend"
+      ? 0
+      : 4.95
   cart.taxPrice = 0
   cart.totalPrice = (
     Number(cart.itemsPrice) +

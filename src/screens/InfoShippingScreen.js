@@ -189,7 +189,7 @@ const InfoShippingScreen = () => {
               <p className={classes.block}>
                 Please include your order number and the products to be returned
                 in this email. If the product is defective, damaged or
-                incorrectly, please send an email with two fotos in delivery day
+                incorrect, please send an email with two fotos on delivery day
                 to{" "}
                 <a
                   href="mailto:dabrowskigrzegorz0@gmail.com"

@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { makeStyles } from "@material-ui/styles"
-import image from "../assets/Frame 63.jpeg"
+import image from "../assets/secondary-banner.jpeg"
 
 const useStyles = makeStyles((theme) => ({
   container: {
