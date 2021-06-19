@@ -547,7 +547,7 @@ const OrderScreen = ({ match, history }) => {
                     Total:
                   </Grid>
                   <Grid item xs={6} md={6} className={classes.total}>
-                    &euro; {order.totalPrice}
+                    &euro; {Number(order.totalPrice).toFixed(2)}
                   </Grid>
                 </Grid>
                 <Grid container>
