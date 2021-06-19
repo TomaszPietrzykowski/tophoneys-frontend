@@ -72,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
   },
   // ------------------------------------------- SIDE ICONS
   icons: {
-    // border: '1px solid lime',
     display: "flex",
     flex: 1,
     justifyContent: "flex-end",
@@ -83,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   },
   iconButton: {
     "&:hover": {
-      backgroundColor: "transparent",
+      backgroundColor: theme.palette.common.background,
     },
     position: "relative",
     [theme.breakpoints.down("sm")]: {
@@ -376,7 +375,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
     ? { transform: "scale(1, 1)" }
     : { transform: "scale(0, 1)" }
   const drawerPureStyle = drawerHoneysOpen
-    ? { maxHeight: "37.7rem" }
+    ? { maxHeight: "41rem" }
     : { maxHeight: 0 }
   const drawerTeaStyle = drawerTeaOpen
     ? { maxHeight: "23.1rem" }
@@ -706,15 +705,15 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
             </li>
             <li
               className={classes.drawerItem}
-              onClick={() => handleDrawerChoice("/category/coniferoushoneydew")}
+              onClick={() => handleDrawerChoice("/category/rapeseedhoney")}
             >
-              <div className={classes.drawerTextSmall}>Coniferous honeydew</div>
+              <div className={classes.drawerTextSmall}>Rapeseed honey</div>
             </li>
             <li
               className={classes.drawerItem}
-              onClick={() => handleDrawerChoice("/category/decidoushoneydew")}
+              onClick={() => handleDrawerChoice("/category/honeydewhoney")}
             >
-              <div className={classes.drawerTextSmall}>Decidous honeydew</div>
+              <div className={classes.drawerTextSmall}>Honeydew honey</div>
             </li>
           </div>
           <Divider />
@@ -1015,25 +1014,25 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           </MenuItem>
                           <MenuItem
                             component={Link}
-                            to="/category/coniferoushoneydew"
+                            to="/category/rapeseedhoney"
                             classes={{ root: classes.submenu2 }}
-                            value="coniferoushoneyfew"
+                            value="rapeseedhoney"
                             onClick={(e) => {
                               handleCloseHoneys(e)
                             }}
                           >
-                            Coniferous honeydew
+                            Rapeseed honey
                           </MenuItem>
                           <MenuItem
                             component={Link}
-                            to="/category/deciduoushoneydew"
+                            to="/category/honeydewhoney"
                             classes={{ root: classes.submenu2 }}
-                            value="deciduoushoneydew"
+                            value="honeydewhoney"
                             onClick={(e) => {
                               handleCloseHoneys(e)
                             }}
                           >
-                            Deciduous honeydew
+                            Honeydew honey
                           </MenuItem>
                         </div>
                         <div>

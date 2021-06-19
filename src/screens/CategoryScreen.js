@@ -35,12 +35,18 @@ const useStyles = makeStyles((theme) => ({
   flex: {
     width: "100%",
     paddingTop: "2rem",
-    ...theme.flex.row,
-    alignItems: "stretch",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    overflow: "wrap",
+    // ...theme.flex.row,
+    // alignItems: "stretch",
+    // justifyContent: "center",
+    // flexWrap: "wrap",
+    // overflow: "wrap",
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    [theme.breakpoints.down("md")]: {
+      gridTemplateColumns: "repeat(3, 1fr)",
+    },
     [theme.breakpoints.down("sm")]: {
+      gridTemplateColumns: "repeat(2, 1fr)",
       paddingTop: "1rem",
     },
   },

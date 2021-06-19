@@ -155,7 +155,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       left: 0,
-      background: `linear-gradient(90deg, transparent, ${theme.palette.text.secondary}, transparent)`,
+      background: `linear-gradient(90deg, ${theme.palette.common.background}, ${theme.palette.text.secondary}, ${theme.palette.common.background})`,
       opacity: 0.3,
     },
     [theme.breakpoints.up("lg")]: {
@@ -182,7 +182,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       left: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, ${theme.palette.secondary.main}, ${theme.palette.common.background})`,
     },
     "&::after": {
       content: "''",
@@ -191,7 +191,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       right: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, ${theme.palette.secondary.main}, ${theme.palette.common.background})`,
       [theme.breakpoints.up("lg")]: {
         display: "none",
       },
@@ -218,7 +218,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       left: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.light}, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, ${theme.palette.secondary.light}, ${theme.palette.common.background})`,
     },
     [theme.breakpoints.down("sm")]: {
       fontSize: ".8rem",

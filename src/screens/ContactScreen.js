@@ -20,6 +20,8 @@ function Alert(props) {
 
 const CssTextField = withStyles((theme) => ({
   root: {
+    ...theme.typography.mont,
+    opacity: 0.8,
     "& label.Mui-focused": {
       color: theme.palette.secondary.light,
     },
@@ -70,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       height: "100%",
       width: 2,
-      background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, 40%, ${theme.palette.secondary.main}, 60%, ${theme.palette.common.background})`,
       [theme.breakpoints.down("xs")]: {
         width: 1,
       },
@@ -141,7 +143,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     width: "100%",
     paddingRight: "1rem",
-    border: "1px solid transparent",
+    border: `1px solid ${theme.palette.common.background}`,
     borderRadius: 4,
     [theme.breakpoints.down("xs")]: {
       marginBottom: 0,
@@ -382,17 +384,20 @@ const ContactScreen = () => {
                     className={classes.logo}
                   />
                 </div>
+                <div className={classes.link}>GD TOP</div>
+                <div className={classes.link}>Coyotestraat 12</div>
+                <div className={classes.link}>1448WE PURMEREND</div>
+                <div className={classes.link}>KVK nr: 82891087</div>
+                <div className={classes.link}>BTW nr: NL003744824B83</div>
+                <div className={classes.link}>
+                  Bank account: NL71ABNA0101598440
+                </div>
                 <div className={classes.link}>
                   Email:{" "}
                   <a href="mailto:info@tophoneys.com">info@tophoneys.com</a>
                 </div>
                 <div className={classes.link}>
                   Facebook: <a href="http://facebook.com">@tophoneys</a>
-                </div>
-                <div className={classes.link}>KVK: 82891087</div>
-                <div className={classes.address}>
-                  <p>Coyotestraat 12</p>
-                  <p>1448WE PURMEREND</p>
                 </div>
               </div>
             </>

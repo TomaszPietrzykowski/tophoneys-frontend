@@ -23,6 +23,8 @@ const CustomCheckbox = withStyles((theme) => ({
 
 const CssTextField = withStyles((theme) => ({
   root: {
+    ...theme.typography.mont,
+    opacity: 0.8,
     "& label.Mui-focused": {
       color: theme.palette.secondary.light,
     },
@@ -62,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       height: "100%",
       width: 2,
-      background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, 40%, ${theme.palette.secondary.main}, 60%, ${theme.palette.common.background})`,
       [theme.breakpoints.down("xs")]: {
         width: 1,
       },
@@ -153,6 +155,7 @@ const UserEditScreen = ({ match, history }) => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [isAdmin, setIsAdmin] = useState(false)
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false)
 
   const userId = match.params.id
 
@@ -176,6 +179,7 @@ const UserEditScreen = ({ match, history }) => {
         setName(user.name)
         setEmail(user.email)
         setIsAdmin(user.isAdmin)
+        setIsSuperAdmin(user.isSuperAdmin)
       }
     }
   }, [dispatch, history, user, userId, successUpdate])
@@ -189,7 +193,11 @@ const UserEditScreen = ({ match, history }) => {
     if (
       window.confirm("Are you sure you want to change user's admin status?")
     ) {
-      setIsAdmin(e.target.checked)
+      if (!isSuperAdmin) {
+        setIsAdmin(e.target.checked)
+      } else {
+        window.alert("Unathorized to change Super Admin settings.")
+      }
     }
   }
 

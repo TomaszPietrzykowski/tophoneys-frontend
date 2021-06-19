@@ -12,8 +12,8 @@ const categories = [
   ["Corriander honeys", "corianderhoneys"],
   ["Heather honeys", "heatherhoneys"],
   ["Dandelion honeys", "dandelionhoneys"],
-  ["Coniferous honeydew", "coniferoushoneydew"],
-  ["Deciduous honeydew", "deciduoushoneydew"],
+  ["Honeydew honey", "honeydewhoney"],
+  ["Rapeseed honey", "rapeseedhoney"],
   ["Creamed honeys", "creamedhoneys"],
   ["Honeys with additives", "additives"],
   ["Accessories", "accessories"],
@@ -26,6 +26,7 @@ const categories = [
   ["Rooibos", "rooibos"],
   ["Yerba Mate", "yerbamate"],
   ["Canned tea", "cannedtea"],
+  ["Special offer", "specialoffer"],
   ["Gift sets", "giftsets"],
 ]
 export default categories

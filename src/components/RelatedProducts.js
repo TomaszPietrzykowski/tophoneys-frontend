@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       width: "100%",
       height: 2,
-      background: `linear-gradient(90deg, transparent, ${theme.palette.secondary.main}, transparent )`,
+      background: `linear-gradient(90deg, ${theme.palette.common.background}, ${theme.palette.secondary.main}, ${theme.palette.common.background} )`,
       opacity: 0.7,
       [theme.breakpoints.down("sm")]: {
         height: 1,

@@ -7,7 +7,7 @@ import Showcase from "../components/Showcase"
 import Teasers from "../components/Teasers"
 import Featured from "../components/Featured"
 import ProductsSlider from "../components/ProductsSlider"
-import PromoLinks from "../components/PromoLinks"
+import InfoLinks from "../components/InfoLinks"
 import SecondaryBanner from "../components/SecondaryBanner"
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +20,7 @@ const Home = () => {
   const classes = useStyles()
   return (
     <main className={classes.container}>
-      <PromoLinks />
+      <InfoLinks />
       <Search isMobile={true} />
       <Showcase />
       <Featured />

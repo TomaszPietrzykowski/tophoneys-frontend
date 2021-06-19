@@ -35,6 +35,8 @@ const CustomCheckbox = withStyles((theme) => ({
 
 const CssTextField = withStyles((theme) => ({
   root: {
+    ...theme.typography.mont,
+    opacity: 0.8,
     "& label.Mui-focused": {
       color: theme.palette.secondary.light,
     },
@@ -97,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       height: "100%",
       width: 2,
-      background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, 40%, ${theme.palette.secondary.main}, 60%, ${theme.palette.common.background})`,
       [theme.breakpoints.down("xs")]: {
         width: 1,
       },
@@ -242,7 +244,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: "-2rem",
       left: 0,
-      background: `linear-gradient(90deg, ${theme.palette.divider}, transparent)`,
+      background: `linear-gradient(90deg, ${theme.palette.divider}, ${theme.palette.common.background})`,
     },
   },
   dropdownItem: {

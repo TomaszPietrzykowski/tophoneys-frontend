@@ -158,7 +158,7 @@ const AboutUsScreen = () => {
               &bull;&nbsp;Honey with additves (fruits, nuts)
             </p>
             <p className={classes.list}>&bull;&nbsp;Bee pollen</p>
-            <p className={classes.list}>&bull;&nbsp;Bee milk</p>
+            <p className={classes.list}>&bull;&nbsp;Royal jelly</p>
             <p className={classes.list}>&bull;&nbsp;Propolis</p>
           </div>
         </div>

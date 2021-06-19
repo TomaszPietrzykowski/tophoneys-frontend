@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import { makeStyles } from "@material-ui/styles"
 import useMediaQuery from "@material-ui/core/useMediaQuery"
 import bannerMobile from "../assets/main-banner-mobile.jpeg"
@@ -14,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
   },
   containerMobile: {
     padding: "0px 15px",
-    // margin: "30px 0px",
     width: "100%",
     height: "auto",
     borderRadius: 7,
@@ -37,7 +37,9 @@ const Showcase = () => {
 
   return (
     <div className={isTablet ? classes.containerMobile : classes.container}>
-      <img src={banner} alt="I love TOP HONEYS" className={classes.banner} />
+      <Link to="/category/sale">
+        <img src={banner} alt="I love TOP HONEYS" className={classes.banner} />
+      </Link>
     </div>
   )
 }

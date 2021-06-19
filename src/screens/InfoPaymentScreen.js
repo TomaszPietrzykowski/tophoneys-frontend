@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       left: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, ${theme.palette.secondary.main}, ${theme.palette.common.background})`,
     },
     "&::after": {
       content: "''",
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       right: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, ${theme.palette.secondary.main}, ${theme.palette.common.background})`,
     },
     [theme.breakpoints.down("md")]: {
       padding: "0 1rem",
@@ -127,6 +127,9 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.text.primary,
     },
   },
+  emphasis: {
+    color: theme.palette.text.primary,
+  },
 }))
 
 const InfoPaymentScreen = () => {
@@ -155,11 +158,13 @@ const InfoPaymentScreen = () => {
                 </div>
               </div>
               <p className={classes.block}>
-                Local payment methods: iDeal, Bancontact and more. Availability
-                of local payment methods depends on your location. Visiting our
-                website from the Netherlands, you will be able to use iDeal,
-                browsing from Belgium will give you chance to use Bancontact,
-                and so on.
+                <span className={classes.emphasis}>
+                  Local payment methods:{" "}
+                </span>
+                iDeal, Bancontact and more. Availability of local payment
+                methods depends on your location. Visiting our website from the
+                Netherlands, you will be able to use iDeal, browsing from
+                Belgium will give you chance to use Bancontact, and so on.
               </p>
               <div className={classes.logosContainer}>
                 <div className={classes.logo}>
@@ -182,7 +187,8 @@ const InfoPaymentScreen = () => {
                 </div>
               </div>
               <p className={classes.block}>
-                Kredit card: all major card payments are accepted
+                <span className={classes.emphasis}>Kredit card: </span>all major
+                card payments are accepted
               </p>
               <div className={classes.logosContainer}>
                 <div className={classes.logo}>
@@ -190,9 +196,10 @@ const InfoPaymentScreen = () => {
                 </div>
               </div>
               <p className={classes.block}>
-                PayPal: With PayPal you can pay for your order easily and
-                directly. You will be taken to the PayPal payment screen where
-                all payment details have already been entered.
+                <span className={classes.emphasis}>PayPal: </span>With PayPal
+                you can pay for your order easily and directly. You will be
+                taken to the PayPal payment screen where all payment details
+                have already been entered.
               </p>
               <p className={classes.block}></p>
               <div className={classes.logosContainer}>
@@ -206,7 +213,7 @@ const InfoPaymentScreen = () => {
               </p>
               <p className={classes.block}>Our account number:</p>
               <p className={classes.block}>GD TOP</p>
-              <p className={classes.block}>NL00 3744 8248 83</p>
+              <p className={classes.block}>NL71 ABNA 0101 5984 40</p>
             </section>
             {/* -------------------------------------------- */}
             <section className={classes.section}>
@@ -219,6 +226,21 @@ const InfoPaymentScreen = () => {
               <p className={classes.block}>
                 If you decide to collect products in person payment should be
                 done in cash upon personal collection from the parcel.
+              </p>
+            </section>
+            <section className={classes.section}>
+              <h3 className={classes.sectionHead}>Invoicing</h3>
+              <p className={classes.block}>
+                You may always get an invoice for your order.
+              </p>
+              <p className={classes.block}>
+                Simply send us your order number and invoice data: company full
+                name, company address and BTW number. Use contact form on our
+                contact page or email adress:{" "}
+                <a href="mailto:info@tophoneys.com" className={classes.link}>
+                  info@tophoneys.com
+                </a>
+                .
               </p>
             </section>
           </div>

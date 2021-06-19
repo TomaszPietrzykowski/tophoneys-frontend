@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       bottom: 0,
       left: 0,
-      background: `linear-gradient(90deg, transparent, ${theme.palette.text.disabled}, transparent)`,
+      background: `linear-gradient(90deg, ${theme.palette.common.background}, ${theme.palette.text.disabled}, ${theme.palette.common.background})`,
       opacity: 0.5,
     },
     "& > *": {
@@ -101,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: 0,
       left: 0,
-      background: `linear-gradient(transparent, ${theme.palette.secondary.main}, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, ${theme.palette.secondary.main}, ${theme.palette.common.background})`,
     },
     [theme.breakpoints.down("md")]: {
       marginLeft: "50%",
@@ -169,7 +169,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       top: "-.5rem",
       left: 0,
-      background: `linear-gradient(90deg, ${theme.palette.secondary.light}, transparent)`,
+      background: `linear-gradient(90deg, ${theme.palette.secondary.light}, ${theme.palette.common.background})`,
     },
   },
   link: {
@@ -234,8 +234,10 @@ const PlaceOrderScreen = ({ history }) => {
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   )
-  cart.shippingPrice = cart.itemsPrice >= 39 ? 0 : 4.95
-  // cart.taxPrice = addDecimals(Number((0.1 * cart.itemsPrice).toFixed(2)));
+  cart.shippingPrice =
+    cart.itemsPrice >= 39 || shippingAddress.city.toLowerCase() === "purmerend"
+      ? 0
+      : 4.95
   cart.taxPrice = 0
   cart.totalPrice = (
     Number(cart.itemsPrice) +

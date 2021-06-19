@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
       left: 0,
       height: "100%",
       width: 2,
-      background: `linear-gradient(transparent, 40%, ${theme.palette.secondary.main}, 60%, transparent)`,
+      background: `linear-gradient(${theme.palette.common.background}, 40%, ${theme.palette.secondary.main}, 60%, ${theme.palette.common.background})`,
       [theme.breakpoints.down("xs")]: {
         width: 1,
       },
@@ -236,7 +236,8 @@ const ProductCreateScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const [name, setName] = useState("")
-  const [image, setImage] = useState("")
+  const [image, setImage] = useState("/public/images/default-img.jpeg")
+  const [imageUploaded, setImageUploaded] = useState(false)
   const [description, setDescription] = useState("")
   const [capacity, setCapacity] = useState("")
   const [price, setPrice] = useState(0)
@@ -268,21 +269,25 @@ const ProductCreateScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(
-      createProduct({
-        name,
-        image,
-        description,
-        category,
-        capacity,
-        price: (price / 100).toFixed(2),
-        countInStock,
-        countryOfOrigin,
-        brand,
-        isPromo,
-        isPublished,
-      })
-    )
+    if (imageUploaded) {
+      dispatch(
+        createProduct({
+          name,
+          image,
+          description,
+          category,
+          capacity,
+          price: (price / 100).toFixed(2),
+          countInStock,
+          countryOfOrigin,
+          brand,
+          isPromo,
+          isPublished,
+        })
+      )
+    } else {
+      window.alert("Don't forget to upload image!")
+    }
   }
 
   const rootCategories = categories
@@ -300,8 +305,8 @@ const ProductCreateScreen = ({ history }) => {
       }
 
       const { data } = await axios.post("/api/uploads", formData, config)
-      const iMac = data.replaceAll(`\\`, "/")
       setImage(data)
+      setImageUploaded(true)
       setUploading(false)
     } catch (error) {
       console.error(error)

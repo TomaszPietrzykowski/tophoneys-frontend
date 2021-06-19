@@ -14,13 +14,14 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     position: "fixed",
     bottom: 0,
+    zIndex: 1300,
   },
   container: {
     maxWidth: 1300,
     margin: "auto",
     display: "flex",
     justifyContent: "space-between",
-    padding: ".9rem 0 .8rem",
+    padding: ".5rem 0 .4rem",
   },
   tab: {
     display: "flex",

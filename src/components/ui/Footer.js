@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
       content: '""',
       width: "50%",
       height: 1,
-      background: `linear-gradient(90deg, transparent, white, transparent)`,
+      background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.common.background}, ${theme.palette.primary.main})`,
       position: "absolute",
       top: 0,
       [theme.breakpoints.down("md")]: {
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
       content: '""',
       width: "50%",
       height: 1,
-      background: `linear-gradient(90deg, transparent, white, transparent)`,
+      background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.common.background}, ${theme.palette.primary.main})`,
       position: "absolute",
       bottom: 0,
       [theme.breakpoints.down("md")]: {
@@ -102,6 +102,12 @@ const useStyles = makeStyles((theme) => ({
   anchor: {
     color: "white",
   },
+  copy: {
+    ...theme.flex.col,
+    ...theme.typography.mont,
+    fontSize: ".9rem",
+    margin: "2rem 0 0",
+  },
 }))
 
 const Footer = () => {
@@ -115,11 +121,11 @@ const Footer = () => {
             <Link to="/register">
               <div className={classes.link}>Create account</div>
             </Link>
-            <Link to="/cart">
-              <div className={classes.link}>Cart</div>
-            </Link>
             <Link to="/profile">
               <div className={classes.link}>My orders and profile</div>
+            </Link>
+            <Link to="/cart">
+              <div className={classes.link}>Cart</div>
             </Link>
           </div>
           <div className={classes.column}>
@@ -142,14 +148,14 @@ const Footer = () => {
             <Link to="/conditions">
               <div className={classes.link}>General conditions</div>
             </Link>
-            <Link to="/privacy">
-              <div className={classes.link}>Privacy policy</div>
-            </Link>
             <Link to="/payment-info">
-              <div className={classes.link}>Payment</div>
+              <div className={classes.link}>Payment and invoices</div>
             </Link>
             <Link to="/shipping-info">
               <div className={classes.link}>Shipping and return</div>
+            </Link>
+            <Link to="/privacy">
+              <div className={classes.link}>Privacy policy</div>
             </Link>
           </div>
         </div>
@@ -171,6 +177,9 @@ const Footer = () => {
           >
             <InstagramIcon className={classes.socialIcon} />
           </a>
+        </div>
+        <div className={classes.copy}>
+          &copy; Copyright {new Date().getFullYear()} GD TOP
         </div>
       </div>
     </div>
