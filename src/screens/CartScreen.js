@@ -10,7 +10,6 @@ import Tooltip from "@material-ui/core/Tooltip"
 import { makeStyles } from "@material-ui/styles"
 import PaymentIcon from "@material-ui/icons/Payment"
 // custom
-import Message from "../components/Message"
 import Counter from "../components/Counter"
 import { removeFromCart, updateQuantity } from "../actions/cartActions"
 
