@@ -177,6 +177,7 @@ const useStyles = makeStyles((theme) => ({
   vat: {
     color: theme.palette.text.disabled,
     fontSize: ".85rem",
+    fontStyle: "italic",
     margin: ".5rem 0 2rem",
     [theme.breakpoints.down("xs")]: {
       fontWeight: 300,
@@ -368,7 +369,7 @@ const ProductScreen = ({ match, history }) => {
                           </div>
                         )}
                       </div>
-                      <div className={classes.vat}>Including VAT</div>
+                      <div className={classes.vat}>incl. VAT</div>
                       {product.capacityDropdown &&
                       product.capacityDropdown.length > 0 ? (
                         <p className={classes.detail}>
@@ -407,6 +408,14 @@ const ProductScreen = ({ match, history }) => {
                           Country:{" "}
                           <span style={{ marginLeft: ".3rem" }}>
                             {product.countryOfOrigin}
+                          </span>
+                        </p>
+                      )}
+                      {product.brand && (
+                        <p className={classes.detail}>
+                          Brand:{" "}
+                          <span style={{ marginLeft: ".3rem" }}>
+                            {product.brand}
                           </span>
                         </p>
                       )}

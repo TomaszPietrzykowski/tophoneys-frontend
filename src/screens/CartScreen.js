@@ -179,6 +179,15 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "2.2rem",
     },
   },
+  vat: {
+    color: theme.palette.text.disabled,
+    fontSize: ".9rem",
+    fontStyle: "italic",
+    margin: ".5rem 0 0",
+    [theme.breakpoints.down("xs")]: {
+      fontWeight: 300,
+    },
+  },
   paymentIcon: {
     fontSize: "1.5rem",
     marginRight: ".5rem",
@@ -287,19 +296,6 @@ const CartScreen = ({ history }) => {
               <Link to="/" className={classes.emptyLink}>
                 go shopping!
               </Link>
-              {/* <Message
-                variant="info"
-                message="Your cart is empty"
-                action={
-                  <Button
-                    color="inherit"
-                    size="small"
-                    onClick={() => history.goBack()}
-                  >
-                    BACK
-                  </Button>
-                }
-              /> */}
             </div>
           ) : (
             <div>
@@ -391,6 +387,7 @@ const CartScreen = ({ history }) => {
                 {cartItems
                   .reduce((acc, item) => acc + item.qty * item.price, 0)
                   .toFixed(2)}
+                <div className={classes.vat}>incl. VAT</div>
               </div>
               <div className={classes.btnContainer}>
                 <Button
