@@ -277,7 +277,7 @@ const OrderScreen = ({ match, history }) => {
     }
     window.paypal
       .Buttons({
-        env: "sandbox", // Or 'production'
+        env: "production", // Or 'sandbox'
         // Set up the payment: call backend with order id, receive result with paypal payment id:
         createOrder: async function () {
           const { data } = await axios.post("/api/checkout/create", body, {
