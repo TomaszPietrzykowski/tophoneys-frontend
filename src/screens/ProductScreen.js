@@ -113,9 +113,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   price: {
-    margin: "1.6rem 0",
+    margin: "1.6rem 0 0",
     fontWeight: 300,
-    fontSize: "2.6rem",
+    fontSize: "2.8rem",
     color: theme.palette.text.secondary,
     display: "flex",
     alignItems: "flex-start",
@@ -170,6 +170,15 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     fontSize: "1rem",
     margin: "1rem 0",
+    [theme.breakpoints.down("xs")]: {
+      fontWeight: 300,
+    },
+  },
+  vat: {
+    color: theme.palette.text.disabled,
+    fontSize: ".85rem",
+    fontStyle: "italic",
+    margin: ".5rem 0 2rem",
     [theme.breakpoints.down("xs")]: {
       fontWeight: 300,
     },
@@ -360,6 +369,7 @@ const ProductScreen = ({ match, history }) => {
                           </div>
                         )}
                       </div>
+                      <div className={classes.vat}>incl. VAT</div>
                       {product.capacityDropdown &&
                       product.capacityDropdown.length > 0 ? (
                         <p className={classes.detail}>
@@ -398,6 +408,14 @@ const ProductScreen = ({ match, history }) => {
                           Country:{" "}
                           <span style={{ marginLeft: ".3rem" }}>
                             {product.countryOfOrigin}
+                          </span>
+                        </p>
+                      )}
+                      {product.brand && (
+                        <p className={classes.detail}>
+                          Brand:{" "}
+                          <span style={{ marginLeft: ".3rem" }}>
+                            {product.brand}
                           </span>
                         </p>
                       )}

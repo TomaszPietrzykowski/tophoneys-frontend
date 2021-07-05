@@ -935,7 +935,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                           </MenuItem>
                           <MenuItem
                             component={Link}
-                            to="/category/mulitiflowerhoneys"
+                            to="/category/multiflowerhoneys"
                             classes={{ root: classes.submenu2 }}
                             value="mulitiflowerhoneys"
                             onClick={(e) => {
