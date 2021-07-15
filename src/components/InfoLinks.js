@@ -9,16 +9,15 @@ const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
     ...theme.typography.prosto,
-    padding: "0 2rem",
-    margin: "1rem",
-    borderBottom: "1px solid #eee",
+    margin: "1rem 0",
     overflow: "hidden",
   },
   links: {
     height: 41,
     display: "grid",
-    gridTemplateColumns: "1fr 1fr 1fr 1fr",
+    gridTemplateColumns: "repeat(4, 25%)",
     justifyContent: "center",
+    alignItems: "center",
     overflow: "hidden",
     width: "100%",
     [theme.breakpoints.down("md")]: {
@@ -33,9 +32,13 @@ const useStyles = makeStyles((theme) => ({
       animationDuration: "20s",
       animationIterationCount: "infinite",
     },
+    [theme.breakpoints.down("xs")]: {
+      width: "400vw",
+    },
   },
   tab: {
     display: "flex",
+    padding: "0 auto",
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
@@ -113,7 +116,7 @@ const InfoLinks = () => {
         </div>
         <div className={classes.tab}>
           <TruckIcon className={classes.icon} />
-          <div className={classes.text}>Free delivery from &euro; 39</div>
+          <div className={classes.text}>Free delivery from &euro; 49.90</div>
         </div>
         <div className={classes.tab}>
           <GiftIcon className={classes.icon} />

@@ -18,9 +18,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "auto",
     borderRadius: 7,
-    [theme.breakpoints.down("xs")]: {
-      padding: "0px .5rem",
-    },
   },
   banner: {
     width: "100%",

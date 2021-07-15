@@ -139,7 +139,7 @@ const InfoShippingScreen = () => {
                 .
               </p>
               <p className={classes.block}>
-                FREE shipping in the Netherlands above € 39,00
+                FREE shipping in the Netherlands above € 49,90
               </p>
               <p className={classes.block}>
                 FREE delivery in Purmerend! Just place an order and delivery

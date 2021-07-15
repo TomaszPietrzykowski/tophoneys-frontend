@@ -28,20 +28,20 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       width: "100%",
       margin: 0,
-      padding: ".5rem",
+      padding: ".5rem 15px",
     },
     transition: "all .3s ease",
     "&:hover": {
       opacity: 0.87,
     },
   },
-  teaser1: {
+  teaserInactive: {
     margin: ".8rem",
     ...theme.flex.col,
     [theme.breakpoints.down("xs")]: {
       width: "100%",
       margin: 0,
-      padding: ".5rem",
+      padding: ".5rem 15px",
     },
   },
   img: {
@@ -68,7 +68,7 @@ const Teasers = () => {
         </div>
       </Link>
       <div>
-        <div className={classes.teaser1}>
+        <div className={classes.teaserInactive}>
           <img src={teaser2} alt="teaser one" className={classes.img} />
         </div>
       </div>

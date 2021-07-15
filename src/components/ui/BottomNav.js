@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     position: "fixed",
     bottom: 0,
+    zIndex: 200,
   },
   container: {
     maxWidth: 1300,

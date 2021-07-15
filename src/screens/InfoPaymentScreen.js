@@ -6,7 +6,6 @@ import AccountBalanceIcon from "@material-ui/icons/AccountBalance"
 import b1 from "../assets/ideal-logo.svg"
 import b2 from "../assets/bancontact-logo.svg"
 import b3 from "../assets/paypal-logo.svg"
-import b4 from "../assets/przelewy24-logo.png"
 import b5 from "../assets/visa-logo.svg"
 import b6 from "../assets/mastercard-logo.svg"
 import b7 from "../assets/maestro-logo.svg"
@@ -152,9 +151,6 @@ const InfoPaymentScreen = () => {
                 </div>
                 <div className={classes.logo}>
                   <img src={b2} alt="producers logo" className={classes.img} />
-                </div>
-                <div className={classes.logo}>
-                  <img src={b4} alt="producers logo" className={classes.img} />
                 </div>
               </div>
               <p className={classes.block}>

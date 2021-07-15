@@ -9,7 +9,7 @@ const categories = [
   ["Goldenrod honeys", "goldenrodhoneys"],
   ["Forest honeys", "foresthoneys"],
   ["Raspberry honeys", "raspberryhoneys"],
-  ["Corriander honeys", "corianderhoneys"],
+  ["Coriander honeys", "corianderhoneys"],
   ["Heather honeys", "heatherhoneys"],
   ["Dandelion honeys", "dandelionhoneys"],
   ["Honeydew honey", "honeydewhoney"],

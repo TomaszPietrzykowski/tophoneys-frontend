@@ -235,7 +235,8 @@ const PlaceOrderScreen = ({ history }) => {
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   )
   cart.shippingPrice =
-    cart.itemsPrice >= 39 || shippingAddress.city.toLowerCase() === "purmerend"
+    cart.itemsPrice >= 49.9 ||
+    shippingAddress.city.toLowerCase() === "purmerend"
       ? 0
       : 4.95
   cart.taxPrice = 0
