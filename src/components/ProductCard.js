@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     letterSpacing: 0.5,
     [theme.breakpoints.down("xs")]: {
-      fontSize: ".75rem",
+      fontSize: "12px",
       letterSpacing: 0.4,
     },
   },
@@ -113,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1rem",
     color: theme.palette.text.primary,
     [theme.breakpoints.down("xs")]: {
-      fontSize: ".85rem",
+      fontSize: "13.6px",
       letterSpacing: 0.4,
     },
   },
@@ -122,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
     margin: ".5rem 0",
     color: theme.palette.text.disabled,
     [theme.breakpoints.down("xs")]: {
-      fontSize: ".75rem",
+      fontSize: "12px",
     },
   },
   price: {
@@ -137,7 +137,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     overflow: "hidden",
     [theme.breakpoints.down("xs")]: {
-      fontSize: "1.2rem",
+      fontSize: "19.2px",
       letterSpacing: 0.5,
     },
   },
@@ -149,7 +149,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0.5,
     position: "relative",
     [theme.breakpoints.down("xs")]: {
-      fontSize: ".8rem",
+      fontSize: "12.8px",
       letterSpacing: 0.4,
       padding: "0 0.3rem",
     },
@@ -200,7 +200,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: ".85rem",
     },
     [theme.breakpoints.down("xs")]: {
-      fontSize: ".7rem",
+      fontSize: "11.2px",
       padding: ".5rem .8rem",
       letterSpacing: 0.3,
     },
@@ -209,11 +209,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.2rem",
     marginRight: ".5rem",
     [theme.breakpoints.down("md")]: {
-      fontSize: "1.2rem",
+      fontSize: "19.2px",
       margin: 0,
     },
     [theme.breakpoints.down("sm")]: {
-      fontSize: ".85rem",
+      fontSize: "13.6px",
       margin: "0 .3rem 0 0",
     },
   },

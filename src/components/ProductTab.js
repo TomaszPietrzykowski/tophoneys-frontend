@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
   },
   saleIcon: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "1rem",
+      fontSize: "16px",
     },
   },
 
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     padding: "1.4rem 0 0 1.4rem",
     [theme.breakpoints.down("sm")]: {
-      padding: ".5rem 0 0 .5rem",
+      padding: "8px 0 0 8px",
     },
   },
   category: {
@@ -104,7 +104,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     letterSpacing: 0.5,
     [theme.breakpoints.down("sm")]: {
-      fontSize: ".75rem",
+      fontSize: "12px",
       letterSpacing: 0.4,
     },
   },
@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1rem",
     color: theme.palette.text.primary,
     [theme.breakpoints.down("sm")]: {
-      fontSize: ".85rem",
+      fontSize: "13.6px",
       letterSpacing: 0.4,
     },
   },
@@ -121,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
     margin: ".5rem 0",
     color: theme.palette.text.disabled,
     [theme.breakpoints.down("sm")]: {
-      fontSize: ".75rem",
+      fontSize: "12px",
     },
   },
   price: {
@@ -137,9 +137,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     paddingLeft: "1.4rem",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "1.2rem",
+      fontSize: "19.2px",
       letterSpacing: 0.5,
-      paddingLeft: ".5rem",
+      paddingLeft: "8px",
     },
   },
 
@@ -150,12 +150,10 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
     opacity: 0.5,
     [theme.breakpoints.down("sm")]: {
-      fontSize: ".8rem",
+      fontSize: "12.8px",
       letterSpacing: 0.4,
-      padding: "0 0.3rem",
+      padding: "0 4.8px",
     },
-    // textDecoration: "line-through",
-    // border: "1px solid blue",
     position: "relative",
     "&::after": {
       content: "''",
@@ -198,9 +196,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
     },
     [theme.breakpoints.down("sm")]: {
-      fontSize: ".7rem",
+      fontSize: "11.2px",
       flex: 1,
-      padding: ".5rem .8rem",
+      padding: "8px 12.8px",
       letterSpacing: 0.3,
     },
   },
@@ -212,15 +210,10 @@ const useStyles = makeStyles((theme) => ({
       margin: 0,
     },
     [theme.breakpoints.down("sm")]: {
-      fontSize: ".85rem",
-      margin: "0 .3rem 0 0",
+      fontSize: "13.6px",
+      margin: "0 4.8px 0 0",
     },
   },
-  // hide: {
-  //   [theme.breakpoints.down("md")]: {
-  //     whiteSpace: "nowrap",
-  //   },
-  // },
 }))
 
 const ProductTab = ({
