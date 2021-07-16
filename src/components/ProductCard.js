@@ -76,19 +76,16 @@ const useStyles = makeStyles((theme) => ({
   },
   imageContainer: {
     ...theme.flex.col,
-    [theme.breakpoints.down("sm")]: {
-      height: "auto",
-    },
+    justifyContent: "flex-end",
+    height: "100%",
   },
   img: {
     display: "block",
     maxWidth: "100%",
     objectFit: "contain",
-    [theme.breakpoints.down("md")]: {
-      maxWidth: "100%",
-    },
   },
   content: {
+    height: "100%",
     display: "flex",
     minHeight: 180,
     flexDirection: "column",
