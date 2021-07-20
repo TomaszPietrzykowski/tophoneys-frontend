@@ -22,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "6rem",
+    marginBottom: "3rem",
     [theme.breakpoints.down("sm")]: {
-      marginBottom: "1.5rem",
+      marginBottom: "1rem",
     },
   },
 

@@ -8,7 +8,7 @@ import ProductTab from "./ProductTab"
 
 const useStyles = makeStyles((theme) => ({
   flex: {
-    margin: "7rem auto",
+    margin: "0 auto",
     ...theme.flex.row,
     justifyContent: "space-around",
     alignItems: "stretch",

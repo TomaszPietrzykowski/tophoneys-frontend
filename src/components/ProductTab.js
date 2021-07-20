@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     margin: "0 1rem",
     display: "grid",
-    gridTemplateRows: "1fr 1fr",
+    gridTemplateRows: "3fr 2fr",
     cursor: "pointer",
     position: "relative",
     "&::before": {
@@ -45,10 +45,8 @@ const useStyles = makeStyles((theme) => ({
   },
   imageContainer: {
     height: "100%",
-    [theme.breakpoints.down("sm")]: {
-      ...theme.flex.colStart,
-      justifyContent: "flex-end",
-    },
+    ...theme.flex.colStart,
+    justifyContent: "flex-end",
   },
   img: {
     display: "block",
@@ -67,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
     ...theme.flex.col,
     top: "-1.2rem",
     right: 5,
-    // transform: "translate(0, 50%)",
     backgroundColor: theme.palette.secondary.main,
     color: "white",
     padding: ".45rem .4rem .3rem .5rem",
@@ -83,17 +80,15 @@ const useStyles = makeStyles((theme) => ({
   },
   saleIcon: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "16px",
+      fontSize: "1rem",
     },
   },
 
   content: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
+    ...theme.flex.colStart,
     padding: "1.4rem 0 0 1.4rem",
     [theme.breakpoints.down("sm")]: {
-      padding: "8px 0 0 8px",
+      padding: ".5rem 0 0 .5rem",
     },
   },
   category: {
@@ -104,15 +99,15 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     letterSpacing: 0.5,
     [theme.breakpoints.down("sm")]: {
-      fontSize: "12px",
-      letterSpacing: 0.4,
+      fontSize: ".7rem",
+      letterSpacing: 0.2,
     },
   },
   title: {
     fontSize: "1rem",
     color: theme.palette.text.primary,
     [theme.breakpoints.down("sm")]: {
-      fontSize: "13.6px",
+      fontSize: ".85rem",
       letterSpacing: 0.4,
     },
   },
@@ -121,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
     margin: ".5rem 0",
     color: theme.palette.text.disabled,
     [theme.breakpoints.down("sm")]: {
-      fontSize: "12px",
+      fontSize: ".75rem",
     },
   },
   price: {
@@ -137,9 +132,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     paddingLeft: "1.4rem",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "19.2px",
+      fontSize: "1.2rem",
       letterSpacing: 0.5,
-      paddingLeft: "8px",
+      paddingLeft: ".5rem",
     },
   },
 
@@ -150,9 +145,9 @@ const useStyles = makeStyles((theme) => ({
     color: "red",
     opacity: 0.5,
     [theme.breakpoints.down("sm")]: {
-      fontSize: "12.8px",
+      fontSize: ".8rem",
       letterSpacing: 0.4,
-      padding: "0 4.8px",
+      padding: "0 0.3rem",
     },
     position: "relative",
     "&::after": {
@@ -196,9 +191,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
     },
     [theme.breakpoints.down("sm")]: {
-      fontSize: "11.2px",
+      fontSize: ".7rem",
       flex: 1,
-      padding: "8px 12.8px",
+      padding: ".5rem .8rem",
       letterSpacing: 0.3,
     },
   },
@@ -210,8 +205,8 @@ const useStyles = makeStyles((theme) => ({
       margin: 0,
     },
     [theme.breakpoints.down("sm")]: {
-      fontSize: "13.6px",
-      margin: "0 4.8px 0 0",
+      fontSize: ".85rem",
+      margin: "0 .3rem 0 0",
     },
   },
 }))

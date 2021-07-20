@@ -29,15 +29,14 @@ const useStyles = makeStyles((theme) => ({
       padding: "1rem",
     },
     [theme.breakpoints.down("xs")]: {
-      maxWidth: "50%",
       padding: "0 .5rem",
       alignItems: "flex-end",
     },
   },
   card: {
     display: "grid",
-    gridTemplateRows: "1fr 1fr",
-    cursor: "pointer",
+    height: "100%",
+    gridTemplateRows: "3fr 2fr auto",
     position: "relative",
     "&::before": {
       content: "''",
@@ -56,7 +55,6 @@ const useStyles = makeStyles((theme) => ({
     right: 5,
     backgroundColor: theme.palette.secondary.main,
     color: "white",
-    // textTransform: "uppercase",
     padding: ".45rem .4rem .3rem .5rem",
     fontSize: ".7rem",
     fontWeight: 500,
@@ -75,7 +73,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   imageContainer: {
-    ...theme.flex.col,
+    cursor: "pointer",
+    ...theme.flex.colStart,
     justifyContent: "flex-end",
     height: "100%",
   },
@@ -85,6 +84,7 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "contain",
   },
   content: {
+    cursor: "pointer",
     height: "100%",
     display: "flex",
     minHeight: 180,
@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     [theme.breakpoints.down("sm")]: {
       padding: ".5rem 0 0 .5rem",
-      minHeight: 145,
+      minHeight: 95,
     },
   },
   category: {
@@ -105,15 +105,15 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     letterSpacing: 0.5,
     [theme.breakpoints.down("xs")]: {
-      fontSize: "12px",
-      letterSpacing: 0.4,
+      fontSize: ".7rem",
+      letterSpacing: 0.2,
     },
   },
   title: {
     fontSize: "1rem",
     color: theme.palette.text.primary,
     [theme.breakpoints.down("xs")]: {
-      fontSize: "13.6px",
+      fontSize: ".85rem",
       letterSpacing: 0.4,
     },
   },
@@ -122,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
     margin: ".5rem 0",
     color: theme.palette.text.disabled,
     [theme.breakpoints.down("xs")]: {
-      fontSize: "12px",
+      fontSize: ".75rem",
     },
   },
   price: {
@@ -137,7 +137,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     overflow: "hidden",
     [theme.breakpoints.down("xs")]: {
-      fontSize: "19.2px",
+      fontSize: "1.2rem",
       letterSpacing: 0.5,
     },
   },
@@ -149,7 +149,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0.5,
     position: "relative",
     [theme.breakpoints.down("xs")]: {
-      fontSize: "12.8px",
+      fontSize: ".8rem",
       letterSpacing: 0.4,
       padding: "0 0.3rem",
     },
@@ -167,7 +167,6 @@ const useStyles = makeStyles((theme) => ({
   buttonsContainer: {
     display: "flex",
     margin: "0 auto 0 0",
-    cursor: "pointer",
     color: theme.palette.common.white,
     padding: "0 0 1rem 1rem",
     [theme.breakpoints.down("sm")]: {
@@ -200,7 +199,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: ".85rem",
     },
     [theme.breakpoints.down("xs")]: {
-      fontSize: "11.2px",
+      fontSize: ".7rem",
       padding: ".5rem .8rem",
       letterSpacing: 0.3,
     },
@@ -209,11 +208,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.2rem",
     marginRight: ".5rem",
     [theme.breakpoints.down("md")]: {
-      fontSize: "19.2px",
+      fontSize: "1.2rem",
       margin: 0,
     },
     [theme.breakpoints.down("sm")]: {
-      fontSize: "13.6px",
+      fontSize: ".85rem",
       margin: "0 .3rem 0 0",
     },
   },
@@ -261,58 +260,51 @@ const ProductCard = ({ product }) => {
       </Snackbar>
       <div className={classes.root}>
         <div className={classes.card}>
-          {/* {product.isPromo && (
-            <div className={classes.saleBadge}>
-              <SaleIcon />
-            </div>
-          )} */}
           <Link to={`/product/${product._id}`}>
             <div className={classes.imageContainer}>
               <img src={product.image} alt="product" className={classes.img} />
             </div>
           </Link>
-          <div>
-            <Link to={`/product/${product._id}`}>
-              <div className={classes.content}>
-                {product.isPromo && (
-                  <div className={classes.saleBadge}>
-                    <SaleIcon className={classes.saleIcon} />
-                  </div>
-                )}
-                <div className={classes.category}>
-                  {getCategoryLabel(product.category[0])}
+          <Link to={`/product/${product._id}`}>
+            <div className={classes.content}>
+              {product.isPromo && (
+                <div className={classes.saleBadge}>
+                  <SaleIcon className={classes.saleIcon} />
                 </div>
-                <div className={classes.title}>{product.name}</div>
-                <div className={classes.capacity}>{product.capacity}</div>
-                <div className={classes.price}>
-                  <div>
-                    <span style={{ opacity: 0.45 }}>&euro; </span>
-                    {product.price.toFixed(2)}
-                  </div>
-                  {product.isPromo && product.previousPrice > 0 && (
-                    <div className={classes.previousPrice}>
-                      {product.previousPrice.toFixed(2)}
-                    </div>
-                  )}
-                </div>
+              )}
+              <div className={classes.category}>
+                {getCategoryLabel(product.category[0])}
               </div>
-            </Link>
-            <div className={classes.buttonsContainer}>
-              <button
-                disabled={!product.countInStock > 0}
-                className={classes.cartBtn}
-                onClick={addToCartHandler}
-              >
-                {product.countInStock > 0 && (
-                  <CartIcon className={classes.cartIcon} />
-                )}
+              <div className={classes.title}>{product.name}</div>
+              <div className={classes.capacity}>{product.capacity}</div>
+              <div className={classes.price}>
                 <div>
-                  <span className={classes.hide}>
-                    {product.countInStock > 0 ? "Add to cart" : "Out of stock"}
-                  </span>
+                  <span style={{ opacity: 0.45 }}>&euro; </span>
+                  {product.price.toFixed(2)}
                 </div>
-              </button>
+                {product.isPromo && product.previousPrice > 0 && (
+                  <div className={classes.previousPrice}>
+                    {product.previousPrice.toFixed(2)}
+                  </div>
+                )}
+              </div>
             </div>
+          </Link>
+          <div className={classes.buttonsContainer}>
+            <button
+              disabled={!product.countInStock > 0}
+              className={classes.cartBtn}
+              onClick={addToCartHandler}
+            >
+              {product.countInStock > 0 && (
+                <CartIcon className={classes.cartIcon} />
+              )}
+              <div>
+                <span className={classes.hide}>
+                  {product.countInStock > 0 ? "Add to cart" : "Out of stock"}
+                </span>
+              </div>
+            </button>
           </div>
         </div>
       </div>

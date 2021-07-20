@@ -251,7 +251,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: ".5rem",
     [theme.breakpoints.down("md")]: {
       fontSize: "1.2rem",
-      margin: 0,
+      margin: "0 .3rem 0 0",
     },
   },
   hide: {
