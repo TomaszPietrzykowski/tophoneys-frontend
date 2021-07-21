@@ -15,6 +15,7 @@ import Message from "../components/Message"
 import Breadcrumbs from "../components/CustomBreadcrumbs"
 import Counter from "../components/Counter"
 import RelatedProducts from "../components/RelatedProducts"
+import { PRODUCT_DETAILS_RESET } from "../constants/productConstants"
 
 // snackbars:
 function Alert(props) {
@@ -282,6 +283,9 @@ const ProductScreen = ({ match, history }) => {
 
   useEffect(() => {
     dispatch(listProductDetails(match.params.id))
+    return () => {
+      dispatch({ type: PRODUCT_DETAILS_RESET })
+    }
   }, [match, dispatch])
 
   const addToCartHandler = () => {
@@ -360,9 +364,14 @@ const ProductScreen = ({ match, history }) => {
                   >
                     <div className={classes.filler2}>
                       {product && <Breadcrumbs category={product.category} />}
-                      <h1 className={classes.name}>{product.name}</h1>
+                      <h1 className={classes.name}>
+                        <span>{product.name}</span>
+                      </h1>
                       <div className={classes.price}>
-                        <div>&euro; {Number(product.price).toFixed(2)}</div>
+                        <div>
+                          <span>&euro;</span>{" "}
+                          <span>{Number(product.price).toFixed(2)}</span>
+                        </div>
                         {product.isPromo && product.previousPrice > 0 && (
                           <div className={classes.previousPrice}>
                             {product.previousPrice.toFixed(2)}

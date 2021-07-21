@@ -47,6 +47,15 @@ const useStyles = makeStyles((theme) => ({
       width: 1,
       background: `linear-gradient(${theme.palette.common.background}, 40%, ${theme.palette.secondary.main}, 60%, ${theme.palette.common.background})`,
     },
+    [`@media (max-width: 460px)`]: {
+      gridTemplateRows: "4fr 3fr auto",
+    },
+    [`@media (max-width: 400px)`]: {
+      gridTemplateRows: "5fr 4fr auto",
+    },
+    [`@media (max-width: 350px)`]: {
+      gridTemplateRows: "1fr 1fr auto",
+    },
   },
   saleBadge: {
     position: "absolute",
@@ -300,9 +309,11 @@ const ProductCard = ({ product }) => {
                 <CartIcon className={classes.cartIcon} />
               )}
               <div>
-                <span className={classes.hide}>
-                  {product.countInStock > 0 ? "Add to cart" : "Out of stock"}
-                </span>
+                {product.countInStock > 0 ? (
+                  <span class="notranslate">Add to cart</span>
+                ) : (
+                  <span class="notranslate">Out of stock</span>
+                )}
               </div>
             </button>
           </div>

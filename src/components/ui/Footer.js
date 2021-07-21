@@ -129,7 +129,9 @@ const Footer = () => {
             </Link>
           </div>
           <div className={classes.column}>
-            <div className={classes.columnHeader}>Top Honeys</div>
+            <div className={classes.columnHeader}>
+              <span class="notranslate">Top Honeys</span>
+            </div>
             <Link to="/">
               <div className={classes.link}>Home</div>
             </Link>

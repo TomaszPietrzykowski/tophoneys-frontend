@@ -42,6 +42,12 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       margin: "0 .5rem",
     },
+    [`@media (max-width: 470px)`]: {
+      gridTemplateRows: "4fr 3fr",
+    },
+    [`@media (max-width: 410px)`]: {
+      gridTemplateRows: "1fr 1fr",
+    },
   },
   imageContainer: {
     height: "100%",
@@ -336,9 +342,11 @@ const ProductTab = ({
                     <CartIcon className={classes.cartIcon} />
                   )}
                   <div>
-                    <span className={classes.hide}>
-                      {countInStock > 0 ? "Add to cart" : "Out of stock"}
-                    </span>
+                    {countInStock > 0 ? (
+                      <span class="notranslate">Add to cart</span>
+                    ) : (
+                      <span class="notranslate">Out of stock</span>
+                    )}
                   </div>
                 </button>
               </div>
