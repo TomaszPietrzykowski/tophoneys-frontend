@@ -8,7 +8,7 @@ import axios from "axios"
 const useStyles = makeStyles((theme) => ({
   container: {
     maxWidth: 1300,
-    margin: "5rem auto",
+    margin: "0 auto 5rem",
     padding: "0px 15px",
     [theme.breakpoints.down("md")]: {
       padding: "0px",
@@ -22,9 +22,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    marginTop: "5rem",
     marginBottom: "3rem",
     [theme.breakpoints.down("sm")]: {
       marginBottom: "1rem",
+      marginTop: "3rem",
     },
   },
 
@@ -66,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ProductsSlider = ({ title, endpoint, timeout, hideHeader = false }) => {
   const classes = useStyles()
-  const isTablet = useMediaQuery("(max-width: 990px)")
+  const isTablet = useMediaQuery("(max-width: 1260px)")
   const isMobile = useMediaQuery("(max-width: 600px)")
   const [loading, setLoading] = useState(false)
   const [products, setProducts] = useState([])

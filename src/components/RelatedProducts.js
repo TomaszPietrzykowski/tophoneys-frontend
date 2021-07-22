@@ -7,7 +7,6 @@ const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.typography.mont,
     width: "100%",
-    // maxHeight: 300,
   },
   header: {
     ...theme.flex.row,
@@ -31,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   title: {
-    // flex: 1,
     color: theme.palette.primary.main,
     textTransform: "uppercase",
     padding: "2rem 3rem",
@@ -41,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
   },
   margin: {
     // flex: 2,
-    // border: "1px solid orange",
   },
 }))
 
