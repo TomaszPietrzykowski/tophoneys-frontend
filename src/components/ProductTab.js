@@ -320,7 +320,7 @@ const ProductTab = ({
             <div>
               <Link to={`/product/${id}`}>
                 <div className={classes.price}>
-                  <div>
+                  <div style={{ whiteSpace: "nowrap" }}>
                     <span style={{ opacity: 0.45 }}>&euro;&nbsp;</span>
                     {Number(price).toFixed(2)}
                   </div>

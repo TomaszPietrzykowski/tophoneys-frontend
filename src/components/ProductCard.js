@@ -287,7 +287,7 @@ const ProductCard = ({ product }) => {
               <div className={classes.title}>{product.name}</div>
               <div className={classes.capacity}>{product.capacity}</div>
               <div className={classes.price}>
-                <div>
+                <div style={{ whiteSpace: "nowrap" }}>
                   <span style={{ opacity: 0.45 }}>&euro; </span>
                   {product.price.toFixed(2)}
                 </div>
