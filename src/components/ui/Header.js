@@ -835,7 +835,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
             <li className={classes.tab}>
               <Link to="/category/new" className={classes.navLink}>
                 <div>
-                  <span class="notranslate">New</span>
+                  <span className="notranslate">New</span>
                 </div>
               </Link>
             </li>
@@ -848,7 +848,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
               <Link to="/category/honeys" className={classes.navLink}>
                 <li className={classes.tab}>
                   <div>
-                    <span class="notranslate">Honeys</span>
+                    <span className="notranslate">Honeys</span>
                   </div>
                   <ExpandIcon className={classes.expandIcon} />
                 </li>
@@ -1095,7 +1095,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
               <Link to="/category/beeproducts" className={classes.navLink}>
                 <li className={classes.tab}>
                   <div>
-                    <span class="notranslate">Bee products</span>
+                    <span className="notranslate">Bee products</span>
                   </div>
                 </li>
               </Link>
@@ -1109,7 +1109,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
               <Link to="/category/tea" className={classes.navLink}>
                 <li className={classes.tab}>
                   <div>
-                    <span class="notranslate">Tea</span>
+                    <span className="notranslate">Tea</span>
                   </div>
                   <ExpandIcon className={classes.expandIcon} />
                 </li>
@@ -1235,21 +1235,21 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
             <Link to="/category/giftsets" className={classes.navLink}>
               <li className={classes.tab}>
                 <div>
-                  <span class="notranslate">Gift sets</span>
+                  <span className="notranslate">Gift sets</span>
                 </div>
               </li>
             </Link>
             <Link to="/category/specialoffer" className={classes.navLink}>
               <li className={classes.tab}>
                 <div>
-                  <span class="notranslate">Special offer</span>
+                  <span className="notranslate">Special offer</span>
                 </div>
               </li>
             </Link>
             <Link to="/category/sale" className={classes.navLink}>
               <li className={classes.tab}>
                 <div>
-                  <span class="notranslate">Sale</span>
+                  <span className="notranslate">Sale</span>
                 </div>
               </li>
             </Link>

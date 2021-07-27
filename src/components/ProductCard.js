@@ -310,9 +310,9 @@ const ProductCard = ({ product }) => {
               )}
               <div>
                 {product.countInStock > 0 ? (
-                  <span class="notranslate">Add to cart</span>
+                  <span className="notranslate">Add to cart</span>
                 ) : (
-                  <span class="notranslate">Out of stock</span>
+                  <span className="notranslate">Out of stock</span>
                 )}
               </div>
             </button>
