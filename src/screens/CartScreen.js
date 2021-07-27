@@ -346,7 +346,9 @@ const CartScreen = ({ history }) => {
                     </Link>
                   </Grid>
                   <Grid item md={2} className={classes.tablePrice}>
-                    &euro; {item.price.toFixed(2)}
+                    <span className="notranslate">
+                      &euro; {item.price.toFixed(2)}
+                    </span>
                   </Grid>
                   <Grid item md={2} className={classes.counter}>
                     <Counter
@@ -376,17 +378,21 @@ const CartScreen = ({ history }) => {
           <>
             <Grid item md={6} lg={4} className={classes.summary}>
               <h2 className={classes.subtotal}>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}{" "}
-                {cartItems.reduce((acc, item) => acc + item.qty, 0) > 1
-                  ? "items"
-                  : "item"}
-                ):
+                <span className="notranslate">
+                  Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}{" "}
+                  {cartItems.reduce((acc, item) => acc + item.qty, 0) > 1
+                    ? "items"
+                    : "item"}
+                  ):
+                </span>
               </h2>
               <div className={classes.price}>
-                &euro;{" "}
-                {cartItems
-                  .reduce((acc, item) => acc + item.qty * item.price, 0)
-                  .toFixed(2)}
+                <span className="notranslate">
+                  &euro;{" "}
+                  {cartItems
+                    .reduce((acc, item) => acc + item.qty * item.price, 0)
+                    .toFixed(2)}
+                </span>
                 <div className={classes.vat}>incl. VAT</div>
               </div>
               <div className={classes.btnContainer}>
@@ -396,7 +402,7 @@ const CartScreen = ({ history }) => {
                   onClick={checkoutHandler}
                 >
                   <PaymentIcon className={classes.paymentIcon} />
-                  checkout
+                  <span className="notranslate">checkout</span>
                 </Button>
               </div>
             </Grid>

@@ -34,7 +34,7 @@ const Counter = ({ max, count, setCount }) => {
         -
       </Button>
       <Button disabled className={classes.btn}>
-        {count}
+        <span className="notranslate">{count}</span>
       </Button>
       <Button
         disabled={count >= max}
