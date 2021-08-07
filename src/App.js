@@ -24,7 +24,8 @@ import RegisterScreen from "./screens/RegisterScreen"
 import ProfileScreen from "./screens/ProfileScreen"
 import ShippingScreen from "./screens/ShippingScreen"
 import PlaceOrderScreen from "./screens/PlaceOrderScreen"
-import OrderScreen from "./screens/OrderScreen"
+import OrderScreenBT from "./screens/OrderScreenBT"
+// import OrderScreen from "./screens/OrderScreen"
 import UserListScreen from "./screens/UserListScreen"
 import UserEditScreen from "./screens/UserEditScreen"
 import ProductListScreen from "./screens/ProductListScreen"
@@ -80,7 +81,8 @@ function App() {
               <Route path="/profile" component={ProfileScreen} exact />
               <Route path="/shipping" component={ShippingScreen} exact />
               <Route path="/placeorder" component={PlaceOrderScreen} exact />
-              <Route path="/order/:id" component={OrderScreen} exact />
+              {/* <Route path="/order/:id" component={OrderScreen} exact /> */}
+              <Route path="/order/:id" component={OrderScreenBT} exact />
               <Route path="/search/:keyword" component={SearchScreen} exact />
               <Route
                 path="/search/:keyword/page/:pageNumber"
