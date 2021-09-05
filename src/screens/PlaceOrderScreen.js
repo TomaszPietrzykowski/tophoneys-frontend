@@ -279,7 +279,7 @@ const PlaceOrderScreen = ({ history }) => {
         user,
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod || "PayPal",
+        paymentMethod: cart.paymentMethod || "mollie",
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
