@@ -183,7 +183,7 @@ const InfoPaymentScreen = () => {
                 </div>
               </div>
               <p className={classes.block}>
-                <span className={classes.emphasis}>Kredit card: </span>all major
+                <span className={classes.emphasis}>Credit card: </span>all major
                 card payments are accepted
               </p>
               <div className={classes.logosContainer}>
