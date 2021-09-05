@@ -13,9 +13,17 @@ import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_SUCCESS,
   ORDER_PAY_FAIL,
+  ORDER_PAY_REQUEST,
 } from "../constants/orderConstants"
 import Message from "../components/Message"
 import CheckoutSteps from "../components/CheckoutSteps"
+// snackbars:
+import Snackbar from "@material-ui/core/Snackbar"
+import MuiAlert from "@material-ui/lab/Alert"
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />
+}
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -240,14 +248,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const OrderScreen = ({ match, history }) => {
+const OrderScreen = ({ match, history, location }) => {
   const classes = useStyles()
   const theme = useTheme()
   const dispatch = useDispatch()
+  // successful alert state
+  const [open, setOpen] = useState(false)
+  const handleAlertClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return
+    }
 
+    setOpen(false)
+  }
   const orderId = match.params.id
-
-  const [sdkReady, setSdkReady] = useState(false)
 
   const { userInfo } = useSelector((state) => state.userLogin)
 
@@ -268,97 +282,23 @@ const OrderScreen = ({ match, history }) => {
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     )
   }
-
-  const renderButtons = () => {
-    const body = {
-      customOrderId: order._id,
-      name: order.user.name,
-      email: order.user.email,
+  // Determine redirection from mollie payments
+  const successfulPaymentRedirectAlert = () => {
+    const query = new URLSearchParams(location.search)
+    if (query.get("redirect") === "mollie" && order.isPaid) {
+      setOpen(true)
     }
-    window.paypal
-      .Buttons({
-        env: "production", // Or 'sandbox'
-        // Set up the payment: call backend with order id, receive result with paypal payment id:
-        createOrder: async function () {
-          const { data } = await axios.post("/api/checkout/create", body, {
-            headers: {
-              "content-type": "application/json",
-            },
-          })
-          return data.result.id
-        },
-        // Execute the payment:
-        // 1. Add an onApprove callback
-        onApprove: function (data, actions) {
-          return fetch("/api/checkout/execute", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify({
-              orderID: data.orderID,
-              payerID: data.payerID,
-            }),
-          })
-            .then(function (res) {
-              return res.json()
-            })
-            .then(function (orderData) {
-              // Check for errors:
-              const errorDetail =
-                Array.isArray(orderData.details) && orderData.details[0]
-
-              // 1. Recoverable errors: INSTRUMENT_DECLINED -> call actions.restart()
-              //    Recoverable state, per:
-              //    https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
-              if (errorDetail && errorDetail.issue === "INSTRUMENT_DECLINED") {
-                return actions.restart()
-              }
-              // 2. Other non-recoverable errors:
-              if (errorDetail) {
-                if (errorDetail.description)
-                  console.log(errorDetail.description)
-                dispatch({
-                  type: ORDER_PAY_FAIL,
-                  payload: errorDetail,
-                })
-              }
-              // 3. Handle successful transaction
-              if (orderData.result.status === "COMPLETED") {
-                dispatch({
-                  type: ORDER_PAY_SUCCESS,
-                  payload: data,
-                })
-              }
-            })
-        },
-      })
-      .render("#paypal-button-container")
   }
 
+  // lifecycle
   useEffect(() => {
-    const addPayPalScript = async () => {
-      const { data: clientId } = await axios.get("/api/config/paypal")
-      const script = document.createElement("script")
-      script.type = "text/javascript"
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=EUR`
-      script.async = true
-      script.onload = () => {
-        setSdkReady(true)
-        if (document.getElementById("paypal-button-container")) {
-          renderButtons()
-        }
-      }
-      document.body.appendChild(script)
-    }
-
     if (!order || successPay || successDeliver || order._id !== orderId) {
       dispatch({ type: ORDER_PAY_RESET })
       dispatch({ type: ORDER_DELIVER_RESET })
       dispatch(getOrderDetails(orderId))
-    } else if (!order.isPaid) {
-      addPayPalScript()
-      setSdkReady(true)
+    }
+    if (order) {
+      successfulPaymentRedirectAlert()
     }
     // eslint-disable-next-line
   }, [dispatch, order, orderId, successPay, successDeliver, userInfo, history])
@@ -368,9 +308,32 @@ const OrderScreen = ({ match, history }) => {
   const deliverHandler = () => {
     dispatch(deliverOrder(order))
   }
+  const handleMollie = async () => {
+    try {
+      dispatch({ type: ORDER_PAY_REQUEST })
+      const { data } = await axios.post("/api/checkout/proceed", {
+        orderID: orderId,
+      })
+      window.location.href = data.checkoutUrl
+      dispatch({ type: ORDER_PAY_SUCCESS })
+    } catch (error) {
+      dispatch({
+        type: ORDER_PAY_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }
 
   return (
     <>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleAlertClose}>
+        <Alert onClose={handleAlertClose} severity="success">
+          Payment successful. Thank you!.
+        </Alert>
+      </Snackbar>
       {order && !order.isPaid ? (
         <CheckoutSteps step1 step2 step3 orderId={orderId} />
       ) : (
@@ -556,10 +519,13 @@ const OrderScreen = ({ match, history }) => {
                       <>
                         {loadingPay ? (
                           <Loader />
-                        ) : !sdkReady ? (
-                          <Loader />
                         ) : (
-                          <div id="paypal-button-container"></div>
+                          <Button
+                            onClick={handleMollie}
+                            className={classes.markAsSendBtn}
+                          >
+                            Pay with mollie
+                          </Button>
                         )}
                       </>
                     )}

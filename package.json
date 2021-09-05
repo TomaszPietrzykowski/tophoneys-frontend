@@ -1,6 +1,6 @@
 {
   "name": "tophoneys-frontend",
-  "proxy": "http://127.0.0.1:5000",
+  "proxy": "https://staging.tophoneys.com",
   "version": "0.1.0",
   "private": true,
   "repository": {
