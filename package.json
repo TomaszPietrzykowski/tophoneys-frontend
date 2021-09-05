@@ -1,6 +1,5 @@
 {
   "name": "tophoneys-frontend",
-  "proxy": "https://staging.tophoneys.com",
   "version": "0.1.0",
   "private": true,
   "repository": {

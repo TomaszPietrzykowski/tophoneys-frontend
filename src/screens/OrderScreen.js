@@ -5,13 +5,13 @@ import axios from "axios"
 // mui
 import { makeStyles, useTheme } from "@material-ui/styles"
 import { Grid, Button } from "@material-ui/core"
+import PaymentIcon from "@material-ui/icons/Payment"
 // custom
 import Loader from "../components/ui/Loader"
 import { getOrderDetails, deliverOrder } from "../actions/orderActions"
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
-  ORDER_PAY_SUCCESS,
   ORDER_PAY_FAIL,
   ORDER_PAY_REQUEST,
 } from "../constants/orderConstants"
@@ -206,15 +206,39 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "1rem",
     },
   },
-
-  paypal: {
-    width: "100%",
-    paddingTop: "3rem",
-    paddingRight: "20%",
+  payBtn: {
+    border: "none",
+    padding: ".8rem 3.5rem .8rem 2.5rem",
+    marginTop: "2rem",
+    cursor: "pointer",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    ...theme.typography.mont,
+    textTransform: "uppercase",
+    letterSpacing: 2,
+    fontSize: "1rem",
+    fontWeight: 600,
+    borderRadius: 4,
+    color: "white",
+    backgroundColor: theme.palette.common.success,
+    transition: "all .3s ease",
+    opacity: 0.85,
+    "&:hover": {
+      backgroundColor: theme.palette.common.success,
+      opacity: 1,
+    },
     [theme.breakpoints.down("xs")]: {
-      padding: "2rem 1rem 0 0",
-      width: "100%",
-      maxWidth: 380,
+      fontSize: "1rem",
+      flex: 1,
+      // padding: ".6rem 3rem .6rem 2rem",
+    },
+  },
+  paymentIcon: {
+    fontSize: "1.8rem",
+    marginRight: ".5rem",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1.5rem",
     },
   },
   markAsSendBtn: {
@@ -315,7 +339,6 @@ const OrderScreen = ({ match, history, location }) => {
         orderID: orderId,
       })
       window.location.href = data.checkoutUrl
-      dispatch({ type: ORDER_PAY_SUCCESS })
     } catch (error) {
       dispatch({
         type: ORDER_PAY_FAIL,
@@ -522,9 +545,10 @@ const OrderScreen = ({ match, history, location }) => {
                         ) : (
                           <Button
                             onClick={handleMollie}
-                            className={classes.markAsSendBtn}
+                            className={classes.payBtn}
                           >
-                            Pay with mollie
+                            <PaymentIcon className={classes.paymentIcon} />
+                            Pay
                           </Button>
                         )}
                       </>
