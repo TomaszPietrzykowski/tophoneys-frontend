@@ -1,10 +1,8 @@
 import React from "react"
 import { makeStyles } from "@material-ui/styles"
-// import { useMediaQuery } from "@material-ui/core";
 import b1 from "../assets/ideal-logo.svg"
 import b2 from "../assets/bancontact-logo.svg"
 import b3 from "../assets/paypal-logo.svg"
-import b4 from "../assets/przelewy24-logo.png"
 import b5 from "../assets/visa-logo.svg"
 import b6 from "../assets/mastercard-logo.svg"
 import b7 from "../assets/maestro-logo.svg"
@@ -66,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const brandsLogos = [b1, b2, b3, b4, b5, b6, b7, b8, b9, b10]
+const brandsLogos = [b1, b2, b3, b5, b6, b7, b8, b9, b10]
 
 const Brands = ({ title }) => {
   const classes = useStyles()

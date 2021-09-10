@@ -142,8 +142,8 @@ const InfoPaymentScreen = () => {
             <section className={classes.section}>
               <h3 className={classes.sectionHead}>Payment methods</h3>
               <p className={classes.block}>
-                Our payments are processed by PayPal Europe, giving you choice
-                from variety of payment methods:
+                Our payments are processed by Mollie B.V. giving you choice from
+                variety of payment methods:
               </p>
               <div className={classes.logosContainer}>
                 <div className={classes.logo}>
