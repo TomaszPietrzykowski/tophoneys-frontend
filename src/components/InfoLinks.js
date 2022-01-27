@@ -112,15 +112,15 @@ const InfoLinks = () => {
       <div className={classes.links}>
         <div className={classes.tab}>
           <TimerIcon className={classes.icon} />
-          <div className={classes.text}>Fast delivery 2-4 days</div>
+          <div className={classes.text}>Fast delivery</div>
         </div>
         <div className={classes.tab}>
           <TruckIcon className={classes.icon} />
-          <div className={classes.text}>Free delivery from &euro; 49.90</div>
+          <div className={classes.text}>Free delivery from &euro; 49</div>
         </div>
         <div className={classes.tab}>
           <GiftIcon className={classes.icon} />
-          <div className={classes.text}>Extra gift from &euro; 60</div>
+          <div className={classes.text}>Free gift with order</div>
         </div>
         <div className={classes.tab}>
           <SecurityIcon className={classes.icon} />
