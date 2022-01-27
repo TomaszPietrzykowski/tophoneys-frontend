@@ -1,17 +1,17 @@
-import React, { useState } from "react"
-import { Link, useHistory } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
-import { makeStyles } from "@material-ui/styles"
-import logo from "../../assets/logotranspbg.png"
-import Search from "./Search"
-import UserIcon from "@material-ui/icons/Person"
-import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
-import SettingsIcon from "@material-ui/icons/Settings"
-import ExpandIcon from "@material-ui/icons/ExpandMore"
-import ContractIcon from "@material-ui/icons/ExpandLess"
-import MenuIcon from "@material-ui/icons/MenuRounded"
-import CloseIcon from "@material-ui/icons/Close"
-import Divider from "@material-ui/core/Divider"
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { makeStyles } from "@material-ui/styles";
+import logo from "../../assets/logotranspbg.png";
+import Search from "./Search";
+import UserIcon from "@material-ui/icons/Person";
+import CartIcon from "@material-ui/icons/ShoppingCartOutlined";
+import SettingsIcon from "@material-ui/icons/Settings";
+import ExpandIcon from "@material-ui/icons/ExpandMore";
+import ContractIcon from "@material-ui/icons/ExpandLess";
+import MenuIcon from "@material-ui/icons/MenuRounded";
+import CloseIcon from "@material-ui/icons/Close";
+import Divider from "@material-ui/core/Divider";
 import {
   ClickAwayListener,
   Grow,
@@ -20,8 +20,8 @@ import {
   Popper,
   IconButton,
   MenuItem,
-} from "@material-ui/core"
-import { logout } from "../../actions/userActions"
+} from "@material-ui/core";
+import { logout } from "../../actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   // --------------------------------------------------- LAYOUT
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 0,
     ...theme.flex.row,
     justifyContent: "space-between",
-    padding: "1.75rem 3rem",
+    padding: "1.25rem 3rem",
     [theme.breakpoints.down("md")]: {
       padding: ".8rem",
     },
@@ -295,91 +295,91 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.4rem",
     color: theme.palette.primary.main,
   },
-}))
+}));
 
 const Header = ({ openDrawer, setOpenDrawer }) => {
   // hooks
-  const classes = useStyles()
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   // redux
-  const { userInfo } = useSelector((state) => state.userLogin)
-  const { cartItems } = useSelector((state) => state.cart)
+  const { userInfo } = useSelector((state) => state.userLogin);
+  const { cartItems } = useSelector((state) => state.cart);
 
   // dropdown states:
-  const [anchorElUser, setAnchorElUser] = useState(null)
-  const [openUser, setOpenUser] = useState(false)
-  const [anchorElAdmin, setAnchorElAdmin] = useState(null)
-  const [openAdmin, setOpenAdmin] = useState(false)
-  const [anchorElHoneys, setAnchorElHoneys] = useState(null)
-  const [openHoneys, setOpenHoneys] = useState(false)
-  const [anchorElTea, setAnchorElTea] = useState(null)
-  const [openTea, setOpenTea] = useState(false)
-  const [drawerHoneysOpen, setDrawerHoneysOpen] = useState(false)
-  const [drawerTeaOpen, setDrawerTeaOpen] = useState(false)
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [openUser, setOpenUser] = useState(false);
+  const [anchorElAdmin, setAnchorElAdmin] = useState(null);
+  const [openAdmin, setOpenAdmin] = useState(false);
+  const [anchorElHoneys, setAnchorElHoneys] = useState(null);
+  const [openHoneys, setOpenHoneys] = useState(false);
+  const [anchorElTea, setAnchorElTea] = useState(null);
+  const [openTea, setOpenTea] = useState(false);
+  const [drawerHoneysOpen, setDrawerHoneysOpen] = useState(false);
+  const [drawerTeaOpen, setDrawerTeaOpen] = useState(false);
 
   //desktop dropdown handlers
   const handleClickUser = (e) => {
-    setAnchorElUser(e.currentTarget)
-    setOpenUser(true)
-  }
+    setAnchorElUser(e.currentTarget);
+    setOpenUser(true);
+  };
   const handleCloseUser = (e) => {
-    setAnchorElUser(null)
-    setOpenUser(false)
-  }
+    setAnchorElUser(null);
+    setOpenUser(false);
+  };
   const handleClickAdmin = (e) => {
-    setAnchorElAdmin(e.currentTarget)
-    setOpenAdmin(true)
-  }
+    setAnchorElAdmin(e.currentTarget);
+    setOpenAdmin(true);
+  };
   const handleCloseAdmin = (e) => {
-    setAnchorElAdmin(null)
-    setOpenAdmin(false)
-  }
+    setAnchorElAdmin(null);
+    setOpenAdmin(false);
+  };
   const handleClickHoneys = (e) => {
-    setAnchorElHoneys(e.currentTarget)
-    setOpenHoneys(true)
-  }
+    setAnchorElHoneys(e.currentTarget);
+    setOpenHoneys(true);
+  };
   const handleCloseHoneys = (e) => {
-    setAnchorElHoneys(null)
-    setOpenHoneys(false)
-  }
+    setAnchorElHoneys(null);
+    setOpenHoneys(false);
+  };
   const handleClickTea = (e) => {
-    setAnchorElTea(e.currentTarget)
-    setOpenTea(true)
-  }
+    setAnchorElTea(e.currentTarget);
+    setOpenTea(true);
+  };
   const handleCloseTea = (e) => {
-    setAnchorElTea(null)
-    setOpenTea(false)
-  }
+    setAnchorElTea(null);
+    setOpenTea(false);
+  };
   const handleListKeyDown = (e) => {
     if (e.key === "Tab") {
-      e.preventDefault()
-      setOpenUser(false)
+      e.preventDefault();
+      setOpenUser(false);
     }
-  }
+  };
   const handleLogout = () => {
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
 
   // mobile dropdown handlers
   const handleDrawerChoice = (link) => {
-    setDrawerHoneysOpen(false)
-    setDrawerTeaOpen(false)
-    setOpenDrawer(false)
-    window.scrollTo(0, 0)
-    history.push(link)
-  }
+    setDrawerHoneysOpen(false);
+    setDrawerTeaOpen(false);
+    setOpenDrawer(false);
+    window.scrollTo(0, 0);
+    history.push(link);
+  };
 
   const drawerScale = openDrawer
     ? { transform: "scale(1, 1)" }
-    : { transform: "scale(0, 1)" }
+    : { transform: "scale(0, 1)" };
   const drawerPureStyle = drawerHoneysOpen
     ? { maxHeight: "41rem" }
-    : { maxHeight: 0 }
+    : { maxHeight: 0 };
   const drawerTeaStyle = drawerTeaOpen
     ? { maxHeight: "23.1rem" }
-    : { maxHeight: 0 }
+    : { maxHeight: 0 };
 
   return (
     <header className={classes.root}>
@@ -472,7 +472,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
                           onClick={(e) => {
-                            handleCloseUser(e)
+                            handleCloseUser(e);
                           }}
                         >
                           Profile
@@ -484,8 +484,8 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
                           onClick={(e) => {
-                            handleCloseUser(e)
-                            handleLogout()
+                            handleCloseUser(e);
+                            handleLogout();
                           }}
                         >
                           Log out
@@ -497,7 +497,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
                           onClick={(e) => {
-                            handleCloseUser(e)
+                            handleCloseUser(e);
                           }}
                         >
                           Log in
@@ -509,7 +509,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                         <MenuItem
                           classes={{ root: classes.dropdownItemIcons }}
                           onClick={(e) => {
-                            handleCloseUser(e)
+                            handleCloseUser(e);
                           }}
                         >
                           Register
@@ -554,7 +554,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
                         onClick={(e) => {
-                          handleCloseAdmin(e)
+                          handleCloseAdmin(e);
                         }}
                       >
                         Products
@@ -564,7 +564,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
                         onClick={(e) => {
-                          handleCloseUser(e)
+                          handleCloseUser(e);
                         }}
                       >
                         Orders
@@ -574,7 +574,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                       <MenuItem
                         classes={{ root: classes.dropdownItemIcons }}
                         onClick={(e) => {
-                          handleCloseUser(e)
+                          handleCloseUser(e);
                         }}
                       >
                         Users
@@ -888,7 +888,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu }}
                             value="purehoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Pure honeys:
@@ -899,7 +899,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="acaciahoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Acacia honey
@@ -910,7 +910,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="sunflowerhoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Sunflower honey
@@ -921,7 +921,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="lindenhoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Linden honey
@@ -932,7 +932,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="buckwheathoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Buckwheat honey
@@ -943,7 +943,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="mulitiflowerhoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Multiflorous honey
@@ -954,7 +954,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="goldenrodhoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Goldenrod honeys
@@ -967,7 +967,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="foresthoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Forest honey
@@ -978,7 +978,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="raspberryhoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Raspberry honey
@@ -989,7 +989,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="corianderhoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Coriander honey
@@ -1000,7 +1000,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="heatherhoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Heather honey
@@ -1011,7 +1011,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="dandelionhoneys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Dandelion honey
@@ -1022,7 +1022,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="rapeseedhoney"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Rapeseed honey
@@ -1033,7 +1033,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu2 }}
                             value="honeydewhoney"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Honeydew honey
@@ -1045,7 +1045,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             to="/category/creamedhoneys"
                             classes={{ root: classes.submenu }}
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Creamed honeys
@@ -1056,7 +1056,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu }}
                             value="nl"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Honeys with additives
@@ -1068,7 +1068,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu }}
                             value="nl"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             Accessories
@@ -1079,7 +1079,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             classes={{ root: classes.submenu }}
                             value="honeys"
                             onClick={(e) => {
-                              handleCloseHoneys(e)
+                              handleCloseHoneys(e);
                             }}
                           >
                             All honeys
@@ -1148,7 +1148,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             to="/category/tea"
                             className={classes.submenu}
                             onClick={(e) => {
-                              handleCloseTea(e)
+                              handleCloseTea(e);
                             }}
                           >
                             All teas
@@ -1158,7 +1158,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             to="/category/blacktea"
                             className={classes.submenu}
                             onClick={(e) => {
-                              handleCloseTea(e)
+                              handleCloseTea(e);
                             }}
                           >
                             Black tea
@@ -1168,7 +1168,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             to="/category/fruittea"
                             className={classes.submenu}
                             onClick={(e) => {
-                              handleCloseTea(e)
+                              handleCloseTea(e);
                             }}
                           >
                             Fruit tea
@@ -1178,7 +1178,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             to="/category/greenteas"
                             className={classes.submenu}
                             onClick={(e) => {
-                              handleCloseTea(e)
+                              handleCloseTea(e);
                             }}
                           >
                             Green tea
@@ -1190,7 +1190,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             to="/category/functionaltea"
                             className={classes.submenu}
                             onClick={(e) => {
-                              handleCloseTea(e)
+                              handleCloseTea(e);
                             }}
                           >
                             Functional tea
@@ -1200,7 +1200,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             to="/category/rooibos"
                             className={classes.submenu}
                             onClick={(e) => {
-                              handleCloseTea(e)
+                              handleCloseTea(e);
                             }}
                           >
                             Rooibos
@@ -1210,7 +1210,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             to="/category/yerbamate"
                             className={classes.submenu}
                             onClick={(e) => {
-                              handleCloseTea(e)
+                              handleCloseTea(e);
                             }}
                           >
                             Yerba Mate
@@ -1220,7 +1220,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                             to="/category/cannedtea"
                             className={classes.submenu}
                             onClick={(e) => {
-                              handleCloseTea(e)
+                              handleCloseTea(e);
                             }}
                           >
                             Canned tea
@@ -1258,7 +1258,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
       </div>
       {/* </div> */}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

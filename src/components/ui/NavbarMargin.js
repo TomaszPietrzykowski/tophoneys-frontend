@@ -1,11 +1,11 @@
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
     width: "100%",
-    height: "11rem",
+    height: "10rem",
     [theme.breakpoints.down("md")]: {
       height: 86,
     },
@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme) => ({
       height: 62,
     },
   },
-}))
+}));
 
 const NavbarMargin = () => {
-  const classes = useStyles()
-  return <div className={classes.root} />
-}
+  const classes = useStyles();
+  return <div className={classes.root} />;
+};
 
-export default NavbarMargin
+export default NavbarMargin;

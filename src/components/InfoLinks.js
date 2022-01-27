@@ -1,15 +1,15 @@
-import React from "react"
-import { makeStyles } from "@material-ui/styles"
-import TruckIcon from "@material-ui/icons/LocalShipping"
-import TimerIcon from "@material-ui/icons/Timer"
-import GiftIcon from "@material-ui/icons/Redeem"
-import SecurityIcon from "@material-ui/icons/Security"
+import React from "react";
+import { makeStyles } from "@material-ui/styles";
+import TruckIcon from "@material-ui/icons/LocalShipping";
+import TimerIcon from "@material-ui/icons/Timer";
+import GiftIcon from "@material-ui/icons/Redeem";
+import SecurityIcon from "@material-ui/icons/Security";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     ...theme.utils.container,
     ...theme.typography.prosto,
-    margin: "1rem 0",
+    margin: ".3rem 0",
     overflow: "hidden",
   },
   links: {
@@ -102,10 +102,10 @@ const useStyles = makeStyles((theme) => ({
       transform: "translateX(0%)",
     },
   },
-}))
+}));
 
 const InfoLinks = () => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <div className={classes.container}>
@@ -128,7 +128,7 @@ const InfoLinks = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default InfoLinks
+export default InfoLinks;
