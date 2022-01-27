@@ -1,15 +1,15 @@
-import React, { useEffect } from "react"
-import { Link } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 // mui
-import { makeStyles } from "@material-ui/styles"
-import { Button, Grid } from "@material-ui/core"
+import { makeStyles } from "@material-ui/styles";
+import { Button, Grid } from "@material-ui/core";
 // custom
-import { createOrder } from "../actions/orderActions"
-import Message from "../components/Message"
-import { ORDER_CREATE_RESET } from "../constants/orderConstants"
-import { CART_EMPTY_ITEMS } from "../constants/cartConstants"
-import CheckoutSteps from "../components/CheckoutSteps"
+import { createOrder } from "../actions/orderActions";
+import Message from "../components/Message";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
+import { CART_EMPTY_ITEMS } from "../constants/cartConstants";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -210,56 +210,55 @@ const useStyles = makeStyles((theme) => ({
   messageContainer: {
     maxWidth: 600,
   },
-}))
+}));
 
 const PlaceOrderScreen = ({ history }) => {
-  const classes = useStyles()
-  const dispatch = useDispatch()
-  const cart = useSelector((state) => state.cart)
-  const { cartItems, shippingAddress } = cart
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const { cartItems, shippingAddress } = cart;
 
-  const userInfo = useSelector((state) => state.userLogin.userInfo)
+  const userInfo = useSelector((state) => state.userLogin.userInfo);
 
   if (
     cartItems.length > 0 &&
     (!shippingAddress.address || !shippingAddress.city)
   ) {
-    history.push("/shipping")
+    history.push("/shipping");
   }
 
   const addDecimals = (num) => {
-    return (Math.round(num * 100) / 100).toFixed(2)
-  }
+    return (Math.round(num * 100) / 100).toFixed(2);
+  };
 
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-  )
+  );
   cart.shippingPrice =
-    cart.itemsPrice >= 49.9 ||
-    shippingAddress.city.toLowerCase() === "purmerend"
+    cart.itemsPrice >= 49 || shippingAddress.city.toLowerCase() === "purmerend"
       ? 0
-      : 4.95
-  cart.taxPrice = 0
+      : 4.95;
+  cart.taxPrice = 0;
   cart.totalPrice = (
     Number(cart.itemsPrice) +
     Number(cart.shippingPrice) +
     Number(cart.taxPrice)
-  ).toFixed(2)
+  ).toFixed(2);
 
-  const orderCreate = useSelector((state) => state.orderCreate)
-  const { order, success, error } = orderCreate
-  const orderAnonymous = useSelector((state) => state.orderAnonymous)
-  const { anonymousShoppingSelected, name, email } = orderAnonymous
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreate;
+  const orderAnonymous = useSelector((state) => state.orderAnonymous);
+  const { anonymousShoppingSelected, name, email } = orderAnonymous;
 
   useEffect(() => {
     if (success) {
-      history.push(`/order/${order._id}`)
-      dispatch({ type: ORDER_CREATE_RESET })
-      dispatch({ type: CART_EMPTY_ITEMS })
-      localStorage.removeItem("cartItems")
+      history.push(`/order/${order._id}`);
+      dispatch({ type: ORDER_CREATE_RESET });
+      dispatch({ type: CART_EMPTY_ITEMS });
+      localStorage.removeItem("cartItems");
     }
     // eslint-disable-next-line
-  }, [dispatch, success, history])
+  }, [dispatch, success, history]);
 
   const placeOrderHandler = () => {
     const user =
@@ -273,7 +272,7 @@ const PlaceOrderScreen = ({ history }) => {
             _id: "Anonymous",
             name,
             email,
-          }
+          };
     dispatch(
       createOrder({
         user,
@@ -285,8 +284,8 @@ const PlaceOrderScreen = ({ history }) => {
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
       })
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -409,7 +408,7 @@ const PlaceOrderScreen = ({ history }) => {
         </Grid>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default PlaceOrderScreen
+export default PlaceOrderScreen;
