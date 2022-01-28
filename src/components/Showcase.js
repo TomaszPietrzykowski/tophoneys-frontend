@@ -1,9 +1,11 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { makeStyles } from "@material-ui/styles"
-import useMediaQuery from "@material-ui/core/useMediaQuery"
-import bannerMobile from "../assets/main-banner-mobile.jpeg"
-import bannerDesktop from "../assets/main-banner-desktop.jpeg"
+import React from "react";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import bannerMobile from "../assets/mainbanner2022mobile.jpg";
+import bannerDesktop from "../assets/mainbanner2022desktop.jpg";
+// import bannerMobile from "../assets/main-banner-mobile.jpeg"
+// import bannerDesktop from "../assets/main-banner-desktop.jpeg"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -24,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     objectFit: "contain",
   },
-}))
+}));
 
 const Showcase = () => {
-  const isTablet = useMediaQuery("(max-width:860px)")
-  const classes = useStyles()
-  const isMobile = useMediaQuery("(max-width: 600px)")
-  const banner = isMobile ? bannerMobile : bannerDesktop
+  const isTablet = useMediaQuery("(max-width:860px)");
+  const classes = useStyles();
+  const isMobile = useMediaQuery("(max-width: 600px)");
+  const banner = isMobile ? bannerMobile : bannerDesktop;
 
   return (
     <div className={isTablet ? classes.containerMobile : classes.container}>
@@ -38,7 +40,7 @@ const Showcase = () => {
         <img src={banner} alt="I love TOP HONEYS" className={classes.banner} />
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default Showcase
+export default Showcase;
