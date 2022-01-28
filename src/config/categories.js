@@ -28,5 +28,9 @@ const categories = [
   ["Canned tea", "cannedtea"],
   ["Special offer", "specialoffer"],
   ["Gift sets", "giftsets"],
-]
-export default categories
+  ["Bio", "bio"],
+  ["Confiture", "confiture"],
+  ["Soft drinks", "softdrinks"],
+  ["Syrup", "syrup"],
+];
+export default categories;

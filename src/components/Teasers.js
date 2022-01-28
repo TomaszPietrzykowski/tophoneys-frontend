@@ -1,11 +1,11 @@
-import React from "react"
+import React from "react";
 // material-ui
-import { makeStyles } from "@material-ui/styles"
-import { Link } from "react-router-dom"
+import { makeStyles } from "@material-ui/styles";
+import { Link } from "react-router-dom";
 // custom
-import teaser1 from "../assets/teaser1.jpeg"
-import teaser2 from "../assets/teaser2.jpeg"
-import teaser3 from "../assets/teaser3.jpeg"
+import teaser1 from "../assets/teaser1.jpeg";
+import teaser2 from "../assets/teaser2.jpeg";
+import teaser3 from "../assets/teaser3.jpeg";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -55,10 +55,10 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: "100%",
     },
   },
-}))
+}));
 
 const Teasers = () => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <div className={classes.container}>
@@ -78,7 +78,7 @@ const Teasers = () => {
         </div>
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default Teasers
+export default Teasers;
