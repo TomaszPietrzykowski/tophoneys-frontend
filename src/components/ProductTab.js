@@ -1,21 +1,21 @@
-import React, { useState } from "react"
-import { makeStyles, useTheme } from "@material-ui/core/styles"
-import useMediaQuery from "@material-ui/core/useMediaQuery"
-import { Link } from "react-router-dom"
-import { useDispatch } from "react-redux"
-import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
-import SaleIcon from "@material-ui/icons/Loyalty"
-import getCategoryLabel from "./GetCategoryLabel"
-import { addToCart } from "../actions/cartActions"
-import { useHistory } from "react-router-dom"
+import React, { useState } from "react";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import CartIcon from "@material-ui/icons/ShoppingCartOutlined";
+import SaleIcon from "@material-ui/icons/Loyalty";
+import getCategoryLabel from "./GetCategoryLabel";
+import { addToCart } from "../actions/cartActions";
+import { useHistory } from "react-router-dom";
 
 // snackbars:
-import Snackbar from "@material-ui/core/Snackbar"
-import MuiAlert from "@material-ui/lab/Alert"
-import { Button } from "@material-ui/core"
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { Button } from "@material-ui/core";
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -215,7 +215,7 @@ const useStyles = makeStyles((theme) => ({
       margin: "0 .3rem 0 0",
     },
   },
-}))
+}));
 
 const ProductTab = ({
   title,
@@ -231,28 +231,28 @@ const ProductTab = ({
   isSale,
   countInStock,
 }) => {
-  const classes = useStyles()
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"))
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   // successful alert state
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const handleAlertClose = (event, reason) => {
     if (reason === "clickaway") {
-      return
+      return;
     }
 
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const addToCartHandler = () => {
-    dispatch(addToCart(id, 1))
-    setOpen(true)
-  }
+    dispatch(addToCart(id, 1));
+    setOpen(true);
+  };
 
-  const slideWidth = 100 / slidesAtOnce
+  const slideWidth = 100 / slidesAtOnce;
 
   return (
     <>
@@ -278,13 +278,7 @@ const ProductTab = ({
         className={classes.root}
         style={
           isFeatured
-            ? isMobile
-              ? { maxWidth: `${slideWidth}%`, minWidth: `${slideWidth}%` }
-              : {
-                  maxWidth: `${slideWidth}%`,
-                  minWidth: `${slideWidth}%`,
-                  padding: "1.5rem",
-                }
+            ? { maxWidth: `100%`, minWidth: `100%` }
             : {
                 maxWidth: `${slideWidth}%`,
                 minWidth: `${slideWidth}%`,
@@ -355,7 +349,7 @@ const ProductTab = ({
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ProductTab
+export default ProductTab;

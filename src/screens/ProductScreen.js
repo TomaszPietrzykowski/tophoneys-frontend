@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 // mui
-import { makeStyles } from "@material-ui/styles"
-import Grid from "@material-ui/core/Grid"
-import Snackbar from "@material-ui/core/Snackbar"
-import MuiAlert from "@material-ui/lab/Alert"
-import { Button } from "@material-ui/core"
-import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
+import { makeStyles } from "@material-ui/styles";
+import Grid from "@material-ui/core/Grid";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { Button } from "@material-ui/core";
+import CartIcon from "@material-ui/icons/ShoppingCartOutlined";
 // custom
-import { listProductDetails } from "../actions/productActions"
-import { addToCart } from "../actions/cartActions"
-import Loader from "../components/ui/Loader"
-import Message from "../components/Message"
-import Breadcrumbs from "../components/CustomBreadcrumbs"
-import Counter from "../components/Counter"
-import RelatedProducts from "../components/RelatedProducts"
-import { PRODUCT_DETAILS_RESET } from "../constants/productConstants"
+import { listProductDetails } from "../actions/productActions";
+import { addToCart } from "../actions/cartActions";
+import Loader from "../components/ui/Loader";
+import Message from "../components/Message";
+import Breadcrumbs from "../components/CustomBreadcrumbs";
+import Counter from "../components/Counter";
+import RelatedProducts from "../components/RelatedProducts";
+import { PRODUCT_DETAILS_RESET } from "../constants/productConstants";
 
 // snackbars:
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     margin: "1.6rem 0",
-    fontWeight: 400,
+    fontWeight: 500,
     fontSize: "1.8rem",
     color: theme.palette.text.primary,
     [theme.breakpoints.down("xs")]: {
@@ -115,9 +115,9 @@ const useStyles = makeStyles((theme) => ({
   },
   price: {
     margin: "1.6rem 0 0",
-    fontWeight: 300,
+    fontWeight: 400,
     fontSize: "2.8rem",
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     display: "flex",
     alignItems: "flex-start",
     [theme.breakpoints.down("xs")]: {
@@ -168,7 +168,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   detail: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     fontSize: "1rem",
     margin: "1rem 0",
     [theme.breakpoints.down("xs")]: {
@@ -176,10 +176,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   vat: {
-    color: theme.palette.text.disabled,
-    fontSize: ".85rem",
-    fontStyle: "italic",
+    color: theme.palette.text.primary,
+    fontSize: "1rem",
     margin: ".5rem 0 2rem",
+    fontWeight: 400,
     [theme.breakpoints.down("xs")]: {
       fontWeight: 300,
     },
@@ -260,46 +260,46 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-}))
+}));
 
 const ProductScreen = ({ match, history }) => {
-  const classes = useStyles()
-  const dispatch = useDispatch()
-  const [qty, setQty] = useState(1)
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const [qty, setQty] = useState(1);
   // successful alert state
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   const handleAlertClose = (event, reason) => {
     if (reason === "clickaway") {
-      return
+      return;
     }
 
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const { loading, error, product } = useSelector(
     (state) => state.productDetails
-  )
+  );
 
   useEffect(() => {
-    dispatch(listProductDetails(match.params.id))
+    dispatch(listProductDetails(match.params.id));
     return () => {
-      dispatch({ type: PRODUCT_DETAILS_RESET })
-    }
-  }, [match, dispatch])
+      dispatch({ type: PRODUCT_DETAILS_RESET });
+    };
+  }, [match, dispatch]);
 
   const addToCartHandler = () => {
-    dispatch(addToCart(match.params.id, qty))
-    setOpen(true)
-  }
+    dispatch(addToCart(match.params.id, qty));
+    setOpen(true);
+  };
   const handleCapacitySelect = (e) => {
-    history.push(`/product/${e.target.value}`)
-  }
+    history.push(`/product/${e.target.value}`);
+  };
 
   const disabledButtonInline =
     product.countInStock === 0
       ? { color: "white", background: "rgba(0,0,0,.25", cursor: "default" }
-      : { color: "white" }
+      : { color: "white" };
 
   return (
     <>
@@ -378,7 +378,7 @@ const ProductScreen = ({ match, history }) => {
                           </div>
                         )}
                       </div>
-                      <div className={classes.vat}>incl. VAT</div>
+                      <div className={classes.vat}>incl. BTW</div>
                       {product.capacityDropdown &&
                       product.capacityDropdown.length > 0 ? (
                         <p className={classes.detail}>
@@ -495,7 +495,7 @@ const ProductScreen = ({ match, history }) => {
         )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ProductScreen
+export default ProductScreen;

@@ -1,19 +1,19 @@
-import React, { useState } from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import { Link, useHistory } from "react-router-dom"
-import { useDispatch } from "react-redux"
-import CartIcon from "@material-ui/icons/ShoppingCartOutlined"
-import getCategoryLabel from "./GetCategoryLabel"
-import SaleIcon from "@material-ui/icons/Loyalty"
-import { addToCart } from "../actions/cartActions"
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import CartIcon from "@material-ui/icons/ShoppingCartOutlined";
+import getCategoryLabel from "./GetCategoryLabel";
+import SaleIcon from "@material-ui/icons/Loyalty";
+import { addToCart } from "../actions/cartActions";
 
 // snackbars:
-import Snackbar from "@material-ui/core/Snackbar"
-import MuiAlert from "@material-ui/lab/Alert"
-import { Button } from "@material-ui/core"
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { Button } from "@material-ui/core";
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -225,27 +225,27 @@ const useStyles = makeStyles((theme) => ({
       margin: "0 .3rem 0 0",
     },
   },
-}))
+}));
 
 const ProductCard = ({ product }) => {
-  const classes = useStyles()
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   // successful alert state
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   const handleAlertClose = (event, reason) => {
     if (reason === "clickaway") {
-      return
+      return;
     }
 
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const addToCartHandler = () => {
-    dispatch(addToCart(product._id, 1))
-    setOpen(true)
-  }
+    dispatch(addToCart(product._id, 1));
+    setOpen(true);
+  };
 
   return (
     <>
@@ -320,7 +320,7 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;
