@@ -180,6 +180,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 600,
     padding: "15px 20px",
     cursor: "pointer",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: ".9rem",
+      padding: "12px",
+    },
   },
   navLink: {
     color: theme.palette.text.primary,
@@ -750,6 +754,22 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
           </li>
           <Divider />
 
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/confiture")}
+          >
+            <div className={classes.drawerText}>Confiture</div>
+          </li>
+          <Divider />
+
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/bio")}
+          >
+            <div className={classes.drawerText}>Bio</div>
+          </li>
+          <Divider />
+
           <li className={classes.drawerItem}>
             <div
               className={classes.drawerText}
@@ -814,6 +834,23 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
             </li>
           </div>
           <Divider />
+
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/syrup")}
+          >
+            <div className={classes.drawerText}>Syrup</div>
+          </li>
+          <Divider />
+
+          <li
+            className={classes.drawerItem}
+            onClick={() => handleDrawerChoice("/category/softdrink")}
+          >
+            <div className={classes.drawerText}>Soft drink</div>
+          </li>
+          <Divider />
+
           <li
             className={classes.drawerItem}
             onClick={() => handleDrawerChoice("/category/giftsets")}
@@ -823,9 +860,9 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
           <Divider />
           <li
             className={classes.drawerItem}
-            onClick={() => handleDrawerChoice("/category/specialoffer")}
+            onClick={() => handleDrawerChoice("/category/sale")}
           >
-            <div className={classes.drawerText}>Special offer</div>
+            <div className={classes.drawerText}>Sale</div>
           </li>
         </ul>
         {/* )} */}
@@ -1100,6 +1137,22 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                 </li>
               </Link>
             </div>
+            <Link to="/category/confiture" className={classes.navLink}>
+              <li className={classes.tab}>
+                <div>
+                  <span className="notranslate">Confiture</span>
+                </div>
+              </li>
+            </Link>
+            <Link to="/category/bio" className={classes.navLink}>
+              <li className={classes.tab}>
+                <div>
+                  <span className="notranslate">
+                    <span style={{ color: "forestgreen" }}>Bio</span>
+                  </span>
+                </div>
+              </li>
+            </Link>
             <div
               aria-owns={"dropdown-tea"}
               aria-haspopup={anchorElTea ? true : undefined}
@@ -1232,6 +1285,22 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                 </Grow>
               )}
             </Popper>
+
+            <Link to="/category/syrup" className={classes.navLink}>
+              <li className={classes.tab}>
+                <div>
+                  <span className="notranslate">Syrup</span>
+                </div>
+              </li>
+            </Link>
+
+            <Link to="/category/softdrink" className={classes.navLink}>
+              <li className={classes.tab}>
+                <div>
+                  <span className="notranslate">Soft drink</span>
+                </div>
+              </li>
+            </Link>
             <Link to="/category/giftsets" className={classes.navLink}>
               <li className={classes.tab}>
                 <div>
@@ -1239,13 +1308,13 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
                 </div>
               </li>
             </Link>
-            <Link to="/category/specialoffer" className={classes.navLink}>
+            {/* <Link to="/category/specialoffer" className={classes.navLink}>
               <li className={classes.tab}>
                 <div>
                   <span className="notranslate">Special offer</span>
                 </div>
               </li>
-            </Link>
+            </Link> */}
             <Link to="/category/sale" className={classes.navLink}>
               <li className={classes.tab}>
                 <div>
