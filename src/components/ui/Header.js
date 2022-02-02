@@ -848,7 +848,7 @@ const Header = ({ openDrawer, setOpenDrawer }) => {
               <Link to="/category/honeys" className={classes.navLink}>
                 <li className={classes.tab}>
                   <div>
-                    <span className="notranslate">Honeys</span>
+                    <span className="notranslate">Honey</span>
                   </div>
                   <ExpandIcon className={classes.expandIcon} />
                 </li>
