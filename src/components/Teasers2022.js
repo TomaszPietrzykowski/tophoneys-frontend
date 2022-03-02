@@ -3,12 +3,12 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Link } from "react-router-dom";
 // custom
-import t1 from "../assets/t5.jpg";
-import t2 from "../assets/t6.jpg";
-import t3 from "../assets/t2.png";
-import t4 from "../assets/t4.jpg";
-import t5 from "../assets/t1.jpg";
-import t6 from "../assets/t3.jpg";
+import t1 from "../assets/teaser2022-01.jpg";
+import t2 from "../assets/teaser2022-02.jpg";
+import t3 from "../assets/teaser2022-03.jpg";
+import t4 from "../assets/teaser2022-04.jpg";
+import t5 from "../assets/teaser2022-05.png";
+import t6 from "../assets/teaser2022-06.jpg";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -62,24 +62,25 @@ const Teasers2022 = () => {
           <img src={t1} alt="pure honeys" className={classes.img} />
         </div>
       </Link>
+      <Link to="/category/beeproducts">
+        <div className={classes.teaser}>
+          <img src={t2} alt="bee products" className={classes.img} />
+        </div>
+      </Link>
       <Link to="/category/additives">
         <div className={classes.teaser}>
-          <img src={t2} alt="honeys with additives" className={classes.img} />
+          <img src={t3} alt="honeys with additives" className={classes.img} />
+        </div>
+      </Link>
+
+      <Link to="/category/confiture">
+        <div className={classes.teaser}>
+          <img src={t4} alt="extra jam and confiture" className={classes.img} />
         </div>
       </Link>
       <Link to="/category/bio">
         <div className={classes.teaser}>
-          <img src={t3} alt="bio" className={classes.img} />
-        </div>
-      </Link>
-      <Link to="/category/beeproducts">
-        <div className={classes.teaser}>
-          <img src={t4} alt="bee products" className={classes.img} />
-        </div>
-      </Link>
-      <Link to="/category/confiture">
-        <div className={classes.teaser}>
-          <img src={t5} alt="extra jam and confiture" className={classes.img} />
+          <img src={t5} alt="bio" className={classes.img} />
         </div>
       </Link>
       <Link to="/category/softdrinks">

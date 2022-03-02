@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { makeStyles /*, useTheme */ } from "@material-ui/core/styles";
+// import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import CartIcon from "@material-ui/icons/ShoppingCartOutlined";
@@ -120,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
   capacity: {
     fontSize: ".8rem",
     margin: ".5rem 0",
-    color: theme.palette.text.disabled,
+    color: theme.palette.text.primary,
     [theme.breakpoints.down("sm")]: {
       fontSize: ".75rem",
     },
@@ -132,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: ".8rem",
     fontSize: "1.8rem",
     fontWeight: 300,
-    color: theme.palette.common.price,
+    color: theme.palette.text.primary,
     letterSpacing: 1,
     flexWrap: "no-wrap",
     overflow: "hidden",
@@ -234,8 +234,8 @@ const ProductTab = ({
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  // const theme = useTheme();
+  // const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   // successful alert state
   const [open, setOpen] = useState(false);
 
@@ -315,7 +315,7 @@ const ProductTab = ({
               <Link to={`/product/${id}`}>
                 <div className={classes.price}>
                   <div style={{ whiteSpace: "nowrap" }}>
-                    <span style={{ opacity: 0.45 }}>&euro;&nbsp;</span>
+                    <span style={{ opacity: 0.5 }}>&euro;&nbsp;</span>
                     {Number(price).toFixed(2)}
                   </div>
                   {isSale && previousPrice > 0 && (

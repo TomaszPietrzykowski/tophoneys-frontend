@@ -129,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
   capacity: {
     fontSize: ".8rem",
     margin: ".5rem 0",
-    color: theme.palette.text.disabled,
+    color: theme.palette.text.primary,
     [theme.breakpoints.down("xs")]: {
       fontSize: ".75rem",
     },
@@ -139,7 +139,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "flex-start",
     margin: "auto 0 0.8rem 0",
     fontSize: "1.9rem",
-    color: theme.palette.common.price,
+    color: theme.palette.text.primary,
     letterSpacing: 1,
     fontWeight: 300,
     flexWrap: "no-wrap",
@@ -288,7 +288,7 @@ const ProductCard = ({ product }) => {
               <div className={classes.capacity}>{product.capacity}</div>
               <div className={classes.price}>
                 <div style={{ whiteSpace: "nowrap" }}>
-                  <span style={{ opacity: 0.45 }}>&euro; </span>
+                  <span style={{ opacity: 0.5 }}>&euro; </span>
                   {product.price.toFixed(2)}
                 </div>
                 {product.isPromo && product.previousPrice > 0 && (
